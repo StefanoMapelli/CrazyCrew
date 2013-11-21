@@ -13,7 +13,7 @@ public class NetworkManagerServer : MonoBehaviour {
 	private int playerCount = 0;
 	// Use this for initialization
 	void Start () {
-		Network.InitializeServer(numberOfPlayers,25000,false);
+		Network.InitializeServer(numberOfPlayers,25001,false);
 		StartCoroutine("sendMessage");
 	}
 	

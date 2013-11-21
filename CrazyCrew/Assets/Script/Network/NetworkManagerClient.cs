@@ -15,7 +15,7 @@ public class NetworkManagerClient : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		udpClient = new UdpClient(9050);
+		udpClient = new UdpClient(9051);
 		System.Threading.Thread connection_thread = new System.Threading.Thread(WaitForServer);
 		connection_thread.Start ();
 	}
@@ -23,13 +23,15 @@ public class NetworkManagerClient : MonoBehaviour {
 	void WaitForServer()
 	{
 		//IPEndPoint object will allow us to read datagrams sent from any source on port 9050.
-		IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 9050);
+		IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 9051);
 		
 		// Receive message from server and control if it's the CrazyCrew message.
 		while(!messageReceived)
 		{
+			Debug.Log("attesa dati:");
 			Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint); 
 			string returnData = Encoding.ASCII.GetString(receiveBytes);
+			Debug.Log("dati:"+returnData);
 			if(returnData.CompareTo("CrazyCrewServer: HELLO")==0)
 			{
 				messageReceived=true;
@@ -50,7 +52,7 @@ public class NetworkManagerClient : MonoBehaviour {
 		{
 			if(GUI.Button(new Rect(100,100,100,100),"Connect To server"))
 			{
-				Network.Connect(serverIpAddress,25000);
+				Network.Connect(serverIpAddress,25001);
 				
 			}
 		}
