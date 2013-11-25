@@ -29,7 +29,10 @@ public class ClientNetworkManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		
+		MasterServer.ipAddress = "192.168.1.4";
+		MasterServer.port = 23466;
+		Network.natFacilitatorIP = "192.168.1.4";
+		Network.natFacilitatorPort = 50005;		
 	}
 	
 	// Update is called once per frame
