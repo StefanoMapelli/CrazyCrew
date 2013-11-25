@@ -1,0 +1,70 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class ClientNetworkManager : MonoBehaviour {
+	
+		
+	private const string typeName = "UniqueGameName";
+	private const string gameName = "CrazyCrewServer";
+	public GameObject controllerPrefab;
+	
+	private HostData[] hostList;
+ 
+	private void RefreshHostList()
+	{
+	    MasterServer.RequestHostList(typeName);
+	}
+	 
+	void OnMasterServerEvent(MasterServerEvent msEvent)
+	{
+	    if (msEvent == MasterServerEvent.HostListReceived)
+	        hostList = MasterServer.PollHostList();
+	}
+	
+	private void InitializeController()
+	{
+  		Network.Instantiate(controllerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+	}
+	
+	// Use this for initialization
+	void Start () 
+	{
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+	
+	private void JoinServer(HostData hostData)
+	{
+	    Debug.Log("Server Joined1");
+		Network.Connect(hostData);
+		Debug.Log("Server Joined2");
+	}
+	 
+	void OnConnectedToServer()
+	{
+	    Debug.Log("Server Joined3");
+		InitializeController();
+	}
+	
+	void OnGUI()
+	{
+	    if (!Network.isClient)
+	    {	 
+	        if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
+	            RefreshHostList();
+	 
+	        if (hostList != null)
+	        {
+	            for (int i = 0; i < hostList.Length; i++)
+	            {
+	                if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+	                    JoinServer(hostList[i]);
+	            }
+	        }
+	    }
+	}
+}
