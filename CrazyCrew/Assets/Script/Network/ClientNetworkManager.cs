@@ -6,7 +6,6 @@ public class ClientNetworkManager : MonoBehaviour {
 		
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "CrazyCrewServer";
-	public GameObject controllerPrefab;
 	
 	private HostData[] hostList;
  
@@ -21,23 +20,18 @@ public class ClientNetworkManager : MonoBehaviour {
 	        hostList = MasterServer.PollHostList();
 	}
 	
-	private void InitializeController()
-	{
-  		Network.Instantiate(controllerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
-	}
-	
 	// Use this for initialization
 	void Start () 
 	{
-		MasterServer.ipAddress = "192.168.1.2";
+		MasterServer.ipAddress = "192.168.1.4";
 		MasterServer.port = 23466;
-		Network.natFacilitatorIP = "192.168.1.2";
+		Network.natFacilitatorIP = "192.168.1.4";
 		Network.natFacilitatorPort = 50005;		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update () 
+	{
 	}
 	
 	private void JoinServer(HostData hostData)
@@ -50,7 +44,6 @@ public class ClientNetworkManager : MonoBehaviour {
 	void OnConnectedToServer()
 	{
 	    Debug.Log("Server Joined3");
-		InitializeController();
 	}
 	
 	void OnGUI()
