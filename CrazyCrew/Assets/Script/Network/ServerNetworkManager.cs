@@ -21,9 +21,9 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		MasterServer.ipAddress = "192.168.1.4";
+		MasterServer.ipAddress = "192.168.1.2";
 		MasterServer.port = 23466;
-		Network.natFacilitatorIP = "192.168.1.4";
+		Network.natFacilitatorIP = "192.168.1.2";
 		Network.natFacilitatorPort = 50005;
 	}
 	
