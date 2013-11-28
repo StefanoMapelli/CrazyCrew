@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Specialized;
 
 public class ServerBogieCarGame : MonoBehaviour {
 
@@ -8,7 +8,7 @@ public class ServerBogieCarGame : MonoBehaviour {
 	private int counterReady = 0;
 	private bool playing = false;
 
-	private Hashtable players = new Hashtable();
+	private ListDictionary players = new ListDictionary();
 
 	// Use this for initialization
 	void Start () {
@@ -82,13 +82,14 @@ public class ServerBogieCarGame : MonoBehaviour {
 	[RPC]
 	void pushLever(string role)
 	{
+
 		if(role.Equals("Lever1"))
 		{
-			networkView.RPC("resetLever", players["Lever1"]);
+			networkView.RPC("resetLever", (NetworkPlayer) players["Lever2"]);
 		}
 		if(role.Equals("Lever2"))
 		{
-			networkView.RPC("resetLever", players["Lever2"])
+			networkView.RPC("resetLever", (NetworkPlayer) players["Lever1"]);
 		}
 
 		//chiama metodo della BOGIE CAR
