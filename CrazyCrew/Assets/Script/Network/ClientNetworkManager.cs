@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class ClientNetworkManager : MonoBehaviour {
-	
-		
+
+	public string masterServerIpAddress="";
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "CrazyCrewServer";
 	private bool ready = false;
@@ -14,9 +14,9 @@ public class ClientNetworkManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		MasterServer.ipAddress = "192.168.1.4";
+		MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
-		Network.natFacilitatorIP = "192.168.1.4";
+		Network.natFacilitatorIP = masterServerIpAddress;
 		Network.natFacilitatorPort = 50005;		
 	}
 
