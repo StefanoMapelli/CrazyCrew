@@ -8,7 +8,7 @@ public class ServerBogieCarGame : MonoBehaviour {
 	private int counterReady = 0;
 	private bool playing = false;
 
-	private ArrayList players = new ArrayList();
+	private Hashtable players = new Hashtable();
 
 	// Use this for initialization
 	void Start () {
@@ -30,20 +30,22 @@ public class ServerBogieCarGame : MonoBehaviour {
 	{
 		if(players.Count < numberOfPlayers)
 		{
-			players.Add(p);
 			counterConnection++;
 			switch(counterConnection)
 			{
 			case 1:
 				networkView.RPC("assignLever1",p);
+				players.Add("Lever1",p);
 				Debug.Log("Leva 1 assegnata");
 				break;
 			case 2:
 				networkView.RPC("assignLever2",p);
+				players.Add("Lever2",p);		
 				Debug.Log("Leva 2 assegnata");
 				break;
 			case 3:
 				networkView.RPC("assignWheel",p);
+				players.Add("Wheel",p);
 				Debug.Log("Sterzo assegnato");
 				break;
 			}
@@ -74,6 +76,26 @@ public class ServerBogieCarGame : MonoBehaviour {
 	
 	[RPC]
 	void startGame()
+	{
+	}
+
+	[RPC]
+	void pushLever(string role)
+	{
+		if(role.Equals("Lever1"))
+		{
+			networkView.RPC("resetLever", players["Lever1"]);
+		}
+		if(role.Equals("Lever2"))
+		{
+			networkView.RPC("resetLever", players["Lever2"])
+		}
+
+		//chiama metodo della BOGIE CAR
+	}
+	
+	[RPC]
+	void resetLever()
 	{
 	}
 }

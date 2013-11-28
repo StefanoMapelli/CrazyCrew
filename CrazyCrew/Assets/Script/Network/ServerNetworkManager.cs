@@ -5,7 +5,7 @@ using System;
 
 public class ServerNetworkManager : MonoBehaviour {
 
-	public string masterServerIpAddress="";
+	public string masterServerIpAddress;
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "CrazyCrewServer";
 	private ServerBogieCarGame sbcg;
@@ -37,6 +37,7 @@ public class ServerNetworkManager : MonoBehaviour {
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
 		Network.natFacilitatorPort = 50005;
+
 	}
 	
 	// Update is called once per frame

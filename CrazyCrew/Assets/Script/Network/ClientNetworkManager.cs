@@ -3,13 +3,11 @@ using System.Collections;
 
 public class ClientNetworkManager : MonoBehaviour {
 
-	public string masterServerIpAddress="";
+	public string masterServerIpAddress;
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "CrazyCrewServer";
-	private bool ready = false;
-	private bool playing = false;
 	private HostData[] hostList;
-	private string role;
+
  
 	// Use this for initialization
 	void Start () 
@@ -45,66 +43,20 @@ public class ClientNetworkManager : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		if (!playing) 
-		{
-	    	if (!Network.isClient)
-	    	{	 
-	        	if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
-	            	RefreshHostList();
-	 
-	        	if (hostList != null)
-	        	{
-	            	for (int i = 0; i < hostList.Length; i++)
-	            	{
-	                	if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
-	                    	JoinServer(hostList[i]);
-	            	}
-	        	}
-	    	}
-			else {
-				if (!ready) {
-					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) {
-						ready = true;
-						networkView.RPC("setReady",RPCMode.Server);
-					}
-				}
-				else {
-					GUI.Label (new Rect(10,10,200,200),"Ready to play, waiting for other players...");
-				}
-			}
+		if (Network.peerType == NetworkPeerType.Disconnected) 
+		{	 
+	        if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
+	           	RefreshHostList();
+	
+        	if (hostList != null)	        	
+			{
+	            for (int i = 0; i < hostList.Length; i++)
+	           	{
+	               	if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+	                   	JoinServer(hostList[i]);
+	           	}
+	       	}
 		}
-		else {
-			GUI.Label (new Rect(20,20,100,100),"PLAYING");
-		}
-	}
-
-	[RPC]
-	void assignLever1()
-	{
-		role="Lever1";
-	}
-	
-	[RPC]
-	void assignLever2()
-	{
-		role="Lever2";
-	}
-	
-	[RPC]
-	void assignWheel()
-	{
-		role="Wheel";
-	}
-	
-	[RPC]
-	void setReady()
-	{
-	}
-	
-	[RPC]
-	void startGame()
-	{
-		playing=true;
 	}
 
 }

@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\BogieCar\ClientBogieCarGame.cs" />
      <Compile Include="Assets\Script\BogieCar\ServerBogieCarGame.cs" />
+     <Compile Include="Assets\Script\Cars\BogieCar.cs" />
      <Compile Include="Assets\Script\Network\ClientNetworkManager.cs" />
      <Compile Include="Assets\Script\Network\ServerNetworkManager.cs" />
   </ItemGroup>
