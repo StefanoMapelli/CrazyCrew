@@ -7,6 +7,7 @@ public class ClientBogieCarGame : MonoBehaviour {
 	private bool playing = false;
 	private string role;
 	private bool leverUp;
+	private float wheelRotation = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +50,8 @@ public class ClientBogieCarGame : MonoBehaviour {
 				}
 				if(role.Equals("Wheel"))
 				{
-
+					wheelRotation = GUI.HorizontalSlider(new Rect(10, 10, 200, 200), wheelRotation, -1.0f, 1.0f);
+					networkView.RPC("rotateWheel", RPCMode.Server, wheelRotation);
 				}
 			}
 		}
@@ -95,5 +97,10 @@ public class ClientBogieCarGame : MonoBehaviour {
 	void resetLever()
 	{
 		leverUp=true;
+	}
+
+	[RPC]
+	void rotateWheel(float wheelRotation) 
+	{ 
 	}
 }

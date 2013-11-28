@@ -92,11 +92,17 @@ public class ServerBogieCarGame : MonoBehaviour {
 			networkView.RPC("resetLever", (NetworkPlayer) players["Lever1"]);
 		}
 
-		//chiama metodo della BOGIE CAR
+		//chiama metodo della BOGIE CAR per l'AZIONE DELL'ABBASSAMENTO LEVA
 	}
 	
 	[RPC]
 	void resetLever()
 	{
+	}
+
+	[RPC]
+	void rotateWheel(float wheelRotation) 
+	{
+		//chiama metodo della BOGIE CAR per lA ROTAZIONE DELLO STERZO
 	}
 }
