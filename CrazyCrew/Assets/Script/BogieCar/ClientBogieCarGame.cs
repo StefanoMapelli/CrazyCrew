@@ -16,7 +16,6 @@ public class ClientBogieCarGame : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 	void OnGUI()
@@ -30,7 +29,7 @@ public class ClientBogieCarGame : MonoBehaviour {
 					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
 					{
 						ready = true;
-						networkView.RPC("setReady",RPCMode.Server);
+						networkView.RPC("setReady",RPCMode.Server, Network.player);
 					}
 				}
 				else
@@ -56,7 +55,13 @@ public class ClientBogieCarGame : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	void OnDisconnectedFromServer(NetworkDisconnection info)
+	{
+		ready=false;
+		playing=false;
+	}
+
 	[RPC]
 	void assignLever1()
 	{
@@ -78,7 +83,7 @@ public class ClientBogieCarGame : MonoBehaviour {
 	}
 	
 	[RPC]
-	void setReady()
+	void setReady(NetworkPlayer np)
 	{
 	}
 	

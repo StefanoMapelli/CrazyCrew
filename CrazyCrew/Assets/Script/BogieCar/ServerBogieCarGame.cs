@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Specialized;
 
 public class ServerBogieCarGame : MonoBehaviour {
-
-	private int numberOfPlayers = 3;
-	private int counterConnection = 0;
-	private int counterReady = 0;
+	
 	private bool playing = false;
 
-	private ListDictionary players = new ListDictionary();
+	private ArrayList players = new ArrayList();
 
 	// Use this for initialization
 	void Start () {
@@ -18,38 +16,124 @@ public class ServerBogieCarGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(counterReady==numberOfPlayers && !playing)
+		if(allPlayerReady() && !playing && players.Count==3)
 		{
 			//inizia partita
 			Debug.Log("Inizia la partita");
+			this.assignRoles();
 			networkView.RPC("startGame",RPCMode.All);
 			playing=true;
 		}
 	}
-	public void PlayerConnection(NetworkPlayer p)
+
+	public void playerConnection(NetworkPlayer np)
 	{
-		if(players.Count < numberOfPlayers)
+		if(players.Count < 3)
 		{
-			counterConnection++;
-			switch(counterConnection)
+			players.Add(new Player(np));
+		}
+	}
+
+	public void playerDisconnection(NetworkPlayer np)
+	{
+		object o = getPlayer(np);
+		players.Remove(o);
+		Debug.Log("Player: "+np+" disconnesso");
+	}
+
+	public void assignRoles()
+	{
+		Player[] playersArray = new Player[3]; 
+		players.CopyTo(playersArray);
+
+		playersArray[0].setRole("Lever1");
+		networkView.RPC("assignLever1", playersArray[0].getNetworkPlayer());
+		Debug.Log("Player "+playersArray[0].getNetworkPlayer()+" ha la leva 1");
+
+		playersArray[1].setRole("Lever2");
+		networkView.RPC("assignLever2", playersArray[1].getNetworkPlayer());
+		Debug.Log("Player "+playersArray[1].getNetworkPlayer()+" ha la leva 2");
+
+		playersArray[2].setRole("Wheel");
+		networkView.RPC("assignWheel", playersArray[2].getNetworkPlayer());
+		Debug.Log("Player "+playersArray[2].getNetworkPlayer()+" ha lo sterzo");
+	}
+
+	private class Player
+	{
+		NetworkPlayer networkPlayer;
+		string role;
+		bool ready=false;
+
+		public Player(NetworkPlayer np)
+		{
+			networkPlayer=np;
+		}
+
+		public bool getReady()
+		{
+			return ready;
+		}
+
+		public void setReady(bool ready)
+		{
+			this.ready=ready;
+		}
+
+		public string getRole()
+		{
+			return role;
+		}
+
+		public void setRole(string role)
+		{
+			this.role=role;
+		}
+
+		public NetworkPlayer getNetworkPlayer()
+		{
+			return networkPlayer;
+		}
+	}
+
+	private Player getPlayer(NetworkPlayer np)
+	{
+		Player p;
+		foreach(object o in players)
+		{
+			p = (Player) o;
+			if(p.getNetworkPlayer().Equals(np))
 			{
-			case 1:
-				networkView.RPC("assignLever1",p);
-				players.Add("Lever1",p);
-				Debug.Log("Leva 1 assegnata");
-				break;
-			case 2:
-				networkView.RPC("assignLever2",p);
-				players.Add("Lever2",p);		
-				Debug.Log("Leva 2 assegnata");
-				break;
-			case 3:
-				networkView.RPC("assignWheel",p);
-				players.Add("Wheel",p);
-				Debug.Log("Sterzo assegnato");
-				break;
+				return p;
 			}
 		}
+		return null;
+	}
+
+	private Player getPlayerByRole(string role)
+	{
+		Player p;
+		foreach(object o in players)
+		{
+			p = (Player) o;
+			if(p.getRole().Equals(role))
+			{
+				return p;
+			}
+		}
+		return null;
+	}
+
+	private bool allPlayerReady()
+	{
+	    Player p;
+		foreach(object o in players)
+		{
+			p = (Player) o;
+			if(!p.getReady())
+				return false;
+		}
+		return true;
 	}
 
 	[RPC]
@@ -68,10 +152,11 @@ public class ServerBogieCarGame : MonoBehaviour {
 	}
 	
 	[RPC]
-	void setReady()
+	void setReady(NetworkPlayer np)
 	{
-		counterReady++;
-		Debug.Log("counterReady: "+counterReady);
+		Player p = getPlayer(np);
+		p.setReady(true);
+		Debug.Log("Player: "+np+" ready to play");
 	}
 	
 	[RPC]
@@ -85,11 +170,11 @@ public class ServerBogieCarGame : MonoBehaviour {
 
 		if(role.Equals("Lever1"))
 		{
-			networkView.RPC("resetLever", (NetworkPlayer) players["Lever2"]);
+			networkView.RPC("resetLever", getPlayerByRole("Lever2").getNetworkPlayer());
 		}
 		if(role.Equals("Lever2"))
 		{
-			networkView.RPC("resetLever", (NetworkPlayer) players["Lever1"]);
+			networkView.RPC("resetLever", getPlayerByRole("Lever1").getNetworkPlayer());
 		}
 
 		//chiama metodo della BOGIE CAR per l'AZIONE DELL'ABBASSAMENTO LEVA
@@ -103,6 +188,7 @@ public class ServerBogieCarGame : MonoBehaviour {
 	[RPC]
 	void rotateWheel(float wheelRotation) 
 	{
+		Debug.Log("Rotate angle recived: "+wheelRotation);
 		//chiama metodo della BOGIE CAR per lA ROTAZIONE DELLO STERZO
 	}
 }

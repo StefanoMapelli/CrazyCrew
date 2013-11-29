@@ -28,18 +28,23 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	void OnPlayerConnected(NetworkPlayer p)
 	{
-		sbcg.PlayerConnection(p);
+		sbcg.playerConnection(p);
+	}
+
+	void OnPlayerDisconnected(NetworkPlayer p)
+	{
+		sbcg.playerDisconnection(p);
 	}
 
 	// Use this for initialization
 	void Start () {
-		MasterServer.ipAddress = masterServerIpAddress;
+		/*MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
-		Network.natFacilitatorPort = 50005;
+		Network.natFacilitatorPort = 50005;*/
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
