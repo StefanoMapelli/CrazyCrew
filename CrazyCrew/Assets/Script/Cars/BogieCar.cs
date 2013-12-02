@@ -5,136 +5,142 @@ public class BogieCar : MonoBehaviour {
 
 	//Conponenti veicolo
 
+	//sterzo
+	float lowestSteerAtSpeed = 50;
+	float lowSpeedSteerAngle = 10;
+	float highSpeedSteerAngle = 1;
+
 	//ruote
 	public WheelCollider WheelFR;
 	public WheelCollider WheelFL;
 	public WheelCollider WheelRR;
 	public WheelCollider WheelRL;
 
-	//valori fisici
-	public float decelerationSpeed = 50f;
-	public float torqueMax = 50f;
+	public float WheelFRRPM;
+	public float WheelFLRPM;
+	public float WheelRRRPM;
+	public float WheelRLRPM;
 
-	//Valori sterzo
-	public float lowestSteerAtSpeed = 50;
-	public float lowSpeedSteerAngle = 10;
-	public float highSpeedSteerAngle = 1;
-
-	private float steerPercent = 0;
+	public float currentSpeed;
 
 	//freni
 	private bool brakeR =false;
 	private bool brakeL =false;
 
-	void BrakeROn()
+	//valori fisici
+	public float decelerationSpeed = -50f;
+	public float retroSpeed=-10f;
+	public float torqueMax=50f;
+	public float topRetroSpeed=-10f;
+	public float topSpeed=150f;
+
+	// Use this for initialization
+	void Start () {
+		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
+	}
+
+	
+	// Update is called once per frame
+	void Update () {
+
+		currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
+		currentSpeed=Mathf.Round(currentSpeed);
+
+		WheelFRRPM = WheelFR.rpm;
+		WheelFLRPM = WheelFL.rpm;
+		WheelRRRPM = WheelRR.rpm;
+		WheelRLRPM = WheelRL.rpm;
+
+		//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
+		Brake ();
+	}
+	
+	public void BrakeROn()
 	{
 		brakeR=true;
 	}
-
-	void BrakeROff()
+	
+	public void BrakeROff()
 	{
 		brakeR=false;
 	}
-
-	void BrakeLOn()
+	
+	public void BrakeLOn()
 	{
 		brakeL=true;
 	}
-
-	void BrakeLOff()
+	
+	public void BrakeLOff()
 	{
 		brakeL=false;
 	}
 
 	/*
-	 * In caso di freno sinistro e destro premuto aziono il freno del veicolo
-	 */
+         * In caso di freno sinistro e destro premuto aziono il freno del veicolo
+         */
 	private void Brake()
-	{
-		Debug.Log("L:  " + brakeL);
-		Debug.Log("R:  " + brakeR);
-
-		if(brakeL && brakeR)
+	{		
+		if(brakeL && brakeR) 
 		{
-			Debug.Log ("dec" + decelerationSpeed);
-			WheelRL.brakeTorque=decelerationSpeed;
-			WheelRR.brakeTorque=decelerationSpeed;
+			if(currentSpeed>0)
+			{
+				Debug.Log ("dec" + decelerationSpeed);
+				WheelRL.brakeTorque = -decelerationSpeed;
+				WheelRR.brakeTorque = -decelerationSpeed;
+				WheelRL.motorTorque = 0;
+				WheelRR.motorTorque = 0;
+			}
+			else if(currentSpeed<=0 && currentSpeed>=topRetroSpeed)
+			{
+				WheelRL.brakeTorque = 0;
+				WheelRR.brakeTorque = 0;
+				WheelRL.motorTorque = retroSpeed;
+				WheelRR.motorTorque = retroSpeed;
+			}
+			else if(currentSpeed<=0 && currentSpeed<=topRetroSpeed)
+			{
+				WheelRL.brakeTorque = 0;
+				WheelRR.brakeTorque = 0;
+				WheelRL.motorTorque = 0;
+				WheelRR.motorTorque = 0;
+			}
+		}
+		else 
+		{
+			WheelRL.brakeTorque = 0;
+			WheelRR.brakeTorque = 0;
 		}
 	}
 
-
 	/*
-	 * Force percent è compreso tra 0 e 1 
-	 * Indica quanto hai abbasato la leva sullo Smartphone
-	 * rispetto al massimo possibile
-	 * 
-	 */
-	void LeverDown(float forcePercent)
+         * Force percent è compreso tra 0 e 1
+         * Indica quanto hai abbasato la leva sullo Smartphone
+         * rispetto al massimo possibile
+         *
+         */
+	public void LeverDown(float forcePercent)
 	{
-		WheelRL.motorTorque= forcePercent*torqueMax;
-		WheelRR.motorTorque= forcePercent*torqueMax;
+		Debug.Log("Lever  ");
+		if(currentSpeed<topSpeed)
+		{
+			WheelRL.motorTorque= forcePercent*torqueMax;
+			WheelRR.motorTorque= forcePercent*torqueMax;
+		}
+		else
+		{
+			WheelRL.motorTorque= 0;
+			WheelRR.motorTorque= 0;
+		}
 	}
 
-
-	/*
-	 * Steer percent deve essere compreso tra -1 e 1
-	 * Positivo se lo sterzo è a destra
-	 * Negativo se sterzo a sinistra
-	 * A seconda di quanto sterzo avrò una percentuale
-	 * 
-	 */
-
-	void Steering(float steerPercent)
-	{
-		this.steerPercent = steerPercent;
-	}
-
-	void Steer()
+	public void Steer(float steerPercent)
 	{
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
 		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
-		
+
 		currentSteerAngle *= steerPercent;
 		
 		WheelFL.steerAngle = currentSteerAngle;
 		WheelFR.steerAngle = currentSteerAngle;
-	}
-
-	// Use this for initialization
-	void Start () {
-
-		rigidbody.centerOfMass=new Vector3(0,-0.9f,0);
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-		if(Input.GetKey(KeyCode.Q) || (Input.GetKey(KeyCode.O)))
-		{
-			LeverDown(1);
-
-		}
-		if(Input.GetKeyDown(KeyCode.A))
-		{
-			BrakeLOn();
-		}
-		if(Input.GetKeyDown(KeyCode.L))
-		{
-			BrakeROn();
-		}
-		if(Input.GetKeyUp(KeyCode.A))
-		{
-			BrakeLOff();
-		}
-		if(Input.GetKeyUp(KeyCode.L))
-		{
-			BrakeROff();
-		}
-
-		//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
-		Brake();
-		//update dello sterzo in base all'ultimo angolo di sterzo ricevuto dal client
-		Steer();
 	}
 }

@@ -46,11 +46,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Script\BogieCar\ClientBogieCarGame.cs" />
-     <Compile Include="Assets\Script\BogieCar\ServerBogieCarGame.cs" />
+     <Compile Include="Assets\Script\BogieCar\ClientBogieCar.cs" />
+     <Compile Include="Assets\Script\BogieCar\ServerBogieCar.cs" />
      <Compile Include="Assets\Script\Cars\BogieCar.cs" />
+     <Compile Include="Assets\Script\Game\ServerGameManager.cs" />
      <Compile Include="Assets\Script\Network\ClientNetworkManager.cs" />
      <Compile Include="Assets\Script\Network\ServerNetworkManager.cs" />
+     <Compile Include="Assets\Script\Player.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

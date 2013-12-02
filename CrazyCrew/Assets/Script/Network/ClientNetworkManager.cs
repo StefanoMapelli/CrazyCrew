@@ -12,10 +12,10 @@ public class ClientNetworkManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		/*MasterServer.ipAddress = masterServerIpAddress;
+		MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
-		Network.natFacilitatorPort = 50005;*/		
+		Network.natFacilitatorPort = 50005;		
 	}
 
 	private void RefreshHostList()

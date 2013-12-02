@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ClientBogieCarGame : MonoBehaviour {
+public class ClientBogieCar : MonoBehaviour {
 
 	private bool ready = false;
 	private bool playing = false;
 	private string role;
 	private bool leverUp;
-	private float wheelRotation = 0.0f;
+	private float steerRotation = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -15,7 +15,17 @@ public class ClientBogieCarGame : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
+		if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyDown(KeyCode.F))
+		{
+			networkView.RPC("brakeOn",RPCMode.Server, role);
+		}
+
+		if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyUp(KeyCode.F))
+		{
+			networkView.RPC("brakeOff",RPCMode.Server, role);
+		}
 	}
 
 	void OnGUI()
@@ -43,14 +53,14 @@ public class ClientBogieCarGame : MonoBehaviour {
 				{
 					if(GUI.Button(new Rect(100,100,200,200),"Push the Lever"))
 					{
-						networkView.RPC("pushLever", RPCMode.Server, role);
+						networkView.RPC("pushLever", RPCMode.Server, role, 1f);
 						leverUp=false;
 					}
 				}
-				if(role.Equals("Wheel"))
+				if(role.Equals("Steer"))
 				{
-					wheelRotation = GUI.HorizontalSlider(new Rect(10, 10, 200, 200), wheelRotation, -1.0f, 1.0f);
-					networkView.RPC("rotateWheel", RPCMode.Server, wheelRotation);
+					steerRotation = GUI.HorizontalSlider(new Rect(10, 10, 200, 200), steerRotation, -1.0f, 1.0f);
+					networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
 				}
 			}
 		}
@@ -77,9 +87,9 @@ public class ClientBogieCarGame : MonoBehaviour {
 	}
 	
 	[RPC]
-	void assignWheel()
+	void assignSteer()
 	{
-		role="Wheel";
+		role="Steer";
 	}
 	
 	[RPC]
@@ -94,7 +104,7 @@ public class ClientBogieCarGame : MonoBehaviour {
 	}
 
 	[RPC]
-	void pushLever(string role)
+	void pushLever(string role, float force)
 	{
 	}
 
@@ -105,7 +115,17 @@ public class ClientBogieCarGame : MonoBehaviour {
 	}
 
 	[RPC]
-	void rotateWheel(float wheelRotation) 
+	void rotateSteer(float steerRotation) 
 	{ 
+	}
+
+	[RPC]
+	void brakeOn(string role)
+	{
+	}
+
+	[RPC]
+	void brakeOff(string role)
+	{
 	}
 }

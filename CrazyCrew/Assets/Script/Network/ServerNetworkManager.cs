@@ -8,7 +8,7 @@ public class ServerNetworkManager : MonoBehaviour {
 	public string masterServerIpAddress;
 	private const string typeName = "UniqueGameName";
 	private const string gameName = "CrazyCrewServer";
-	private ServerBogieCarGame sbcg;
+	private ServerGameManager serverGameManager;
 
 	private void StartServer()
 	{
@@ -23,25 +23,27 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	void Awake()
 	{
-		sbcg = (ServerBogieCarGame) gameObject.GetComponent("ServerBogieCarGame");
+		serverGameManager = (ServerGameManager) gameObject.GetComponent("ServerGameManager");
 	}
 
 	void OnPlayerConnected(NetworkPlayer p)
 	{
-		sbcg.playerConnection(p);
+		serverGameManager.playerConnection(p);
 	}
 
 	void OnPlayerDisconnected(NetworkPlayer p)
 	{
-		sbcg.playerDisconnection(p);
+		serverGameManager.playerDisconnection(p);
 	}
 
 	// Use this for initialization
 	void Start () {
-		/*MasterServer.ipAddress = masterServerIpAddress;
+
+		DontDestroyOnLoad(gameObject);
+		MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
-		Network.natFacilitatorPort = 50005;*/
+		Network.natFacilitatorPort = 50005;
 
 	}
 
