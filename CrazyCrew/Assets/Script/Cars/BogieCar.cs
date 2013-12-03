@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Threading;
 
 public class BogieCar : MonoBehaviour {
 
 	//Conponenti veicolo
+
+	public int timeTorque = 2000;
 
 	//sterzo
 	float lowestSteerAtSpeed = 50;

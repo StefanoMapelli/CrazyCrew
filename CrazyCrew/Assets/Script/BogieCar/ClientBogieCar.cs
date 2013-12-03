@@ -17,14 +17,17 @@ public class ClientBogieCar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyDown(KeyCode.F))
+		if(role != null)
 		{
-			networkView.RPC("brakeOn",RPCMode.Server, role);
-		}
+			if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyDown(KeyCode.F))
+			{
+				networkView.RPC("brakeOn",RPCMode.Server, role);
+			}
 
-		if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyUp(KeyCode.F))
-		{
-			networkView.RPC("brakeOff",RPCMode.Server, role);
+			if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyUp(KeyCode.F))
+			{
+				networkView.RPC("brakeOff",RPCMode.Server, role);
+			}
 		}
 	}
 
