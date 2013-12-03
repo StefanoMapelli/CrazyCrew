@@ -43,6 +43,14 @@ public class BogieCar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//Controllo se devo sottrarre la forza dalle ruote motrici
+		
+		if(subTorque > 0 && WheelRL.motorTorque > 0 && WheelRR.motorTorque > 0)
+		{
+			WheelRL.motorTorque -= subTorque;
+			WheelRR.motorTorque -= subTorque;
+		}
+
 		currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
 		currentSpeed=Mathf.Round(currentSpeed);
 
@@ -131,6 +139,19 @@ public class BogieCar : MonoBehaviour {
 			WheelRL.motorTorque= 0;
 			WheelRR.motorTorque= 0;
 		}
+	}
+
+	float subTorque;
+	
+	void StopTorque(float torque)
+	{
+		Thread.Sleep (timeTorque);
+		//Debug.Log("stop  " + WheelRL.motorTorque  + WheelRR.motorTorque);
+		while(subTorque != 0)
+		{
+			Thread.Sleep (20);
+		}
+		subTorque = torque;
 	}
 
 	public void Steer(float steerPercent)
