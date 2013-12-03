@@ -6,7 +6,7 @@ public class BogieCar : MonoBehaviour {
 
 	//Conponenti veicolo
 
-	public int timeTorque = 2000;
+	public int timeTorque = 2;
 
 	//sterzo
 	float lowestSteerAtSpeed = 50;
@@ -45,14 +45,6 @@ public class BogieCar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		//Controllo se devo sottrarre la forza dalle ruote motrici
-		
-		if(subTorque > 0 && WheelRL.motorTorque > 0 && WheelRR.motorTorque > 0)
-		{
-			WheelRL.motorTorque -= subTorque;
-			WheelRR.motorTorque -= subTorque;
-		}
 
 		currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
 		currentSpeed=Mathf.Round(currentSpeed);
@@ -136,6 +128,9 @@ public class BogieCar : MonoBehaviour {
 		{
 			WheelRL.motorTorque= forcePercent*torqueMax;
 			WheelRR.motorTorque= forcePercent*torqueMax;
+
+			StartCoroutine (StopTorque(forcePercent*torqueMax));
+
 		}
 		else
 		{
@@ -144,17 +139,23 @@ public class BogieCar : MonoBehaviour {
 		}
 	}
 
-	float subTorque;
-	
-	void StopTorque(float torque)
+	IEnumerator StopTorque(float torque)
 	{
-		Thread.Sleep (timeTorque);
-		//Debug.Log("stop  " + WheelRL.motorTorque  + WheelRR.motorTorque);
-		while(subTorque != 0)
+		yield return new WaitForSeconds(timeTorque);
+
+		if(WheelRL.motorTorque > 0 && WheelRR.motorTorque > 0)
 		{
-			Thread.Sleep (20);
+			if(WheelRL.motorTorque < torque || WheelRR.motorTorque < torque)
+			{
+				WheelRL.motorTorque = 0;
+				WheelRR.motorTorque = 0;
+			}
+			else
+			{
+				WheelRL.motorTorque -= torque;
+				WheelRR.motorTorque -= torque;
+			}
 		}
-		subTorque = torque;
 	}
 
 	public void Steer(float steerPercent)
