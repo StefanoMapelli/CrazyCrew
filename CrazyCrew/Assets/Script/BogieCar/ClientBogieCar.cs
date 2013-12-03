@@ -8,10 +8,13 @@ public class ClientBogieCar : MonoBehaviour {
 	private string role;
 	private bool leverUp;
 	private float steerRotation = 0.0f;
+	public GameObject lever;
+	public GameObject leverPlane;
+	private LeverController leverController;
 
 	// Use this for initialization
 	void Start () {
-	
+		leverController = (LeverController) lever.GetComponent("LeverController");
 	}
 	
 	// Update is called once per frame
@@ -52,21 +55,19 @@ public class ClientBogieCar : MonoBehaviour {
 			}
 			else 
 			{
-				if((role.Equals("Lever1") || role.Equals("Lever2")) && (leverUp))
-				{
-					if(GUI.Button(new Rect(100,100,200,200),"Push the Lever"))
+				if (role != null) {
+					if(role.Equals("Steer"))
 					{
-						networkView.RPC("pushLever", RPCMode.Server, role, 1f);
-						leverUp=false;
+						steerRotation = GUI.HorizontalSlider(new Rect(10, 10, 200, 200), steerRotation, -1.0f, 1.0f);
+						networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
 					}
-				}
-				if(role.Equals("Steer"))
-				{
-					steerRotation = GUI.HorizontalSlider(new Rect(10, 10, 200, 200), steerRotation, -1.0f, 1.0f);
-					networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
 				}
 			}
 		}
+	}
+
+	public string getRole() {
+		return role;
 	}
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
@@ -78,15 +79,19 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void assignLever1()
 	{
-		role="Lever1";
-		leverUp=true;
+		lever.SetActive(true);
+		leverPlane.SetActive(true);
+		role = "Lever1";
+		leverController.setBlocked(false);
 	}
 	
 	[RPC]
 	void assignLever2()
 	{
+		lever.SetActive(true);
+		leverPlane.SetActive(true);
 		role="Lever2";
-		leverUp=false;
+		leverController.setBlocked(true);
 	}
 	
 	[RPC]
@@ -114,7 +119,7 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void resetLever()
 	{
-		leverUp=true;
+		leverController.setBlocked(false);
 	}
 
 	[RPC]

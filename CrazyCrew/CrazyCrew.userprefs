@@ -1,10 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Desktop\CrazyCrew\Assets\Script\Cars\BogieCar.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\BogieCar\ClientBogieCar.cs">
     <Files>
-      <File FileName="..\..\..\..\..\Desktop\CrazyCrew\Assets\Script\Cars\BogieCar.cs" Line="45" Column="18" />
-      <File FileName="Assets\Script\Cars\BogieCar.cs" Line="132" Column="4" />
-      <File FileName="Assets\Script\BogieCar\ClientBogieCar.cs" Line="135" Column="1" />
+      <File FileName="Assets\Script\Controller\LeverController.cs" Line="20" Column="18" />
+      <File FileName="Assets\Script\BogieCar\ClientBogieCar.cs" Line="92" Column="13" />
+      <File FileName="Assets\Script\BogieCar\ServerBogieCar.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
