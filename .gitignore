@@ -26,3 +26,6 @@ $RECYCLE.BIN/
 /*.sln
 /*.suo
 /*.user
+*.csproj
+*.sln
+*.userprefs

@@ -41,7 +41,7 @@ public class LeverController : MonoBehaviour {
 		}
 	}
 
-	void OnMouseUpAsButton() {
+	void OnMouseUp() {
 		if(!blocked) {
 			float force;
 
