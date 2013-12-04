@@ -21,18 +21,6 @@ public class ClientBogieCar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(role != null)
-		{
-			if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyDown(KeyCode.F))
-			{
-				networkView.RPC("brakeOn",RPCMode.Server, role);
-			}
-
-			if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyUp(KeyCode.F))
-			{
-				networkView.RPC("brakeOff",RPCMode.Server, role);
-			}
-		}
 	}
 
 	void OnGUI()
