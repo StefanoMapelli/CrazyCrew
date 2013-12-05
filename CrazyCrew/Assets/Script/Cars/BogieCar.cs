@@ -36,6 +36,8 @@ public class BogieCar : MonoBehaviour {
 	public float torqueMax=50f;
 	public float topRetroSpeed=-10f;
 	public float topSpeed=150f;
+	public float torqueCorrectionL=1f;
+	public float torqueCorrectionR=1f;
 
 	// Use this for initialization
 	void Start () {
@@ -53,6 +55,25 @@ public class BogieCar : MonoBehaviour {
 		WheelFLRPM = WheelFL.rpm;
 		WheelRRRPM = WheelRR.rpm;
 		WheelRLRPM = WheelRL.rpm;
+
+		if(WheelFR.rpm<WheelFL.rpm)
+		{
+			torqueCorrectionL=0.90f;
+			torqueCorrectionR=1f;
+			
+		}
+		else if(WheelFL.rpm<WheelFR.rpm)
+		{
+			torqueCorrectionR=0.90f;;
+			torqueCorrectionL=1f;
+			
+			
+		}
+		else if(WheelFL.rpm==WheelFR.rpm)
+		{
+			torqueCorrectionR=1f;;
+			torqueCorrectionL=1f;
+		}
 
 		//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
 		Brake ();
