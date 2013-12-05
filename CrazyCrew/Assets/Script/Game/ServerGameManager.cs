@@ -61,7 +61,7 @@ public class ServerGameManager : MonoBehaviour {
 	{
 		serverBogieCar.initializeBogieCar();
 		serverBogieCar.assignRoles();
-		networkView.RPC("startGame",RPCMode.All);
+		//networkView.RPC("startGame",RPCMode.All);
 	}
 	
 	public void playerConnection(NetworkPlayer np)
@@ -151,11 +151,13 @@ public class ServerGameManager : MonoBehaviour {
 		p.setReady(true);
 		Debug.Log("Player: "+np+" ready to play");
 	}
-	
+
+	/*
 	[RPC]
 	void startGame()
 	{
 	}
+	*/
 
 	[RPC]
 	void setPause(bool pause)
@@ -173,14 +175,17 @@ public class ServerGameManager : MonoBehaviour {
 			{
 				p.setConnected(true);
 				p.setNetworkPlayer(np);
-				networkView.RPC("reconnectionGood",np, p.getRole());
+				//networkView.RPC("reconnectionGood",np, p.getRole());
 
 				if(allPlayersConnected())
 				{
 					this.pause=false;
 					Time.timeScale = initialTimeScale;
-					networkView.RPC("resumeGame", RPCMode.All);
+					networkView.RPC("setPause", RPCMode.All,false);
 				}
+			}
+			else {
+				Network.CloseConnection (np,true);
 			}
 		}
 		else
@@ -215,13 +220,13 @@ public class ServerGameManager : MonoBehaviour {
 							networkView.RPC("assginSteer",np);
 						}
 					}
-					networkView.RPC("reconnectionGood",np, pl.getRole());
+					//networkView.RPC("reconnectionGood",np, pl.getRole());
 
 					if(allPlayersConnected())
 					{
 						this.pause=false;
 						Time.timeScale = initialTimeScale;
-						networkView.RPC("resumeGame", RPCMode.All);
+						networkView.RPC("setPause", RPCMode.All,false);
 					}
 
 					return;
@@ -230,10 +235,12 @@ public class ServerGameManager : MonoBehaviour {
 		}
 	}
 
+	/*
 	[RPC]
 	void reconnectionGood(string role)
 	{
 	}
+	*/
 
 	[RPC]
 	void resumeGame()

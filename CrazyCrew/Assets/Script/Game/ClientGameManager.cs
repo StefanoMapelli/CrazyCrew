@@ -5,9 +5,7 @@ public class ClientGameManager : MonoBehaviour {
 
 	private string role;
 	private bool ready = false;
-	private bool playing = false;
 	private bool pause = false;
-	private bool connected = false;
 	
 	// Use this for initialization
 	void Start () 
@@ -21,8 +19,9 @@ public class ClientGameManager : MonoBehaviour {
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
 	{
-		ready=false;
-		playing=false;
+		//ready=false;
+		//playing=false;
+		setPause (true);
 	}
 	
 	public string getRole() {
@@ -38,15 +37,12 @@ public class ClientGameManager : MonoBehaviour {
 	{
 		if(Network.peerType == NetworkPeerType.Client)
 		{
-			if (!playing) 
+			if (!ready) 
 			{
-				if (!ready) 
+				if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
 				{
-					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
-					{
-						ready = true;
-						networkView.RPC("setReady",RPCMode.Server, Network.player);
-					}
+					ready = true;
+					networkView.RPC("setReady",RPCMode.Server, Network.player);
 				}
 				else
 				{
@@ -87,30 +83,34 @@ public class ClientGameManager : MonoBehaviour {
 	void setReady(NetworkPlayer np)
 	{
 	}
-	
+
+	/*
 	[RPC]
 	void startGame()
 	{
 		playing=true;
 	}
+	*/
 
 	[RPC]
 	void reconnect(NetworkPlayer np, string role)
 	{	
 	}
 
+	/*
 	[RPC]
 	void reconnectionGood(string role)
 	{
 		this.role = role;
 		this.ready = true;
 	}
+	*/
 
+	/*
 	[RPC]
 	void resumeGame()
 	{
-		this.playing = true;
-		this.pause = false;
-		Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -10.0f);
+		setPause (false);
 	}
+	*/
 }

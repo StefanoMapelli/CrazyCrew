@@ -19,22 +19,25 @@ public class ServerBogieCar : MonoBehaviour {
 
 	public void assignRoles()
 	{
-		Player[] playersArray = new Player[3]; 
-		serverGameManager.getPlayers().CopyTo(playersArray);
+		// SECONDO ME QUESTO E' UN ERRORE ( by Dario)
+		//Player[] playersArray = new Player[3]; 
+		//serverGameManager.getPlayers().CopyTo(playersArray);
 
-		playersArray[0].setRole("Lever1");
-		networkView.RPC("assignLever1", playersArray[0].getNetworkPlayer());
-		networkView.RPC("blockLever", playersArray[0].getNetworkPlayer(), false);
-		Debug.Log("Player "+playersArray[0].getNetworkPlayer()+" ha la leva 1");
+		ArrayList playersArray = serverGameManager.getPlayers();
 
-		playersArray[1].setRole("Lever2");
-		networkView.RPC("assignLever2", playersArray[1].getNetworkPlayer());
-		networkView.RPC("blockLever", playersArray[1].getNetworkPlayer(), true);
-		Debug.Log("Player "+playersArray[1].getNetworkPlayer()+" ha la leva 2");
+		((Player) playersArray[0]).setRole("Lever1");
+		networkView.RPC("assignLever1", ((Player)playersArray[0]).getNetworkPlayer());
+		networkView.RPC("blockLever", ((Player)playersArray[0]).getNetworkPlayer(), false);
+		Debug.Log("Player "+((Player)playersArray[0]).getNetworkPlayer()+" ha la leva 1");
 
-		playersArray[2].setRole("Steer");
-		networkView.RPC("assignSteer", playersArray[2].getNetworkPlayer());
-		Debug.Log("Player "+playersArray[2].getNetworkPlayer()+" ha lo sterzo");
+		((Player)playersArray[1]).setRole("Lever2");
+		networkView.RPC("assignLever2", ((Player)playersArray[1]).getNetworkPlayer());
+		networkView.RPC("blockLever", ((Player)playersArray[1]).getNetworkPlayer(), true);
+		Debug.Log("Player "+((Player)playersArray[1]).getNetworkPlayer()+" ha la leva 2");
+
+		((Player)playersArray[2]).setRole("Steer");
+		networkView.RPC("assignSteer", ((Player)playersArray[2]).getNetworkPlayer());
+		Debug.Log("Player "+((Player)playersArray[2]).getNetworkPlayer()+" ha lo sterzo");
 	}
 
 	public void initializeBogieCar()

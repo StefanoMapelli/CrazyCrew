@@ -8,6 +8,9 @@ public class ClientNetworkManager : MonoBehaviour {
 	private const string gameName = "CrazyCrewServer";
 	private HostData[] hostList;
 
+	private HostData myServer;
+	private bool reconnectRunning = false;
+
  
 	// Use this for initialization
 	void Start () 
@@ -32,18 +35,25 @@ public class ClientNetworkManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (Network.peerType == NetworkPeerType.Disconnected && myServer != null) {
+			if (!reconnectRunning) {
+				StartCoroutine("tryReconnect");
+				reconnectRunning = true;
+			}
+		}
 	}
 	
 	private void JoinServer(HostData hostData)
 	{
 	    Debug.Log("Server Joined1");
 		Network.Connect(hostData);
+		myServer = hostData;
 		Debug.Log("Server Joined2");
 	}
 	
 	void OnGUI()
 	{
-		if (Network.peerType == NetworkPeerType.Disconnected) 
+		if (Network.peerType == NetworkPeerType.Disconnected && myServer == null) 
 		{	 
 	        if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
 	           	RefreshHostList();
@@ -59,4 +69,16 @@ public class ClientNetworkManager : MonoBehaviour {
 		}
 	}
 
+	private IEnumerator tryReconnect() {
+		while (Network.peerType == NetworkPeerType.Disconnected) {
+			Debug.Log ("I'm disconnected, trying to reconnect to server...");
+			Network.Connect (myServer);
+			yield return new WaitForSeconds(5);
+		}
+		GameObject client = GameObject.Find ("Client");
+		NetworkView netView = (NetworkView) client.GetComponent("NetworkView");
+		ClientGameManager clientGameManager = (ClientGameManager) client.GetComponent("ClientGameManager");
+		netView.RPC ("reconnect",RPCMode.Server,Network.player,clientGameManager.getRole ());
+		reconnectRunning = false;
+	}
 }
