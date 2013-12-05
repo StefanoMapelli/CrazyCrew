@@ -10,6 +10,7 @@ public class ClientBogieCar : MonoBehaviour {
 	private float steerRotation = 0.0f;
 	public GameObject lever;
 	public GameObject leverPlane;
+	public GameObject steer;
 	private LeverController leverController;
 
 	// Use this for initialization
@@ -20,18 +21,6 @@ public class ClientBogieCar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(role != null)
-		{
-			if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyDown(KeyCode.F))
-			{
-				networkView.RPC("brakeOn",RPCMode.Server, role);
-			}
-
-			if((role.Equals("Lever1") || role.Equals("Lever2")) && Input.GetKeyUp(KeyCode.F))
-			{
-				networkView.RPC("brakeOff",RPCMode.Server, role);
-			}
-		}
 	}
 
 	void OnGUI()
@@ -51,16 +40,6 @@ public class ClientBogieCar : MonoBehaviour {
 				else
 				{
 					GUI.Label (new Rect(10,10,200,200),"Ready to play, waiting for other players...");
-				}
-			}
-			else 
-			{
-				if (role != null) {
-					if(role.Equals("Steer"))
-					{
-						steerRotation = GUI.HorizontalSlider(new Rect(10, 10, 200, 200), steerRotation, -1.0f, 1.0f);
-						networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
-					}
 				}
 			}
 		}
@@ -97,6 +76,7 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void assignSteer()
 	{
+		steer.SetActive(true);
 		role="Steer";
 	}
 	
