@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using System.Threading;
 
 public class ServerGameManager : MonoBehaviour {
 
+	private float initialTimeScale;
+	
 	private bool playing = false;
+	private bool pause = false;
 	private int numberOfPlayers = 3;
 	private ArrayList players = new ArrayList();
 	private ServerBogieCar serverBogieCar;
@@ -17,13 +21,14 @@ public class ServerGameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		initialTimeScale = Time.timeScale;
 		serverBogieCar = (ServerBogieCar) gameObject.GetComponent("ServerBogieCar");
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		if(allPlayerReady() && !playing && players.Count==numberOfPlayers)
+		if(allPlayersReady() && !playing && players.Count==numberOfPlayers)
 		{
 
 			//inizia partita
@@ -36,6 +41,22 @@ public class ServerGameManager : MonoBehaviour {
 		}
 	}
 
+
+	void OnGUI()
+	{
+		if(pause)
+		{
+			if(!allPlayersConnected())
+			{
+				GUI.Label (new Rect(10,10,200,200),"Waiting for players reconnection...");
+			}
+			else
+			{
+				GUI.Label (new Rect(10,10,200,200),"Game paused");
+			}
+		}
+	}
+
 	public void OnLevelWasLoaded(int level)
 	{
 		serverBogieCar.initializeBogieCar();
@@ -45,17 +66,30 @@ public class ServerGameManager : MonoBehaviour {
 	
 	public void playerConnection(NetworkPlayer np)
 	{
-		if(players.Count < numberOfPlayers)
+		if(!playing)
 		{
-			players.Add(new Player(np));
+			if(players.Count < numberOfPlayers)
+			{
+				players.Add(new Player(np));
+			}
 		}
 	}
 	
 	public void playerDisconnection(NetworkPlayer np)
 	{
-		object o = getPlayer(np);
-		players.Remove(o);
-		Debug.Log("Player: "+np+" disconnesso");
+		if(!playing)
+		{
+			object o = getPlayer(np);
+			players.Remove(o);
+			Debug.Log("Player: "+np+" disconnesso");
+		}
+		else
+		{
+			getPlayer(np).setConnected(false);
+			pause = true;
+			Time.timeScale = 0;
+			networkView.RPC("setPause", RPCMode.All, pause);
+		}
 	}
 
 	public Player getPlayer(NetworkPlayer np)
@@ -86,7 +120,7 @@ public class ServerGameManager : MonoBehaviour {
 		return null;
 	}
 	
-	private bool allPlayerReady()
+	private bool allPlayersReady()
 	{
 		Player p;
 		foreach(object o in players)
@@ -96,5 +130,113 @@ public class ServerGameManager : MonoBehaviour {
 				return false;
 		}
 		return true;
+	}
+
+	private bool allPlayersConnected()
+	{
+		Player p;
+		foreach(object o in players)
+		{
+			p = (Player) o;
+			if(!p.getConnected())
+				return false;
+		}
+		return true;
+	}
+
+	[RPC]
+	void setReady(NetworkPlayer np)
+	{
+		Player p = getPlayer(np);
+		p.setReady(true);
+		Debug.Log("Player: "+np+" ready to play");
+	}
+	
+	[RPC]
+	void startGame()
+	{
+	}
+
+	[RPC]
+	void setPause(bool pause)
+	{
+	}
+
+	[RPC]
+	void reconnect(NetworkPlayer np, string role)
+	{
+		Player p = getPlayerByRole(role);
+
+		if(p != null)
+		{
+			if(!p.getConnected())
+			{
+				p.setConnected(true);
+				p.setNetworkPlayer(np);
+				networkView.RPC("reconnectionGood",np, p.getRole());
+
+				if(allPlayersConnected())
+				{
+					this.pause=false;
+					Time.timeScale = initialTimeScale;
+					networkView.RPC("resumeGame", RPCMode.All);
+				}
+			}
+		}
+		else
+		{
+			Player pl;
+			foreach(object o in players)
+			{
+				pl = (Player) o;
+
+				if(!pl.getConnected())
+				{
+					pl.setConnected(true);
+					pl.setNetworkPlayer(np);
+
+					//Da estendere nel caso di aggiunta veicoli (in base al veicolo che stiamo guidando cambierà l'implementazione) 
+					if(pl.getRole().Equals("Lever1"))
+					{
+						networkView.RPC("assginLever1",np);
+						networkView.RPC("blockLever",np, false);
+						networkView.RPC("blockLever",np, getPlayerByRole("Lever2").getNetworkPlayer(),true);
+					}
+					else
+					{
+						if(pl.getRole().Equals("Lever2"))
+						{
+							networkView.RPC("assginLever2",np);
+							networkView.RPC("blockLever",np, true);
+							networkView.RPC("blockLever",np, getPlayerByRole("Lever1").getNetworkPlayer(),false);
+						}
+						else
+						{
+							networkView.RPC("assginSteer",np);
+						}
+					}
+					networkView.RPC("reconnectionGood",np, pl.getRole());
+
+					if(allPlayersConnected())
+					{
+						this.pause=false;
+						Time.timeScale = initialTimeScale;
+						networkView.RPC("resumeGame", RPCMode.All);
+					}
+
+					return;
+				}
+			}
+		}
+	}
+
+	[RPC]
+	void reconnectionGood(string role)
+	{
+	}
+
+	[RPC]
+	void resumeGame()
+	{
 	}
 }

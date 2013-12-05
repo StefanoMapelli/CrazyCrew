@@ -3,56 +3,29 @@ using System.Collections;
 
 public class ClientBogieCar : MonoBehaviour {
 
-	private bool ready = false;
-	private bool playing = false;
-	private string role;
 	private bool leverUp;
-	private float steerRotation = 0.0f;
 	public GameObject lever;
 	public GameObject leverPlane;
 	public GameObject steer;
 	private LeverController leverController;
 
+	private ClientGameManager clientGameManager;
+
 	// Use this for initialization
 	void Start () {
 		leverController = (LeverController) lever.GetComponent("LeverController");
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	}
 
-	void OnGUI()
+	void Awake()
 	{
-		if(Network.peerType == NetworkPeerType.Client)
-		{
-			if (!playing) 
-			{
-				if (!ready) 
-				{
-					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
-					{
-						ready = true;
-						networkView.RPC("setReady",RPCMode.Server, Network.player);
-					}
-				}
-				else
-				{
-					GUI.Label (new Rect(10,10,200,200),"Ready to play, waiting for other players...");
-				}
-			}
-		}
-	}
-
-	public string getRole() {
-		return role;
+		clientGameManager = (ClientGameManager) gameObject.GetComponent("ClientGameManager");
 	}
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
 	{
-		ready=false;
-		playing=false;
+		lever.SetActive(false);
+		leverPlane.SetActive(false);
+		steer.SetActive(false);
 	}
 
 	[RPC]
@@ -60,46 +33,33 @@ public class ClientBogieCar : MonoBehaviour {
 	{
 		lever.SetActive(true);
 		leverPlane.SetActive(true);
-		role = "Lever1";
-		leverController.setBlocked(false);
+		clientGameManager.setRole("Lever1"); 
 	}
-	
+
 	[RPC]
 	void assignLever2()
 	{
 		lever.SetActive(true);
 		leverPlane.SetActive(true);
-		role="Lever2";
-		leverController.setBlocked(true);
+		clientGameManager.setRole("Lever2");
+	}
+
+	[RPC]
+	void blockLever(bool blocked)
+	{
+		leverController.setBlocked(blocked);
 	}
 	
 	[RPC]
 	void assignSteer()
 	{
 		steer.SetActive(true);
-		role="Steer";
-	}
-	
-	[RPC]
-	void setReady(NetworkPlayer np)
-	{
-	}
-	
-	[RPC]
-	void startGame()
-	{
-		playing=true;
+		clientGameManager.setRole("Steer");
 	}
 
 	[RPC]
 	void pushLever(string role, float force)
 	{
-	}
-
-	[RPC]
-	void resetLever()
-	{
-		leverController.setBlocked(false);
 	}
 
 	[RPC]

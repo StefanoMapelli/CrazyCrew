@@ -11,7 +11,7 @@ public class BrakeController : MonoBehaviour {
 	void Start () {
 		GameObject client = GameObject.Find ("Client");
 		networkView = (NetworkView) client.GetComponent("NetworkView");
-		role = ((ClientBogieCar) client.GetComponent ("ClientBogieCar")).getRole();
+		role = ((ClientGameManager) client.GetComponent ("ClientGameManager")).getRole();
 	}
 	
 	// Update is called once per frame

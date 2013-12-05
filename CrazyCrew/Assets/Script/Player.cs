@@ -3,15 +3,26 @@ using System.Collections;
 
 public class Player
 {
-	NetworkPlayer networkPlayer;
-	string role;
-	bool ready=false;
-	
+	private NetworkPlayer networkPlayer;
+	private string role;
+	private bool ready=false;
+	private bool connected=true;
+
 	public Player(NetworkPlayer np)
 	{
 		networkPlayer=np;
 	}
+
+	public bool getConnected()
+	{
+		return connected;
+	}
 	
+	public void setConnected(bool connected)
+	{
+		this.connected=connected;
+	}
+
 	public bool getReady()
 	{
 		return ready;
@@ -35,5 +46,10 @@ public class Player
 	public NetworkPlayer getNetworkPlayer()
 	{
 		return networkPlayer;
+	}
+
+	public void setNetworkPlayer(NetworkPlayer np)
+	{
+		this.networkPlayer = np;
 	}
 }

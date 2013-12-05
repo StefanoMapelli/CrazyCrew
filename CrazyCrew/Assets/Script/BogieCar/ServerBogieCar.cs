@@ -24,10 +24,12 @@ public class ServerBogieCar : MonoBehaviour {
 
 		playersArray[0].setRole("Lever1");
 		networkView.RPC("assignLever1", playersArray[0].getNetworkPlayer());
+		networkView.RPC("blockLever", playersArray[0].getNetworkPlayer(), false);
 		Debug.Log("Player "+playersArray[0].getNetworkPlayer()+" ha la leva 1");
 
 		playersArray[1].setRole("Lever2");
 		networkView.RPC("assignLever2", playersArray[1].getNetworkPlayer());
+		networkView.RPC("blockLever", playersArray[1].getNetworkPlayer(), true);
 		Debug.Log("Player "+playersArray[1].getNetworkPlayer()+" ha la leva 2");
 
 		playersArray[2].setRole("Steer");
@@ -50,7 +52,12 @@ public class ServerBogieCar : MonoBehaviour {
 	void assignLever2()
 	{
 	}
-	
+
+	[RPC]
+	void blockLever(bool blocked)
+	{
+	}
+
 	[RPC]
 	void assignSteer()
 	{
@@ -75,19 +82,14 @@ public class ServerBogieCar : MonoBehaviour {
 
 		if(role.Equals("Lever1"))
 		{
-			networkView.RPC("resetLever", serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer());
+			networkView.RPC("blockLever", serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(),false);
 		}
 		if(role.Equals("Lever2"))
 		{
-			networkView.RPC("resetLever", serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer());
+			networkView.RPC("blockLever", serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(),false);
 		}
 
 		bogieCar.LeverDown(force);
-	}
-	
-	[RPC]
-	void resetLever()
-	{
 	}
 
 	[RPC]
