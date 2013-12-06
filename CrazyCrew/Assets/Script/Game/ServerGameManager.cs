@@ -165,6 +165,23 @@ public class ServerGameManager : MonoBehaviour {
 	}
 
 	[RPC]
+	void clientPause(bool p)
+	{
+		if (p) {
+			networkView.RPC ("setPause",RPCMode.All,true);
+			pause = true;
+			Time.timeScale = 0;
+		}
+		else {
+			if (allPlayersConnected()) {
+				networkView.RPC("setPause",RPCMode.All,false);
+				pause = false;
+				Time.timeScale = initialTimeScale;
+			}
+		}
+	}
+
+	[RPC]
 	void reconnect(NetworkPlayer np, string role)
 	{
 		Player p = getPlayerByRole(role);

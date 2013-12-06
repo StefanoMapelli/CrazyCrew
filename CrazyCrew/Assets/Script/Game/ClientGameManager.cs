@@ -6,6 +6,7 @@ public class ClientGameManager : MonoBehaviour {
 	private string role;
 	private bool ready = false;
 	private bool pause = false;
+	private bool iSetPause = false;
 	
 	// Use this for initialization
 	void Start () 
@@ -15,6 +16,20 @@ public class ClientGameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if (role != null) {
+			if (Input.GetKeyDown(KeyCode.P))
+			{
+				if (pause) {
+					if (iSetPause) {
+						networkView.RPC ("clientPause",RPCMode.Server,false);
+					}
+				}
+				else {
+					networkView.RPC ("clientPause",RPCMode.Server,true);
+					iSetPause = true;
+				}
+			}
+		}
 	}
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
@@ -37,12 +52,14 @@ public class ClientGameManager : MonoBehaviour {
 	{
 		if(Network.peerType == NetworkPeerType.Client)
 		{
-			if (!ready) 
-			{
-				if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
+			if (role == null) {
+				if (!ready) 
 				{
-					ready = true;
-					networkView.RPC("setReady",RPCMode.Server, Network.player);
+					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
+					{
+						ready = true;
+						networkView.RPC("setReady",RPCMode.Server, Network.player);
+					}
 				}
 				else
 				{
@@ -76,7 +93,12 @@ public class ClientGameManager : MonoBehaviour {
 		else
 		{
 			Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -10.0f);
+			iSetPause = false;
 		}
+	}
+
+	[RPC]
+	void clientPause(bool p) {
 	}
 
 	[RPC]
