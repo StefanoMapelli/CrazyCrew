@@ -18,23 +18,6 @@ public class SteerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		Debug.Log(gameObject.transform.rotation.eulerAngles.z);
-
-		if(gameObject.transform.rotation.eulerAngles.z <= 90 && gameObject.transform.rotation.eulerAngles.z!=0)
-		{
-			steerRotation = -gameObject.transform.rotation.eulerAngles.z/90;
-		}
-		else
-			if(gameObject.transform.rotation.eulerAngles.z >= 270 && gameObject.transform.rotation.eulerAngles.z!=0)
-		{
-			steerRotation = 1 - ((gameObject.transform.rotation.eulerAngles.z - 270)/90);
-		}
-		else
-			if(gameObject.transform.rotation.eulerAngles.z ==0)
-				steerRotation=0;
-
-		networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
-		Debug.Log("Inviato :"+steerRotation);
 	}
 
 	void OnMouseDrag()
@@ -51,5 +34,26 @@ public class SteerController : MonoBehaviour {
 			{
 				gameObject.transform.rotation = Quaternion.Euler(0,0,90);
 			}
+
+		if(Network.peerType != NetworkPeerType.Disconnected)
+		{
+			Debug.Log(gameObject.transform.rotation.eulerAngles.z);
+		
+			if(gameObject.transform.rotation.eulerAngles.z <= 90 && gameObject.transform.rotation.eulerAngles.z!=0)
+			{
+				steerRotation = -gameObject.transform.rotation.eulerAngles.z/90;
+			}
+			else
+				if(gameObject.transform.rotation.eulerAngles.z >= 270 && gameObject.transform.rotation.eulerAngles.z!=0)
+			{
+				steerRotation = 1 - ((gameObject.transform.rotation.eulerAngles.z - 270)/90);
+			}
+			else
+				if(gameObject.transform.rotation.eulerAngles.z ==0)
+					steerRotation=0;
+			
+			networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
+			Debug.Log("Inviato :"+steerRotation);
+		}
 	}
 }

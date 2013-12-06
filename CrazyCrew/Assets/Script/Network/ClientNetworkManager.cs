@@ -76,7 +76,7 @@ public class ClientNetworkManager : MonoBehaviour {
 		while (Network.peerType == NetworkPeerType.Disconnected) {
 			Debug.Log ("I'm disconnected, trying to reconnect to server...");
 			Network.Connect (myServer);
-			yield return new WaitForSeconds(5);
+			yield return new WaitForSeconds(10);
 		}
 		networkView.RPC ("reconnect",RPCMode.Server,Network.player,clientGameManager.getRole ());
 		reconnectRunning = false;

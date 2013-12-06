@@ -23,9 +23,9 @@ public class ClientBogieCar : MonoBehaviour {
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
 	{
-		lever.SetActive(false);
+		/*	lever.SetActive(false);
 		leverPlane.SetActive(false);
-		steer.SetActive(false);
+		steer.SetActive(false);*/
 	}
 
 	[RPC]

@@ -6,7 +6,6 @@ public class ClientGameManager : MonoBehaviour {
 	private string role;
 	private bool ready = false;
 	private bool pause = false;
-	private bool iSetPause = false;
 	
 	// Use this for initialization
 	void Start () 
@@ -19,14 +18,13 @@ public class ClientGameManager : MonoBehaviour {
 		if (role != null) {
 			if (Input.GetKeyDown(KeyCode.P))
 			{
-				if (pause) {
-					if (iSetPause) {
-						networkView.RPC ("clientPause",RPCMode.Server,false);
-					}
+				if (pause) 
+				{
+					networkView.RPC ("clientPause",RPCMode.Server,false);
 				}
-				else {
+				else 
+				{
 					networkView.RPC ("clientPause",RPCMode.Server,true);
-					iSetPause = true;
 				}
 			}
 		}
@@ -93,7 +91,6 @@ public class ClientGameManager : MonoBehaviour {
 		else
 		{
 			Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -10.0f);
-			iSetPause = false;
 		}
 	}
 

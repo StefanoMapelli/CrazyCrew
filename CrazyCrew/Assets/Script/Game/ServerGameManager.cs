@@ -194,12 +194,12 @@ public class ServerGameManager : MonoBehaviour {
 				p.setNetworkPlayer(np);
 				//networkView.RPC("reconnectionGood",np, p.getRole());
 
-				if(allPlayersConnected())
+				/*if(allPlayersConnected())
 				{
 					this.pause=false;
 					Time.timeScale = initialTimeScale;
 					networkView.RPC("setPause", RPCMode.All,false);
-				}
+				}*/
 			}
 			else {
 				Network.CloseConnection (np,true);
@@ -239,12 +239,12 @@ public class ServerGameManager : MonoBehaviour {
 					}
 					//networkView.RPC("reconnectionGood",np, pl.getRole());
 
-					if(allPlayersConnected())
+					/*if(allPlayersConnected())
 					{
 						this.pause=false;
 						Time.timeScale = initialTimeScale;
 						networkView.RPC("setPause", RPCMode.All,false);
-					}
+					}*/
 
 					return;
 				}
