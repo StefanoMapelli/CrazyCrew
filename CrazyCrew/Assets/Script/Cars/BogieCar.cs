@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Threading;
+using System;
 
 public class BogieCar : MonoBehaviour {
 
@@ -18,11 +19,20 @@ public class BogieCar : MonoBehaviour {
 	public WheelCollider WheelFL;
 	public WheelCollider WheelRR;
 	public WheelCollider WheelRL;
+	public WheelCollider WheelTraction;
+
+	public Transform WheelFLTransform;
+	public Transform WheelFRTransform;
+	public Transform WheelRLTransform;
+	public Transform WheelRRTransform;
 
 	public float WheelFRRPM;
 	public float WheelFLRPM;
 	public float WheelRRRPM;
 	public float WheelRLRPM;
+	public float WheelTractionRPM;
+
+	public float torqueTraction;
 
 	public float currentSpeed;
 
@@ -39,22 +49,39 @@ public class BogieCar : MonoBehaviour {
 	public float torqueCorrectionL=1f;
 	public float torqueCorrectionR=1f;
 
+	//power up
+	private float powerUpSpeed=1f;
+
+	private TextMesh PowerUpText;
+
+	//Timer
+	private TextMesh timerText;
+	//Da settare quando comincia la partita
+	private DateTime startTime;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
+
+		PowerUpText =  (TextMesh) (GameObject.Find("PowerUpText").GetComponent("TextMesh"));
+		PowerUpText.text="";
+
+		timerText =  (TextMesh) (GameObject.Find("TimerText").GetComponent("TextMesh"));
+		timerText.text = "00:00";
+		startTime = DateTime.Now;
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
 
-		currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
-		currentSpeed=Mathf.Round(currentSpeed);
+		TimeSpan timeTemp = DateTime.Now - startTime;
+		timerText.text = timeTemp.Minutes.ToString () + ":" + timeTemp.Seconds.ToString()+ ":" + timeTemp.Milliseconds.ToString();
 
-		WheelFRRPM = WheelFR.rpm;
-		WheelFLRPM = WheelFL.rpm;
-		WheelRRRPM = WheelRR.rpm;
-		WheelRLRPM = WheelRL.rpm;
+		torqueTraction = WheelTraction.motorTorque;
+		//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
+		currentSpeed= 2*22/7*WheelTraction.radius*WheelTraction.rpm*60/1000;
+		currentSpeed=Mathf.Round(currentSpeed);
 
 		if(WheelFR.rpm<WheelFL.rpm)
 		{
@@ -77,6 +104,25 @@ public class BogieCar : MonoBehaviour {
 
 		//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
 		Brake ();
+
+		WheelRotate();
+	}
+
+	public void WheelRotate()
+	{
+		WheelFRRPM = WheelFR.rpm;
+		WheelFLRPM = WheelFL.rpm;
+		WheelRRRPM = WheelRR.rpm;
+		WheelRLRPM = WheelRL.rpm;
+		WheelTractionRPM = WheelTraction.rpm;
+
+		WheelFRTransform.Rotate(0,-WheelFR.rpm/60*360*Time.deltaTime,0);
+		WheelRLTransform.Rotate(0,-WheelRL.rpm/60*360*Time.deltaTime,0);
+		WheelRRTransform.Rotate(0,-WheelRR.rpm/60*360*Time.deltaTime,0);
+		WheelFLTransform.Rotate(0,-WheelRR.rpm/60*360*Time.deltaTime,0);
+		WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,WheelFL.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
+		WheelFRTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,WheelFR.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
+
 	}
 	
 	public void BrakeROn()
@@ -109,30 +155,38 @@ public class BogieCar : MonoBehaviour {
 			if(currentSpeed>0)
 			{
 				Debug.Log ("dec" + decelerationSpeed);
-				WheelRL.brakeTorque = -decelerationSpeed;
+				/*WheelRL.brakeTorque = -decelerationSpeed;
 				WheelRR.brakeTorque = -decelerationSpeed;
 				WheelRL.motorTorque = 0;
-				WheelRR.motorTorque = 0;
+				WheelRR.motorTorque = 0;*/
+				WheelTraction.motorTorque = 0;
+				WheelTraction.brakeTorque = -decelerationSpeed;
 			}
 			else if(currentSpeed<=0 && currentSpeed>=topRetroSpeed)
 			{
-				WheelRL.brakeTorque = 0;
+				/*WheelRL.brakeTorque = 0;
 				WheelRR.brakeTorque = 0;
 				WheelRL.motorTorque = retroSpeed;
-				WheelRR.motorTorque = retroSpeed;
+				WheelRR.motorTorque = retroSpeed;*/
+				WheelTraction.brakeTorque = 0;
+				WheelTraction.motorTorque = retroSpeed;
 			}
 			else if(currentSpeed<=0 && currentSpeed<=topRetroSpeed)
 			{
-				WheelRL.brakeTorque = 0;
+				/*WheelRL.brakeTorque = 0;
 				WheelRR.brakeTorque = 0;
 				WheelRL.motorTorque = 0;
-				WheelRR.motorTorque = 0;
+				WheelRR.motorTorque = 0;*/
+
+				WheelTraction.brakeTorque = 0;
+				WheelTraction.motorTorque = 0;
 			}
 		}
 		else 
 		{
-			WheelRL.brakeTorque = 0;
-			WheelRR.brakeTorque = 0;
+			WheelTraction.brakeTorque = 0;
+/*			WheelRL.brakeTorque = 0;
+			WheelRR.brakeTorque = 0;*/
 		}
 	}
 
@@ -147,16 +201,18 @@ public class BogieCar : MonoBehaviour {
 		Debug.Log("Lever  ");
 		if(currentSpeed<topSpeed)
 		{
-			WheelRL.motorTorque= forcePercent*torqueMax;
-			WheelRR.motorTorque= forcePercent*torqueMax;
+			/*WheelRL.motorTorque= forcePercent*torqueMax*powerUpSpeed;
+			WheelRR.motorTorque= forcePercent*torqueMax*powerUpSpeed;*/
 
-			StartCoroutine (StopTorque(forcePercent*torqueMax));
+			WheelTraction.motorTorque += forcePercent*torqueMax*powerUpSpeed;
+			StartCoroutine (StopTorque(forcePercent*torqueMax*powerUpSpeed));
 
 		}
 		else
 		{
-			WheelRL.motorTorque= 0;
-			WheelRR.motorTorque= 0;
+			/*WheelRL.motorTorque= 0;
+			WheelRR.motorTorque= 0;*/
+			WheelTraction.motorTorque = 0;
 		}
 	}
 
@@ -164,19 +220,32 @@ public class BogieCar : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(timeTorque);
 
-		if(WheelRL.motorTorque > 0 && WheelRR.motorTorque > 0)
+		/*if(WheelRL.motorTorque > 0 && WheelRR.motorTorque > 0)
 		{
 			if(WheelRL.motorTorque < torque || WheelRR.motorTorque < torque)
 			{
 				WheelRL.motorTorque = 0;
 				WheelRR.motorTorque = 0;
+				WheelTraction.motorTorque = 0;
 			}
 			else
 			{
 				WheelRL.motorTorque -= torque;
 				WheelRR.motorTorque -= torque;
 			}
+		}*/
+		if(WheelTraction.motorTorque > 0)
+		{
+			if(WheelTraction.motorTorque < torque)
+			{
+				WheelTraction.motorTorque = 0;
+			}
+			else
+			{
+				WheelTraction.motorTorque -= torque;
+			}
 		}
+
 	}
 
 	public void Steer(float steerPercent)
@@ -188,5 +257,26 @@ public class BogieCar : MonoBehaviour {
 		
 		WheelFL.steerAngle = currentSteerAngle;
 		WheelFR.steerAngle = currentSteerAngle;
+	}
+
+	void OnTriggerEnter(Collider other) {
+
+
+		StartCoroutine (DoubleSpeedStart());
+
+
+
+	}
+
+	//power up coroutine da implementare
+	IEnumerator DoubleSpeedStart()
+	{
+		powerUpSpeed=2f;
+		PowerUpText.text="Doppia Velocità...CANE!!!";
+		yield return new WaitForSeconds(2);
+		PowerUpText.text="";
+		yield return new WaitForSeconds(3);
+
+		powerUpSpeed=1f;
 	}
 }
