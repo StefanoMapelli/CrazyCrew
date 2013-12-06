@@ -73,6 +73,13 @@ public class ServerGameManager : MonoBehaviour {
 				players.Add(new Player(np));
 			}
 		}
+		else
+		{
+			if(!allPlayersConnected())
+			{
+				networkView.RPC("connectInGame",np);
+			}
+		}
 	}
 	
 	public void playerDisconnection(NetworkPlayer np)
@@ -152,13 +159,6 @@ public class ServerGameManager : MonoBehaviour {
 		Debug.Log("Player: "+np+" ready to play");
 	}
 
-	/*
-	[RPC]
-	void startGame()
-	{
-	}
-	*/
-
 	[RPC]
 	void setPause(bool pause)
 	{
@@ -186,37 +186,33 @@ public class ServerGameManager : MonoBehaviour {
 	{
 		Player p = getPlayerByRole(role);
 
+		//caso riconnessione da client che era in partita
 		if(p != null)
 		{
 			if(!p.getConnected())
 			{
 				p.setConnected(true);
 				p.setNetworkPlayer(np);
-				//networkView.RPC("reconnectionGood",np, p.getRole());
-
-				/*if(allPlayersConnected())
-				{
-					this.pause=false;
-					Time.timeScale = initialTimeScale;
-					networkView.RPC("setPause", RPCMode.All,false);
-				}*/
 			}
 			else {
 				Network.CloseConnection (np,true);
 			}
 		}
+		//caso riconnessione da client mai stato in partita (per esempio: in caso di app riavviata...)
 		else
 		{
 			Player pl;
 			foreach(object o in players)
 			{
 				pl = (Player) o;
-
+				
 				if(!pl.getConnected())
 				{
 					pl.setConnected(true);
 					pl.setNetworkPlayer(np);
-
+					networkView.RPC("setReady",np);
+					networkView.RPC("setPause", np, true);
+					
 					//Da estendere nel caso di aggiunta veicoli (in base al veicolo che stiamo guidando cambierà l'implementazione) 
 					if(pl.getRole().Equals("Lever1"))
 					{
@@ -227,7 +223,7 @@ public class ServerGameManager : MonoBehaviour {
 					else
 					{
 						if(pl.getRole().Equals("Lever2"))
-						{
+						{	
 							networkView.RPC("assginLever2",np);
 							networkView.RPC("blockLever",np, true);
 							networkView.RPC("blockLever",np, getPlayerByRole("Lever1").getNetworkPlayer(),false);
@@ -237,30 +233,14 @@ public class ServerGameManager : MonoBehaviour {
 							networkView.RPC("assginSteer",np);
 						}
 					}
-					//networkView.RPC("reconnectionGood",np, pl.getRole());
-
-					/*if(allPlayersConnected())
-					{
-						this.pause=false;
-						Time.timeScale = initialTimeScale;
-						networkView.RPC("setPause", RPCMode.All,false);
-					}*/
-
-					return;
 				}
+				return;
 			}
 		}
 	}
 
-	/*
 	[RPC]
-	void reconnectionGood(string role)
-	{
-	}
-	*/
-
-	[RPC]
-	void resumeGame()
+	void connectInGame()
 	{
 	}
 }

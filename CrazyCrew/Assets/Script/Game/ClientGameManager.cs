@@ -50,7 +50,8 @@ public class ClientGameManager : MonoBehaviour {
 	{
 		if(Network.peerType == NetworkPeerType.Client)
 		{
-			if (role == null) {
+			if (role == null)
+			{
 				if (!ready) 
 				{
 					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
@@ -101,35 +102,24 @@ public class ClientGameManager : MonoBehaviour {
 	[RPC]
 	void setReady(NetworkPlayer np)
 	{
+		this.ready=true;
 	}
-
-	/*
-	[RPC]
-	void startGame()
-	{
-		playing=true;
-	}
-	*/
 
 	[RPC]
 	void reconnect(NetworkPlayer np, string role)
 	{	
 	}
 
-	/*
 	[RPC]
-	void reconnectionGood(string role)
+	void connectInGame()
 	{
-		this.role = role;
-		this.ready = true;
+		if(role == null)
+		{
+			networkView.RPC("reconnect",RPCMode.Server, Network.player, "unknown");
+		}
+		else
+		{
+			networkView.RPC("reconnect",RPCMode.Server, Network.player, this.role);
+		}
 	}
-	*/
-
-	/*
-	[RPC]
-	void resumeGame()
-	{
-		setPause (false);
-	}
-	*/
 }

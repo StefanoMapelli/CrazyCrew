@@ -78,8 +78,6 @@ public class ClientNetworkManager : MonoBehaviour {
 			Network.Connect (myServer);
 			yield return new WaitForSeconds(10);
 		}
-		networkView.RPC ("reconnect",RPCMode.Server,Network.player,clientGameManager.getRole ());
 		reconnectRunning = false;
-
 	}
 }
