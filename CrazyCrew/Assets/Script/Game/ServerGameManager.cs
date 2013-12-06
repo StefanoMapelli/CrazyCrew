@@ -210,31 +210,33 @@ public class ServerGameManager : MonoBehaviour {
 				{
 					pl.setConnected(true);
 					pl.setNetworkPlayer(np);
-					networkView.RPC("setReady",np);
 					networkView.RPC("setPause", np, true);
-					
+					networkView.RPC("setReady",np,np);
+
 					//Da estendere nel caso di aggiunta veicoli (in base al veicolo che stiamo guidando cambierà l'implementazione) 
 					if(pl.getRole().Equals("Lever1"))
 					{
-						networkView.RPC("assginLever1",np);
+						networkView.RPC("assignLever1",np);
 						networkView.RPC("blockLever",np, false);
-						networkView.RPC("blockLever",np, getPlayerByRole("Lever2").getNetworkPlayer(),true);
+						networkView.RPC("blockLever",getPlayerByRole("Lever2").getNetworkPlayer(),true);
+						return;
 					}
 					else
 					{
 						if(pl.getRole().Equals("Lever2"))
 						{	
-							networkView.RPC("assginLever2",np);
+							networkView.RPC("assignLever2",np);
 							networkView.RPC("blockLever",np, true);
-							networkView.RPC("blockLever",np, getPlayerByRole("Lever1").getNetworkPlayer(),false);
+							networkView.RPC("blockLever",getPlayerByRole("Lever1").getNetworkPlayer(),false);
+							return;
 						}
 						else
 						{
-							networkView.RPC("assginSteer",np);
+							networkView.RPC("assignSteer",np);
+							return;
 						}
 					}
 				}
-				return;
 			}
 		}
 	}

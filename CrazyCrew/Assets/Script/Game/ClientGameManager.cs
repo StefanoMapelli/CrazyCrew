@@ -52,12 +52,12 @@ public class ClientGameManager : MonoBehaviour {
 		{
 			if (role == null)
 			{
-				if (!ready) 
+				if (!ready && !pause) 
 				{
 					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
 					{
 						ready = true;
-						networkView.RPC("setReady",RPCMode.Server, Network.player);
+						networkView.RPC("setReady",RPCMode.Server, Network.player);;
 					}
 				}
 				else
@@ -115,6 +115,7 @@ public class ClientGameManager : MonoBehaviour {
 	{
 		if(role == null)
 		{
+			Debug.Log("ci sono");
 			networkView.RPC("reconnect",RPCMode.Server, Network.player, "unknown");
 		}
 		else
