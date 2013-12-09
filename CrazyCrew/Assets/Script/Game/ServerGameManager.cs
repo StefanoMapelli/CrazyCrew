@@ -12,6 +12,7 @@ public class ServerGameManager : MonoBehaviour {
 	private int numberOfPlayers = 3;
 	private ArrayList players = new ArrayList();
 	private ServerBogieCar serverBogieCar;
+	private PlayerCount playerCount;
 
 	public ArrayList getPlayers()
 	{
@@ -23,6 +24,8 @@ public class ServerGameManager : MonoBehaviour {
 	{
 		initialTimeScale = Time.timeScale;
 		serverBogieCar = (ServerBogieCar) gameObject.GetComponent("ServerBogieCar");
+
+		playerCount = (PlayerCount) GameObject.Find ("PlayerCountText").GetComponent("PlayerCount");
 	}
 
 	// Update is called once per frame
@@ -71,6 +74,7 @@ public class ServerGameManager : MonoBehaviour {
 			if(players.Count < numberOfPlayers)
 			{
 				players.Add(new Player(np));
+				playerCount.incrementNumber();
 			}
 		}
 		else
@@ -89,6 +93,7 @@ public class ServerGameManager : MonoBehaviour {
 			object o = getPlayer(np);
 			players.Remove(o);
 			Debug.Log("Player: "+np+" disconnesso");
+			playerCount.decrementNumber();
 		}
 		else
 		{

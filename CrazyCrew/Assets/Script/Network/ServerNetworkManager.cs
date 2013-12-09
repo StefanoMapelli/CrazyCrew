@@ -10,12 +10,19 @@ public class ServerNetworkManager : MonoBehaviour {
 	private const string gameName = "CrazyCrewServer";
 	private ServerGameManager serverGameManager;
 
-	private void StartServer()
+	public void StartServer()
 	{
-	    Network.InitializeServer(4, 25000, false);
+	    Network.InitializeServer(3, 25000, false);
 	    MasterServer.RegisterHost(typeName, gameName);
 	}
-	
+
+	void OnFailedToConnectToMasterServer(NetworkConnectionError info) 
+	{
+		GUIMenus.waitingForPlayersMenu(false);
+		GUIMenus.mainMenu(true);
+		GUIMenus.masterServerError(true);
+	}
+
 	void OnServerInitialized()
 	{
 	    Debug.Log("Server Initializied");
@@ -44,18 +51,10 @@ public class ServerNetworkManager : MonoBehaviour {
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
 		Network.natFacilitatorPort = 50005;
-
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-	}
-
-	void OnGUI()
-	{
-		if(!Network.isServer)
-		 if (GUI.Button(new Rect(100, 100, 250, 100), "Start Server"))
-	    	 StartServer();
 	}
 }
