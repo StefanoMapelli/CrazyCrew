@@ -43,7 +43,7 @@ public class ServerBogieCar : MonoBehaviour {
 	public void initializeBogieCar()
 	{
 		GameObject o = GameObject.Find("BogieCarModel");
-		bogieCar = (BogieCarMovement)	o.GetComponent("BogieCar");
+		bogieCar = (BogieCarMovement)	o.GetComponent("BogieCarMovement");
 	}
 
 	[RPC]

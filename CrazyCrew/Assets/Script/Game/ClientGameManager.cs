@@ -86,10 +86,6 @@ public class ClientGameManager : MonoBehaviour {
 			{
 				GUI.Label (new Rect(10,10,200,200),"Attempting to reconnect...");
 			}
-			else
-			{
-				GUI.Label (new Rect(10,10,200,200),"Game paused");
-			}
 		}
 	}
 
@@ -105,8 +101,7 @@ public class ClientGameManager : MonoBehaviour {
 		}
 		else
 		{
-			Camera.main.transform.position = controlPosition;
-			Debug.Log("Sposto camera");
+			Camera.main.transform.position = new Vector3(0,1,-10);
 		}
 	}
 

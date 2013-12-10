@@ -12,4 +12,14 @@ public class ExitToMenu : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void OnMouseDown()
+	{
+		Debug.Log("Ho schiacciato");
+
+		GameObject.Destroy(GameObject.Find("Client"));
+		Network.Disconnect();
+		Application.LoadLevel("client");
+
+	}
 }
