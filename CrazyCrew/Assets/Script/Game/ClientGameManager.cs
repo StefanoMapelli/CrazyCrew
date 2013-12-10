@@ -6,12 +6,14 @@ public class ClientGameManager : MonoBehaviour {
 	private string role;
 	private bool ready = false;
 	private bool pause = false;
+	private Vector3 controlPosition;
 	
 	// Use this for initialization
 	void Start () 
 	{
 	}
 	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -21,6 +23,7 @@ public class ClientGameManager : MonoBehaviour {
 				if (pause) 
 				{
 					networkView.RPC ("clientPause",RPCMode.Server,false);
+
 				}
 				else 
 				{
@@ -28,6 +31,16 @@ public class ClientGameManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public void resumeGame()
+	{
+		networkView.RPC ("clientPause",RPCMode.Server,false);
+	}
+
+	public void pauseOn()
+	{
+		networkView.RPC ("clientPause",RPCMode.Server,true);
 	}
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
@@ -57,7 +70,7 @@ public class ClientGameManager : MonoBehaviour {
 					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
 					{
 						ready = true;
-						networkView.RPC("setReady",RPCMode.Server, Network.player);;
+						networkView.RPC("setReady",RPCMode.Server, Network.player);
 					}
 				}
 				else
@@ -87,11 +100,13 @@ public class ClientGameManager : MonoBehaviour {
 
 		if(pause)
 		{
-			Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, 20.0f);
+			controlPosition=Camera.main.transform.position;
+			Camera.main.transform.position = new Vector3(100,1, -10);
 		}
 		else
 		{
-			Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -10.0f);
+			Camera.main.transform.position = controlPosition;
+			Debug.Log("Sposto camera");
 		}
 	}
 
