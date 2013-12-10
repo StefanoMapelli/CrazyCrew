@@ -5,7 +5,7 @@ using System.Collections.Specialized;
 public class ServerBogieCar : MonoBehaviour {
 
 	private ServerGameManager serverGameManager;
-	private BogieCar bogieCar;
+	private BogieCarMovement bogieCar;
 
 	// Use this for initialization
 	void Start () 
@@ -43,7 +43,7 @@ public class ServerBogieCar : MonoBehaviour {
 	public void initializeBogieCar()
 	{
 		GameObject o = GameObject.Find("BogieCarModel");
-		bogieCar = (BogieCar)	o.GetComponent("BogieCar");
+		bogieCar = (BogieCarMovement)	o.GetComponent("BogieCar");
 	}
 
 	[RPC]

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Threading;
 using System;
 
-public class BogieCar : MonoBehaviour {
+public class BogieCarMovement : MonoBehaviour {
 
 	//Conponenti veicolo
 
