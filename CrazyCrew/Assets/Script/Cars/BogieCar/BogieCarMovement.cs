@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Threading;
 using System;
 
 public class BogieCarMovement : MonoBehaviour {
@@ -59,6 +58,9 @@ public class BogieCarMovement : MonoBehaviour {
 	//Da settare quando comincia la partita
 	private DateTime startTime;
 
+	//TimeOut all'inizio della partita
+	private TextMesh countDownText;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
@@ -66,46 +68,79 @@ public class BogieCarMovement : MonoBehaviour {
 		PowerUpText =  (TextMesh) (GameObject.Find("PowerUpText").GetComponent("TextMesh"));
 		PowerUpText.text="";
 
+		//CountDown
+
+		countDownText = (TextMesh) (GameObject.Find("CountDownText").GetComponent("TextMesh"));
+		StartCoroutine( WriteTextMesh(countDownText, "3", 0));
+		StartCoroutine( WriteTextMesh(countDownText, "2", 1));
+		StartCoroutine( WriteTextMesh(countDownText, "1", 2));
+		StartCoroutine( WriteTextMesh(countDownText, "Go!!!", 3));
+		StartCoroutine( WriteTextMesh(countDownText, "", 4));
+
 		timerText =  (TextMesh) (GameObject.Find("TimerText").GetComponent("TextMesh"));
 		timerText.text = "00:00";
 		startTime = DateTime.Now;
+	}
+
+	/// <summary>
+	/// Wait for seconds time and wrtite text in textMesh.
+	/// </summary>
+	/// <param name="textMesh">Text mesh where write.</param>
+	/// <param name="text">Text to write.</param>
+	/// <param name="seconds">Seconds to wait before write.</param>
+	private IEnumerator WriteTextMesh(TextMesh textMesh, string text, float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		textMesh.text = text;
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
 
-		TimeSpan timeTemp = DateTime.Now - startTime;
-		timerText.text = timeTemp.Minutes.ToString () + ":" + timeTemp.Seconds.ToString()+ ":" + timeTemp.Milliseconds.ToString();
-
-		torqueTraction = WheelTraction.motorTorque;
-		//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
-		currentSpeed= 2*22/7*WheelTraction.radius*WheelTraction.rpm*60/1000;
-		currentSpeed=Mathf.Round(currentSpeed);
-
-		if(WheelFR.rpm<WheelFL.rpm)
+		//Setto il time di partenza
+		if(countDownText.text == "Go!!!")
 		{
-			torqueCorrectionL=0.90f;
-			torqueCorrectionR=1f;
-			
-		}
-		else if(WheelFL.rpm<WheelFR.rpm)
-		{
-			torqueCorrectionR=0.90f;;
-			torqueCorrectionL=1f;
-			
-			
-		}
-		else if(WheelFL.rpm==WheelFR.rpm)
-		{
-			torqueCorrectionR=1f;;
-			torqueCorrectionL=1f;
+			startTime = DateTime.Now;
 		}
 
-		//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
+
+		if(countDownText.text == "" || countDownText.text == "Go!!!")
+			//Ora comincia la partita.
+		{
+			TimeSpan timeTemp = DateTime.Now - startTime;
+			Debug.Log (timeTemp);
+			timerText.text = timeTemp.Minutes.ToString () + ":" + timeTemp.Seconds.ToString()+ ":" + timeTemp.Milliseconds.ToString();
+		
+			torqueTraction = WheelTraction.motorTorque;
+			//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
+			currentSpeed= 2*22/7*WheelTraction.radius*WheelTraction.rpm*60/1000;
+			currentSpeed=Mathf.Round(currentSpeed);
+
+			if(WheelFR.rpm<WheelFL.rpm)
+			{
+				torqueCorrectionL=0.90f;
+				torqueCorrectionR=1f;
+				
+			}
+			else if(WheelFL.rpm<WheelFR.rpm)
+			{
+				torqueCorrectionR=0.90f;;
+				torqueCorrectionL=1f;
+				
+				
+			}
+			else if(WheelFL.rpm==WheelFR.rpm)
+			{
+				torqueCorrectionR=1f;;
+				torqueCorrectionL=1f;
+			}
+
+			//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
 		Brake ();
 
 		WheelRotate();
+		}
 	}
 
 	public void WheelRotate()
@@ -189,13 +224,12 @@ public class BogieCarMovement : MonoBehaviour {
 			WheelRR.brakeTorque = 0;*/
 		}
 	}
-
-	/*
-         * Force percent è compreso tra 0 e 1
-         * Indica quanto hai abbasato la leva sullo Smartphone
-         * rispetto al massimo possibile
-         *
-         */
+	
+	/// <summary>
+	///  Indica quanto hai abbasato la leva sullo Smartphone
+	///  rispetto al massimo possibile
+	/// </summary>
+	/// <param name="forcePercent">Force percent è compreso tra 0 e 1.</param>
 	public void LeverDown(float forcePercent)
 	{
 		Debug.Log("Lever  ");
@@ -259,6 +293,7 @@ public class BogieCarMovement : MonoBehaviour {
 		WheelFR.steerAngle = currentSteerAngle;
 	}
 
+	//Collisione con powerUp
 	void OnTriggerEnter(Collider other) {
 
 
