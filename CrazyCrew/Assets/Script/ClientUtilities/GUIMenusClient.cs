@@ -4,23 +4,30 @@ using System.Collections;
 public static class GUIMenusClient {
 
 	public static void refreshList(bool enabled) {
-		MeshRenderer refreshListRenderer = (MeshRenderer) GameObject.Find("RefreshListText").GetComponent("MeshRenderer");
-		refreshListRenderer.enabled = enabled;
+		GameObject refreshList = GameObject.Find("RefreshListText");
+
+		((MeshRenderer) refreshList.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) refreshList.GetComponent("BoxCollider")).enabled = enabled;
 	}
 
 	public static void quitButton(bool enabled) {
-		MeshRenderer quitButtonRenderer = (MeshRenderer) GameObject.Find("Quit").GetComponent("MeshRenderer");
-		quitButtonRenderer.enabled = enabled;
+		GameObject quitButton = GameObject.Find("Quit");
+
+		((MeshRenderer) quitButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) quitButton.GetComponent("BoxCollider")).enabled = enabled;
 	}
 
 	public static void connectionError(bool enabled) {
-		MeshRenderer connectionErrorRenderer = (MeshRenderer) GameObject.Find("ConnectionErrorText").GetComponent("MeshRenderer");
-		connectionErrorRenderer.enabled = enabled;
+		GameObject connectionError = GameObject.Find("ConnectionErrorText");
+
+		((MeshRenderer) connectionError.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 
 	public static void readyButton(bool enabled) {
-		MeshRenderer readyButtonRenderer = (MeshRenderer) GameObject.Find("ReadyText").GetComponent("MeshRenderer");
-		readyButtonRenderer.enabled = enabled;
+		GameObject readyButton = GameObject.Find("ReadyText");
+
+		((MeshRenderer) readyButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) readyButton.GetComponent("BoxCollider")).enabled = enabled;
 	}
 
 	public static void readyButton(string msg) {

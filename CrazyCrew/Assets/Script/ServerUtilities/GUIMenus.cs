@@ -5,25 +5,34 @@ public static class GUIMenus
 {
 	public static void masterServerError(bool enabled)
 	{
-		MeshRenderer masterServerError = (MeshRenderer)GameObject.Find ("ConnectionErrorText").GetComponent("MeshRenderer");
-		masterServerError.enabled = enabled;
+		GameObject masterServerError = GameObject.Find ("ConnectionErrorText");
+		((MeshRenderer) masterServerError.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 
 	public static void mainMenu(bool enabled)
 	{
-		MeshRenderer newGame = (MeshRenderer) GameObject.Find("NewGameText").GetComponent("MeshRenderer");
-		MeshRenderer quit = (MeshRenderer) GameObject.Find("QuitText").GetComponent("MeshRenderer");
+		GameObject newGame = GameObject.Find("NewGameText");
+		GameObject quit = GameObject.Find("QuitText");
 
-		newGame.enabled = enabled;
-		quit.enabled = enabled;
+		MeshRenderer mesh = (MeshRenderer) newGame.GetComponent("MeshRenderer");
+		BoxCollider collider = (BoxCollider) newGame.GetComponent("BoxCollider");
+
+		mesh.enabled = enabled;
+		collider.enabled = enabled;
+
+		mesh = (MeshRenderer) quit.GetComponent("MeshRenderer");
+		collider = (BoxCollider) quit.GetComponent("BoxCollider");
+
+		mesh.enabled = enabled;
+		collider.enabled = enabled;
 	}
 
 	public static void waitingForPlayersMenu(bool enabled)
 	{
-		MeshRenderer waiting = (MeshRenderer) GameObject.Find ("WaitingText").GetComponent("MeshRenderer");
-		MeshRenderer playerCount = (MeshRenderer) GameObject.Find ("PlayerCountText").GetComponent("MeshRenderer");
-
-		waiting.enabled = enabled;
-		playerCount.enabled = enabled;
+		GameObject waiting = GameObject.Find("WaitingText");
+		GameObject playerCount = GameObject.Find("PlayerCountText");
+		
+		((MeshRenderer) waiting.GetComponent("MeshRenderer")).enabled = enabled;
+		((MeshRenderer) playerCount.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 }

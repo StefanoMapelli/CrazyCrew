@@ -17,6 +17,5 @@ public class RefreshList : MonoBehaviour {
 
 	void OnMouseDown() {
 		clientNetworkManager.RefreshHostList();
-		GUIMenusClient.connectionError(false);
 	}
 }
