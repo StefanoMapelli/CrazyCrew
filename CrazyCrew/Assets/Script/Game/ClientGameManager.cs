@@ -17,6 +17,7 @@ public class ClientGameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		/*
 		if (role != null) {
 			if (Input.GetKeyDown(KeyCode.P))
 			{
@@ -30,6 +31,26 @@ public class ClientGameManager : MonoBehaviour {
 					networkView.RPC ("clientPause",RPCMode.Server,true);
 				}
 			}
+		}*/
+
+		if(Network.peerType == NetworkPeerType.Client)
+		{
+			
+			if (role == null)
+			{
+				
+				if (!ready && !pause) 
+				{
+					GUIMenusClient.readyButton(true);
+				}
+				else
+				{
+					GUIMenusClient.readyButton("Ready to play...");
+				}
+				
+			}
+			else 
+				GUIMenusClient.readyButton(false);
 		}
 	}
 
@@ -59,12 +80,15 @@ public class ClientGameManager : MonoBehaviour {
 		this.role = role;
 	}
 
+
 	void OnGUI()
-	{
+	{/*
 		if(Network.peerType == NetworkPeerType.Client)
 		{
+
 			if (role == null)
 			{
+
 				if (!ready && !pause) 
 				{
 					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
@@ -77,8 +101,9 @@ public class ClientGameManager : MonoBehaviour {
 				{
 					GUI.Label (new Rect(10,10,200,200),"Ready to play, waiting for other players...");
 				}
+
 			}
-		}
+		}*/
 
 		if(pause)
 		{
@@ -110,9 +135,10 @@ public class ClientGameManager : MonoBehaviour {
 	}
 
 	[RPC]
-	void setReady(NetworkPlayer np)
+	public void setReady(NetworkPlayer np)
 	{
 		this.ready=true;
+		networkView.RPC("setReady",RPCMode.Server, Network.player);
 	}
 
 	[RPC]
@@ -124,8 +150,7 @@ public class ClientGameManager : MonoBehaviour {
 	void connectInGame()
 	{
 		if(role == null)
-		{
-			Debug.Log("ci sono");
+		{		
 			networkView.RPC("reconnect",RPCMode.Server, Network.player, "unknown");
 		}
 		else

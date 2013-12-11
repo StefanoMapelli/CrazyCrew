@@ -24,7 +24,7 @@ public class ClientNetworkManager : MonoBehaviour {
 		clientGameManager = (ClientGameManager) client.GetComponent("ClientGameManager");
 	}
 
-	private void RefreshHostList()
+	public void RefreshHostList()
 	{
 	    MasterServer.RequestHostList(typeName);
 	}
@@ -34,7 +34,25 @@ public class ClientNetworkManager : MonoBehaviour {
 	    if (msEvent == MasterServerEvent.HostListReceived)
 	        hostList = MasterServer.PollHostList();
 	}
-	
+
+	void OnFailedToConnectToMasterServer(NetworkConnectionError e) {
+		GUIMenusClient.connectionError(true);
+		GUIMenusClient.quitButton(true);
+		GUIMenusClient.refreshList(true);
+	}
+
+	void OnFailedToConnect(NetworkConnectionError e) {
+		GUIMenusClient.connectionError(true);
+		GUIMenusClient.quitButton(true);
+		GUIMenusClient.refreshList(true);
+	}
+
+	void OnConnectedToServer() {
+		GUIMenusClient.connectionError(false);
+		GUIMenusClient.quitButton(false);
+		GUIMenusClient.refreshList(false);
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -58,14 +76,14 @@ public class ClientNetworkManager : MonoBehaviour {
 	{
 		if (Network.peerType == NetworkPeerType.Disconnected && myServer == null) 
 		{	 
-	        if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
-	           	RefreshHostList();
+	        //if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
+	           	//RefreshHostList();
 	
         	if (hostList != null)	        	
 			{
 	            for (int i = 0; i < hostList.Length; i++)
 	           	{
-	               	if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+	               	if (GUI.Button(new Rect(850, 150 + (110 * i), 200, 50), hostList[i].gameName))
 	                   	JoinServer(hostList[i]);
 	           	}
 	       	}
