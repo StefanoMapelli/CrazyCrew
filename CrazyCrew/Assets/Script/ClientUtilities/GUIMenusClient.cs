@@ -40,16 +40,21 @@ public static class GUIMenusClient {
 
 	public static void pauseMenuPositioning(bool enabled)
 	{
-		GameObject pauseMenu = GameObject.Find("PauseMenu");
-		Vector3 screenPos = Camera.main.WorldToScreenPoint(pauseMenu.transform.position);
+		GameObject resumeGameButton = GameObject.Find("ResumeGameButton");
+		Vector3 screenPosResume = Camera.main.WorldToScreenPoint(resumeGameButton.transform.position);
+
+		GameObject exitButton = GameObject.Find("ExitToMenuButton");
+		Vector3 screenPosExit = Camera.main.WorldToScreenPoint(exitButton.transform.position);
 
 		if(enabled)
 		{
-			pauseMenu.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
+			resumeGameButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/3)*2, screenPosResume.z));
+			exitButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPosExit.z));
 		}
 		else
 		{
-			pauseMenu.transform.position = new Vector3(1000,screenPos.y,screenPos.z);
+			resumeGameButton.transform.position = new Vector3(1000,1,-2);
+			exitButton.transform.position = new Vector3(1000,1,-2);
 		}
 	}
 }
