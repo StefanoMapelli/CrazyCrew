@@ -11,6 +11,8 @@ public class ClientNetworkManager : MonoBehaviour {
 	private HostData myServer = null;
 	private bool reconnectRunning = false;
 	private ClientGameManager clientGameManager;
+
+	private bool listArrived = false;
  
 	// Use this for initialization
 	void Start () 
@@ -31,8 +33,12 @@ public class ClientNetworkManager : MonoBehaviour {
 	 
 	void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
-	    if (msEvent == MasterServerEvent.HostListReceived)
+	    if (msEvent == MasterServerEvent.HostListReceived) {
 	        hostList = MasterServer.PollHostList();
+
+			if (myServer != null)
+				listArrived = true;
+		}
 	}
 
 	void OnFailedToConnectToMasterServer(NetworkConnectionError e) {
@@ -91,11 +97,30 @@ public class ClientNetworkManager : MonoBehaviour {
 	}
 
 	private IEnumerator tryReconnect() {
-		while (Network.peerType == NetworkPeerType.Disconnected) {
-			Debug.Log ("I'm disconnected, trying to reconnect to server...");
-			Network.Connect (myServer);
+		while (!listArrived) {
+			Debug.Log ("list requested, now waiting...");
+			RefreshHostList();
 			yield return new WaitForSeconds(10);
 		}
+
+		bool found = false;
+		for (int i = 0; i < hostList.Length; i++) {
+			if (hostList[i].gameName == myServer.gameName) {
+				found = true;
+				break;
+			}
+		}
+
+		if (found) {
+			while (Network.peerType == NetworkPeerType.Disconnected) {
+				Network.Connect (myServer);
+				yield return new WaitForSeconds(10);
+			}
+		}
+		else {
+			Application.LoadLevel ("client");
+		}
 		reconnectRunning = false;
+		listArrived = false;
 	}
 }

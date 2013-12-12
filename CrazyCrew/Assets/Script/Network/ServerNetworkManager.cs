@@ -7,11 +7,12 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	public string masterServerIpAddress;
 	private const string typeName = "UniqueGameName";
-	private const string gameName = "CrazyCrewServer";
+	private string gameName;
 	private ServerGameManager serverGameManager;
 
 	public void StartServer()
 	{
+		gameName = DateTime.Now.ToString();
 	    Network.InitializeServer(3, 25000, false);
 	    MasterServer.RegisterHost(typeName, gameName);
 	}

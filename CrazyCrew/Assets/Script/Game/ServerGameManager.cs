@@ -64,7 +64,6 @@ public class ServerGameManager : MonoBehaviour {
 	{
 		serverBogieCar.initializeBogieCar();
 		serverBogieCar.assignRoles();
-		//networkView.RPC("startGame",RPCMode.All);
 	}
 	
 	public void playerConnection(NetworkPlayer np)
