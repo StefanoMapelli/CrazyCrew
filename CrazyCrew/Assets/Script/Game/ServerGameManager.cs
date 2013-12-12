@@ -13,6 +13,7 @@ public class ServerGameManager : MonoBehaviour {
 	private ArrayList players = new ArrayList();
 	private ServerBogieCar serverBogieCar;
 	private PlayerCount playerCount;
+	private RaceManager raceManager;
 
 	public ArrayList getPlayers()
 	{
@@ -64,6 +65,7 @@ public class ServerGameManager : MonoBehaviour {
 	{
 		serverBogieCar.initializeBogieCar();
 		serverBogieCar.assignRoles();
+		raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
 	}
 	
 	public void playerConnection(NetworkPlayer np)
@@ -99,6 +101,7 @@ public class ServerGameManager : MonoBehaviour {
 			getPlayer(np).setConnected(false);
 			pause = true;
 			Time.timeScale = 0;
+			raceManager.SetPause(true);
 			networkView.RPC("setPause", RPCMode.All, pause);
 		}
 	}
@@ -171,6 +174,7 @@ public class ServerGameManager : MonoBehaviour {
 	[RPC]
 	void clientPause(bool p)
 	{
+		raceManager.SetPause(p);
 		if (p) {
 			networkView.RPC ("setPause",RPCMode.All,true);
 			pause = true;
