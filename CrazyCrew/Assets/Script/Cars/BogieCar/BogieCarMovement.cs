@@ -25,10 +25,6 @@ public class BogieCarMovement : MonoBehaviour {
 	public Transform WheelRLTransform;
 	public Transform WheelRRTransform;
 
-	public float WheelFRRPM;
-	public float WheelFLRPM;
-	public float WheelRRRPM;
-	public float WheelRLRPM;
 	public float WheelTractionRPM;
 
 	public float torqueTraction;
@@ -107,10 +103,6 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void WheelRotate()
 	{
-		WheelFRRPM = WheelFR.rpm;
-		WheelFLRPM = WheelFL.rpm;
-		WheelRRRPM = WheelRR.rpm;
-		WheelRLRPM = WheelRL.rpm;
 		WheelTractionRPM = WheelTraction.rpm;
 
 		WheelFRTransform.Rotate(0,-WheelFR.rpm/60*360*Time.deltaTime,0);
@@ -279,6 +271,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 	IEnumerator Finish ()
 	{
+		Debug.Log ("finish");
+
 		if(!finishRace)
 		{
 			finishRace = true;
@@ -298,5 +292,16 @@ public class BogieCarMovement : MonoBehaviour {
 		yield return new WaitForSeconds(3);
 
 		powerUpSpeed=1f;
+	
+	
+	}
+
+	/// <summary>
+	/// Restart the race.
+	/// Sposto il veicolo alla partenza
+	/// </summary>
+	public void RestartRace()
+	{
+		transform.position = new Vector3(14,0,114);
 	}
 }

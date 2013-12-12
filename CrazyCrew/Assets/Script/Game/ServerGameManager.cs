@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Threading;
+using System;
 
 public class ServerGameManager : MonoBehaviour {
 
@@ -45,6 +46,9 @@ public class ServerGameManager : MonoBehaviour {
 		}
 	}
 
+	//resto in attesa dell'evento di fine gara
+
+
 
 	void OnGUI()
 	{
@@ -61,11 +65,21 @@ public class ServerGameManager : MonoBehaviour {
 		}
 	}
 
+
+
+
 	public void OnLevelWasLoaded(int level)
 	{
 		serverBogieCar.initializeBogieCar();
 		serverBogieCar.assignRoles();
 		raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
+		//aggiungo l'evento di fine gara
+		raceManager.RaceFinish+=new EventHandler(RaceFinish);
+	}
+
+	private void RaceFinish(System.Object sender, EventArgs e)
+	{
+
 	}
 	
 	public void playerConnection(NetworkPlayer np)

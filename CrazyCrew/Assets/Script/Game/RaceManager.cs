@@ -4,6 +4,18 @@ using System;
 
 public class RaceManager : MonoBehaviour {
 
+	//evento fine gara
+	public delegate void RaceFinishEventHandler(object sender, EventArgs e);
+
+	public event EventHandler RaceFinish;
+
+	protected virtual void OnRaceFinish(EventArgs e)
+	{
+		RaceFinish(this,e);
+	}
+
+
+
 	private TextMesh infoText;
 	//Pause
 	private bool pause = true;
@@ -17,12 +29,15 @@ public class RaceManager : MonoBehaviour {
 	//Menu finale
 	public GameObject finishMenu;
 	public GameObject finalTime;
+	private bool isFinish=false;
 
 	// Use this for initialization
 	void Start () {
-		infoText =  (TextMesh) (GameObject.Find("InfoText").GetComponent("TextMesh"));
-		infoText.text="";
-		
+		//CountDown
+		StartCoroutine (StartGame ());
+	}
+
+	public void RestartRace () {
 		//CountDown
 		StartCoroutine (StartGame ());
 	}
@@ -33,6 +48,9 @@ public class RaceManager : MonoBehaviour {
 	/// <returns></returns>
 	private IEnumerator StartGame()
 	{
+		infoText =  (TextMesh) (GameObject.Find("InfoText").GetComponent("TextMesh"));
+		infoText.text="";
+
 		infoText.text = "3";
 		yield return new WaitForSeconds(1);
 		infoText.text = "2";
@@ -43,7 +61,7 @@ public class RaceManager : MonoBehaviour {
 
 		//Appena esce la scritta Go si può partire e parte il timer
 		timerText =  (TextMesh) (GameObject.Find("TimerText").GetComponent("TextMesh"));
-		timerText.text = "00:00";
+		timerText.text = "00:00:000";
 		startTime = DateTime.Now;
 
 		SetPause (false);
@@ -62,13 +80,17 @@ public class RaceManager : MonoBehaviour {
 	/// </summary>
 	public void FinishLine()
 	{
+		//OnRaceFinish(EventArgs.Empty);
 		finishMenu.SetActive (true);
-		((TextMesh)finalTime.GetComponent ("TextMesh")).text += timerText.text;
+		isFinish=true;
+		infoText.text="";
+		timerText.text="";
+		((TextMesh)finalTime.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", timer.Minutes, timer.Seconds, timer.Milliseconds);;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if(!pause)
+		if(!pause && !isFinish)
 		{
 			TimeSpan timeTemp = DateTime.Now.Subtract (startTime);
 
@@ -77,6 +99,7 @@ public class RaceManager : MonoBehaviour {
 			string formattedTimeSpan = string.Format("{0:D2}:{1:D2}:{2:D3}", timer.Minutes, timer.Seconds, timer.Milliseconds);
 			timerText.text = formattedTimeSpan;
 		}
+
 		startTime = DateTime.Now;
 	}
 }
