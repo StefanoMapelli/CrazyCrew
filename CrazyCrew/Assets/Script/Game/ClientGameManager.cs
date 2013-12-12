@@ -129,6 +129,8 @@ public class ClientGameManager : MonoBehaviour {
 		{
 			Camera.main.transform.position = new Vector3(0,1,-10);
 		}
+
+		GUIMenusClient.pauseMenuPositioning(pause);
 	}
 
 	[RPC]

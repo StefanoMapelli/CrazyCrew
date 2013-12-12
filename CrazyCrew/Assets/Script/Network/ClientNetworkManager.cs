@@ -89,7 +89,7 @@ public class ClientNetworkManager : MonoBehaviour {
 			{
 	            for (int i = 0; i < hostList.Length; i++)
 	           	{
-	               	if (GUI.Button(new Rect(850, 150 + (110 * i), 200, 50), hostList[i].gameName))
+	               	if (GUI.Button(new Rect(450+(100*i), 300, 150, 50), hostList[i].gameName))
 	                   	JoinServer(hostList[i]);
 	           	}
 	       	}

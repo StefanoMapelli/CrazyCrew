@@ -8,6 +8,9 @@ public class ReadyButton : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		clientGameManager = (ClientGameManager) GameObject.Find ("Client").GetComponent ("ClientGameManager");
+
+		Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+		transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
 	}
 	
 	// Update is called once per frame
