@@ -49,8 +49,9 @@ public class ClientGameManager : MonoBehaviour {
 				}
 				
 			}
-			else 
+			else {
 				GUIMenusClient.readyButton(false);
+			}
 		}
 	}
 

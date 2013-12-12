@@ -17,6 +17,6 @@ public class ReadyButton : MonoBehaviour {
 
 	void OnMouseDown() {
 		clientGameManager.setReady(Network.player);
-		GUIMenusClient.readyButton(false);
+		//GUIMenusClient.readyButton(false);
 	}
 }
