@@ -51,67 +51,29 @@ public class BogieCarMovement : MonoBehaviour {
 	//power up
 	private float powerUpSpeed=1f;
 
-	private TextMesh PowerUpText;
+	//CheckPoint
+	private bool checkPoint = false;
+	public GameObject raceManager;
 
-	//Timer
-	private TextMesh timerText;
-	//Da settare quando comincia la partita
-	private DateTime startTime;
 
-	//TimeOut all'inizio della partita
-	private TextMesh countDownText;
+	private bool startRace = false;
+	private bool finishRace = false;
 
+	public TextMesh infoText;
+	
 	// Use this for initialization
 	void Start () {
+
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
 
-		PowerUpText =  (TextMesh) (GameObject.Find("PowerUpText").GetComponent("TextMesh"));
-		PowerUpText.text="";
-
-		//CountDown
-
-		countDownText = (TextMesh) (GameObject.Find("CountDownText").GetComponent("TextMesh"));
-		StartCoroutine( WriteTextMesh(countDownText, "3", 0));
-		StartCoroutine( WriteTextMesh(countDownText, "2", 1));
-		StartCoroutine( WriteTextMesh(countDownText, "1", 2));
-		StartCoroutine( WriteTextMesh(countDownText, "Go!!!", 3));
-		StartCoroutine( WriteTextMesh(countDownText, "", 4));
-
-		timerText =  (TextMesh) (GameObject.Find("TimerText").GetComponent("TextMesh"));
-		timerText.text = "00:00";
-		startTime = DateTime.Now;
-	}
-
-	/// <summary>
-	/// Wait for seconds time and wrtite text in textMesh.
-	/// </summary>
-	/// <param name="textMesh">Text mesh where write.</param>
-	/// <param name="text">Text to write.</param>
-	/// <param name="seconds">Seconds to wait before write.</param>
-	private IEnumerator WriteTextMesh(TextMesh textMesh, string text, float seconds)
-	{
-		yield return new WaitForSeconds(seconds);
-		textMesh.text = text;
 	}
 
 	
 	// Update is called once per frame
 	void Update () {
-
-		//Setto il time di partenza
-		if(countDownText.text == "Go!!!")
-		{
-			startTime = DateTime.Now;
-		}
-
-
-		if(countDownText.text == "" || countDownText.text == "Go!!!")
+		if(startRace && !finishRace)
 			//Ora comincia la partita.
 		{
-			TimeSpan timeTemp = DateTime.Now - startTime;
-			Debug.Log (timeTemp);
-			timerText.text = timeTemp.Minutes.ToString () + ":" + timeTemp.Seconds.ToString()+ ":" + timeTemp.Milliseconds.ToString();
-		
 			torqueTraction = WheelTraction.motorTorque;
 			//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
 			currentSpeed= 2*22/7*WheelTraction.radius*WheelTraction.rpm*60/1000;
@@ -296,20 +258,43 @@ public class BogieCarMovement : MonoBehaviour {
 	//Collisione con powerUp
 	void OnTriggerEnter(Collider other) {
 
+		if(other.gameObject.name == "PowerUpObject")
+		{
+			StartCoroutine (DoubleSpeedStart());
+		}else if(other.gameObject.name == "FinishLine")
+		{
+			//Finish si attiva solo se checkPoint = true
+			if(checkPoint)
+			{
+				StartCoroutine (Finish());
+			}
+		}
+		else if(other.gameObject.name == "CheckPoint")
+		{
+			checkPoint = !checkPoint;
+		}
 
-		StartCoroutine (DoubleSpeedStart());
 
+	}
 
-
+	IEnumerator Finish ()
+	{
+		if(!finishRace)
+		{
+			finishRace = true;
+			yield return 0;
+			Time.timeScale = 0;
+			((RaceManager)raceManager.GetComponent ("RaceManager")).FinishLine ();
+		}
 	}
 
 	//power up coroutine da implementare
 	IEnumerator DoubleSpeedStart()
 	{
 		powerUpSpeed=2f;
-		PowerUpText.text="Doppia Velocità...CANE!!!";
+		infoText.text="Doppia Velocità!!!";
 		yield return new WaitForSeconds(2);
-		PowerUpText.text="";
+		infoText.text="";
 		yield return new WaitForSeconds(3);
 
 		powerUpSpeed=1f;
