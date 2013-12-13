@@ -5,8 +5,8 @@ public class QuitButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-		transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
+		/*Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+		transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));*/
 	}
 	
 	// Update is called once per frame

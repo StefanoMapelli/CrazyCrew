@@ -43,20 +43,17 @@ public class ClientNetworkManager : MonoBehaviour {
 
 	void OnFailedToConnectToMasterServer(NetworkConnectionError e) {
 		GUIMenusClient.connectionError(true);
-		GUIMenusClient.quitButton(true);
-		GUIMenusClient.refreshList(true);
+		GUIMenusClient.mainMenu(true);
 	}
 
 	void OnFailedToConnect(NetworkConnectionError e) {
 		GUIMenusClient.connectionError(true);
-		GUIMenusClient.quitButton(true);
-		GUIMenusClient.refreshList(true);
+		GUIMenusClient.mainMenu(true);
 	}
 
 	void OnConnectedToServer() {
 		GUIMenusClient.connectionError(false);
-		GUIMenusClient.quitButton(false);
-		GUIMenusClient.refreshList(false);
+		GUIMenusClient.mainMenu(false);
 	}
 
 	// Update is called once per frame

@@ -4,44 +4,41 @@ using System.Collections;
 public class ClientBogieCar : MonoBehaviour {
 
 	private bool leverUp;
-	public GameObject lever;
-	public GameObject leverPlane;
-	public GameObject steer;
 	private LeverController leverController;
-
+	private BrakeController brakeController;
 	private ClientGameManager clientGameManager;
 
 	// Use this for initialization
 	void Start () {
+		GameObject lever = GameObject.Find("Lever");
+		GameObject brake = GameObject.Find("Brake");
+
 		leverController = (LeverController) lever.GetComponent("LeverController");
-	}
+		brakeController = (BrakeController) brake.GetComponent("BrakeController");
 
-	void Awake()
-	{
 		clientGameManager = (ClientGameManager) gameObject.GetComponent("ClientGameManager");
-	}
-
-	void OnDisconnectedFromServer(NetworkDisconnection info)
-	{
-		/*	lever.SetActive(false);
-		leverPlane.SetActive(false);
-		steer.SetActive(false);*/
 	}
 
 	[RPC]
 	void assignLever1()
 	{
-		lever.SetActive(true);
-		leverPlane.SetActive(true);
-		clientGameManager.setRole("Lever1"); 
+		clientGameManager.setRole("Lever1");
+		leverController.setRole("Lever1");
+		brakeController.setRole("Lever1");
+
+		GUIMenusClient.showLever(true);
+		GUIMenusClient.showPauseButton(true); 
 	}
 
 	[RPC]
 	void assignLever2()
 	{
-		lever.SetActive(true);
-		leverPlane.SetActive(true);
 		clientGameManager.setRole("Lever2");
+		leverController.setRole("Lever2");
+		brakeController.setRole("Lever2");
+
+		GUIMenusClient.showLever(true);
+		GUIMenusClient.showPauseButton(true);
 	}
 
 	[RPC]
@@ -53,7 +50,8 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void assignSteer()
 	{
-		steer.SetActive(true);
+		GUIMenusClient.showSteer(true);
+		GUIMenusClient.showPauseButton(true);
 		clientGameManager.setRole("Steer");
 	}
 

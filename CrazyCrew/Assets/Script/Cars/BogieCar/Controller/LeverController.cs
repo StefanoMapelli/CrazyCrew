@@ -15,12 +15,15 @@ public class LeverController : MonoBehaviour {
 	void Start () {
 		GameObject client = GameObject.Find ("Client");
 		networkView = (NetworkView) client.GetComponent("NetworkView");
-		role = ((ClientGameManager) client.GetComponent ("ClientGameManager")).getRole();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+	}	
+
+	public void setRole(string role)
+	{
+		this.role = role;
 	}
 	
 	void OnMouseDown() {

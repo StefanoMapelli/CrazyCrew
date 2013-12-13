@@ -232,7 +232,6 @@ public class ServerGameManager : MonoBehaviour {
 				{
 					pl.setConnected(true);
 					pl.setNetworkPlayer(np);
-					networkView.RPC("setPause", np, true);
 					networkView.RPC("setReady",np,np);
 
 					//Da estendere nel caso di aggiunta veicoli (in base al veicolo che stiamo guidando cambierà l'implementazione) 
@@ -241,6 +240,7 @@ public class ServerGameManager : MonoBehaviour {
 						networkView.RPC("assignLever1",np);
 						networkView.RPC("blockLever",np, false);
 						networkView.RPC("blockLever",getPlayerByRole("Lever2").getNetworkPlayer(),true);
+						networkView.RPC("setPause", np, true);
 						return;
 					}
 					else
@@ -250,11 +250,13 @@ public class ServerGameManager : MonoBehaviour {
 							networkView.RPC("assignLever2",np);
 							networkView.RPC("blockLever",np, true);
 							networkView.RPC("blockLever",getPlayerByRole("Lever1").getNetworkPlayer(),false);
+							networkView.RPC("setPause", np, true);
 							return;
 						}
 						else
 						{
 							networkView.RPC("assignSteer",np);
+							networkView.RPC("setPause", np, true);
 							return;
 						}
 					}
