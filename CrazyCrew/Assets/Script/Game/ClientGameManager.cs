@@ -12,6 +12,11 @@ public class ClientGameManager : MonoBehaviour {
 	{
 		//posizionamento dei menu al centro dello schermo
 		GUIMenusClient.menuPositioning();
+		GUIMenusClient.controllerPositioning();
+
+		LeverController leverController = 
+			(LeverController)GameObject.Find ("Lever").GetComponent("LeverController");
+		leverController.setBorder();
 	}
 	
 

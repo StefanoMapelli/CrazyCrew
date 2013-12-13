@@ -24,6 +24,35 @@ public static class GUIMenusClient {
 		exit.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
 	}
 
+	public static void controllerPositioning() {
+		Vector3 cost = new Vector3(0,0,-1);
+
+		GameObject steer = GameObject.Find ("Steer");
+		GameObject pause = GameObject.Find ("Pause");
+		GameObject pauseLabel = GameObject.Find ("PauseLabel");
+		GameObject lever = GameObject.Find("Lever");
+		GameObject leverPlane = GameObject.Find("LeverPlane");
+		GameObject brake = GameObject.Find("Brake");
+		GameObject brakeLabel = GameObject.Find("BrakeLabel");
+		GameObject leverInfo = GameObject.Find("LeverInfo");
+
+		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
+
+		steer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z)); 
+		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/10, screenPos.z));
+		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,(Screen.height/5), screenPos.z));
+
+		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/2, screenPos.z));
+		brake.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,Screen.height/2, screenPos.z));
+		brakeLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,(Screen.height/10)*6, screenPos.z));
+		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/5, screenPos.z));
+
+		float sup = leverPlane.transform.position.y + 
+			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
+		lever.transform.position = 
+			new Vector3(leverPlane.transform.position.x,sup,-1f);
+	}
+
 	public static void mainMenu(bool enabled)
 	{
 		GameObject refreshList = GameObject.Find("RefreshListText");

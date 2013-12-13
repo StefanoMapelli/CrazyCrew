@@ -10,6 +10,10 @@ public class LeverController : MonoBehaviour {
 	private string role;	
 	private bool blocked;
 	private TextMesh text;
+
+	private float sup;
+	private float inf;
+	private float len;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,7 +29,17 @@ public class LeverController : MonoBehaviour {
 	{
 		this.role = role;
 	}
-	
+
+	public void setBorder() {
+		GameObject leverPlane = GameObject.Find ("LeverPlane");
+
+		sup = leverPlane.transform.position.y + 
+			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
+		inf = leverPlane.transform.position.y - 
+			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;	
+		len = ((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y;
+	}
+
 	void OnMouseDown() {
 		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 		
@@ -39,18 +53,18 @@ public class LeverController : MonoBehaviour {
 			
 			Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
 			transform.position = curPosition;
-			if (transform.position.y > 6.5)
-				transform.position = new Vector3(transform.position.x,6.5f,transform.position.z);
-			if (transform.position.y < -4.5)
-				transform.position = new Vector3(transform.position.x,-4.5f,transform.position.z);
+			if (transform.position.y > sup)
+				transform.position = new Vector3(transform.position.x,sup,transform.position.z);
+			if (transform.position.y < inf)
+				transform.position = new Vector3(transform.position.x,inf,transform.position.z);
 		}
 	}
 	
 	void OnMouseUp() {
 		if(!blocked) {
 			float force;
-			
-			force = 1.0f-((transform.position.y+4.5f)/11.0f); //chiedi a Dario
+
+			force = (sup-(transform.position.y))/len;//chiedi a Muzza
 			networkView.RPC ("pushLever",RPCMode.Server,role,force);
 			setBlocked(true);
 		}
@@ -60,7 +74,7 @@ public class LeverController : MonoBehaviour {
 		if (text == null)
 			text =  (TextMesh) (GameObject.Find("LeverInfo").GetComponent("TextMesh"));
 		if (!block) {
-			transform.position = new Vector3(transform.position.x,6.5f,transform.position.z);
+			transform.position = new Vector3(transform.position.x,sup,transform.position.z);
 			text.text = "Pull the lever!";
 			text.color = Color.green;
 			blocked = false;

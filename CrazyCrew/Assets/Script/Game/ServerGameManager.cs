@@ -188,14 +188,15 @@ public class ServerGameManager : MonoBehaviour {
 	[RPC]
 	void clientPause(bool p)
 	{
-		raceManager.SetPause(p);
 		if (p) {
+			raceManager.SetPause(p);
 			networkView.RPC ("setPause",RPCMode.All,true);
 			pause = true;
 			Time.timeScale = 0;
 		}
 		else {
 			if (allPlayersConnected()) {
+				raceManager.SetPause(p);
 				networkView.RPC("setPause",RPCMode.All,false);
 				pause = false;
 				Time.timeScale = initialTimeScale;
