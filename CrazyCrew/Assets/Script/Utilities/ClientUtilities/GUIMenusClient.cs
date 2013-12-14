@@ -13,6 +13,9 @@ public static class GUIMenusClient {
 		GameObject quitButton = GameObject.Find("Quit");
 		GameObject resumeGame = GameObject.Find("ResumeGameButton");
 		GameObject exit = GameObject.Find("ExitToMenuButton");
+		GameObject backButton = GameObject.Find ("BackButton");
+		GameObject nextButton = GameObject.Find ("NextButton");
+		GameObject serverList = GameObject.Find ("ServerList");
 
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
@@ -22,6 +25,10 @@ public static class GUIMenusClient {
 
 		resumeGame.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/3)*2, screenPos.z));
 		exit.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
+
+		backButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/6,Screen.height/10, screenPos.z));
+		nextButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*5,Screen.height/10, screenPos.z));
+		serverList.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*3,Screen.height/3, screenPos.z));
 	}
 
 	public static void controllerPositioning() {
@@ -150,5 +157,21 @@ public static class GUIMenusClient {
 		((SphereCollider) steer.GetComponent("SphereCollider")).enabled = enabled;
 
 		((MeshRenderer) steerFront.GetComponent("MeshRenderer")).enabled = enabled;
+	}
+
+	public static void showServerList(bool enabled) 
+	{
+		GameObject backButton = GameObject.Find ("BackButton");
+		GameObject nextButton = GameObject.Find ("NextButton");
+		GameObject serverList = GameObject.Find ("ServerList");
+
+		((MeshRenderer) backButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) backButton.GetComponent("BoxCollider")).enabled = enabled;
+
+		((MeshRenderer) nextButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) nextButton.GetComponent("BoxCollider")).enabled = enabled;
+
+		((MeshRenderer) serverList.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) serverList.GetComponent("BoxCollider")).enabled = enabled;
 	}
 }

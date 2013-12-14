@@ -58,6 +58,7 @@ public class ClientGameManager : MonoBehaviour {
 	void OnDisconnectedFromServer(NetworkDisconnection info)
 	{
 		setPause (true);
+		GUIMenusClient.readyButton(false);
 	}
 	
 	public string getRole() {
