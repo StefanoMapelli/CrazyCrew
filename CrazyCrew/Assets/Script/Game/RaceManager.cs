@@ -105,4 +105,9 @@ public class RaceManager : MonoBehaviour {
 
 		startTime = DateTime.Now;
 	}
+
+	public void bonusTime(int bonus)
+	{
+		timer=timer.Subtract(new TimeSpan(0,0,bonus));
+	}
 }

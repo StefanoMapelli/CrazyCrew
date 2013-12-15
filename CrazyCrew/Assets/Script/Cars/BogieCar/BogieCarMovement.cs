@@ -12,6 +12,7 @@ public class BogieCarMovement : MonoBehaviour {
 	float lowestSteerAtSpeed = 50;
 	float lowSpeedSteerAngle = 10;
 	float highSpeedSteerAngle = 1;
+	bool isSteerAvailable=true;
 
 	//ruote
 	public WheelCollider WheelFR;
@@ -220,36 +221,19 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void Steer(float steerPercent)
 	{
-		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
-		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
+		if(isSteerAvailable)
+		{
+			float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
+			float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
 
-		currentSteerAngle *= steerPercent;
+			currentSteerAngle *= steerPercent;
 		
-		WheelFL.steerAngle = currentSteerAngle;
-		WheelFR.steerAngle = currentSteerAngle;
+			WheelFL.steerAngle = currentSteerAngle;
+			WheelFR.steerAngle = currentSteerAngle;
+		}
 	}
 
-	//Collisione con powerUp
-	void OnTriggerEnter(Collider other) {
 
-		if(other.gameObject.name == "PowerUpObject")
-		{
-			StartCoroutine (DoubleSpeedStart());
-		}else if(other.gameObject.name == "FinishLine")
-		{
-			//Finish si attiva solo se checkPoint = true
-			if(checkPoint)
-			{
-				StartCoroutine (Finish());
-			}
-		}
-		else if(other.gameObject.name == "CheckPoint")
-		{
-			checkPoint = !checkPoint;
-		}
-
-
-	}
 
 	IEnumerator Finish ()
 	{
@@ -264,15 +248,83 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 	}
 
-	//power up coroutine da implementare
+	//Collisione con powerUp
+	void OnTriggerEnter(Collider other) 
+	{
+		
+		if(other.gameObject.name == "PowerUpObject")
+		{
+			int powerUpId= UnityEngine.Random.Range(1,4);
+			switch(powerUpId)
+			{
+				case 1:
+				{
+					//doppia spinta
+					StartCoroutine (DoubleSpeedStart());
+					break;
+				}
+
+				case 2:
+				{
+					//sterzo bloccato
+					StartCoroutine (SteerBlock());
+					break;
+				}
+
+				case 3:
+				{
+					//tempo decrementato
+					StartCoroutine (BonusTime());
+					break;
+				}
+				//manca il cmabio dei controlli
+			}
+		}
+		else if(other.gameObject.name == "FinishLine")
+		{
+			//Finish si attiva solo se checkPoint = true
+			if(checkPoint)
+			{
+				StartCoroutine (Finish());
+			}
+		}
+		else if(other.gameObject.name == "CheckPoint")
+		{
+			checkPoint = !checkPoint;
+		}
+		
+		
+	}
+
+	//powerup: sterzo non funzionante per 3 secondi
+	IEnumerator SteerBlock()
+	{
+		infoText.text="OPS...STEER BLOCKED";
+		isSteerAvailable=false;
+		yield return new WaitForSeconds(3);
+		infoText.text="";
+		isSteerAvailable=true;
+
+	}
+
+	//powerUp: il tempo viene decrementato di un valore tra 5 e 10 secondi
+	IEnumerator BonusTime()
+	{
+		int bonusTime = UnityEngine.Random.Range(5,11);
+		infoText.text="BONUS TIME: " +bonusTime+ "sec";
+		((RaceManager)raceManager.GetComponent ("RaceManager")).bonusTime(bonusTime);
+		yield return new WaitForSeconds(3);
+		infoText.text="";
+
+	}
+
+	//powerup che raddoppia la forza data dalla leva
 	IEnumerator DoubleSpeedStart()
 	{
 		powerUpSpeed=2f;
-		infoText.text="Doppia Velocità!!!";
-		yield return new WaitForSeconds(2);
+		infoText.text="DOUBLE FORCE!!!";
+		yield return new WaitForSeconds(5);
 		infoText.text="";
-		yield return new WaitForSeconds(3);
-
 		powerUpSpeed=1f;
 	
 	
