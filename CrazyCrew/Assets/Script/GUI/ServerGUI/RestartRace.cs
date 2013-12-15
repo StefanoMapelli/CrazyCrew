@@ -19,10 +19,8 @@ public class RestartRace : MonoBehaviour {
 	void OnMouseDown()
 	{
 		Debug.Log("restart la gara");
-		Application.LoadLevel("bogieCar");
-
-		((BogieCarMovement)carMovement.GetComponent("BogieCarMovement")).RestartRace ();
-		((RaceManager)raceManager.GetComponent("RaceManager")).RestartRace ();
+		Application.LoadLevel("restartLevel");
+		//((RaceManager)raceManager.GetComponent("RaceManager")).RestartRace ();
 	}
 
 }

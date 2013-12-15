@@ -71,6 +71,8 @@ public class ServerGameManager : MonoBehaviour {
 	public void OnLevelWasLoaded(int level)
 	{
 		serverBogieCar.initializeBogieCar();
+		Debug.Log("Livello ricaricato");
+		Time.timeScale = initialTimeScale;
 		serverBogieCar.assignRoles();
 		raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
 		//aggiungo l'evento di fine gara

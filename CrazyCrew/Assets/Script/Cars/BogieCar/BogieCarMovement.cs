@@ -28,6 +28,7 @@ public class BogieCarMovement : MonoBehaviour {
 	public float WheelTractionRPM;
 
 	public float torqueTraction;
+	public float brakeTorque;
 
 	public float currentSpeed;
 
@@ -41,8 +42,6 @@ public class BogieCarMovement : MonoBehaviour {
 	public float torqueMax=50f;
 	public float topRetroSpeed=-10f;
 	public float topSpeed=150f;
-	public float torqueCorrectionL=1f;
-	public float torqueCorrectionR=1f;
 
 	//power up
 	private float powerUpSpeed=1f;
@@ -52,7 +51,7 @@ public class BogieCarMovement : MonoBehaviour {
 	public GameObject raceManager;
 
 
-	private bool startRace = false;
+	private bool startRace = true;
 	private bool finishRace = false;
 
 	public TextMesh infoText;
@@ -71,28 +70,10 @@ public class BogieCarMovement : MonoBehaviour {
 			//Ora comincia la partita.
 		{
 			torqueTraction = WheelTraction.motorTorque;
+			brakeTorque=WheelTraction.brakeTorque;
 			//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
 			currentSpeed= 2*22/7*WheelTraction.radius*WheelTraction.rpm*60/1000;
 			currentSpeed=Mathf.Round(currentSpeed);
-
-			if(WheelFR.rpm<WheelFL.rpm)
-			{
-				torqueCorrectionL=0.90f;
-				torqueCorrectionR=1f;
-				
-			}
-			else if(WheelFL.rpm<WheelFR.rpm)
-			{
-				torqueCorrectionR=0.90f;;
-				torqueCorrectionL=1f;
-				
-				
-			}
-			else if(WheelFL.rpm==WheelFR.rpm)
-			{
-				torqueCorrectionR=1f;;
-				torqueCorrectionL=1f;
-			}
 
 			//controllo ogni volta se entrambi i freni sono premuti ed in tal caso freno il veicolo
 		Brake ();
@@ -193,6 +174,7 @@ public class BogieCarMovement : MonoBehaviour {
 			WheelRR.motorTorque= forcePercent*torqueMax*powerUpSpeed;*/
 
 			WheelTraction.motorTorque += forcePercent*torqueMax*powerUpSpeed;
+			Debug.Log("Lever  "+forcePercent*torqueMax*powerUpSpeed);
 			StartCoroutine (StopTorque(forcePercent*torqueMax*powerUpSpeed));
 
 		}
@@ -277,7 +259,7 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			finishRace = true;
 			yield return 0;
-			Time.timeScale = 0;
+			WheelTraction.brakeTorque=1000;
 			((RaceManager)raceManager.GetComponent ("RaceManager")).FinishLine ();
 		}
 	}
@@ -294,14 +276,5 @@ public class BogieCarMovement : MonoBehaviour {
 		powerUpSpeed=1f;
 	
 	
-	}
-
-	/// <summary>
-	/// Restart the race.
-	/// Sposto il veicolo alla partenza
-	/// </summary>
-	public void RestartRace()
-	{
-		transform.position = new Vector3(14,0,114);
 	}
 }
