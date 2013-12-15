@@ -6,33 +6,23 @@ public class ClientGameManager : MonoBehaviour {
 	private string role;
 	private bool ready = false;
 	private bool pause = false;
-	private Vector3 controlPosition;
 	
 	// Use this for initialization
 	void Start () 
 	{
+		//posizionamento dei menu al centro dello schermo
+		GUIMenusClient.menuPositioning();
+		GUIMenusClient.controllerPositioning();
+
+		LeverController leverController = 
+			(LeverController)GameObject.Find ("Lever").GetComponent("LeverController");
+		leverController.setBorder();
 	}
 	
 
 	// Update is called once per frame
 	void Update () 
 	{
-		/*
-		if (role != null) {
-			if (Input.GetKeyDown(KeyCode.P))
-			{
-				if (pause) 
-				{
-					networkView.RPC ("clientPause",RPCMode.Server,false);
-
-				}
-				else 
-				{
-					networkView.RPC ("clientPause",RPCMode.Server,true);
-				}
-			}
-		}*/
-
 		if(Network.peerType == NetworkPeerType.Client)
 		{
 			
@@ -67,9 +57,8 @@ public class ClientGameManager : MonoBehaviour {
 
 	void OnDisconnectedFromServer(NetworkDisconnection info)
 	{
-		//ready=false;
-		//playing=false;
 		setPause (true);
+		GUIMenusClient.readyButton(false);
 	}
 	
 	public string getRole() {
@@ -83,29 +72,7 @@ public class ClientGameManager : MonoBehaviour {
 
 
 	void OnGUI()
-	{/*
-		if(Network.peerType == NetworkPeerType.Client)
-		{
-
-			if (role == null)
-			{
-
-				if (!ready && !pause) 
-				{
-					if (GUI.Button(new Rect(10,10,200,200),"Press to start the game")) 
-					{
-						ready = true;
-						networkView.RPC("setReady",RPCMode.Server, Network.player);
-					}
-				}
-				else
-				{
-					GUI.Label (new Rect(10,10,200,200),"Ready to play, waiting for other players...");
-				}
-
-			}
-		}*/
-
+	{
 		if(pause)
 		{
 			if(Network.peerType == NetworkPeerType.Disconnected)
@@ -122,15 +89,39 @@ public class ClientGameManager : MonoBehaviour {
 
 		if(pause)
 		{
-			controlPosition=Camera.main.transform.position;
-			Camera.main.transform.position = new Vector3(100,1, -10);
+			if(role == "Lever1" || role == "Lever2")
+			{
+				GUIMenusClient.showLever(false);
+			}
+			else
+			{
+				if(role == "Steer")
+				{
+					GUIMenusClient.showSteer(false);
+				}
+			}
+
+			GUIMenusClient.showPauseButton(false);
+			GUIMenusClient.pauseMenu(true);
 		}
 		else
 		{
-			Camera.main.transform.position = new Vector3(0,1,-10);
-		}
+			GUIMenusClient.pauseMenu(false);
 
-		GUIMenusClient.pauseMenuPositioning(pause);
+			if(role == "Lever1" || role == "Lever2")
+			{
+				GUIMenusClient.showLever(true);
+			}
+			else
+			{
+				if(role == "Steer")
+				{
+					GUIMenusClient.showSteer(true);
+				}
+			}
+			
+			GUIMenusClient.showPauseButton(true);
+		}
 	}
 
 	[RPC]

@@ -19,10 +19,6 @@ public class ServerBogieCar : MonoBehaviour {
 
 	public void assignRoles()
 	{
-		// SECONDO ME QUESTO E' UN ERRORE ( by Dario)
-		//Player[] playersArray = new Player[3]; 
-		//serverGameManager.getPlayers().CopyTo(playersArray);
-
 		ArrayList playersArray = serverGameManager.getPlayers();
 
 		((Player) playersArray[0]).setRole("Lever1");

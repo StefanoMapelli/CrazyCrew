@@ -13,29 +13,33 @@ public class ClientNetworkManager : MonoBehaviour {
 	private ClientGameManager clientGameManager;
 
 	private bool listArrived = false;
+
+	private ServerList serverList;
  
 	// Use this for initialization
 	void Start () 
-	{
+	{/*
 		MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
-		Network.natFacilitatorPort = 50005;	
+		Network.natFacilitatorPort = 50005;	*/
 
 		GameObject client = GameObject.Find ("Client");
 		clientGameManager = (ClientGameManager) client.GetComponent("ClientGameManager");
+		serverList = (ServerList) GameObject.Find ("ServerList").GetComponent("ServerList");
 	}
 
 	public void RefreshHostList()
 	{
 	    MasterServer.RequestHostList(typeName);
+		GUIMenusClient.showServerList(true);
 	}
 	 
 	void OnMasterServerEvent(MasterServerEvent msEvent)
 	{
 	    if (msEvent == MasterServerEvent.HostListReceived) {
 	        hostList = MasterServer.PollHostList();
-
+			serverList.setList(hostList);
 			if (myServer != null)
 				listArrived = true;
 		}
@@ -43,20 +47,17 @@ public class ClientNetworkManager : MonoBehaviour {
 
 	void OnFailedToConnectToMasterServer(NetworkConnectionError e) {
 		GUIMenusClient.connectionError(true);
-		GUIMenusClient.quitButton(true);
-		GUIMenusClient.refreshList(true);
+		GUIMenusClient.mainMenu(true);
 	}
 
 	void OnFailedToConnect(NetworkConnectionError e) {
 		GUIMenusClient.connectionError(true);
-		GUIMenusClient.quitButton(true);
-		GUIMenusClient.refreshList(true);
+		GUIMenusClient.mainMenu(true);
 	}
 
 	void OnConnectedToServer() {
 		GUIMenusClient.connectionError(false);
-		GUIMenusClient.quitButton(false);
-		GUIMenusClient.refreshList(false);
+		GUIMenusClient.mainMenu(false);
 	}
 
 	// Update is called once per frame
@@ -70,16 +71,18 @@ public class ClientNetworkManager : MonoBehaviour {
 		}
 	}
 	
-	private void JoinServer(HostData hostData)
+	public void JoinServer(HostData hostData)
 	{
 	    Debug.Log("Server Joined1");
 		Network.Connect(hostData);
 		myServer = hostData;
+		GUIMenusClient.showServerList(false);
 		Debug.Log("Server Joined2");
 	}
 	
 	void OnGUI()
 	{
+		/*
 		if (Network.peerType == NetworkPeerType.Disconnected && myServer == null) 
 		{	 
 	        //if (GUI.Button(new Rect(100, 250, 250, 100), "Refresh Hosts"))
@@ -94,12 +97,13 @@ public class ClientNetworkManager : MonoBehaviour {
 	           	}
 	       	}
 		}
+		*/
 	}
 
 	private IEnumerator tryReconnect() {
 		while (!listArrived) {
 			Debug.Log ("list requested, now waiting...");
-			RefreshHostList();
+			MasterServer.RequestHostList(typeName);
 			yield return new WaitForSeconds(10);
 		}
 
