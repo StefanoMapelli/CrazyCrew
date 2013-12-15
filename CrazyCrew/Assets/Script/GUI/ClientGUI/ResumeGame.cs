@@ -21,6 +21,12 @@ public class ResumeGame : MonoBehaviour {
 
 	void OnMouseDown()
 	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		clientGameManager.resumeGame();
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 }

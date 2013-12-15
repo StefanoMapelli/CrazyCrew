@@ -19,7 +19,19 @@ public class ReadyButton : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		if(((TextMesh)gameObject.GetComponent("TextMesh")).text.EndsWith("?"))
+		{
+			((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
+		}
 		clientGameManager.setReady(Network.player);
 		//GUIMenusClient.readyButton(false);
+	}
+
+	void OnMouseUp()
+	{
+		if(((TextMesh)gameObject.GetComponent("TextMesh")).text.EndsWith("?"))
+		{
+			((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		}
 	}
 }

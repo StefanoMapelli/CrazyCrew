@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class GUIMenus
+public static class GUIMenusServer
 {
 	public static void masterServerError(bool enabled)
 	{

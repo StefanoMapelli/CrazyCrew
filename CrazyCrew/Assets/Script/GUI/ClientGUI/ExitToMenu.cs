@@ -15,10 +15,15 @@ public class ExitToMenu : MonoBehaviour {
 	void OnMouseDown()
 	{
 		Debug.Log("Ho schiacciato");
-
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		GameObject.Destroy(GameObject.Find("Client"));
 		Network.Disconnect();
 		Application.LoadLevel("client");
 
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 }

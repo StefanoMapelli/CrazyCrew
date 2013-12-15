@@ -18,8 +18,14 @@ public class ServerList : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		if (list.Length > 0)
 			clientNetworkManager.JoinServer(list[index]);
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 
 	public void setList(HostData[] list) {

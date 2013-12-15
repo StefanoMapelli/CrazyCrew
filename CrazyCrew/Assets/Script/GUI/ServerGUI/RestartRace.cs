@@ -18,9 +18,16 @@ public class RestartRace : MonoBehaviour {
 
 	void OnMouseDown()
 	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
+
 		Debug.Log("restart la gara");
 		Application.LoadLevel("restartLevel");
 		//((RaceManager)raceManager.GetComponent("RaceManager")).RestartRace ();
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 
 }

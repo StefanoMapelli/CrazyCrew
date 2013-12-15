@@ -19,9 +19,9 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	void OnFailedToConnectToMasterServer(NetworkConnectionError info) 
 	{
-		GUIMenus.waitingForPlayersMenu(false);
-		GUIMenus.mainMenu(true);
-		GUIMenus.masterServerError(true);
+		GUIMenusServer.waitingForPlayersMenu(false);
+		GUIMenusServer.mainMenu(true);
+		GUIMenusServer.masterServerError(true);
 	}
 
 	void OnServerInitialized()
