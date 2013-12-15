@@ -4,7 +4,7 @@ using System.Collections;
 public class ClientNetworkManager : MonoBehaviour {
 
 	public string masterServerIpAddress;
-	private const string typeName = "UniqueGameName";
+	private const string typeName = "CrazyCrew";
 	private const string gameName = "CrazyCrewServer";
 	private HostData[] hostList;
 

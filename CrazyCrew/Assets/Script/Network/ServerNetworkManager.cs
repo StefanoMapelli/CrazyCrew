@@ -6,7 +6,7 @@ using System;
 public class ServerNetworkManager : MonoBehaviour {
 
 	public string masterServerIpAddress;
-	private const string typeName = "UniqueGameName";
+	private const string typeName = "CrazyCrew";
 	private string gameName;
 	private ServerGameManager serverGameManager;
 
