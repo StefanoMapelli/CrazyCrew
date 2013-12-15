@@ -16,6 +16,12 @@ public class NextButton : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		serverList.incrementIdex();
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 }

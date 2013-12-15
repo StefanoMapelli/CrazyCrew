@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class RefreshList : MonoBehaviour {
-
+	
 	private ClientNetworkManager clientNetworkManager;
 
 	// Use this for initialization
@@ -14,6 +14,12 @@ public class RefreshList : MonoBehaviour {
 		transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/3)*2, screenPos.z));*/
 
 	void OnMouseDown() {
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		clientNetworkManager.RefreshHostList();
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 }

@@ -15,7 +15,13 @@ public class ExitToInitialMenu : MonoBehaviour {
 
 	void OnMouseDown()
 	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		GameObject.Destroy(GameObject.Find("Server"));
 		Application.LoadLevel("server");
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 }
