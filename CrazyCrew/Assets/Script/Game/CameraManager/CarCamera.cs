@@ -60,7 +60,7 @@ public class CarCamera : MonoBehaviour {
 	public void cameraOnFinishMenu()
 	{
 		finishMenu=true;
-		transform.position=new Vector3(13.48057f,-13.1f,112.817f);
+		transform.position=new Vector3(14.4843f,-13.1f,110f);
 		transform.rotation=new Quaternion(0,0,0,0);
 
 	}
