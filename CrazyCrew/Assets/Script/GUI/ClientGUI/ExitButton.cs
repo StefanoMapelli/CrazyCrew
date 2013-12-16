@@ -16,6 +16,12 @@ public class ExitButton : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		clientGameManager.exit();
+	}
+
+	void OnMouseUp()
+	{
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 	}
 }

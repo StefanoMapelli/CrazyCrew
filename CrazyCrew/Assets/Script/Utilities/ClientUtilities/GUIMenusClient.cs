@@ -31,8 +31,8 @@ public static class GUIMenusClient {
 		nextButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*5,Screen.height/10, screenPos.z));
 		serverList.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*3,Screen.height/3, screenPos.z));
 
-		restartButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*2,Screen.height/2, screenPos.z));
-		exitButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*3,Screen.height/2, screenPos.z));
+		restartButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/3)*2, screenPos.z));
+		exitButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
 	}
 
 	public static void controllerPositioning() {
