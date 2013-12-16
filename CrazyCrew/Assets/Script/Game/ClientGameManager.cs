@@ -82,6 +82,14 @@ public class ClientGameManager : MonoBehaviour {
 		}
 	}
 
+	public void exit() {
+		networkView.RPC ("exitGame",RPCMode.Server);
+	}
+
+	public void restart() {
+		networkView.RPC ("restartGame",RPCMode.Server);
+	}
+
 	[RPC]
 	void setPause(bool pause)
 	{
@@ -151,5 +159,29 @@ public class ClientGameManager : MonoBehaviour {
 		{
 			networkView.RPC("reconnect",RPCMode.Server, Network.player, this.role);
 		}
+	}
+
+	[RPC]
+	void endGame() {
+		GUIMenusClient.showLever(false);
+		GUIMenusClient.showSteer(false);
+		GUIMenusClient.showPauseButton(false);
+		GUIMenusClient.showEndMenu(true);
+	}
+
+	[RPC]
+	void exitGame() {
+		//Network.Disconnect ();
+		Application.LoadLevel ("client");
+	}
+
+	[RPC]
+	void restartGame() {
+		GUIMenusClient.showEndMenu(false);
+		GUIMenusClient.showPauseButton(true);
+		if (role == "Lever1" || role == "Lever2")
+			GUIMenusClient.showLever(true);
+		else if (role == "Steer")
+			GUIMenusClient.showSteer(true);
 	}
 }

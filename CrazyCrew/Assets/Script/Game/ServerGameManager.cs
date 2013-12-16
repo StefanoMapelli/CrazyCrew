@@ -70,18 +70,21 @@ public class ServerGameManager : MonoBehaviour {
 
 	public void OnLevelWasLoaded(int level)
 	{
-		serverBogieCar.initializeBogieCar();
-		Debug.Log("Livello ricaricato");
-		Time.timeScale = initialTimeScale;
-		serverBogieCar.assignRoles();
-		raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
-		//aggiungo l'evento di fine gara
-		raceManager.RaceFinish+=new EventHandler(RaceFinish);
+		if (level == 1) {
+			serverBogieCar.initializeBogieCar();
+			Debug.Log("Livello ricaricato");
+			Time.timeScale = initialTimeScale;
+			serverBogieCar.assignRoles();
+			raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
+			//aggiungo l'evento di fine gara
+			raceManager.RaceFinish+=new EventHandler(RaceFinish);
+		}
 	}
 
 	private void RaceFinish(System.Object sender, EventArgs e)
 	{
-
+		Debug.Log ("race finished, sending signal to clients");
+		networkView.RPC ("endGame",RPCMode.All);
 	}
 	
 	public void playerConnection(NetworkPlayer np)
@@ -271,5 +274,28 @@ public class ServerGameManager : MonoBehaviour {
 	[RPC]
 	void connectInGame()
 	{
+	}
+
+	[RPC]
+	void showEndMenu() {
+	}
+
+	[RPC]
+	public void exitGame() {
+		networkView.RPC ("exitGame",RPCMode.Others);
+		Network.Disconnect();
+		GameObject.Destroy(GameObject.Find("Server"));
+		Application.LoadLevel("server");
+	}
+
+	[RPC]
+	public void restartGame() {
+		networkView.RPC ("restartGame",RPCMode.Others);
+		Debug.Log("restart la gara");
+		Application.LoadLevel("restartLevel");
+	}
+
+	[RPC]
+	void endGame() {
 	}
 }

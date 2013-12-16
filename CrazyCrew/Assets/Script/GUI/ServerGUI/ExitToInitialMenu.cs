@@ -3,9 +3,11 @@ using System.Collections;
 
 public class ExitToInitialMenu : MonoBehaviour {
 
+	private ServerGameManager serverGameManager;
+
 	// Use this for initialization
 	void Start () {
-	
+		serverGameManager = (ServerGameManager) GameObject.Find ("Server").GetComponent("ServerGameManager");
 	}
 	
 	// Update is called once per frame
@@ -16,8 +18,7 @@ public class ExitToInitialMenu : MonoBehaviour {
 	void OnMouseDown()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
-		GameObject.Destroy(GameObject.Find("Server"));
-		Application.LoadLevel("server");
+		serverGameManager.exitGame();
 	}
 
 	void OnMouseUp()

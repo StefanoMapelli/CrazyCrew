@@ -82,7 +82,7 @@ public class RaceManager : MonoBehaviour {
 	/// </summary>
 	public void FinishLine()
 	{
-		//OnRaceFinish(EventArgs.Empty);
+		OnRaceFinish(EventArgs.Empty);
 		finishMenu.SetActive (true);
 		isFinish=true;
 		infoText.text="";

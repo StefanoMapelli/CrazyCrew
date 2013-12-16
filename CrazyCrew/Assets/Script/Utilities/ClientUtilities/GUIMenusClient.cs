@@ -16,7 +16,8 @@ public static class GUIMenusClient {
 		GameObject backButton = GameObject.Find ("BackButton");
 		GameObject nextButton = GameObject.Find ("NextButton");
 		GameObject serverList = GameObject.Find ("ServerList");
-
+		GameObject restartButton = GameObject.Find ("RestartButton");
+		GameObject exitButton = GameObject.Find ("ExitButton");
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
@@ -29,6 +30,9 @@ public static class GUIMenusClient {
 		backButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/6,Screen.height/10, screenPos.z));
 		nextButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*5,Screen.height/10, screenPos.z));
 		serverList.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*3,Screen.height/3, screenPos.z));
+
+		restartButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*2,Screen.height/2, screenPos.z));
+		exitButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*3,Screen.height/2, screenPos.z));
 	}
 
 	public static void controllerPositioning() {
@@ -161,5 +165,16 @@ public static class GUIMenusClient {
 
 		((MeshRenderer) serverList.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) serverList.GetComponent("BoxCollider")).enabled = enabled;
+	}
+
+	public static void showEndMenu(bool enabled) {
+		GameObject restartButton = GameObject.Find ("RestartButton");
+		GameObject exitButton = GameObject.Find ("ExitButton");
+
+		((MeshRenderer) restartButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) restartButton.GetComponent("BoxCollider")).enabled = enabled;
+		
+		((MeshRenderer) exitButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) exitButton.GetComponent("BoxCollider")).enabled = enabled;
 	}
 }
