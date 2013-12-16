@@ -70,6 +70,8 @@ public class BogieCarMovement : MonoBehaviour {
 		if(startRace && !finishRace)
 			//Ora comincia la partita.
 		{
+			Debug.Log("freno retro destro"+ WheelRR.brakeTorque);
+			Debug.Log("freno retro sinistra "+ WheelRL.brakeTorque);
 			torqueTraction = WheelTraction.motorTorque;
 			brakeTorque=WheelTraction.brakeTorque;
 			//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
@@ -126,29 +128,17 @@ public class BogieCarMovement : MonoBehaviour {
 			if(currentSpeed>0)
 			{
 				Debug.Log ("dec" + decelerationSpeed);
-				/*WheelRL.brakeTorque = -decelerationSpeed;
-				WheelRR.brakeTorque = -decelerationSpeed;
-				WheelRL.motorTorque = 0;
-				WheelRR.motorTorque = 0;*/
+
 				WheelTraction.motorTorque = 0;
 				WheelTraction.brakeTorque = -decelerationSpeed;
 			}
 			else if(currentSpeed<=0 && currentSpeed>=topRetroSpeed)
 			{
-				/*WheelRL.brakeTorque = 0;
-				WheelRR.brakeTorque = 0;
-				WheelRL.motorTorque = retroSpeed;
-				WheelRR.motorTorque = retroSpeed;*/
 				WheelTraction.brakeTorque = 0;
 				WheelTraction.motorTorque = retroSpeed;
 			}
 			else if(currentSpeed<=0 && currentSpeed<=topRetroSpeed)
 			{
-				/*WheelRL.brakeTorque = 0;
-				WheelRR.brakeTorque = 0;
-				WheelRL.motorTorque = 0;
-				WheelRR.motorTorque = 0;*/
-
 				WheelTraction.brakeTorque = 0;
 				WheelTraction.motorTorque = 0;
 			}
@@ -156,8 +146,6 @@ public class BogieCarMovement : MonoBehaviour {
 		else 
 		{
 			WheelTraction.brakeTorque = 0;
-/*			WheelRL.brakeTorque = 0;
-			WheelRR.brakeTorque = 0;*/
 		}
 	}
 	
