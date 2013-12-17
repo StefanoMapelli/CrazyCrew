@@ -68,6 +68,11 @@ public class RaceManager : MonoBehaviour {
 
 		SetPause (false);
 
+		// just an attempt
+		ServerBogieCar serverBogieCar = (ServerBogieCar) GameObject.Find ("Server").GetComponent("ServerBogieCar");
+		serverBogieCar.assignRoles();
+		// just an attempt
+
 		yield return new WaitForSeconds(1);
 		infoText.text = "";
 	}
