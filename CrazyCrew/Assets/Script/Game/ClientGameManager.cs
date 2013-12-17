@@ -171,17 +171,20 @@ public class ClientGameManager : MonoBehaviour {
 
 	[RPC]
 	void exitGame() {
-		//Network.Disconnect ();
+		Network.Disconnect ();
 		Application.LoadLevel ("client");
 	}
 
 	[RPC]
 	void restartGame() {
+
 		GUIMenusClient.showEndMenu(false);
+		/*
 		GUIMenusClient.showPauseButton(true);
 		if (role == "Lever1" || role == "Lever2")
 			GUIMenusClient.showLever(true);
 		else if (role == "Steer")
 			GUIMenusClient.showSteer(true);
+	*/
 	}
 }
