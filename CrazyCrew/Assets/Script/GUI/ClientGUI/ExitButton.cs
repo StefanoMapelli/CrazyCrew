@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ExitToInitialMenu : MonoBehaviour {
+public class ExitButton : MonoBehaviour {
 
-	private ServerGameManager serverGameManager;
+	private ClientGameManager clientGameManager;
 
 	// Use this for initialization
 	void Start () {
-		serverGameManager = (ServerGameManager) GameObject.Find ("Server").GetComponent("ServerGameManager");
+		clientGameManager = (ClientGameManager) GameObject.Find ("Client").GetComponent("ClientGameManager");
 	}
 	
 	// Update is called once per frame
@@ -15,10 +15,9 @@ public class ExitToInitialMenu : MonoBehaviour {
 	
 	}
 
-	void OnMouseDown()
-	{
+	void OnMouseDown() {
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
-		serverGameManager.exitGame();
+		clientGameManager.exit();
 	}
 
 	void OnMouseUp()

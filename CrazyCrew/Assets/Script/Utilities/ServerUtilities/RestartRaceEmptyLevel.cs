@@ -9,10 +9,14 @@ public class RestartRaceEmptyLevel : MonoBehaviour {
 	void Start () {
 
 		Application.LoadLevel("bogieCar");
-		((RaceManager)GameObject.Find("RaceManager").GetComponent("RaceManager")).RestartRace ();
-	
 	}
-	
+
+	public void OnLevelWasLoaded(int level) {
+		if (level == 1) {
+			((RaceManager)GameObject.Find("RaceManager").GetComponent("RaceManager")).RestartRace ();
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 	

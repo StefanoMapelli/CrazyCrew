@@ -70,8 +70,6 @@ public class BogieCarMovement : MonoBehaviour {
 		if(startRace && !finishRace)
 			//Ora comincia la partita.
 		{
-			Debug.Log("freno retro destro"+ WheelRR.brakeTorque);
-			Debug.Log("freno retro sinistra "+ WheelRL.brakeTorque);
 			torqueTraction = WheelTraction.motorTorque;
 			brakeTorque=WheelTraction.brakeTorque;
 			//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;

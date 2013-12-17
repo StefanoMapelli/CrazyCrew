@@ -16,12 +16,16 @@ public class PlayerCount : MonoBehaviour {
 	}
 
 	public void incrementNumber() {
-		number++;
-		textMesh.text = number+"/"+max;
+		if (number < 3) {
+			number++;
+			textMesh.text = number+"/"+max;
+		}
 	}
 
 	public void decrementNumber() {
-		number--;
-		textMesh.text = number+"/"+max;
+		if (number > 0) {
+			number--;
+			textMesh.text = number+"/"+max;
+		}
 	}
 }
