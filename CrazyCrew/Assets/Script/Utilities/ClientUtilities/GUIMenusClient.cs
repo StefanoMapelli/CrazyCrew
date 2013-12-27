@@ -38,7 +38,8 @@ public static class GUIMenusClient {
 	public static void controllerPositioning() {
 		Vector3 cost = new Vector3(0,0,-1);
 
-		GameObject steer = GameObject.Find ("Steer");
+		GameObject leftSteer = GameObject.Find ("LeftSteer");
+		GameObject rightSteer = GameObject.Find ("RightSteer");
 		GameObject pause = GameObject.Find ("Pause");
 		GameObject pauseLabel = GameObject.Find ("PauseLabel");
 		GameObject lever = GameObject.Find("Lever");
@@ -49,7 +50,8 @@ public static class GUIMenusClient {
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
-		steer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z)); 
+		leftSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*2,Screen.height/2, screenPos.z));
+		rightSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*4,Screen.height/2, screenPos.z));
 		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/10, screenPos.z));
 		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,(Screen.height/5), screenPos.z));
 
@@ -142,13 +144,14 @@ public static class GUIMenusClient {
 
 	public static void showSteer(bool enabled)
 	{
-		GameObject steer = GameObject.Find("Steer"); 
-		GameObject steerFront = GameObject.Find("SteerFront");
+		GameObject leftSteer = GameObject.Find("LeftSteer"); 
+		GameObject rightSteer = GameObject.Find("RightSteer");
 
-		((MeshRenderer) steer.GetComponent("MeshRenderer")).enabled = enabled;
-		((SphereCollider) steer.GetComponent("SphereCollider")).enabled = enabled;
+		((MeshRenderer) leftSteer.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) leftSteer.GetComponent("BoxCollider")).enabled = enabled;
 
-		((MeshRenderer) steerFront.GetComponent("MeshRenderer")).enabled = enabled;
+		((MeshRenderer) rightSteer.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) rightSteer.GetComponent("BoxCollider")).enabled = enabled;
 	}
 
 	public static void showServerList(bool enabled) 

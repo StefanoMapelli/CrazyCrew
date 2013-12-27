@@ -18,12 +18,12 @@ public class ClientNetworkManager : MonoBehaviour {
  
 	// Use this for initialization
 	void Start () 
-	{
+	{/*
 		MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
 		Network.natFacilitatorPort = 50005;	
-
+	*/
 		GameObject client = GameObject.Find ("Client");
 		clientGameManager = (ClientGameManager) client.GetComponent("ClientGameManager");
 		serverList = (ServerList) GameObject.Find ("ServerList").GetComponent("ServerList");
