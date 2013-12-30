@@ -240,7 +240,7 @@ public class BogieCarMovement : MonoBehaviour {
 		
 		if(other.gameObject.name == "PowerUpObject")
 		{
-			int powerUpId= UnityEngine.Random.Range(1,4);
+			int powerUpId= UnityEngine.Random.Range(1,5);
 			switch(powerUpId)
 			{
 				case 1:
@@ -263,7 +263,13 @@ public class BogieCarMovement : MonoBehaviour {
 					StartCoroutine (BonusTime());
 					break;
 				}
-				//manca il cmabio dei controlli
+
+				case 4:
+				{
+					ServerBogieCar serverBogieCar = (ServerBogieCar)GameObject.Find("Server").GetComponent("ServerBogieCar");
+					serverBogieCar.assignRoles();
+					break;	
+				}
 			}
 		}
 		else if(other.gameObject.name == "FinishLine")

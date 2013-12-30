@@ -28,6 +28,7 @@ public class ClientBogieCar : MonoBehaviour {
 
 		GUIMenusClient.showLever(true);
 		GUIMenusClient.showPauseButton(true); 
+		GUIMenusClient.showSteer(false);
 	}
 
 	[RPC]
@@ -39,6 +40,7 @@ public class ClientBogieCar : MonoBehaviour {
 
 		GUIMenusClient.showLever(true);
 		GUIMenusClient.showPauseButton(true);
+		GUIMenusClient.showSteer(false);
 	}
 
 	[RPC]
@@ -53,6 +55,8 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showSteer(true);
 		GUIMenusClient.showPauseButton(true);
 		clientGameManager.setRole("Steer");
+
+		GUIMenusClient.showLever(false);
 	}
 
 	[RPC]

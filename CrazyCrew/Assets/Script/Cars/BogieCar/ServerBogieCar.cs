@@ -20,20 +20,33 @@ public class ServerBogieCar : MonoBehaviour {
 	public void assignRoles()
 	{
 		ArrayList playersArray = serverGameManager.getPlayers();
+		ArrayList assigned = new ArrayList();
+		int randomIndex;
+		int i = 0;
 
-		((Player) playersArray[0]).setRole("Lever1");
-		networkView.RPC("assignLever1", ((Player)playersArray[0]).getNetworkPlayer());
-		networkView.RPC("blockLever", ((Player)playersArray[0]).getNetworkPlayer(), false);
-		Debug.Log("Player "+((Player)playersArray[0]).getNetworkPlayer()+" ha la leva 1");
+		while (assigned.Count < playersArray.Count) {
+			randomIndex = UnityEngine.Random.Range(0,3);
 
-		((Player)playersArray[1]).setRole("Lever2");
-		networkView.RPC("assignLever2", ((Player)playersArray[1]).getNetworkPlayer());
-		networkView.RPC("blockLever", ((Player)playersArray[1]).getNetworkPlayer(), true);
-		Debug.Log("Player "+((Player)playersArray[1]).getNetworkPlayer()+" ha la leva 2");
+			if (!assigned.Contains(playersArray[randomIndex])) {
+				assigned.Add(playersArray[randomIndex]);
 
-		((Player)playersArray[2]).setRole("Steer");
-		networkView.RPC("assignSteer", ((Player)playersArray[2]).getNetworkPlayer());
-		Debug.Log("Player "+((Player)playersArray[2]).getNetworkPlayer()+" ha lo sterzo");
+				if (i == 0) {
+					((Player) playersArray[randomIndex]).setRole("Lever1");
+					networkView.RPC("assignLever1", ((Player)playersArray[randomIndex]).getNetworkPlayer());
+					networkView.RPC("blockLever", ((Player)playersArray[randomIndex]).getNetworkPlayer(), false);
+				}
+				else if (i == 1) {
+					((Player)playersArray[randomIndex]).setRole("Lever2");
+					networkView.RPC("assignLever2", ((Player)playersArray[randomIndex]).getNetworkPlayer());
+					networkView.RPC("blockLever", ((Player)playersArray[randomIndex]).getNetworkPlayer(), true);
+				}
+				else {
+					((Player)playersArray[randomIndex]).setRole("Steer");
+					networkView.RPC("assignSteer", ((Player)playersArray[randomIndex]).getNetworkPlayer());
+				}
+				i++;
+			}
+		}
 	}
 
 	public void initializeBogieCar()
