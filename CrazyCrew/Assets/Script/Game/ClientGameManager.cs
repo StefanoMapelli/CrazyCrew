@@ -100,6 +100,7 @@ public class ClientGameManager : MonoBehaviour {
 			if(role == "Lever1" || role == "Lever2")
 			{
 				GUIMenusClient.showLever(false);
+				GUIMenusClient.showPowerUpController(false,role);
 			}
 			else
 			{
@@ -119,6 +120,7 @@ public class ClientGameManager : MonoBehaviour {
 			if(role == "Lever1" || role == "Lever2")
 			{
 				GUIMenusClient.showLever(true);
+				GUIMenusClient.showPowerUpController(true,role);
 			}
 			else
 			{
