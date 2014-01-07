@@ -47,19 +47,24 @@ public static class GUIMenusClient {
 		GameObject brake = GameObject.Find("Brake");
 		GameObject brakeLabel = GameObject.Find("BrakeLabel");
 		GameObject leverInfo = GameObject.Find("LeverInfo");
+		GameObject powerUpButton = GameObject.Find ("PowerUpButton");
+		GameObject powerUpLabel = GameObject.Find ("PowerUpLabel");
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
-		leftSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*2,Screen.height/2, screenPos.z));
-		rightSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/5)*4,Screen.height/2, screenPos.z));
+		leftSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*1,Screen.height/2, screenPos.z));
+		rightSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/2, screenPos.z));
 		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/10, screenPos.z));
 		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,(Screen.height/5), screenPos.z));
 
-		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/2, screenPos.z));
+		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
 		brake.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,Screen.height/2, screenPos.z));
 		brakeLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,(Screen.height/10)*6, screenPos.z));
-		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/5, screenPos.z));
+		powerUpButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/2, screenPos.z));
+		powerUpLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,(Screen.height/10)*6, screenPos.z));
+		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/5, screenPos.z));
 
+		//estremo superiore del LeverPlane
 		float sup = leverPlane.transform.position.y + 
 			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
 		lever.transform.position = 
@@ -152,6 +157,30 @@ public static class GUIMenusClient {
 
 		((MeshRenderer) rightSteer.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) rightSteer.GetComponent("BoxCollider")).enabled = enabled;
+	}
+
+	public static void showPowerUpController(bool enabled, string role)
+	{
+		GameObject powerUpButton = GameObject.Find ("PowerUpButton");
+		GameObject powerUpLabel = GameObject.Find ("PowerUpLabel");
+
+		((MeshRenderer) powerUpButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) powerUpButton.GetComponent("BoxCollider")).enabled = enabled;
+		
+		((MeshRenderer) powerUpLabel.GetComponent("MeshRenderer")).enabled = enabled;
+
+		if(role == "Lever1")
+		{
+			((TextMesh) powerUpLabel.GetComponent("TextMesh")).text = "Activate bonus";
+		}
+		else
+		{
+			if(role == "Lever2")
+			{
+				//questa label verrà aggiornata quando il giocatore deve azionare il bottone per rimuovere un malus, per es. "Pulisci lo schermo dal fango!"
+				((TextMesh) powerUpLabel.GetComponent("TextMesh")).text = "Reduce malus effects";
+			}
+		}
 	}
 
 	public static void showServerList(bool enabled) 

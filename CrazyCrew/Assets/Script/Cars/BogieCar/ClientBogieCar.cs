@@ -6,15 +6,18 @@ public class ClientBogieCar : MonoBehaviour {
 	private bool leverUp;
 	private LeverController leverController;
 	private BrakeController brakeController;
+	private PowerUpController powerUpController;
 	private ClientGameManager clientGameManager;
 
 	// Use this for initialization
 	void Start () {
 		GameObject lever = GameObject.Find("Lever");
 		GameObject brake = GameObject.Find("Brake");
+		GameObject powerUpButton = GameObject.Find("PowerUpButton");
 
 		leverController = (LeverController) lever.GetComponent("LeverController");
 		brakeController = (BrakeController) brake.GetComponent("BrakeController");
+		powerUpController = (PowerUpController) powerUpButton.GetComponent("PowerUpController");
 
 		clientGameManager = (ClientGameManager) gameObject.GetComponent("ClientGameManager");
 	}
@@ -25,10 +28,12 @@ public class ClientBogieCar : MonoBehaviour {
 		clientGameManager.setRole("Lever1");
 		leverController.setRole("Lever1");
 		brakeController.setRole("Lever1");
+		powerUpController.setRole("Lever1");
 
 		GUIMenusClient.showLever(true);
 		GUIMenusClient.showPauseButton(true); 
 		GUIMenusClient.showSteer(false);
+		GUIMenusClient.showPowerUpController(true, "Lever1");
 	}
 
 	[RPC]
@@ -37,10 +42,12 @@ public class ClientBogieCar : MonoBehaviour {
 		clientGameManager.setRole("Lever2");
 		leverController.setRole("Lever2");
 		brakeController.setRole("Lever2");
+		powerUpController.setRole("Lever2");
 
 		GUIMenusClient.showLever(true);
 		GUIMenusClient.showPauseButton(true);
 		GUIMenusClient.showSteer(false);
+		GUIMenusClient.showPowerUpController(true, "Lever2");
 	}
 
 	[RPC]
@@ -55,6 +62,7 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showSteer(true);
 		GUIMenusClient.showPauseButton(true);
 		clientGameManager.setRole("Steer");
+		GUIMenusClient.showPowerUpController(false, "Steer");
 
 		GUIMenusClient.showLever(false);
 	}
@@ -77,5 +85,27 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void brakeOff(string role)
 	{
+	}
+
+	[RPC]
+	void activateBonus()
+	{
+	}
+	
+	[RPC]
+	void reduceMalus()
+	{
+	}
+
+	[RPC]
+	void hasBonus(bool hasBonus)
+	{
+		powerUpController.setHasBonus(hasBonus);
+	}
+
+	[RPC]
+	void hasMalus(bool hasMalus)
+	{
+		powerUpController.setHasMalus(hasMalus);
 	}
 }
