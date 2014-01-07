@@ -98,9 +98,11 @@ public class ClientBogieCar : MonoBehaviour {
 	}
 
 	[RPC]
-	void hasBonus(bool hasBonus)
+	void hasBonus(bool hasBonus, string bonusName)
 	{
 		powerUpController.setHasBonus(hasBonus);
+		powerUpController.setBonusName(bonusName);
+		powerUpController.updateBonusLabel();
 	}
 
 	[RPC]

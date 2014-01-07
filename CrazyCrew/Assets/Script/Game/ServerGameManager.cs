@@ -78,6 +78,8 @@ public class ServerGameManager : MonoBehaviour {
 			raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
 			//aggiungo l'evento di fine gara
 			raceManager.RaceFinish+=new EventHandler(RaceFinish);
+			//aggiungo l'evento di acquisizione del Power-UP
+			raceManager.PowerUp+=new EventHandler(PowerUp);
 		}
 	}
 
@@ -86,6 +88,31 @@ public class ServerGameManager : MonoBehaviour {
 		Debug.Log ("race finished, sending signal to clients");
 		networkView.RPC ("endGame",RPCMode.All);
 	}
+
+	private void PowerUp(System.Object sender, EventArgs e)
+	{
+		Debug.Log ("PowerUp acquired");
+
+		if(raceManager.getBonus().GetType() == typeof(BonusMissile))
+		{
+			networkView.RPC ("hasBonus",RPCMode.All, true, "MISSILE");
+		}
+		else
+		{
+			if(raceManager.getBonus().GetType() == typeof(BonusPoop))
+			{
+				networkView.RPC ("hasBonus",RPCMode.All, true, "POOP");
+			}
+			else
+			{
+				if(raceManager.getBonus().GetType() == typeof(BonusSpeed))
+				{
+					networkView.RPC ("hasBonus",RPCMode.All, true, "SPEED");
+				}
+			}
+		}
+	}
+
 	
 	public void playerConnection(NetworkPlayer np)
 	{
@@ -123,6 +150,11 @@ public class ServerGameManager : MonoBehaviour {
 			raceManager.SetPause(true);
 			networkView.RPC("setPause", RPCMode.All, pause);
 		}
+	}
+
+	public RaceManager getRaceManager()
+	{
+		return raceManager;
 	}
 
 	public Player getPlayer(NetworkPlayer np)

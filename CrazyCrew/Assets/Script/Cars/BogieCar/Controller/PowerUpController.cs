@@ -9,17 +9,33 @@ public class PowerUpController : MonoBehaviour {
 
 	//valori aggiornati ogni qualvolta viene acquisito/utilizzato/rimosso un bonus o un malus tremite RPC dal server
 	private bool hasBonus = false;
+	private string bonusName;
 	private bool hasMalus = false;
 
 	// Use this for initialization
 	void Start () {
 		GameObject client = GameObject.Find ("Client");
 		networkView = (NetworkView) client.GetComponent("NetworkView");
+		text = ((TextMesh)GameObject.Find ("PowerUpLabel").GetComponent("TextMesh"));
+	}
+
+	void Update()
+	{
 	}
 
 	public void setRole(string role)
 	{
 		this.role = role;
+	}
+
+	public void setBonusName(string name)
+	{
+		bonusName = name;
+	}
+
+	public string getBonusName()
+	{
+		return bonusName;
 	}
 
 	public void setHasBonus(bool hasBonus)
@@ -32,8 +48,19 @@ public class PowerUpController : MonoBehaviour {
 		this.hasMalus = hasMalus;
 	}
 
-	// Update is called once per frame
-	void Update () {
+	public void updateBonusLabel()
+	{
+		if(role == "Lever1")
+		{
+			if(hasBonus)
+			{
+				text.text = "Activate "+bonusName;
+			}
+			else
+			{
+				text.text = "Activate bonus";
+			}
+		}
 	}
 
 	void OnMouseDown()

@@ -148,7 +148,8 @@ public class ServerBogieCar : MonoBehaviour {
 	void activateBonus()
 	{
 		//codice che attiva il bonus acquisito sul veicolo
-		networkView.RPC("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(),false);
+		serverGameManager.getRaceManager().getBonus().StartEffect();
+		networkView.RPC("hasBonus", serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), false, "");
 	}
 
 	[RPC]
@@ -160,7 +161,7 @@ public class ServerBogieCar : MonoBehaviour {
 
 	//RPC chiamate per aggiornare lo stato del client riguardo la situazione bonus/malus
 	[RPC]
-	void hasBonus(bool hasBonus)
+	void hasBonus(bool hasBonus, string bonusName)
 	{
 	}
 	
