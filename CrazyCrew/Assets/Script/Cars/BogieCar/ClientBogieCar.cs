@@ -65,6 +65,7 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showPowerUpController(false, "Steer");
 
 		GUIMenusClient.showLever(false);
+		GUIMenusClient.positioningSteerPause();
 	}
 
 	[RPC]

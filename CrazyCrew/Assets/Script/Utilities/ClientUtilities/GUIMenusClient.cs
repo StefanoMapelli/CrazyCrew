@@ -6,6 +6,11 @@ public static class GUIMenusClient {
 	//chiamato solo una volta all'inzio , al fine di centrare il MainMenu e il Pause Menu nello schermo
 	public static void menuPositioning()
 	{
+		Screen.autorotateToPortrait = true;
+		Screen.autorotateToLandscapeLeft = true;
+		Screen.autorotateToLandscapeRight = true;
+		Screen.orientation = ScreenOrientation.AutoRotation;
+
 		//vettore utilizzato per mandenere costante la coordinata z per tutti gli oggetti
 		Vector3 cost = new Vector3(0,0,-1);
 
@@ -69,6 +74,12 @@ public static class GUIMenusClient {
 			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
 		lever.transform.position = 
 			new Vector3(leverPlane.transform.position.x,sup,-1f);
+
+		// try to scale correctly the steer controls
+		float height = Camera.main.orthographicSize * 2f;
+		float width = (height * Screen.width / Screen.height)/3f;
+		leftSteer.transform.localScale = new Vector3(width, height, 1f);
+		rightSteer.transform.localScale = new Vector3(width, height, 1f);
 	}
 
 	public static void mainMenu(bool enabled)
@@ -208,5 +219,22 @@ public static class GUIMenusClient {
 		
 		((MeshRenderer) exitButton.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) exitButton.GetComponent("BoxCollider")).enabled = enabled;
+	}
+
+	public static void positioningSteerPause() {
+		GameObject pause = GameObject.Find ("Pause");
+		GameObject pauseLabel = GameObject.Find ("PauseLabel");
+		Vector3 cost = new Vector3(0,0,-1);
+
+		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
+
+		// place pause button and pause label in the center
+		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2f,Screen.height/2f, screenPos.z));
+		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2f,Screen.height/2f, screenPos.z));
+
+		// scale pause button properly
+		float height = Camera.main.orthographicSize * 2f;
+		float width = (height * Screen.width / Screen.height)/3f;
+		pause.transform.localScale = new Vector3(width, height, 1f);
 	}
 }
