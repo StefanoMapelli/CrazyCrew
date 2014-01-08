@@ -14,18 +14,24 @@ public class SteerController : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		i = 0f;
+			i = 0f;
 	}
 	
 	void OnMouseDrag() {
-		i += Time.deltaTime*rate;
-		if (gameObject.name == "LeftSteer") {
-			steerRotation = Mathf.Lerp (steerRotation,-1f,i);
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit = new RaycastHit();
+		if (Physics.Raycast (ray, out hit, 1f)) {
+			if (hit.collider.gameObject.name == "LeftSteer") {
+				i += Time.deltaTime*rate;
+				steerRotation = Mathf.Lerp (steerRotation,-1f,i);
+				networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
+			}
+			else if (hit.collider.gameObject.name == "RightSteer") {
+				i += Time.deltaTime*rate;
+				steerRotation = Mathf.Lerp (steerRotation,1f,i);
+				networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
+			}
 		}
-		else if (gameObject.name == "RightSteer") {
-			steerRotation = Mathf.Lerp (steerRotation,1f,i);
-		}
-		networkView.RPC("rotateSteer", RPCMode.Server, steerRotation);
 	}
 	
 	void OnMouseUp() {

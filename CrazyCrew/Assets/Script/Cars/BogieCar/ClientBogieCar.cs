@@ -34,6 +34,8 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showPauseButton(true); 
 		GUIMenusClient.showSteer(false);
 		GUIMenusClient.showPowerUpController(true, "Lever1");
+
+		GUIMenusClient.controllerPositioning();
 	}
 
 	[RPC]
@@ -48,6 +50,8 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showPauseButton(true);
 		GUIMenusClient.showSteer(false);
 		GUIMenusClient.showPowerUpController(true, "Lever2");
+
+		GUIMenusClient.controllerPositioning();
 	}
 
 	[RPC]

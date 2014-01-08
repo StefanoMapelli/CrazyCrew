@@ -13,6 +13,7 @@ public class RestartButton : MonoBehaviour {
 	void OnMouseDown() {
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		clientGameManager.restart();
+		clientGameManager.setPause(false);
 	}
 
 	void OnMouseUp()

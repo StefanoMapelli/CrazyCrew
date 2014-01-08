@@ -6,11 +6,6 @@ public static class GUIMenusClient {
 	//chiamato solo una volta all'inzio , al fine di centrare il MainMenu e il Pause Menu nello schermo
 	public static void menuPositioning()
 	{
-		Screen.autorotateToPortrait = true;
-		Screen.autorotateToLandscapeLeft = true;
-		Screen.autorotateToLandscapeRight = true;
-		Screen.orientation = ScreenOrientation.AutoRotation;
-
 		//vettore utilizzato per mandenere costante la coordinata z per tutti gli oggetti
 		Vector3 cost = new Vector3(0,0,-1);
 
@@ -23,6 +18,7 @@ public static class GUIMenusClient {
 		GameObject serverList = GameObject.Find ("ServerList");
 		GameObject restartButton = GameObject.Find ("RestartButton");
 		GameObject exitButton = GameObject.Find ("ExitButton");
+		GameObject restartFromPause = GameObject.Find ("RestartFromPauseButton");
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
@@ -31,6 +27,7 @@ public static class GUIMenusClient {
 
 		resumeGame.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/3)*2, screenPos.z));
 		exit.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
+		restartFromPause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/3,screenPos.z));
 
 		backButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/6,Screen.height/10, screenPos.z));
 		nextButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*5,Screen.height/10, screenPos.z));
@@ -60,6 +57,7 @@ public static class GUIMenusClient {
 		leftSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*1,Screen.height/2, screenPos.z));
 		rightSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/2, screenPos.z));
 		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/10, screenPos.z));
+		pause.transform.localScale = new Vector3(5f,5f,1f);
 		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,(Screen.height/5), screenPos.z));
 
 		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
@@ -118,12 +116,16 @@ public static class GUIMenusClient {
 	{
 		GameObject resumeGame = GameObject.Find("ResumeGameButton");
 		GameObject exit = GameObject.Find("ExitToMenuButton");
+		GameObject restartFromPause = GameObject.Find ("RestartFromPauseButton");
 
 		((MeshRenderer) resumeGame.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) resumeGame.GetComponent("BoxCollider")).enabled = enabled;
 		
 		((MeshRenderer) exit.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) exit.GetComponent("BoxCollider")).enabled = enabled;
+
+		((MeshRenderer) restartFromPause.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) restartFromPause.GetComponent("BoxCollider")).enabled = enabled;
 	}
 
 	//metodi per far vedere i controllers
