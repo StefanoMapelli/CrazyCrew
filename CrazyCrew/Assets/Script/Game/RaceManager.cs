@@ -4,37 +4,49 @@ using System;
 
 public class RaceManager : MonoBehaviour {
 
+	private BogieCarMovement bogieCarMovement;
+
 	//evento fine gara
 	public delegate void RaceFinishEventHandler(object sender, EventArgs e);
-
 	public event EventHandler RaceFinish;
 
-	protected virtual void OnRaceFinish(EventArgs e)
-	{
-		RaceFinish(this,e);
-	}
+	//evento aquisizione power-up
+	public delegate void PowerUpEventHandler(object sender, EventArgs e);
+	public event EventHandler PowerUp;
 
-
-
+	//info
 	private TextMesh infoText;
+
 	//Pause
 	private bool pause = true;
 
 	//timer
 	private DateTime startTime;
 	TimeSpan timer = new TimeSpan(0,0,0,0,0);
-
 	private TextMesh timerText;
 
 	//Menu finale
 	public GameObject finishMenu;
 	public GameObject finalTime;
-	private bool isFinish=false;
+	private bool isFinish = false;
+
+	//bonus acquisito
+	private Bonus bonusAcquired;
 
 	// Use this for initialization
 	void Start () {
 		//CountDown
 		StartCoroutine (StartGame ());
+	}
+
+	protected virtual void OnRaceFinish(EventArgs e)
+	{
+		RaceFinish(this,e);
+	}
+
+	protected virtual void OnPowerUpAcquired(EventArgs e)
+	{
+		PowerUp(this, e);
 	}
 
 	public void RestartRace () {
@@ -50,6 +62,7 @@ public class RaceManager : MonoBehaviour {
 	/// <returns></returns>
 	private IEnumerator StartGame()
 	{
+		bogieCarMovement = (BogieCarMovement) GameObject.Find("BogieCarModel").GetComponent("BogieCarMovement");
 		infoText =  (TextMesh) (GameObject.Find("InfoText").GetComponent("TextMesh"));
 		infoText.text="";
 
@@ -111,8 +124,46 @@ public class RaceManager : MonoBehaviour {
 		startTime = DateTime.Now;
 	}
 
+	//da usare nel caso di bonus di tempo
 	public void bonusTime(int bonus)
 	{
-		timer=timer.Subtract(new TimeSpan(0,0,bonus));
+		timer = timer.Subtract(new TimeSpan(0,0,bonus));
+	}
+
+	public void setBonus()
+	{
+		int powerUpId = UnityEngine.Random.Range(1,5);
+		switch(powerUpId)
+		{
+			case 1:
+			{
+				bonusAcquired = new BonusMissile();
+				break;
+			}
+			
+			case 2:
+			{
+				bonusAcquired = new BonusPoop();
+				break;
+			}
+			
+			case 3:
+			{
+				bogieCarMovement.bonusTime();
+				break;
+			}
+			
+			case 4:
+			{
+				bonusAcquired = new BonusSpeed();
+				break;	
+			}
+		}
+		OnPowerUpAcquired(EventArgs.Empty);
+	}
+
+	public Bonus getBonus()
+	{
+		return bonusAcquired;
 	}
 }

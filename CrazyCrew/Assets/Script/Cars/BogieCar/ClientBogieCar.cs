@@ -65,6 +65,7 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showPowerUpController(false, "Steer");
 
 		GUIMenusClient.showLever(false);
+		GUIMenusClient.positioningSteerPause();
 	}
 
 	[RPC]
@@ -98,9 +99,11 @@ public class ClientBogieCar : MonoBehaviour {
 	}
 
 	[RPC]
-	void hasBonus(bool hasBonus)
+	void hasBonus(bool hasBonus, string bonusName)
 	{
 		powerUpController.setHasBonus(hasBonus);
+		powerUpController.setBonusName(bonusName);
+		powerUpController.updateBonusLabel();
 	}
 
 	[RPC]

@@ -8,30 +8,11 @@ public class SteerController : MonoBehaviour {
 	private float rate = 1f/5f;
 	private NetworkView networkView;
 
-	private float screenWidth;
-	private float screenHeight;
-	
 	// Use this for initialization
 	void Start () {
 		networkView = (NetworkView) GameObject.Find ("Client").GetComponent("NetworkView");
-
-		screenWidth = Screen.width;
-		screenHeight = Screen.height;
-
-		Screen.autorotateToPortrait = true;
-		Screen.autorotateToLandscapeLeft = true;
-		Screen.orientation = ScreenOrientation.AutoRotation;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (this.screenWidth != Screen.width || this.screenHeight != Screen.height) {
-			this.screenWidth = Screen.width;
-			this.screenHeight = Screen.height;
-			GUIMenusClient.controllerPositioning();
-		}
-	}
-	
+
 	void OnMouseDown() {
 		i = 0f;
 	}

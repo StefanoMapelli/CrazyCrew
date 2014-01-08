@@ -12,7 +12,6 @@ public class BogieCarMovement : MonoBehaviour {
 	float lowestSteerAtSpeed = 50;
 	float lowSpeedSteerAngle = 10;
 	float highSpeedSteerAngle = 1;
-	bool isSteerAvailable=true;
 
 	//ruote
 	public WheelCollider WheelFR;
@@ -44,9 +43,6 @@ public class BogieCarMovement : MonoBehaviour {
 	public float topRetroSpeed=-10f;
 	public float topSpeed=150f;
 
-	//power up
-	private float powerUpSpeed=1f;
-
 	//CheckPoint
 	private bool checkPoint = false;
 	public GameObject raceManager;
@@ -54,6 +50,9 @@ public class BogieCarMovement : MonoBehaviour {
 
 	private bool startRace = true;
 	private bool finishRace = false;
+
+	//powerUp
+	public float speedMultiplierBonus;
 
 	public TextMesh infoText;
 	
@@ -72,7 +71,6 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			torqueTraction = WheelTraction.motorTorque;
 			brakeTorque=WheelTraction.brakeTorque;
-			//currentSpeed= 2*22/7*WheelRL.radius*WheelRL.rpm*60/1000;
 			currentSpeed= 2*22/7*WheelTraction.radius*WheelTraction.rpm*60/1000;
 			currentSpeed=Mathf.Round(currentSpeed);
 
@@ -117,8 +115,8 @@ public class BogieCarMovement : MonoBehaviour {
 	}
 
 	/*
-         * In caso di freno sinistro e destro premuto aziono il freno del veicolo
-         */
+    * In caso di freno sinistro e destro premuto aziono il freno del veicolo
+    */
 	private void Brake()
 	{		
 		if(brakeL && brakeR) 
@@ -157,18 +155,12 @@ public class BogieCarMovement : MonoBehaviour {
 		Debug.Log("Lever  ");
 		if(currentSpeed<topSpeed)
 		{
-			/*WheelRL.motorTorque= forcePercent*torqueMax*powerUpSpeed;
-			WheelRR.motorTorque= forcePercent*torqueMax*powerUpSpeed;*/
-
-			WheelTraction.motorTorque += forcePercent*torqueMax*powerUpSpeed;
-			Debug.Log("Lever  "+forcePercent*torqueMax*powerUpSpeed);
-			StartCoroutine (StopTorque(forcePercent*torqueMax*powerUpSpeed));
-
+			WheelTraction.motorTorque += forcePercent*torqueMax;
+			Debug.Log("Lever  "+forcePercent*torqueMax);
+			StartCoroutine (StopTorque(forcePercent*torqueMax));
 		}
 		else
 		{
-			/*WheelRL.motorTorque= 0;
-			WheelRR.motorTorque= 0;*/
 			WheelTraction.motorTorque = 0;
 		}
 	}
@@ -177,20 +169,6 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(timeTorque);
 
-		/*if(WheelRL.motorTorque > 0 && WheelRR.motorTorque > 0)
-		{
-			if(WheelRL.motorTorque < torque || WheelRR.motorTorque < torque)
-			{
-				WheelRL.motorTorque = 0;
-				WheelRR.motorTorque = 0;
-				WheelTraction.motorTorque = 0;
-			}
-			else
-			{
-				WheelRL.motorTorque -= torque;
-				WheelRR.motorTorque -= torque;
-			}
-		}*/
 		if(WheelTraction.motorTorque > 0)
 		{
 			if(WheelTraction.motorTorque < torque)
@@ -207,20 +185,15 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void Steer(float steerPercent)
 	{
-		if(isSteerAvailable)
-		{
-			float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
-			float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
+		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
+		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
 
-			currentSteerAngle *= steerPercent;
+		currentSteerAngle *= steerPercent;
 		
-			WheelFL.steerAngle = currentSteerAngle;
-			WheelFR.steerAngle = currentSteerAngle;
-		}
+		WheelFL.steerAngle = currentSteerAngle;
+		WheelFR.steerAngle = currentSteerAngle;
 	}
-
-
-
+	
 	IEnumerator Finish ()
 	{
 		Debug.Log ("finish");
@@ -234,71 +207,55 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 	}
 
-	//Collisione con powerUp
+	//Collisione con oggetti in gara
 	void OnTriggerEnter(Collider other) 
-	{
-		
+	{	
 		if(other.gameObject.name == "PowerUpObject")
 		{
-			int powerUpId= UnityEngine.Random.Range(1,5);
-			switch(powerUpId)
+			((RaceManager)raceManager.GetComponent ("RaceManager")).setBonus();
+		}
+		else
+		{
+			if(other.gameObject.name == "FinishLine")
 			{
-				case 1:
+				//Finish si attiva solo se checkPoint = true
+				if(checkPoint)
 				{
-					//doppia spinta
-					StartCoroutine (DoubleSpeedStart());
-					break;
+					StartCoroutine (Finish());
 				}
-
-				case 2:
+			}
+			else
+			{
+				if(other.gameObject.name == "CheckPoint")
 				{
-					//sterzo bloccato
-					StartCoroutine (SteerBlock());
-					break;
-				}
-
-				case 3:
-				{
-					//tempo decrementato
-					StartCoroutine (BonusTime());
-					break;
-				}
-
-				case 4:
-				{
-					ServerBogieCar serverBogieCar = (ServerBogieCar)GameObject.Find("Server").GetComponent("ServerBogieCar");
-					serverBogieCar.assignRoles();
-					break;	
+					checkPoint = !checkPoint;
 				}
 			}
 		}
-		else if(other.gameObject.name == "FinishLine")
-		{
-			//Finish si attiva solo se checkPoint = true
-			if(checkPoint)
-			{
-				StartCoroutine (Finish());
-			}
-		}
-		else if(other.gameObject.name == "CheckPoint")
-		{
-			checkPoint = !checkPoint;
-		}
-		
-		
 	}
 
-	//powerup: sterzo non funzionante per 3 secondi
-	IEnumerator SteerBlock()
+
+	//GESTIONE POWER-UP
+
+	public void bonusSpeed()
 	{
-		infoText.text="OPS...STEER BLOCKED";
-		isSteerAvailable=false;
-		yield return new WaitForSeconds(3);
-		infoText.text="";
-		isSteerAvailable=true;
-
+		StartCoroutine(BonusSpeed());
 	}
 
+	IEnumerator BonusSpeed()
+	{
+		infoText.text="TURBOOOOOO";
+		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
+		yield return new WaitForSeconds(5);
+		StartCoroutine (StopTorque(torqueMax*speedMultiplierBonus));
+		infoText.text="";
+	}
+
+	public void bonusTime()
+	{
+		StartCoroutine(BonusTime());
+	}
+	
 	//powerUp: il tempo viene decrementato di un valore tra 5 e 10 secondi
 	IEnumerator BonusTime()
 	{
@@ -307,18 +264,6 @@ public class BogieCarMovement : MonoBehaviour {
 		((RaceManager)raceManager.GetComponent ("RaceManager")).bonusTime(bonusTime);
 		yield return new WaitForSeconds(3);
 		infoText.text="";
-
-	}
-
-	//powerup che raddoppia la forza data dalla leva
-	IEnumerator DoubleSpeedStart()
-	{
-		powerUpSpeed=2f;
-		infoText.text="DOUBLE FORCE!!!";
-		yield return new WaitForSeconds(5);
-		infoText.text="";
-		powerUpSpeed=1f;
-	
-	
+		
 	}
 }

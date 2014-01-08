@@ -6,10 +6,20 @@ public class ClientGameManager : MonoBehaviour {
 	private string role;
 	private bool ready = false;
 	private bool pause = false;
-	
+
+	private float screenWidth;
+	private float screenHeight;
+
 	// Use this for initialization
 	void Start () 
 	{
+		Screen.autorotateToPortrait = true;
+		Screen.autorotateToLandscapeLeft = true;
+		Screen.autorotateToLandscapeRight = true;
+		Screen.orientation = ScreenOrientation.AutoRotation;
+		screenWidth = Screen.width;
+		screenHeight = Screen.height;
+
 		//posizionamento dei menu al centro dello schermo
 		GUIMenusClient.menuPositioning();
 		GUIMenusClient.controllerPositioning();
@@ -42,6 +52,15 @@ public class ClientGameManager : MonoBehaviour {
 			else {
 				GUIMenusClient.readyButton(false);
 			}
+		}
+
+		if (this.screenWidth != Screen.width || this.screenHeight != Screen.height) {
+			this.screenWidth = Screen.width;
+			this.screenHeight = Screen.height;
+			GUIMenusClient.controllerPositioning();
+
+			if (role == "Steer") 
+				GUIMenusClient.positioningSteerPause();
 		}
 	}
 
