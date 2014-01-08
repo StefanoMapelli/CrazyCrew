@@ -110,7 +110,7 @@ public class ClientGameManager : MonoBehaviour {
 	}
 
 	[RPC]
-	void setPause(bool pause)
+	public void setPause(bool pause)
 	{
 		this.pause = pause;
 

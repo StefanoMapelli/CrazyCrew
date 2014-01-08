@@ -5,21 +5,32 @@ public class AICarScript : MonoBehaviour {
 
 	private ArrayList path;
 	private GameObject pathGroup;
+	public string pathName="";
 	public float maxSteer=15.0f;
+
 	public WheelCollider wheelFL;
 	public WheelCollider wheelFR;
 	public WheelCollider wheelTraction;
+	public WheelCollider wheelRR;
+	public WheelCollider wheelRL;
+
+	public Transform WheelFLTransform;
+	public Transform WheelFRTransform;
+	public Transform WheelRLTransform;
+	public Transform WheelRRTransform;
+
 	public int currentPathObject=0; 
 	public float distFromPath=5;
 	public float maxTorque=50;
+	public float maxSpeed=70;
 	public float currentSpeed;
 	public Ray frontSensor;
 	public Ray frontLeftSensor;
 	public Ray frontRightSensor;
-	private bool obstacle=false;
 	public float sensorRay=10;
 	public int blocked=0;
 	public bool retroRequest=false;
+	public int numberOfRetroRequest=0;
 
 
 	// Use this for initialization
@@ -30,7 +41,7 @@ public class AICarScript : MonoBehaviour {
 
 	void GetPath()
 	{
-		pathGroup=GameObject.Find("_Path");
+		pathGroup=GameObject.Find(pathName);
 		Transform[] pathObjs=pathGroup.GetComponentsInChildren<Transform>();
 		path= new ArrayList();
 		
@@ -44,6 +55,18 @@ public class AICarScript : MonoBehaviour {
 		Debug.Log(path.Count);
 	}
 
+	public void WheelRotate()
+	{
+		
+		WheelFRTransform.Rotate(0,-wheelFR.rpm/60*360*Time.deltaTime,0);
+		WheelRLTransform.Rotate(0,-wheelRL.rpm/60*360*Time.deltaTime,0);
+		WheelRRTransform.Rotate(0,-wheelRR.rpm/60*360*Time.deltaTime,0);
+		WheelFLTransform.Rotate(0,-wheelRR.rpm/60*360*Time.deltaTime,0);
+		WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,wheelFL.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
+		WheelFRTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,wheelFR.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
+		
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () {
 
@@ -51,35 +74,53 @@ public class AICarScript : MonoBehaviour {
 		Move ();
 		FrontSensor();
 		RetroOnCollision();
+		WheelRotate();
 
 		currentSpeed= 2*22/7*wheelFR.radius*wheelFR.rpm*60/1000;
 		currentSpeed=Mathf.Round(currentSpeed);
 	}
 
+	/// <summary>
+	/// Sterzo secondo il percorso a punti
+	/// </summary>
 	void GetSteer()
 	{
-		Vector3 steerVector = transform.InverseTransformPoint(new Vector3(((Transform)path[currentPathObject]).position.x,transform.position.y,((Transform)path[currentPathObject]).position.z));
-		float newSteer = maxSteer * (-steerVector.z/steerVector.magnitude);
 
-		wheelFL.steerAngle=newSteer;
-		wheelFR.steerAngle=newSteer;
+		if(!retroRequest)
+		{
+			Vector3 steerVector = transform.InverseTransformPoint(new Vector3(((Transform)path[currentPathObject]).position.x,transform.position.y,((Transform)path[currentPathObject]).position.z));
+			float newSteer = maxSteer * (-steerVector.z/steerVector.magnitude);
 
-		if(steerVector.magnitude<=distFromPath)
-		{
-			currentPathObject++;
+			wheelFL.steerAngle=newSteer;
+			wheelFR.steerAngle=newSteer;
+
+			if(steerVector.magnitude<=distFromPath)
+			{
+				currentPathObject++;
+			}
+			if(currentPathObject>=path.Count)
+			{
+				currentPathObject=0;
+			}
 		}
-		if(currentPathObject>=path.Count)
+		else
 		{
-			currentPathObject=0;
+			wheelFL.steerAngle=0;
+			wheelFR.steerAngle=0;
 		}
+
 
 	}
 
+
+	/// <summary>
+	/// Movimento costante in avanti oppure retro nel caso di collisione continua
+	/// </summary>
 	void Move()
 	{
 		if(!retroRequest)
 		{
-			if(currentSpeed<=70)
+			if(currentSpeed<=maxSpeed)
 				wheelTraction.motorTorque=maxTorque;
 			else
 				wheelTraction.motorTorque=0;
@@ -91,7 +132,9 @@ public class AICarScript : MonoBehaviour {
 		}
 	}
 	
-
+	/// <summary>
+	/// Sterzo in base agli ostacoli rilevati dai sensori
+	/// </summary>
 	void FrontSensor()
 	{
 		float newSteer=0;
@@ -113,119 +156,168 @@ public class AICarScript : MonoBehaviour {
 		bool raycastFR=Physics.Raycast(frontRightSensor,out infoFR, sensorRay);
 
 		//ostacolo rilevato dal sensore di fronte
-
-		if(raycastF && (!infoF.collider.name.Equals("CheckPoint") && !infoF.collider.name.Equals("PowerUp") && !infoF.collider.name.Equals("FinishLine")))
+		if(!retroRequest)
 		{
-			blocked++;
-			if(raycastFL)
+			if(raycastF && ignoredCollision(infoF))
 			{
-				if(raycastFR)
+				incrementBlocked(infoF);
+				if(raycastFL)
 				{
-					if(infoFL.distance>infoFR.distance)
+					if(raycastFR)
 					{
-						//curvo a sinistra ostacolo di fronte più vicino a destra
-						wheelFL.steerAngle=-maxSteer;
-						wheelFR.steerAngle=-maxSteer;
+						if(infoFL.distance>infoFR.distance)
+						{
+							//curvo a sinistra ostacolo di fronte più vicino a destra
+							wheelFL.steerAngle=-maxSteer;
+							wheelFR.steerAngle=-maxSteer;
+						}
+						if(infoFL.distance<infoFR.distance)
+						{
+							//curvo a destra ostacolo fronte più vicino a sinistra
+							wheelFL.steerAngle=maxSteer;
+							wheelFR.steerAngle=maxSteer;
+						}
 					}
-					if(infoFL.distance<infoFR.distance)
+					else
 					{
-						//curvo a destra ostacolo fronte più vicino a sinistra
+						//curvo a destra ostacolo centro-sinistra
 						wheelFL.steerAngle=maxSteer;
 						wheelFR.steerAngle=maxSteer;
 					}
 				}
 				else
 				{
-					//curvo a destra ostacolo centro-sinistra
-					wheelFL.steerAngle=maxSteer;
-					wheelFR.steerAngle=maxSteer;
-				}
-			}
-			else
-			{
-				if(raycastFR)
-				{
-					//curvo a sinistra ostacolo centro-destra
-					wheelFL.steerAngle=-maxSteer;
-					wheelFR.steerAngle=-maxSteer;
-				}
-				else
-				{
-					//curvo random a destra o a sinistra perchè l'ostacolo è esattamente di fronte a noi
-					if(Random.Range(-1,1)>=0)
+					if(raycastFR)
 					{
+						//curvo a sinistra ostacolo centro-destra
 						wheelFL.steerAngle=-maxSteer;
 						wheelFR.steerAngle=-maxSteer;
 					}
 					else
 					{
-						wheelFL.steerAngle=maxSteer;
-						wheelFR.steerAngle=maxSteer;
+						//curvo random a destra o a sinistra perchè l'ostacolo è esattamente di fronte a noi
+						if(Random.Range(-1,1)>=0)
+						{
+							wheelFL.steerAngle=-maxSteer;
+							wheelFR.steerAngle=-maxSteer;
+						}
+						else
+						{
+							//wheelFL.steerAngle=maxSteer;
+							//wheelFR.steerAngle=maxSteer;
+						}
 					}
 				}
 			}
-		}
-		//ostacolo rilevato solo dai sensori obliqui
-		else
-		{
-			if(raycastFL && (!infoFL.collider.name.Equals("CheckPoint") && !infoFL.collider.name.Equals("PowerUp") && !infoFL.collider.name.Equals("FinishLine")))
+			//ostacolo rilevato solo dai sensori obliqui
+			else
 			{
-				if(raycastFR&& (!infoFR.collider.name.Equals("CheckPoint") && !infoFR.collider.name.Equals("PowerUp") && !infoFR.collider.name.Equals("FinishLine")))
+				if(raycastFL && ignoredCollision(infoFL))
 				{
-					if(infoFL.distance>infoFR.distance)
+					if(raycastFR && ignoredCollision(infoFR))
 					{
-						//curvo a sinistra ostacolo più vicino a destra
-						blocked++;
-						wheelFL.steerAngle=-maxSteer;
-						wheelFR.steerAngle=-maxSteer;
+						if(infoFL.distance>infoFR.distance)
+						{
+							//curvo a sinistra ostacolo più vicino a destra
+							incrementBlocked(infoFL);
+							incrementBlocked(infoFR);
+							wheelFL.steerAngle=-maxSteer;
+							wheelFR.steerAngle=-maxSteer;
+						}
+						if(infoFL.distance<infoFR.distance)
+						{
+							//curvo a destra ostacolo più vicino a sinistra
+							incrementBlocked(infoFL);
+							incrementBlocked(infoFR);
+							wheelFL.steerAngle=maxSteer;
+							wheelFR.steerAngle=maxSteer;
+						}
 					}
-					if(infoFL.distance<infoFR.distance)
+					else
 					{
-						//curvo a destra ostacolo più vicino a sinistra
-						blocked++;
+						//curvo a destra ostacolo a sinistra
+						incrementBlocked(infoFL);
 						wheelFL.steerAngle=maxSteer;
 						wheelFR.steerAngle=maxSteer;
 					}
 				}
 				else
 				{
-					//curvo a destra ostacolo a sinistra
-					blocked++;
-					wheelFL.steerAngle=maxSteer;
-					wheelFR.steerAngle=maxSteer;
-				}
-			}
-			else
-			{
-				if(raycastFR && (!infoFR.collider.name.Equals("CheckPoint")&& !infoFR.collider.name.Equals("PowerUp") && !infoFR.collider.name.Equals("FinishLine")))
-				{
-					//curvo a sinsitra ostacolo a destra
-					blocked++;
-					wheelFL.steerAngle=-maxSteer;
-					wheelFR.steerAngle=-maxSteer;
+					if(raycastFR && ignoredCollision(infoFR))
+					{
+						//curvo a sinsitra ostacolo a destra
+						incrementBlocked(infoFR);
+						wheelFL.steerAngle=-maxSteer;
+						wheelFR.steerAngle=-maxSteer;
+					}
 				}
 			}
 		}
 	}
 
-	IEnumerator RetroTorque()
+	IEnumerator setRetro()
 	{
 		retroRequest=true;
+		blocked=0;
 		yield return new WaitForSeconds(4);
 		retroRequest=false;
-		blocked=0;
+
 	}
 
 	void RetroOnCollision()
 	{
-		if(blocked>100)
+		if(blocked>150 && currentSpeed<20)
 		{
-			StartCoroutine (RetroTorque());
+			if(numberOfRetroRequest<3)
+			{
+				StartCoroutine (setRetro());
+				numberOfRetroRequest++;
+			}
+			else
+			{
+				RepositioningAICar();
+			}
 		}
+	}
+
+	void RepositioningAICar()
+	{
+		numberOfRetroRequest=0;
+		blocked=0;
+		transform.position=((Transform) path[currentPathObject]).position;
 	}
 
 	void OnCollisionEnter(Collision c)
 	{
-		Debug.Log("Oggetto colpito");
+		Debug.Log("Collision");
 	}
+
+
+	/// <summary>
+	/// verifica le info sulle collisioni e ignora gli ostacoli che non devono essere evitati
+	/// </summary>
+	/// <returns><c>true</c>, if collision was ignoreded, <c>false</c> otherwise.</returns>
+	/// <param name="info">Info.</param>
+	bool ignoredCollision(RaycastHit info)
+	{
+		if(!info.collider.name.Equals("CheckPoint")&& !info.collider.name.Equals("PowerUpObject") && !info.collider.name.Equals("FinishLine"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	void incrementBlocked(RaycastHit info)
+	{
+		if(!info.collider.tag.Equals("Car"))
+		{
+			blocked++;
+
+		}
+	}
+
+
 }
