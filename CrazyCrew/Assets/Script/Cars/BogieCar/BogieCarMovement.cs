@@ -4,6 +4,8 @@ using System;
 
 public class BogieCarMovement : MonoBehaviour {
 
+	private ServerBogieCar serverBogieCar;
+	
 	//Conponenti veicolo
 
 	public int timeTorque = 2;
@@ -51,19 +53,35 @@ public class BogieCarMovement : MonoBehaviour {
 	private bool startRace = true;
 	private bool finishRace = false;
 
-	//powerUp
+	//bonus info
 	public float speedMultiplierBonus;
+	private Bonus bonusAcquired;
+
+	//malus info
+	private bool malusActive = false;
+	private int reductionCounter = 0;
+	private int malusDuration;
+
+	private int malusSteerRotation = 0;
 
 	public TextMesh infoText;
 	
 	// Use this for initialization
-	void Start () {
-
+	void Start () 
+	{
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
-
+		serverBogieCar = (ServerBogieCar) GameObject.Find ("Server").GetComponent("ServerBogieCar");
 	}
 
-	
+	public Bonus getBonus()
+	{
+		return bonusAcquired;
+	}
+
+	/*public void setSteerMalusDuration()
+	{
+	}*/
+
 	// Update is called once per frame
 	void Update () {
 		if(startRace && !finishRace)
@@ -188,7 +206,7 @@ public class BogieCarMovement : MonoBehaviour {
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
 		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
 
-		currentSteerAngle *= steerPercent;
+		currentSteerAngle = (currentSteerAngle*steerPercent) + malusSteerRotation;
 		
 		WheelFL.steerAngle = currentSteerAngle;
 		WheelFR.steerAngle = currentSteerAngle;
@@ -209,10 +227,37 @@ public class BogieCarMovement : MonoBehaviour {
 
 	//Collisione con oggetti in gara
 	void OnTriggerEnter(Collider other) 
-	{	
-		if(other.gameObject.name == "PowerUpObject")
+	{
+		if(other.gameObject.name == "BonusObject")
 		{
-			((RaceManager)raceManager.GetComponent ("RaceManager")).setBonus();
+			int powerUpId = UnityEngine.Random.Range(1,5);
+			serverBogieCar.bonusComunication(powerUpId);
+			switch(powerUpId)
+			{
+			case 1:
+			{
+				bonusAcquired = new BonusMissile();
+				break;
+			}
+				
+			case 2:
+			{
+				bonusAcquired = new BonusPoop();
+				break;
+			}
+				
+			case 3:
+			{
+				StartCoroutine(BonusTime());
+				break;
+			}
+				
+			case 4:
+			{
+				bonusAcquired = new BonusSpeed();
+				break;	
+			}
+			}
 		}
 		else
 		{
@@ -230,12 +275,50 @@ public class BogieCarMovement : MonoBehaviour {
 				{
 					checkPoint = !checkPoint;
 				}
+				else
+				{
+					if(other.gameObject.name == "MalusObject" && !malusActive)
+					{
+						malusActive = true;
+
+						int powerUpId = UnityEngine.Random.Range(1,5);
+						serverBogieCar.malusComunication(powerUpId);
+						switch(powerUpId)
+						{
+						case 1:
+						{
+							//effetto fango su schermo
+							break;
+						}
+							
+						case 2:
+						{
+							//effetto rallentamento
+							break;
+						}
+
+						case 3:
+						{
+							serverBogieCar.assignRoles();
+							malusActive = false;
+							break;
+						}
+							
+						case 4:
+						{
+							StartCoroutine(MalusSteerFailure());
+							break;	
+						}
+						}
+					}
+				}
 			}
 		}
 	}
 
 
 	//GESTIONE POWER-UP
+	//BONUS
 
 	public void bonusSpeed()
 	{
@@ -251,11 +334,6 @@ public class BogieCarMovement : MonoBehaviour {
 		infoText.text="";
 	}
 
-	public void bonusTime()
-	{
-		StartCoroutine(BonusTime());
-	}
-	
 	//powerUp: il tempo viene decrementato di un valore tra 5 e 10 secondi
 	IEnumerator BonusTime()
 	{
@@ -264,6 +342,50 @@ public class BogieCarMovement : MonoBehaviour {
 		((RaceManager)raceManager.GetComponent ("RaceManager")).bonusTime(bonusTime);
 		yield return new WaitForSeconds(3);
 		infoText.text="";
-		
+	}
+
+
+	//MALUS
+	public void malusReduction(string malusName)
+	{
+		reductionCounter++;
+
+		if(reductionCounter % 10 == 0)
+		{
+			malusDuration--;
+			StartCoroutine(MalusReductionNotify());
+		}
+	}
+
+	IEnumerator MalusReductionNotify()
+	{
+		infoText.text=" Malus reduced...GOOD JOB!";
+		yield return new WaitForSeconds(2);
+		infoText.text="";
+	}
+
+	IEnumerator MalusSteerFailure()
+	{
+		infoText.text="STEER FAILURE!!";
+		malusSteerRotation = UnityEngine.Random.Range(3,7);
+
+		if(UnityEngine.Random.Range(1,2) == 1)
+		{
+			malusSteerRotation = -malusSteerRotation;
+		}
+		Debug.Log("Sterzo deviato di: "+malusSteerRotation);
+		malusDuration=5;
+
+		for(int i=0;i<malusDuration;i++)
+		{
+			infoText.text="Put some oil bro!";
+			yield return new WaitForSeconds(1);
+		}
+
+		serverBogieCar.malusEnded();
+		malusDuration=5;
+		malusSteerRotation=0;
+		infoText.text="";
+		malusActive = false;
 	}
 }

@@ -47,9 +47,7 @@ public class ServerGameManager : MonoBehaviour {
 	}
 
 	//resto in attesa dell'evento di fine gara
-
-
-
+	
 	void OnGUI()
 	{
 		if(pause)
@@ -64,10 +62,7 @@ public class ServerGameManager : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-
+	
 	public void OnLevelWasLoaded(int level)
 	{
 		if (level == 1) {
@@ -78,8 +73,6 @@ public class ServerGameManager : MonoBehaviour {
 			raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
 			//aggiungo l'evento di fine gara
 			raceManager.RaceFinish+=new EventHandler(RaceFinish);
-			//aggiungo l'evento di acquisizione del Power-UP
-			raceManager.PowerUp+=new EventHandler(PowerUp);
 		}
 	}
 
@@ -89,31 +82,6 @@ public class ServerGameManager : MonoBehaviour {
 		networkView.RPC ("endGame",RPCMode.All);
 	}
 
-	private void PowerUp(System.Object sender, EventArgs e)
-	{
-		Debug.Log ("PowerUp acquired");
-
-		if(raceManager.getBonus().GetType() == typeof(BonusMissile))
-		{
-			networkView.RPC ("hasBonus",RPCMode.All, true, "MISSILE");
-		}
-		else
-		{
-			if(raceManager.getBonus().GetType() == typeof(BonusPoop))
-			{
-				networkView.RPC ("hasBonus",RPCMode.All, true, "POOP");
-			}
-			else
-			{
-				if(raceManager.getBonus().GetType() == typeof(BonusSpeed))
-				{
-					networkView.RPC ("hasBonus",RPCMode.All, true, "SPEED");
-				}
-			}
-		}
-	}
-
-	
 	public void playerConnection(NetworkPlayer np)
 	{
 		if(!playing)

@@ -51,8 +51,61 @@ public class ServerBogieCar : MonoBehaviour {
 
 	public void initializeBogieCar()
 	{
-		GameObject o = GameObject.Find("BogieCarModel");
+		GameObject o = GameObject.Find("_BogieCarModel");
 		bogieCar = (BogieCarMovement)	o.GetComponent("BogieCarMovement");
+	}
+
+	public void bonusComunication(int powerUpId)
+	{
+		switch(powerUpId)
+		{
+		case 1:
+		{
+			networkView.RPC ("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), true, "MISSILE");
+			break;
+		}
+			
+		case 2:
+		{
+			networkView.RPC ("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), true, "POOP");
+			break;
+		}
+
+		case 4:
+		{
+			networkView.RPC ("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), true, "SPEED");
+			break;	
+		}
+		}
+	}
+
+	public void malusComunication(int powerUpId)
+	{
+		switch(powerUpId)
+		{
+		case 1:
+		{
+			networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), true, "MUD");
+			break;
+		}
+			
+		case 2:
+		{
+			networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), true, "SLOWDOWN");
+			break;
+		}
+			
+		case 4:
+		{
+			networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), true, "STEER FAILURE");
+			break;	
+		}
+		}
+	}
+
+	public void malusEnded()
+	{
+		networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), false, "");
 	}
 
 	[RPC]
@@ -148,15 +201,14 @@ public class ServerBogieCar : MonoBehaviour {
 	void activateBonus()
 	{
 		//codice che attiva il bonus acquisito sul veicolo
-		serverGameManager.getRaceManager().getBonus().StartEffect();
+		bogieCar.getBonus().StartEffect();
 		networkView.RPC("hasBonus", serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), false, "");
 	}
 
 	[RPC]
-	void reduceMalus()
+	void reduceMalus(string malusName)
 	{
-		//codice che indica che il bottone per ridurre gli effetti di un malus è stato premuto
-		//più pressioni di tale bottone in un arco di tempo determinano una migliore riduzione.
+		bogieCar.malusReduction(malusName);
 	}
 
 	//RPC chiamate per aggiornare lo stato del client riguardo la situazione bonus/malus
@@ -166,7 +218,7 @@ public class ServerBogieCar : MonoBehaviour {
 	}
 	
 	[RPC]
-	void hasMalus(bool hasMalus)
+	void hasMalus(bool hasMalus, string malusName)
 	{
 	}
 }

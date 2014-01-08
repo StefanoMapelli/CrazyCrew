@@ -30,7 +30,7 @@ public class AICarScript : MonoBehaviour {
 
 	void GetPath()
 	{
-		pathGroup=GameObject.Find("Path");
+		pathGroup=GameObject.Find("_Path");
 		Transform[] pathObjs=pathGroup.GetComponentsInChildren<Transform>();
 		path= new ArrayList();
 		

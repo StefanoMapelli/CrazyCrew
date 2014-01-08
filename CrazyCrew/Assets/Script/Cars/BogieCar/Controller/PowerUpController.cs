@@ -11,6 +11,7 @@ public class PowerUpController : MonoBehaviour {
 	private bool hasBonus = false;
 	private string bonusName;
 	private bool hasMalus = false;
+	private string malusName;
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +49,16 @@ public class PowerUpController : MonoBehaviour {
 		this.hasMalus = hasMalus;
 	}
 
+	public void setMalusName(string name)
+	{
+		malusName = name;
+	}
+	
+	public string getMalusName()
+	{
+		return malusName;
+	}
+
 	public void updateBonusLabel()
 	{
 		if(role == "Lever1")
@@ -63,6 +74,21 @@ public class PowerUpController : MonoBehaviour {
 		}
 	}
 
+	public void updateMalusLabel()
+	{
+		if(role == "Lever2")
+		{
+			if(hasMalus)
+			{
+				text.text = "Reduce "+malusName;
+			}
+			else
+			{
+				text.text = "Reduce malus effects";
+			}
+		}
+	}
+	
 	void OnMouseDown()
 	{
 		if(role == "Lever1" && hasBonus)
@@ -74,7 +100,7 @@ public class PowerUpController : MonoBehaviour {
 		{
 			if(role == "Lever2" && hasMalus)
 			{
-				networkView.RPC("reduceMalus", RPCMode.Server);
+				networkView.RPC("reduceMalus", RPCMode.Server, malusName);
 				Debug.Log("Sono: "+role+" e ho premuto il PowerUpButton");
 			}
 		}

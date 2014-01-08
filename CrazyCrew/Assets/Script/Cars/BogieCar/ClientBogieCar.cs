@@ -94,7 +94,7 @@ public class ClientBogieCar : MonoBehaviour {
 	}
 	
 	[RPC]
-	void reduceMalus()
+	void reduceMalus(string malusName)
 	{
 	}
 
@@ -107,8 +107,10 @@ public class ClientBogieCar : MonoBehaviour {
 	}
 
 	[RPC]
-	void hasMalus(bool hasMalus)
+	void hasMalus(bool hasMalus, string malusName)
 	{
 		powerUpController.setHasMalus(hasMalus);
+		powerUpController.setMalusName(malusName);
+		powerUpController.updateMalusLabel();
 	}
 }

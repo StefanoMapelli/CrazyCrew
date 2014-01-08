@@ -10,10 +10,6 @@ public class RaceManager : MonoBehaviour {
 	public delegate void RaceFinishEventHandler(object sender, EventArgs e);
 	public event EventHandler RaceFinish;
 
-	//evento aquisizione power-up
-	public delegate void PowerUpEventHandler(object sender, EventArgs e);
-	public event EventHandler PowerUp;
-
 	//info
 	private TextMesh infoText;
 
@@ -30,9 +26,6 @@ public class RaceManager : MonoBehaviour {
 	public GameObject finalTime;
 	private bool isFinish = false;
 
-	//bonus acquisito
-	private Bonus bonusAcquired;
-
 	// Use this for initialization
 	void Start () {
 		//CountDown
@@ -42,11 +35,6 @@ public class RaceManager : MonoBehaviour {
 	protected virtual void OnRaceFinish(EventArgs e)
 	{
 		RaceFinish(this,e);
-	}
-
-	protected virtual void OnPowerUpAcquired(EventArgs e)
-	{
-		PowerUp(this, e);
 	}
 
 	public void RestartRace () {
@@ -62,7 +50,7 @@ public class RaceManager : MonoBehaviour {
 	/// <returns></returns>
 	private IEnumerator StartGame()
 	{
-		bogieCarMovement = (BogieCarMovement) GameObject.Find("BogieCarModel").GetComponent("BogieCarMovement");
+		bogieCarMovement = (BogieCarMovement) GameObject.Find("_BogieCarModel").GetComponent("BogieCarMovement");
 		infoText =  (TextMesh) (GameObject.Find("InfoText").GetComponent("TextMesh"));
 		infoText.text="";
 
@@ -128,42 +116,5 @@ public class RaceManager : MonoBehaviour {
 	public void bonusTime(int bonus)
 	{
 		timer = timer.Subtract(new TimeSpan(0,0,bonus));
-	}
-
-	public void setBonus()
-	{
-		int powerUpId = UnityEngine.Random.Range(1,5);
-		switch(powerUpId)
-		{
-			case 1:
-			{
-				bonusAcquired = new BonusMissile();
-				break;
-			}
-			
-			case 2:
-			{
-				bonusAcquired = new BonusPoop();
-				break;
-			}
-			
-			case 3:
-			{
-				bogieCarMovement.bonusTime();
-				break;
-			}
-			
-			case 4:
-			{
-				bonusAcquired = new BonusSpeed();
-				break;	
-			}
-		}
-		OnPowerUpAcquired(EventArgs.Empty);
-	}
-
-	public Bonus getBonus()
-	{
-		return bonusAcquired;
 	}
 }
