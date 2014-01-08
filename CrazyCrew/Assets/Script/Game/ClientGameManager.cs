@@ -198,14 +198,7 @@ public class ClientGameManager : MonoBehaviour {
 
 	[RPC]
 	void restartGame() {
-
+		networkView.RPC("clientPause",RPCMode.Server, false);
 		GUIMenusClient.showEndMenu(false);
-		/*
-		GUIMenusClient.showPauseButton(true);
-		if (role == "Lever1" || role == "Lever2")
-			GUIMenusClient.showLever(true);
-		else if (role == "Steer")
-			GUIMenusClient.showSteer(true);
-	*/
 	}
 }

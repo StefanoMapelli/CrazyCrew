@@ -27,6 +27,8 @@ public class PowerUpController : MonoBehaviour {
 	public void setRole(string role)
 	{
 		this.role = role;
+		updateBonusLabel();
+		updateMalusLabel();
 	}
 
 	public void setBonusName(string name)

@@ -203,10 +203,12 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void Steer(float steerPercent)
 	{
+		Debug.Log(steerPercent);
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
 		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
 
 		currentSteerAngle = (currentSteerAngle*steerPercent) + malusSteerRotation;
+
 		
 		WheelFL.steerAngle = currentSteerAngle;
 		WheelFR.steerAngle = currentSteerAngle;
@@ -288,12 +290,16 @@ public class BogieCarMovement : MonoBehaviour {
 						case 1:
 						{
 							//effetto fango su schermo
+							serverBogieCar.malusEnded();
+							malusActive = false;
 							break;
 						}
 							
 						case 2:
 						{
 							//effetto rallentamento
+							serverBogieCar.malusEnded();
+							malusActive = false;
 							break;
 						}
 
@@ -367,7 +373,7 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator MalusSteerFailure()
 	{
 		infoText.text="STEER FAILURE!!";
-		malusSteerRotation = UnityEngine.Random.Range(3,7);
+		malusSteerRotation = UnityEngine.Random.Range(3,5);
 
 		if(UnityEngine.Random.Range(1,2) == 1)
 		{

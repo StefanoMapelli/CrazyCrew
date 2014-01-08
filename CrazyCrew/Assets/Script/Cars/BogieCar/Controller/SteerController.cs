@@ -20,7 +20,7 @@ public class SteerController : MonoBehaviour {
 	void OnMouseDrag() {
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit = new RaycastHit();
-		if (Physics.Raycast (ray, out hit, 1f)) {
+		if (Physics.Raycast (ray, out hit, 100f)) {
 			if (hit.collider.gameObject.name == "LeftSteer") {
 				i += Time.deltaTime*rate;
 				steerRotation = Mathf.Lerp (steerRotation,-1f,i);

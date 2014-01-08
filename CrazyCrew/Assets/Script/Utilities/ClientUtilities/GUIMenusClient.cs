@@ -182,7 +182,7 @@ public static class GUIMenusClient {
 		
 		((MeshRenderer) powerUpLabel.GetComponent("MeshRenderer")).enabled = enabled;
 
-		if(role == "Lever1")
+	/*	if(role == "Lever1")
 		{
 			((TextMesh) powerUpLabel.GetComponent("TextMesh")).text = "Activate bonus";
 		}
@@ -193,7 +193,7 @@ public static class GUIMenusClient {
 				//questa label verrà aggiornata quando il giocatore deve azionare il bottone per rimuovere un malus, per es. "Pulisci lo schermo dal fango!"
 				((TextMesh) powerUpLabel.GetComponent("TextMesh")).text = "Reduce malus effects";
 			}
-		}
+		}*/
 	}
 
 	public static void showServerList(bool enabled) 
