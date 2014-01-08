@@ -290,7 +290,6 @@ public class AICarScript : MonoBehaviour {
 	void OnCollisionEnter(Collision c)
 	{
 		Debug.Log("Collision");
-		//rigidbody.AddForce(-transform.up*20);
 	}
 
 
