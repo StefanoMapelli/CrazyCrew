@@ -289,10 +289,11 @@ public class AICarScript : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
-		Debug.Log("Collision");
-		if(c.collider.name.Equals("Missile"))
+		Debug.Log("Collision with:       " + c.collider.name);
+		if(c.collider.name.Equals("Missile(Clone)"))
 		{
-			MissileEffect();
+			Debug.Log("Missile mi ha colpito ");
+			StartCoroutine(MissileEffect());
 		}
 	}
 
@@ -322,11 +323,13 @@ public class AICarScript : MonoBehaviour {
 		}
 	}
 
-	void MissileEffect()
+	IEnumerator MissileEffect()
 	{
 		wheelTraction.brakeTorque=2000;
 		wheelTraction.motorTorque=0;
-		rigidbody.AddExplosionForce(10,transform.position,5);
+		yield return new WaitForSeconds(1);
+		rigidbody.AddExplosionForce(100,transform.position,10);
+		wheelTraction.brakeTorque=0;
 	}
 	
 
