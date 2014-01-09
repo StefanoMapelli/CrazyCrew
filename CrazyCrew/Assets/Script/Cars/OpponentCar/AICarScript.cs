@@ -289,7 +289,6 @@ public class AICarScript : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
-		Debug.Log("Collision with:       " + c.collider.name);
 		if(c.collider.name.Equals("Missile(Clone)"))
 		{
 			Debug.Log("Missile mi ha colpito ");
@@ -328,7 +327,7 @@ public class AICarScript : MonoBehaviour {
 		wheelTraction.brakeTorque=2000;
 		wheelTraction.motorTorque=0;
 		yield return new WaitForSeconds(1);
-		rigidbody.AddExplosionForce(100,transform.position,10);
+		rigidbody.AddForce(new Vector3(0,10,0));
 		wheelTraction.brakeTorque=0;
 	}
 	

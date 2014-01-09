@@ -94,7 +94,7 @@ public class RaceManager : MonoBehaviour {
 		infoText.text="";
 		timerText.text="";
 		((TextMesh)finalTime.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", timer.Minutes, timer.Seconds, timer.Milliseconds);
-		((CarCamera)GameObject.Find("Camera").GetComponent("CarCamera")).cameraOnFinishMenu();
+		((CarCamera)GameObject.Find("_Camera").GetComponent("CarCamera")).cameraOnFinishMenu();
 	}
 
 	// Update is called once per frame

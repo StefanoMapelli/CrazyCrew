@@ -20,7 +20,7 @@ public class CarCamera : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 
-		if(!finishMenu)
+		/*if(!finishMenu)
 		{
 			float wantedAngle = rotationVector.y;
 			float wantedHeight = car.position.y+height;
@@ -34,13 +34,13 @@ public class CarCamera : MonoBehaviour {
 			transform.position-=currentRotation*Vector3.forward*distance;
 			transform.position=new Vector3(transform.position.x,myHeight,transform.position.z);
 			transform.LookAt(car);
-		}
+		}*/
 	
 	}
 
 	void FixedUpdate()
 	{
-		if(!finishMenu)
+		/*if(!finishMenu)
 		{
 			Vector3 localVelocity = car.InverseTransformDirection(car.rigidbody.velocity);
 			if(localVelocity.x<-0.5f){
@@ -53,7 +53,7 @@ public class CarCamera : MonoBehaviour {
 			
 			float acc= car.rigidbody.velocity.magnitude;
 			camera.fieldOfView = defaultFOV+acc*zoomRacio;
-		}
+		}*/
 		
 	}
 
@@ -61,7 +61,7 @@ public class CarCamera : MonoBehaviour {
 	{
 		finishMenu=true;
 		transform.position=new Vector3(14.4843f,-13.1f,110f);
-		transform.rotation=new Quaternion(0,0,0,0);
+		transform.rotation=new Quaternion(0,90,0,0);
 
 	}
 
