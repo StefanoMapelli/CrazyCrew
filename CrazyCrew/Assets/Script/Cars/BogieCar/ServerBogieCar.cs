@@ -160,8 +160,6 @@ public class ServerBogieCar : MonoBehaviour {
 	[RPC]
 	void rotateSteer(float steerRotation) 
 	{
-		Debug.Log("Rotate angle recived: "+steerRotation);
-
 		bogieCar.Steer(steerRotation);
 	}
 

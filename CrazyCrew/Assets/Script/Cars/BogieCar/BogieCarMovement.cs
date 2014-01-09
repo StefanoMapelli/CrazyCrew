@@ -141,7 +141,6 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			if(currentSpeed>0)
 			{
-				Debug.Log ("dec" + decelerationSpeed);
 
 				WheelTraction.motorTorque = 0;
 				WheelTraction.brakeTorque = -decelerationSpeed;
@@ -170,11 +169,9 @@ public class BogieCarMovement : MonoBehaviour {
 	/// <param name="forcePercent">Force percent è compreso tra 0 e 1.</param>
 	public void LeverDown(float forcePercent)
 	{
-		Debug.Log("Lever  ");
 		if(currentSpeed<topSpeed)
 		{
 			WheelTraction.motorTorque += forcePercent*torqueMax;
-			Debug.Log("Lever  "+forcePercent*torqueMax);
 			StartCoroutine (StopTorque(forcePercent*torqueMax));
 		}
 		else
@@ -203,7 +200,6 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void Steer(float steerPercent)
 	{
-		Debug.Log(steerPercent);
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
 		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
 
@@ -328,6 +324,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void bonusSpeed()
 	{
+		Debug.Log ("Turbo attivato");
 		StartCoroutine(BonusSpeed());
 	}
 
@@ -335,7 +332,7 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		infoText.text="TURBOOOOOO";
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(2);
 		StartCoroutine (StopTorque(torqueMax*speedMultiplierBonus));
 		infoText.text="";
 	}
@@ -356,7 +353,7 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		reductionCounter++;
 
-		if(reductionCounter % 10 == 0)
+		if(reductionCounter % 3 == 0)
 		{
 			malusDuration--;
 			StartCoroutine(MalusReductionNotify());

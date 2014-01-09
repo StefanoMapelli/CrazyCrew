@@ -290,6 +290,10 @@ public class AICarScript : MonoBehaviour {
 	void OnCollisionEnter(Collision c)
 	{
 		Debug.Log("Collision");
+		if(c.collider.name.Equals("Missile"))
+		{
+			MissileEffect();
+		}
 	}
 
 
@@ -315,9 +319,15 @@ public class AICarScript : MonoBehaviour {
 		if(!info.collider.tag.Equals("Car"))
 		{
 			blocked++;
-
 		}
 	}
 
+	void MissileEffect()
+	{
+		wheelTraction.brakeTorque=2000;
+		wheelTraction.motorTorque=0;
+		rigidbody.AddExplosionForce(10,transform.position,5);
+	}
+	
 
 }
