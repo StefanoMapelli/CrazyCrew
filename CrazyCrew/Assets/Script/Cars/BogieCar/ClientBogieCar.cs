@@ -107,6 +107,10 @@ public class ClientBogieCar : MonoBehaviour {
 	{
 		powerUpController.setHasBonus(hasBonus);
 		powerUpController.setBonusName(bonusName);
+
+		if(hasBonus)
+			powerUpController.setVibration();
+
 		powerUpController.updateBonusLabel();
 	}
 
@@ -115,6 +119,10 @@ public class ClientBogieCar : MonoBehaviour {
 	{
 		powerUpController.setHasMalus(hasMalus);
 		powerUpController.setMalusName(malusName);
+
+		if(hasMalus)
+			powerUpController.setVibration();
+
 		powerUpController.updateMalusLabel();
 	}
 }

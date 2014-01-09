@@ -90,7 +90,12 @@ public class PowerUpController : MonoBehaviour {
 			}
 		}
 	}
-	
+
+	public void setVibration()
+	{
+		Handheld.Vibrate();
+	}
+
 	void OnMouseDown()
 	{
 		if(role == "Lever1" && hasBonus)
