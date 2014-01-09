@@ -93,7 +93,7 @@ public class PowerUpController : MonoBehaviour {
 
 	public void setVibration()
 	{
-		Handheld.Vibrate();
+		//Handheld.Vibrate();
 	}
 
 	void OnMouseDown()

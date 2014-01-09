@@ -63,7 +63,6 @@ public class BogieCarMovement : MonoBehaviour {
 	private int malusDuration;
 
 	private int malusSteerRotation=0;
-	public float malusSlowdownMultiplier;
 
 	public TextMesh infoText;
 	
@@ -230,6 +229,7 @@ public class BogieCarMovement : MonoBehaviour {
 		if(other.gameObject.name == "BonusObject")
 		{
 			int powerUpId = UnityEngine.Random.Range(1,5);
+			//powerUpId=4;
 			serverBogieCar.bonusComunication(powerUpId);
 			switch(powerUpId)
 			{
@@ -282,7 +282,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 						int powerUpId = UnityEngine.Random.Range(1,5);
 
-						powerUpId=2;
+						//powerUpId=2;
 						serverBogieCar.malusComunication(powerUpId);
 						switch(powerUpId)
 						{
@@ -333,7 +333,7 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		infoText.text="TURBOOOOOO";
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(0.5f);
 		StartCoroutine (StopTorque(torqueMax*speedMultiplierBonus));
 		infoText.text="";
 	}
@@ -357,6 +357,11 @@ public class BogieCarMovement : MonoBehaviour {
 		if(reductionCounter % 3 == 0)
 		{
 			malusDuration--;
+
+			if(malusName == "SLOWDOWN")
+				WheelTraction.motorTorque = torqueMax*0.05f;
+
+
 			StartCoroutine(MalusReductionNotify());
 		}
 	}
@@ -394,15 +399,16 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator MalusSlowdown()
 	{
 		malusDuration=5;
-		WheelTraction.brakeTorque = -decelerationSpeed*malusSlowdownMultiplier;
+		serverBogieCar.slowDown(true);
+		WheelTraction.motorTorque = -torqueMax*0.2f;
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			infoText.text="UNEXPECTED SLOWDOWN! Press the button to reduce it!";
+			infoText.text="LEVER FAILURE! Press the button to reduce it!";
 			yield return new WaitForSeconds(1);
 		}
-		WheelTraction.brakeTorque = 0;
 
+		serverBogieCar.slowDown(false);
 		serverBogieCar.malusEnded();
 		malusDuration=5;
 		infoText.text="";

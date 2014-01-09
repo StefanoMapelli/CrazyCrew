@@ -9,6 +9,7 @@ public class LeverController : MonoBehaviour {
 	private NetworkView networkView;
 	private string role;	
 	private bool blocked;
+	private bool malusBlocked = false;
 	private TextMesh text;
 
 	private float sup;
@@ -28,6 +29,21 @@ public class LeverController : MonoBehaviour {
 	public void setRole(string role)
 	{
 		this.role = role;
+	}
+
+	public void setMalusBlocked(bool blocked)
+	{
+		this.malusBlocked = blocked;
+		if(blocked)
+		{
+			text.text = "Lever failure!!";
+			text.color = Color.yellow;
+		}
+	}
+
+	public bool getMalusBlocked()
+	{
+		return this.malusBlocked;
 	}
 
 	public void setBorder() {
@@ -81,8 +97,14 @@ public class LeverController : MonoBehaviour {
 		}
 		else {
 			blocked = true;
+
 			text.text = "Wait...";
 			text.color = Color.red;
 		}
+	}
+	
+	public bool getBlocked()
+	{
+		return blocked;
 	}
 }

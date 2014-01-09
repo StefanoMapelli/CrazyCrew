@@ -125,4 +125,28 @@ public class ClientBogieCar : MonoBehaviour {
 
 		powerUpController.updateMalusLabel();
 	}
+
+	[RPC]
+	void slowDownMalus(bool slowDown)
+	{
+		if(clientGameManager.getRole() == "Lever1" || clientGameManager.getRole() == "Lever2")
+		{
+			if(slowDown)
+			{
+				if(!leverController.getBlocked())
+				{
+					leverController.setBlocked(true);
+					leverController.setMalusBlocked(true);
+				}
+			}
+			else
+			{
+				if(leverController.getMalusBlocked())
+				{
+					leverController.setBlocked(false);
+					leverController.setMalusBlocked(false);
+				}
+			}
+		}
+	}
 }
