@@ -62,7 +62,8 @@ public class BogieCarMovement : MonoBehaviour {
 	private int reductionCounter = 0;
 	private int malusDuration;
 
-	private int malusSteerRotation = 0;
+	private int malusSteerRotation=0;
+	public float malusSlowdownMultiplier;
 
 	public TextMesh infoText;
 	
@@ -280,6 +281,8 @@ public class BogieCarMovement : MonoBehaviour {
 						malusActive = true;
 
 						int powerUpId = UnityEngine.Random.Range(1,5);
+
+						powerUpId=2;
 						serverBogieCar.malusComunication(powerUpId);
 						switch(powerUpId)
 						{
@@ -293,9 +296,7 @@ public class BogieCarMovement : MonoBehaviour {
 							
 						case 2:
 						{
-							//effetto rallentamento
-							serverBogieCar.malusEnded();
-							malusActive = false;
+							StartCoroutine(MalusSlowdown());
 							break;
 						}
 
@@ -369,25 +370,41 @@ public class BogieCarMovement : MonoBehaviour {
 
 	IEnumerator MalusSteerFailure()
 	{
-		infoText.text="STEER FAILURE!!";
-		malusSteerRotation = UnityEngine.Random.Range(3,5);
+		malusDuration=5;
+		malusSteerRotation=6;
 
 		if(UnityEngine.Random.Range(1,2) == 1)
 		{
 			malusSteerRotation = -malusSteerRotation;
 		}
-		Debug.Log("Sterzo deviato di: "+malusSteerRotation);
-		malusDuration=5;
-
+	
 		for(int i=0;i<malusDuration;i++)
 		{
-			infoText.text="Put some oil bro!";
+			infoText.text="STEER FAILURE! Press the button to reduce it!";
 			yield return new WaitForSeconds(1);
 		}
 
 		serverBogieCar.malusEnded();
 		malusDuration=5;
 		malusSteerRotation=0;
+		infoText.text="";
+		malusActive = false;
+	}
+
+	IEnumerator MalusSlowdown()
+	{
+		malusDuration=5;
+		WheelTraction.brakeTorque = -decelerationSpeed*malusSlowdownMultiplier;
+
+		for(int i=0;i<malusDuration;i++)
+		{
+			infoText.text="UNEXPECTED SLOWDOWN! Press the button to reduce it!";
+			yield return new WaitForSeconds(1);
+		}
+		WheelTraction.brakeTorque = 0;
+
+		serverBogieCar.malusEnded();
+		malusDuration=5;
 		infoText.text="";
 		malusActive = false;
 	}
