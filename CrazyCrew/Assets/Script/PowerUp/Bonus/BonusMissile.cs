@@ -6,7 +6,7 @@ public class BonusMissile : MonoBehaviour, Bonus
 
 	private GameObject car;
 	float missileForwardOffset = 3;
-	Vector3 height = new Vector3(0,1,0);
+	Vector3 height = new Vector3(0,2,0);
 
 	public BonusMissile()
 	{
