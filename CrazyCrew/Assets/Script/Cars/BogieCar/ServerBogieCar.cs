@@ -108,6 +108,11 @@ public class ServerBogieCar : MonoBehaviour {
 		networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), false, "");
 	}
 
+	public void slowDown(bool slowDown)
+	{
+		networkView.RPC ("slowDownMalus",RPCMode.Others, slowDown);
+	}
+
 	[RPC]
 	void assignLever1()
 	{
@@ -217,6 +222,11 @@ public class ServerBogieCar : MonoBehaviour {
 	
 	[RPC]
 	void hasMalus(bool hasMalus, string malusName)
+	{
+	}
+
+	[RPC]
+	void slowDownMalus(bool slowDown)
 	{
 	}
 }
