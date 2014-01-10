@@ -292,6 +292,7 @@ public class ServerGameManager : MonoBehaviour {
 	public void restartGame() {
 		networkView.RPC ("restartGame",RPCMode.Others);
 		Debug.Log("restart la gara");
+		pause = false;
 		Application.LoadLevel("restartLevel");
 	}
 

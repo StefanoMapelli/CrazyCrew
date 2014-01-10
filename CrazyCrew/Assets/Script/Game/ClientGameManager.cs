@@ -199,7 +199,8 @@ public class ClientGameManager : MonoBehaviour {
 
 	[RPC]
 	void restartGame() {
-		networkView.RPC("clientPause",RPCMode.Server, false);
+		//networkView.RPC("clientPause",RPCMode.Server, false);
+		GUIMenusClient.pauseMenu(false);
 		GUIMenusClient.showEndMenu(false);
 	}
 }
