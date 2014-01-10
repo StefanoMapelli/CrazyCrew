@@ -61,19 +61,19 @@ public class ServerBogieCar : MonoBehaviour {
 		{
 		case 1:
 		{
-			networkView.RPC ("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), true, "MISSILE");
+			networkView.RPC ("hasBonus",RPCMode.Others, true, "MISSILE");
 			break;
 		}
 			
 		case 2:
 		{
-			networkView.RPC ("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), true, "POOP");
+			networkView.RPC ("hasBonus",RPCMode.Others, true, "POOP");
 			break;
 		}
 
 		case 4:
 		{
-			networkView.RPC ("hasBonus",serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), true, "SPEED");
+			networkView.RPC ("hasBonus",RPCMode.Others, true, "SPEED");
 			break;	
 		}
 		}
@@ -85,19 +85,19 @@ public class ServerBogieCar : MonoBehaviour {
 		{
 		case 1:
 		{
-			networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), true, "MUD");
+			networkView.RPC ("hasMalus", RPCMode.Others, true, "MUD");
 			break;
 		}
 			
 		case 2:
 		{
-			networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), true, "SLOWDOWN");
+			networkView.RPC ("hasMalus",RPCMode.Others, true, "SLOWDOWN");
 			break;
 		}
 			
 		case 4:
 		{
-			networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), true, "STEER FAILURE");
+			networkView.RPC ("hasMalus",RPCMode.Others, true, "STEER FAILURE");
 			break;	
 		}
 		}
@@ -105,7 +105,7 @@ public class ServerBogieCar : MonoBehaviour {
 
 	public void malusEnded()
 	{
-		networkView.RPC ("hasMalus",serverGameManager.getPlayerByRole("Lever2").getNetworkPlayer(), false, "");
+		networkView.RPC ("hasMalus",RPCMode.Others, false, "");
 	}
 
 	public void slowDown(bool slowDown)
@@ -205,7 +205,7 @@ public class ServerBogieCar : MonoBehaviour {
 	{
 		//codice che attiva il bonus acquisito sul veicolo
 		bogieCar.getBonus().StartEffect();
-		networkView.RPC("hasBonus", serverGameManager.getPlayerByRole("Lever1").getNetworkPlayer(), false, "");
+		networkView.RPC("hasBonus", RPCMode.Others, false, "");
 	}
 
 	[RPC]
