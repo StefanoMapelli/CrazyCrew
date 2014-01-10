@@ -24,7 +24,15 @@ public class RaceManager : MonoBehaviour {
 
 	//Menu finale
 	public GameObject finishMenu;
-	public GameObject finalTime;
+	public GameObject time1;
+	public GameObject time2;
+	public GameObject time3;
+	public GameObject time4;
+	public GameObject time5;
+	public GameObject time6;
+
+
+
 	private bool isFinish = false;
 
 	//Opponent car object
@@ -104,14 +112,164 @@ public class RaceManager : MonoBehaviour {
 		isFinish=true;
 		infoText.text="";
 		timerText.text="";
-
-		((TextMesh)finalTime.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", timer.Minutes, timer.Seconds, timer.Milliseconds);
+		ArrayList ranking=Ranking();
+		bool isInRankingText=false;
+		int rank=1;
+		for(int i=0;i<ranking.Count;i++)
+		{
+			if(!isInRankingText)
+			{
+				//se il tempo di bogie car è minore dell'avversario scrivo a video il tempo di bogie car in classifica
+				if(((AICarScript)ranking[i]).finalTime.CompareTo(bogieCarMovement.finalTime)>0)
+				{
+					switch(rank)
+					{
+					case 1: 
+					{
+						((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+						break;
+					}
+					case 2: 
+					{
+						((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+						break;
+					}
+					case 3: 
+					{
+						((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+						break;
+					}
+					case 4: 
+					{
+						((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+						break;
+					}
+					case 5: 
+					{
+						((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+						break;
+					}
+					case 6: 
+					{
+						((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+						break;
+					}
+					}
+					rank++;
+					isInRankingText=true;
+				}
+			}
+			switch(rank)
+			{
+			case 1: 
+			{
+				((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", ((AICarScript)ranking[i]).finalTime.Minutes, ((AICarScript)ranking[i]).finalTime.Seconds, ((AICarScript)ranking[i]).finalTime.Milliseconds);
+				break;
+			}
+			case 2: 
+			{
+				((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", ((AICarScript)ranking[i]).finalTime.Minutes, ((AICarScript)ranking[i]).finalTime.Seconds, ((AICarScript)ranking[i]).finalTime.Milliseconds);
+				break;
+			}
+			case 3: 
+			{
+				((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", ((AICarScript)ranking[i]).finalTime.Minutes, ((AICarScript)ranking[i]).finalTime.Seconds, ((AICarScript)ranking[i]).finalTime.Milliseconds);
+				break;
+			}
+			case 4: 
+			{
+				((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", ((AICarScript)ranking[i]).finalTime.Minutes, ((AICarScript)ranking[i]).finalTime.Seconds, ((AICarScript)ranking[i]).finalTime.Milliseconds);
+				break;
+			}
+			case 5: 
+			{
+				((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", ((AICarScript)ranking[i]).finalTime.Minutes, ((AICarScript)ranking[i]).finalTime.Seconds, ((AICarScript)ranking[i]).finalTime.Milliseconds);
+				break;
+			}
+			case 6: 
+			{
+				((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", ((AICarScript)ranking[i]).finalTime.Minutes, ((AICarScript)ranking[i]).finalTime.Seconds, ((AICarScript)ranking[i]).finalTime.Milliseconds);
+				break;
+			}
+			}
+			rank++;
+		}
+		if(!isInRankingText)
+		{
+			switch(rank)
+			{
+			case 1: 
+			{
+				((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+				((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+				break;
+			}
+			case 2: 
+			{
+				((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+				((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+				break;
+			}
+			case 3: 
+			{
+				((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+				((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+				break;
+			}
+			case 4: 
+			{
+				((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+				((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+				break;
+			}
+			case 5: 
+			{
+				((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+				((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+				break;
+			}
+			case 6: 
+			{
+				((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+				((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+				break;
+			}
+			}
+		}
 		((CarCamera)camera.GetComponent("CarCamera")).cameraOnFinishMenu();
 	}
 
-	public TimeSpan FinishLineOpponentCar()
+	public TimeSpan getFinalTime()
 	{
 		return timer;
+	}
+
+	public ArrayList Ranking()
+	{
+		ArrayList cars=new ArrayList();
+		cars.Add(opponentCar1);
+		cars.Add(opponentCar2);
+		object temp;
+
+		for(int i=0;i<cars.Count;i++)
+		{
+			for(int j=1;i<cars.Count;i++)
+			{
+				if(((AICarScript) cars[j-1]).finalTime.CompareTo(((AICarScript) cars[j]).finalTime)>0)
+				{
+					temp=cars[j];
+					cars[j]=cars[j-1];
+					cars[j-1]=temp;
+				}
+			}
+		}
+		return cars;
 	}
 
 	// Update is called once per frame

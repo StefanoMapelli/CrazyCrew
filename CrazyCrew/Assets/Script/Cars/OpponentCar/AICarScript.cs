@@ -37,7 +37,7 @@ public class AICarScript : MonoBehaviour {
 	public bool raceFinished=false;
 	public bool checkpointPassed=false;
 
-	public TimeSpan finalTime;
+	public TimeSpan finalTime=new TimeSpan(99,99,99);
 
 
 	// Use this for initialization
@@ -316,7 +316,7 @@ public class AICarScript : MonoBehaviour {
 			raceFinished=true;
 			wheelTraction.motorTorque=0;
 			wheelTraction.brakeTorque=50;
-			finalTime=((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).FinishLineOpponentCar();
+			finalTime=((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getFinalTime();
 			Debug.Log(finalTime);
 		}
 		if(other.gameObject.name== "CheckPoint")

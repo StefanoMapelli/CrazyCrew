@@ -65,6 +65,8 @@ public class BogieCarMovement : MonoBehaviour {
 	private int malusSteerRotation=0;
 
 	public TextMesh infoText;
+
+	public TimeSpan finalTime;
 	
 	// Use this for initialization
 	void Start () 
@@ -220,6 +222,7 @@ public class BogieCarMovement : MonoBehaviour {
 			yield return 0;
 			rigidbody.isKinematic=true;
 
+			finalTime=((RaceManager)raceManager.GetComponent ("RaceManager")).getFinalTime();
 			((RaceManager)raceManager.GetComponent ("RaceManager")).FinishLine ();
 		}
 	}
