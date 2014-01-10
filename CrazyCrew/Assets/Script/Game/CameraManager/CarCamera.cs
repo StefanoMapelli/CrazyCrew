@@ -61,7 +61,7 @@ public class CarCamera : MonoBehaviour {
 	{
 		finishMenu=true;
 		transform.position=new Vector3(14.4843f,-13.1f,110f);
-		transform.rotation=new Quaternion(0,90,0,0);
+		transform.rotation.Set(0,90,0,0);
 
 	}
 

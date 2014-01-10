@@ -218,7 +218,7 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			finishRace = true;
 			yield return 0;
-			WheelTraction.brakeTorque=1000;
+			rigidbody.isKinematic=true;
 			((RaceManager)raceManager.GetComponent ("RaceManager")).FinishLine ();
 		}
 	}
