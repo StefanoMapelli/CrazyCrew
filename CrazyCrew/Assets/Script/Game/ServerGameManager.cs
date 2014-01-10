@@ -293,6 +293,8 @@ public class ServerGameManager : MonoBehaviour {
 		networkView.RPC ("restartGame",RPCMode.Others);
 		Debug.Log("restart la gara");
 		pause = false;
+		networkView.RPC ("hasBonus",RPCMode.Others,false,"");
+		networkView.RPC ("hasMalus",RPCMode.Others,false,"");
 		Application.LoadLevel("restartLevel");
 	}
 
