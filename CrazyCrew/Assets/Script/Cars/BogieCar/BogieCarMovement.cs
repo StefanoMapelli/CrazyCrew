@@ -286,7 +286,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 						int powerUpId = UnityEngine.Random.Range(1,5);
 
-						//powerUpId=2;
+						powerUpId=3;
 						serverBogieCar.malusComunication(powerUpId);
 						switch(powerUpId)
 						{

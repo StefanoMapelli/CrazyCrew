@@ -15,16 +15,6 @@ public class RestartButton : MonoBehaviour {
 	void OnMouseDown() {
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		clientGameManager.restart();
-		clientGameManager.setPause(false);
-
-		// eliminate old bonus
-		powerUpController.setHasBonus(false);
-		powerUpController.updateBonusLabel();
-
-		// eliminate old malus
-		powerUpController.setHasMalus(false);
-		powerUpController.updateMalusLabel();
-
 	}
 
 	void OnMouseUp()
