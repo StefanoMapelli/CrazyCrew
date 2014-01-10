@@ -119,7 +119,7 @@ public class ClientGameManager : MonoBehaviour {
 			if(role == "Lever1" || role == "Lever2")
 			{
 				GUIMenusClient.showLever(false);
-				GUIMenusClient.showPowerUpController(false,role);
+				GUIMenusClient.showPowerUpController(false);
 			}
 			else
 			{
@@ -139,7 +139,7 @@ public class ClientGameManager : MonoBehaviour {
 			if(role == "Lever1" || role == "Lever2")
 			{
 				GUIMenusClient.showLever(true);
-				GUIMenusClient.showPowerUpController(true,role);
+				GUIMenusClient.showPowerUpController(true);
 			}
 			else
 			{
@@ -187,6 +187,7 @@ public class ClientGameManager : MonoBehaviour {
 		GUIMenusClient.showLever(false);
 		GUIMenusClient.showSteer(false);
 		GUIMenusClient.showPauseButton(false);
+		GUIMenusClient.showPowerUpController(false);
 		GUIMenusClient.showEndMenu(true);
 	}
 

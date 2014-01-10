@@ -172,7 +172,7 @@ public static class GUIMenusClient {
 		((BoxCollider) rightSteer.GetComponent("BoxCollider")).enabled = enabled;
 	}
 
-	public static void showPowerUpController(bool enabled, string role)
+	public static void showPowerUpController(bool enabled)
 	{
 		GameObject powerUpButton = GameObject.Find ("PowerUpButton");
 		GameObject powerUpLabel = GameObject.Find ("PowerUpLabel");
@@ -181,19 +181,6 @@ public static class GUIMenusClient {
 		((BoxCollider) powerUpButton.GetComponent("BoxCollider")).enabled = enabled;
 		
 		((MeshRenderer) powerUpLabel.GetComponent("MeshRenderer")).enabled = enabled;
-
-	/*	if(role == "Lever1")
-		{
-			((TextMesh) powerUpLabel.GetComponent("TextMesh")).text = "Activate bonus";
-		}
-		else
-		{
-			if(role == "Lever2")
-			{
-				//questa label verrà aggiornata quando il giocatore deve azionare il bottone per rimuovere un malus, per es. "Pulisci lo schermo dal fango!"
-				((TextMesh) powerUpLabel.GetComponent("TextMesh")).text = "Reduce malus effects";
-			}
-		}*/
 	}
 
 	public static void showServerList(bool enabled) 

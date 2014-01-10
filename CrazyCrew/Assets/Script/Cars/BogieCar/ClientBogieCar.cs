@@ -33,7 +33,7 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showLever(true);
 		GUIMenusClient.showPauseButton(true); 
 		GUIMenusClient.showSteer(false);
-		GUIMenusClient.showPowerUpController(true, "Lever1");
+		GUIMenusClient.showPowerUpController(true);
 
 		GUIMenusClient.controllerPositioning();
 	}
@@ -49,7 +49,7 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showLever(true);
 		GUIMenusClient.showPauseButton(true);
 		GUIMenusClient.showSteer(false);
-		GUIMenusClient.showPowerUpController(true, "Lever2");
+		GUIMenusClient.showPowerUpController(true);
 
 		GUIMenusClient.controllerPositioning();
 	}
@@ -66,7 +66,7 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showSteer(true);
 		GUIMenusClient.showPauseButton(true);
 		clientGameManager.setRole("Steer");
-		GUIMenusClient.showPowerUpController(false, "Steer");
+		GUIMenusClient.showPowerUpController(false);
 
 		GUIMenusClient.showLever(false);
 		GUIMenusClient.positioningSteerPause();
