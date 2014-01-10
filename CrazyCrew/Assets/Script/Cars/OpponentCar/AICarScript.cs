@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class AICarScript : MonoBehaviour {
 
@@ -31,6 +32,12 @@ public class AICarScript : MonoBehaviour {
 	public int blocked=0;
 	public bool retroRequest=false;
 	public int numberOfRetroRequest=0;
+
+	public bool raceStarted=false;
+	public bool raceFinished=false;
+	public bool checkpointPassed=false;
+
+	public TimeSpan finalTime;
 
 
 	// Use this for initialization
@@ -70,14 +77,17 @@ public class AICarScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		GetSteer();
-		Move ();
-		FrontSensor();
-		RetroOnCollision();
-		WheelRotate();
+		if(raceStarted)
+		{
+			GetSteer();
+			Move ();
+			FrontSensor();
+			RetroOnCollision();
+			WheelRotate();
 
-		currentSpeed= 2*22/7*wheelFR.radius*wheelFR.rpm*60/1000;
-		currentSpeed=Mathf.Round(currentSpeed);
+			currentSpeed= 2*22/7*wheelFR.radius*wheelFR.rpm*60/1000;
+			currentSpeed=Mathf.Round(currentSpeed);
+		}
 	}
 
 	/// <summary>
@@ -118,17 +128,20 @@ public class AICarScript : MonoBehaviour {
 	/// </summary>
 	void Move()
 	{
-		if(!retroRequest)
+		if(!raceFinished)
 		{
-			if(currentSpeed<=maxSpeed)
-				wheelTraction.motorTorque=maxTorque;
+			if(!retroRequest)
+			{
+				if(currentSpeed<=maxSpeed)
+					wheelTraction.motorTorque=maxTorque;
+				else
+					wheelTraction.motorTorque=0;
+			}
 			else
-				wheelTraction.motorTorque=0;
-		}
-		else
-		{
-			Debug.Log("Vai indietro");
-			wheelTraction.motorTorque=-20;
+			{
+				Debug.Log("Vai indietro");
+				wheelTraction.motorTorque=-20;
+			}
 		}
 	}
 	
@@ -137,7 +150,6 @@ public class AICarScript : MonoBehaviour {
 	/// </summary>
 	void FrontSensor()
 	{
-		float newSteer=0;
 		RaycastHit infoF=new RaycastHit();
 		RaycastHit infoFR=new RaycastHit();
 		RaycastHit infoFL=new RaycastHit();
@@ -196,7 +208,7 @@ public class AICarScript : MonoBehaviour {
 					else
 					{
 						//curvo random a destra o a sinistra perchè l'ostacolo è esattamente di fronte a noi
-						if(Random.Range(-1,1)>=0)
+						if(UnityEngine.Random.Range(-1,1)>=0)
 						{
 							wheelFL.steerAngle=-maxSteer;
 							wheelFR.steerAngle=-maxSteer;
@@ -294,6 +306,23 @@ public class AICarScript : MonoBehaviour {
 			Debug.Log("Missile mi ha colpito ");
 			StartCoroutine(MissileEffect());
 		}
+
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.gameObject.name == "FinishLine" && checkpointPassed)
+		{
+			raceFinished=true;
+			wheelTraction.motorTorque=0;
+			wheelTraction.brakeTorque=50;
+			finalTime=((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).FinishLineOpponentCar();
+			Debug.Log(finalTime);
+		}
+		if(other.gameObject.name== "CheckPoint")
+		{
+			checkpointPassed=!checkpointPassed;
+		}
 	}
 
 
@@ -329,6 +358,11 @@ public class AICarScript : MonoBehaviour {
 		yield return new WaitForSeconds(1);
 		rigidbody.AddForce(new Vector3(0,10,0));
 		wheelTraction.brakeTorque=0;
+	}
+
+	public void setRaceStarted(bool isStarted)
+	{
+		raceStarted=isStarted;
 	}
 	
 

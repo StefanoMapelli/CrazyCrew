@@ -15,14 +15,15 @@ public class CarCamera : MonoBehaviour {
 	private bool finishMenu=false;
 	
 	void Start () {
+		car=GameObject.Find("_BogieCarModel").GetComponent<Transform>();
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 
-		/*if(!finishMenu)
+		if(!finishMenu)
 		{
-			float wantedAngle = rotationVector.y;
+			/*float wantedAngle = rotationVector.y;
 			float wantedHeight = car.position.y+height;
 			float myAngle=transform.eulerAngles.y;
 			float myHeight=transform.position.y;
@@ -33,8 +34,12 @@ public class CarCamera : MonoBehaviour {
 			transform.position=car.position;
 			transform.position-=currentRotation*Vector3.forward*distance;
 			transform.position=new Vector3(transform.position.x,myHeight,transform.position.z);
+			transform.LookAt(car);*/
+
+			transform.position=new Vector3(car.position.x,car.position.y,car.position.z)-5*car.right + 2*car.up;
 			transform.LookAt(car);
-		}*/
+
+		}
 	
 	}
 
@@ -61,7 +66,7 @@ public class CarCamera : MonoBehaviour {
 	{
 		finishMenu=true;
 		transform.position=new Vector3(14.4843f,-13.1f,110f);
-		transform.rotation.Set(0,90,0,0);
+		transform.rotation=new Quaternion(0,0,0,0);
 
 	}
 

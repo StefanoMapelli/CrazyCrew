@@ -27,6 +27,10 @@ public class RaceManager : MonoBehaviour {
 	public GameObject finalTime;
 	private bool isFinish = false;
 
+	//Opponent car object
+	private AICarScript opponentCar1;
+	private AICarScript opponentCar2;
+
 	// Use this for initialization
 	void Start () {
 		//CountDown
@@ -75,6 +79,12 @@ public class RaceManager : MonoBehaviour {
 		serverBogieCar.assignRoles();
 		// just an attempt
 
+		opponentCar1= (AICarScript) GameObject.Find("_OpponentCarModel1").GetComponent("AICarScript");
+		opponentCar2= (AICarScript) GameObject.Find("_OpponentCarModel2").GetComponent("AICarScript");
+
+		opponentCar1.setRaceStarted(true);
+		opponentCar2.setRaceStarted(true);
+
 		yield return new WaitForSeconds(1);
 		infoText.text = "";
 	}
@@ -94,8 +104,14 @@ public class RaceManager : MonoBehaviour {
 		isFinish=true;
 		infoText.text="";
 		timerText.text="";
+
 		((TextMesh)finalTime.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", timer.Minutes, timer.Seconds, timer.Milliseconds);
 		((CarCamera)camera.GetComponent("CarCamera")).cameraOnFinishMenu();
+	}
+
+	public TimeSpan FinishLineOpponentCar()
+	{
+		return timer;
 	}
 
 	// Update is called once per frame
