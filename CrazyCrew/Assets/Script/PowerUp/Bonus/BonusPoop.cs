@@ -3,8 +3,17 @@ using System.Collections;
 
 public class BonusPoop : MonoBehaviour, Bonus 
 {
-	public void StartEffect ()
+	private GameObject car;
+	private float poopDisplacement = 5f;
+	
+	public BonusPoop()
 	{
-		//ancora da pensare
+		car = GameObject.Find("_BogieCarModel");
+	}
+	
+	public void StartEffect () 
+	{
+		UnityEngine.Object poop = Resources.Load("Prefab/Poop");
+		GameObject poopObject= GameObject.Instantiate(poop,car.transform.position-car.transform.right*poopDisplacement, car.transform.rotation) as GameObject;
 	}
 }
