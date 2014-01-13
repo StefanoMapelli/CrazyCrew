@@ -15,7 +15,7 @@ public class CarCamera : MonoBehaviour {
 	private bool finishMenu=false;
 	
 	void Start () {
-		car=GameObject.Find("_BogieCarModel").GetComponent<Transform>();
+		//car=GameObject.Find("_BogieCarModel").GetComponent<Transform>();
 	}
 	
 	// Update is called once per frame
@@ -58,8 +58,8 @@ public class CarCamera : MonoBehaviour {
 			
 			float acc= car.rigidbody.velocity.magnitude;
 			camera.fieldOfView = defaultFOV+acc*zoomRacio;
-		}*/
-		
+		}
+		*/
 	}
 
 	public void cameraOnFinishMenu()

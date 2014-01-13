@@ -37,7 +37,7 @@ public class AICarScript : MonoBehaviour {
 	public bool raceFinished=false;
 	public bool checkpointPassed=false;
 
-	public TimeSpan finalTime=new TimeSpan(99,99,99);
+	public TimeSpan finalTime=new TimeSpan(0,0,0);
 
 
 	// Use this for initialization
@@ -333,7 +333,7 @@ public class AICarScript : MonoBehaviour {
 	/// <param name="info">Info.</param>
 	bool ignoredCollision(RaycastHit info)
 	{
-		if(!info.collider.name.Equals("CheckPoint")&& !info.collider.name.Equals("PowerUpObject") && !info.collider.name.Equals("FinishLine"))
+		if(!info.collider.name.Equals("CheckPoint")&& !info.collider.name.Equals("PowerUpObject") && !info.collider.name.Equals("StartLine") && !info.collider.name.Equals("FinishLine"))
 		{
 			return true;
 		}

@@ -259,6 +259,19 @@ public class RaceManager : MonoBehaviour {
 
 		for(int i=0;i<cars.Count;i++)
 		{
+			if(((AICarScript) cars[i]).finalTime.CompareTo(new TimeSpan(0,0,0))==0)
+			{
+				int h=0;
+				int m=0;
+				int s=UnityEngine.Random.Range(5,60);
+				int ms=UnityEngine.Random.Range(0,99);
+
+				((AICarScript) cars[i]).finalTime=bogieCarMovement.finalTime.Add(new TimeSpan(0,h,m,s,ms));
+			}
+		}
+
+		for(int i=0;i<cars.Count;i++)
+		{
 			for(int j=1;i<cars.Count;i++)
 			{
 				if(((AICarScript) cars[j-1]).finalTime.CompareTo(((AICarScript) cars[j]).finalTime)>0)
