@@ -32,7 +32,6 @@ public class AICarScript : MonoBehaviour {
 	public int blocked=0;
 	public bool retroRequest=false;
 	public int numberOfRetroRequest=0;
-
 	public bool raceStarted=false;
 	public bool raceFinished=false;
 	public bool checkpointPassed=false;
@@ -44,6 +43,7 @@ public class AICarScript : MonoBehaviour {
 	void Start () {
 		GetPath();
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
+		StartCoroutine(SetMaxSpeedOnPath());
 	}
 
 	void GetPath()
@@ -264,6 +264,35 @@ public class AICarScript : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	IEnumerator SetMaxSpeedOnPath()
+	{
+		while(!raceFinished)
+		{
+			if(isPointOnCurve(currentPathObject))
+			{
+				maxSpeed=UnityEngine.Random.Range(100,130);
+				yield return new WaitForSeconds(2);
+			}
+			else
+			{
+				maxSpeed=UnityEngine.Random.Range(130,160);
+				yield return new WaitForSeconds(2);
+			}
+		}
+	}
+
+	bool isPointOnCurve(int i)
+	{
+		if(((i>=17) && (i<=29)) || ((i>=33) && (i<=45)) || ((i>=50) && (i<=67)) || ((i>=79) && (i<=81)) || ((i>=98) && (i<=107)) || ((i>=114) && (i<=127)) || ((i>=138) && (i<=141)) || ((i>=144) && (i<=155)) || ((i>=158) && (i<=176)) || ((i>=187) && (i<=200)) || ((i>=204) && (i<=207)) || ((i>=219) && (i<=230)) || ((i>=242) && (i<=249)) || ((i>=256) && (i<=259)) || ((i>=268) && (i<=276)) || ((i>=290) && (i<=308)))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 
