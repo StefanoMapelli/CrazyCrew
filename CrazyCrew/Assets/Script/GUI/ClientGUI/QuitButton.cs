@@ -3,6 +3,8 @@ using System.Collections;
 
 public class QuitButton : MonoBehaviour {
 
+	public AudioSource buttonSound;
+
 	// Use this for initialization
 	void Start () {
 		/*Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -22,6 +24,6 @@ public class QuitButton : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		buttonSound.Play();
 	}
 }

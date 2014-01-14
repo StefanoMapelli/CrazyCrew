@@ -5,6 +5,7 @@ public class RestartButton : MonoBehaviour {
 
 	private ClientGameManager clientGameManager;
 	private PowerUpController powerUpController;
+	public AudioSource buttonSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,6 @@ public class RestartButton : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		buttonSound.Play();
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections;
 public class NextButton : MonoBehaviour {
 
 	private ServerList serverList;
+	public AudioSource shiftSound;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,6 @@ public class NextButton : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		shiftSound.Play();
 	}
 }

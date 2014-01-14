@@ -4,6 +4,7 @@ using System.Collections;
 public class ReadyButton : MonoBehaviour {
 
 	private ClientGameManager clientGameManager;
+	public AudioSource readyButton;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +32,7 @@ public class ReadyButton : MonoBehaviour {
 	{
 		//if(((TextMesh)gameObject.GetComponent("TextMesh")).text.EndsWith("?"))
 
-			((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		readyButton.Play();
 	}
 }

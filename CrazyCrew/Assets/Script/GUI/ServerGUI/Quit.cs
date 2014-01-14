@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Quit : MonoBehaviour {
 
+	public AudioSource buttonSound;
+
 	// Use this for initialization
 	void OnMouseDown()
 	{
@@ -14,6 +16,6 @@ public class Quit : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play ();
+		buttonSound.Play ();
 	}
 }

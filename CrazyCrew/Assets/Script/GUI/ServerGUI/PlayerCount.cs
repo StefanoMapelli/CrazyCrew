@@ -6,6 +6,8 @@ public class PlayerCount : MonoBehaviour {
 	private int number = 0;
 	private int max = 3;
 	private TextMesh textMesh;
+	public AudioSource ackSound;
+
 	// Use this for initialization
 	void Start () {
 		textMesh = (TextMesh)gameObject.GetComponent("TextMesh");
@@ -19,7 +21,7 @@ public class PlayerCount : MonoBehaviour {
 		if (number < 3) {
 			number++;
 			//play della notifica
-			gameObject.audio.Play ();
+			ackSound.Play ();
 			textMesh.text = number+"/"+max;
 		}
 	}
@@ -28,7 +30,7 @@ public class PlayerCount : MonoBehaviour {
 		if (number > 0) {
 			number--;
 			//play della notifica
-			gameObject.audio.Play ();
+			ackSound.Play ();
 			textMesh.text = number+"/"+max;
 		}
 	}
