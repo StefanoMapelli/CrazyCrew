@@ -63,6 +63,7 @@ public class BogieCarMovement : MonoBehaviour {
 	private int malusDuration;
 
 	private int malusSteerRotation=0;
+	private ArrayList mudSpotsList = new ArrayList();
 
 	public TextMesh infoText;
 
@@ -73,6 +74,16 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
 		serverBogieCar = (ServerBogieCar) GameObject.Find ("Server").GetComponent("ServerBogieCar");
+
+		GameObject Stain1 = GameObject.Find("Stain1");
+		GameObject Stain2 = GameObject.Find("Stain2"); 
+		GameObject Stain3 = GameObject.Find("Stain3"); 
+		GameObject Stain4 = GameObject.Find("Stain4"); 
+		mudSpotsList.Add(Stain1);
+		mudSpotsList.Add(Stain2);
+		mudSpotsList.Add(Stain3);
+		mudSpotsList.Add(Stain4);
+		
 	}
 
 	public Bonus getBonus()
@@ -286,15 +297,13 @@ public class BogieCarMovement : MonoBehaviour {
 
 						int powerUpId = UnityEngine.Random.Range(1,5);
 
-						powerUpId=3;
+						//powerUpId=3;
 						serverBogieCar.malusComunication(powerUpId);
 						switch(powerUpId)
 						{
 						case 1:
 						{
-							//effetto fango su schermo
-							serverBogieCar.malusEnded();
-							malusActive = false;
+							StartCoroutine(MalusMud());
 							break;
 						}
 							
@@ -360,11 +369,17 @@ public class BogieCarMovement : MonoBehaviour {
 
 		if(reductionCounter % 3 == 0)
 		{
-			malusDuration--;
+			if(malusName != "MUD")
+				malusDuration--;
 
 			if(malusName == "SLOWDOWN")
 				WheelTraction.motorTorque = torqueMax*0.05f;
 
+			if(malusName == "MUD")
+			{
+				((MeshRenderer)((GameObject)mudSpotsList[0]).GetComponent("MeshRenderer")).enabled = false;
+				mudSpotsList.RemoveAt(0);
+			}
 
 			StartCoroutine(MalusReductionNotify());
 		}
@@ -413,6 +428,42 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 
 		serverBogieCar.slowDown(false);
+		serverBogieCar.malusEnded();
+		malusDuration=5;
+		infoText.text="";
+		malusActive = false;
+	}
+
+	IEnumerator MalusMud()
+	{
+		malusDuration=5;
+
+		GameObject Stain1 = GameObject.Find("Stain1");
+		GameObject Stain2 = GameObject.Find("Stain2"); 
+		GameObject Stain3 = GameObject.Find("Stain3"); 
+		GameObject Stain4 = GameObject.Find("Stain4"); 
+		((MeshRenderer) Stain1.GetComponent("MeshRenderer")).enabled = true;
+		((MeshRenderer) Stain2.GetComponent("MeshRenderer")).enabled = true;
+		((MeshRenderer) Stain3.GetComponent("MeshRenderer")).enabled = true;
+		((MeshRenderer) Stain4.GetComponent("MeshRenderer")).enabled = true;
+
+		for(int i=0;i<malusDuration;i++)
+		{
+			infoText.text="MUD ON THE SCREEN! Press the button to clean it!";
+			yield return new WaitForSeconds(1);
+		}
+
+		//ordine di grandezza crescente
+		mudSpotsList.Add(Stain1);
+		mudSpotsList.Add(Stain2);
+		mudSpotsList.Add(Stain3);
+		mudSpotsList.Add(Stain4);
+		
+		((MeshRenderer) Stain1.GetComponent("MeshRenderer")).enabled = false;
+		((MeshRenderer) Stain2.GetComponent("MeshRenderer")).enabled = false;
+		((MeshRenderer) Stain3.GetComponent("MeshRenderer")).enabled = false;
+		((MeshRenderer) Stain4.GetComponent("MeshRenderer")).enabled = false;
+
 		serverBogieCar.malusEnded();
 		malusDuration=5;
 		infoText.text="";

@@ -28,23 +28,27 @@ public class ServerBogieCar : MonoBehaviour {
 			randomIndex = UnityEngine.Random.Range(0,3);
 
 			if (!assigned.Contains(playersArray[randomIndex])) {
-				assigned.Add(playersArray[randomIndex]);
 
-				if (i == 0) {
-					((Player) playersArray[randomIndex]).setRole("Lever1");
+				if (i == 0 && ((Player) playersArray[randomIndex]).getRole() != "Steer") {
+					assigned.Add(playersArray[randomIndex]);
+					((Player) playersArray[randomIndex]).setRole("Steer");
+					networkView.RPC("assignSteer", ((Player)playersArray[randomIndex]).getNetworkPlayer());
+					i++;
+				}
+				else if (i == 1 && ((Player) playersArray[randomIndex]).getRole() != "Lever1") {
+					assigned.Add(playersArray[randomIndex]);
+					((Player)playersArray[randomIndex]).setRole("Lever1");
 					networkView.RPC("assignLever1", ((Player)playersArray[randomIndex]).getNetworkPlayer());
 					networkView.RPC("blockLever", ((Player)playersArray[randomIndex]).getNetworkPlayer(), false);
+					i++;
 				}
-				else if (i == 1) {
-					((Player)playersArray[randomIndex]).setRole("Lever2");
-					networkView.RPC("assignLever2", ((Player)playersArray[randomIndex]).getNetworkPlayer());
-					networkView.RPC("blockLever", ((Player)playersArray[randomIndex]).getNetworkPlayer(), true);
+				else if (i == 2) {
+						assigned.Add(playersArray[randomIndex]);
+						((Player)playersArray[randomIndex]).setRole("Lever2");
+						networkView.RPC("assignLever2", ((Player)playersArray[randomIndex]).getNetworkPlayer());
+						networkView.RPC("blockLever", ((Player)playersArray[randomIndex]).getNetworkPlayer(), true);	
+						i++;
 				}
-				else {
-					((Player)playersArray[randomIndex]).setRole("Steer");
-					networkView.RPC("assignSteer", ((Player)playersArray[randomIndex]).getNetworkPlayer());
-				}
-				i++;
 			}
 		}
 	}
