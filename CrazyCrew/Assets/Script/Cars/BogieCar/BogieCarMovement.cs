@@ -70,7 +70,11 @@ public class BogieCarMovement : MonoBehaviour {
 	public TimeSpan finalTime;
 
 	public float poopFactor=0;
-	
+
+	//Posizione dove fare respawn, si aggiorna all'ultimo checkPoint passato.
+	private Vector3 lastPosition = new Vector3();
+	private Quaternion lastRotation = new Quaternion();
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -85,7 +89,9 @@ public class BogieCarMovement : MonoBehaviour {
 		mudSpotsList.Add(Stain2);
 		mudSpotsList.Add(Stain3);
 		mudSpotsList.Add(Stain4);
-		
+
+		lastPosition = this.transform.position;
+		lastRotation = this.transform.rotation;
 	}
 
 	public Bonus getBonus()
@@ -111,6 +117,12 @@ public class BogieCarMovement : MonoBehaviour {
 		Brake ();
 
 		WheelRotate();
+		}
+
+		if(Input.GetKeyDown (KeyCode.R))
+		{
+			this.transform.position=lastPosition;
+			this.transform.rotation = lastRotation;
 		}
 	}
 
@@ -257,6 +269,12 @@ public class BogieCarMovement : MonoBehaviour {
 	//Collisione con oggetti in gara
 	void OnTriggerEnter(Collider other) 
 	{
+		if(other.tag=="CheckPoint")
+		{
+			lastPosition = other.transform.position;
+			lastRotation = other.transform.rotation;
+		}
+
 		if(other.name=="Poop(Clone)")
 		{
 			StartCoroutine(PoopEffect());
