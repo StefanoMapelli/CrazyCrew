@@ -9,7 +9,7 @@ public class NextButton : MonoBehaviour {
 	void Start () {
 		serverList = (ServerList) GameObject.Find ("ServerList").GetComponent("ServerList");
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -23,5 +23,6 @@ public class NextButton : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		gameObject.audio.Play();
 	}
 }

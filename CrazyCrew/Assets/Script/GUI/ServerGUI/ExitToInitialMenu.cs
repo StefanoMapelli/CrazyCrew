@@ -24,5 +24,6 @@ public class ExitToInitialMenu : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		gameObject.audio.Play ();
 	}
 }

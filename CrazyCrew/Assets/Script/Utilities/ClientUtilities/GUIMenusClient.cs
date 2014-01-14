@@ -98,6 +98,9 @@ public static class GUIMenusClient {
 		connectionError.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/10, screenPos.z));
 
 		((MeshRenderer) connectionError.GetComponent("MeshRenderer")).enabled = enabled;
+
+		if(enabled)
+			connectionError.audio.Play();
 	}
 
 	public static void readyButton(bool enabled) {

@@ -16,6 +16,9 @@ public class ServerGameManager : MonoBehaviour {
 	private PlayerCount playerCount;
 	private RaceManager raceManager;
 
+	public AudioSource restart;
+	public AudioSource exit;
+
 	public ArrayList getPlayers()
 	{
 		return players;
@@ -282,6 +285,7 @@ public class ServerGameManager : MonoBehaviour {
 
 	[RPC]
 	public void exitGame() {
+		exit.Play();
 		networkView.RPC ("exitGame",RPCMode.Others);
 		Network.Disconnect();
 		GameObject.Destroy(GameObject.Find("Server"));
@@ -290,6 +294,7 @@ public class ServerGameManager : MonoBehaviour {
 
 	[RPC]
 	public void restartGame() {
+		restart.Play();
 		networkView.RPC ("restartGame",RPCMode.Others);
 		Debug.Log("restart la gara");
 		pause = false;

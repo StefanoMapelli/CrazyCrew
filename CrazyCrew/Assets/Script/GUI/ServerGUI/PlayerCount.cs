@@ -18,6 +18,8 @@ public class PlayerCount : MonoBehaviour {
 	public void incrementNumber() {
 		if (number < 3) {
 			number++;
+			//play della notifica
+			gameObject.audio.Play ();
 			textMesh.text = number+"/"+max;
 		}
 	}
@@ -25,6 +27,8 @@ public class PlayerCount : MonoBehaviour {
 	public void decrementNumber() {
 		if (number > 0) {
 			number--;
+			//play della notifica
+			gameObject.audio.Play ();
 			textMesh.text = number+"/"+max;
 		}
 	}

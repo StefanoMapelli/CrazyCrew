@@ -7,6 +7,9 @@ public static class GUIMenusServer
 	{
 		GameObject masterServerError = GameObject.Find ("ConnectionErrorText");
 		((MeshRenderer) masterServerError.GetComponent("MeshRenderer")).enabled = enabled;
+
+		if(enabled)
+			masterServerError.audio.Play();
 	}
 
 	public static void mainMenu(bool enabled)

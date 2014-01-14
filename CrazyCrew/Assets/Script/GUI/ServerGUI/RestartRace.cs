@@ -27,6 +27,7 @@ public class RestartRace : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		gameObject.audio.Play ();
 	}
 
 }

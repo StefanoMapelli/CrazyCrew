@@ -18,14 +18,20 @@ public class ServerList : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		if (list.Length > 0)
+		{	
+			((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 			clientNetworkManager.JoinServer(list[index]);
+		}
 	}
 
 	void OnMouseUp()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		if (list.Length > 0)
+		{	
+			((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+			gameObject.audio.Play();
+		}
 	}
 
 	public void setList(HostData[] list) {

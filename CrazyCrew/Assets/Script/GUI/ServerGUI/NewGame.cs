@@ -19,6 +19,7 @@ public class NewGame : MonoBehaviour {
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 
+
 		GUIMenusServer.masterServerError(false);
 
 		server = GameObject.Find("Server");
@@ -32,5 +33,6 @@ public class NewGame : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		gameObject.audio.Play ();
 	}
 }

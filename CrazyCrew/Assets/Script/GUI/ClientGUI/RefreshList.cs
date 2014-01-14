@@ -21,5 +21,6 @@ public class RefreshList : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		gameObject.audio.Play();
 	}
 }
