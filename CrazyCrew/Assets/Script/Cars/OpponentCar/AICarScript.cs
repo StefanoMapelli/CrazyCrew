@@ -35,6 +35,7 @@ public class AICarScript : MonoBehaviour {
 	public bool raceStarted=false;
 	public bool raceFinished=false;
 	public bool checkpointPassed=false;
+	public float poopFactor=0;
 
 	public TimeSpan finalTime=new TimeSpan(0,0,0);
 
@@ -101,8 +102,8 @@ public class AICarScript : MonoBehaviour {
 			Vector3 steerVector = transform.InverseTransformPoint(new Vector3(((Transform)path[currentPathObject]).position.x,transform.position.y,((Transform)path[currentPathObject]).position.z));
 			float newSteer = maxSteer * (-steerVector.z/steerVector.magnitude);
 
-			wheelFL.steerAngle=newSteer;
-			wheelFR.steerAngle=newSteer;
+			wheelFL.steerAngle=newSteer+poopFactor;
+			wheelFR.steerAngle=newSteer+poopFactor;
 
 			if(steerVector.magnitude<=distFromPath)
 			{
@@ -340,7 +341,7 @@ public class AICarScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject.name == "FinishLine" && checkpointPassed)
+		if(other.gameObject.name == "FinishLine")
 		{
 			raceFinished=true;
 			wheelTraction.motorTorque=0;
@@ -348,10 +349,24 @@ public class AICarScript : MonoBehaviour {
 			finalTime=((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getFinalTime();
 			Debug.Log(finalTime);
 		}
-		if(other.gameObject.name== "CheckPoint")
+		if(other.name=="Poop(Clone)")
 		{
-			checkpointPassed=!checkpointPassed;
+			StartCoroutine(PoopEffect());
 		}
+	}
+
+	IEnumerator PoopEffect()
+	{
+		if(UnityEngine.Random.Range(-1,1)>0)
+		{
+			poopFactor=10;
+		}
+		else
+		{
+			poopFactor=-10;
+		}
+		yield return new WaitForSeconds(5);
+		poopFactor=0;
 	}
 
 
@@ -362,7 +377,11 @@ public class AICarScript : MonoBehaviour {
 	/// <param name="info">Info.</param>
 	bool ignoredCollision(RaycastHit info)
 	{
-		if(!info.collider.tag.Equals("CheckPoint")&& !info.collider.name.Equals("PowerUpObject") && !info.collider.name.Equals("StartLine") && !info.collider.name.Equals("FinishLine"))
+		if(!info.collider.tag.Equals("CheckPoint")&& 
+		   !info.collider.name.Equals("PowerUpObject") && 
+		   !info.collider.name.Equals("StartLine")&& 
+		   !info.collider.name.Equals("Poop(Clone)") && 
+		   !info.collider.name.Equals("FinishLine"))
 		{
 			return true;
 		}

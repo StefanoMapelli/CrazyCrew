@@ -22,16 +22,19 @@ public class CheckPointManager : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(timeList.ContainsKey(other.gameObject.name))
+		if(other.tag=="Car")
 		{
-			timeList.Remove(other.gameObject.name);
-		}
+			if(timeList.ContainsKey(other.gameObject.name))
+			{
+				timeList.Remove(other.gameObject.name);
+			}
 
-		timeList.Add(other.gameObject.name,raceManager.getTime());
+			timeList.Add(other.gameObject.name,raceManager.getTime());
 
-		if(other.gameObject.name=="Player")
-		{
-			raceManager.ShowRanking(timeList);
+			if(other.gameObject.name=="Player")
+			{
+				raceManager.ShowRanking(timeList);
+			}
 		}
 	}
 }

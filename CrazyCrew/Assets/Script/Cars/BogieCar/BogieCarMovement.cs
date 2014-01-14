@@ -68,6 +68,8 @@ public class BogieCarMovement : MonoBehaviour {
 	public TextMesh infoText;
 
 	public TimeSpan finalTime;
+
+	public float poopFactor=0;
 	
 	// Use this for initialization
 	void Start () 
@@ -219,8 +221,8 @@ public class BogieCarMovement : MonoBehaviour {
 		currentSteerAngle = (currentSteerAngle*steerPercent) + malusSteerRotation;
 
 		
-		WheelFL.steerAngle = currentSteerAngle;
-		WheelFR.steerAngle = currentSteerAngle;
+		WheelFL.steerAngle = currentSteerAngle+poopFactor;
+		WheelFR.steerAngle = currentSteerAngle+poopFactor;
 	}
 	
 	IEnumerator Finish ()
@@ -238,9 +240,27 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 	}
 
+	IEnumerator PoopEffect()
+	{
+		if(UnityEngine.Random.Range(-1,1)>0)
+		{
+			poopFactor=5;
+		}
+		else
+		{
+			poopFactor=-5;
+		}
+		yield return new WaitForSeconds(5);
+		poopFactor=0;
+	}
+
 	//Collisione con oggetti in gara
 	void OnTriggerEnter(Collider other) 
 	{
+		if(other.name=="Poop(Clone)")
+		{
+			StartCoroutine(PoopEffect());
+		}
 		if(other.gameObject.name == "BonusObject")
 		{
 			int powerUpId = UnityEngine.Random.Range(1,5);
@@ -277,55 +297,44 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			if(other.gameObject.name == "FinishLine")
 			{
-				//Finish si attiva solo se checkPoint = true
-				if(checkPoint)
-				{
-					StartCoroutine (Finish());
-				}
+				StartCoroutine (Finish());
 			}
 			else
 			{
-				if(other.gameObject.name == "CheckPoint")
+				if(other.gameObject.name == "MalusObject" && !malusActive)
 				{
-					checkPoint = !checkPoint;
-				}
-				else
-				{
-					if(other.gameObject.name == "MalusObject" && !malusActive)
+					malusActive = true;
+
+					int powerUpId = UnityEngine.Random.Range(1,5);
+
+					//powerUpId=3;
+					serverBogieCar.malusComunication(powerUpId);
+					switch(powerUpId)
 					{
-						malusActive = true;
+					case 1:
+					{
+						StartCoroutine(MalusMud());
+						break;
+					}
+						
+					case 2:
+					{
+						StartCoroutine(MalusSlowdown());
+						break;
+					}
 
-						int powerUpId = UnityEngine.Random.Range(1,5);
-
-						//powerUpId=3;
-						serverBogieCar.malusComunication(powerUpId);
-						switch(powerUpId)
-						{
-						case 1:
-						{
-							StartCoroutine(MalusMud());
-							break;
-						}
-							
-						case 2:
-						{
-							StartCoroutine(MalusSlowdown());
-							break;
-						}
-
-						case 3:
-						{
-							serverBogieCar.assignRoles();
-							malusActive = false;
-							break;
-						}
-							
-						case 4:
-						{
-							StartCoroutine(MalusSteerFailure());
-							break;	
-						}
-						}
+					case 3:
+					{
+						serverBogieCar.assignRoles();
+						malusActive = false;
+						break;
+					}
+						
+					case 4:
+					{
+						StartCoroutine(MalusSteerFailure());
+						break;	
+					}
 					}
 				}
 			}
