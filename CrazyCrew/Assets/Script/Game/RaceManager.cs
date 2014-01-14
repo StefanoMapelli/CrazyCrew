@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class RaceManager : MonoBehaviour {
@@ -12,6 +13,7 @@ public class RaceManager : MonoBehaviour {
 
 	//info
 	private TextMesh infoText;
+	private TextMesh rankingText;
 	public GameObject camera;
 
 	//Pause
@@ -65,6 +67,7 @@ public class RaceManager : MonoBehaviour {
 	{
 		bogieCarMovement = (BogieCarMovement) GameObject.Find("_BogieCarModel").GetComponent("BogieCarMovement");
 		infoText =  (TextMesh) (GameObject.Find("InfoText").GetComponent("TextMesh"));
+		rankingText =  (TextMesh) (GameObject.Find("RankingText").GetComponent("TextMesh"));
 		infoText.text="";
 
 		infoText.text = "3";
@@ -250,6 +253,11 @@ public class RaceManager : MonoBehaviour {
 		return timer;
 	}
 
+	public TimeSpan getTime()
+	{
+		return timer;
+	}
+
 	public ArrayList Ranking()
 	{
 		ArrayList cars=new ArrayList();
@@ -304,5 +312,31 @@ public class RaceManager : MonoBehaviour {
 	public void bonusTime(int bonus)
 	{
 		timer = timer.Subtract(new TimeSpan(0,0,bonus));
+	}
+
+	public void ShowRanking(Dictionary<string,TimeSpan> timeList)
+	{
+
+		StartCoroutine(ShowRankingText(timeList));
+	}
+
+	IEnumerator ShowRankingText(Dictionary<string,TimeSpan> timeList)
+	{
+		string text="Ranking:";
+		foreach (string key in timeList.Keys)
+		{
+			if(key=="Player")
+			{
+				text+="\n" + key + "           "+ string.Format("{0:D2}:{1:D2}:{2:D3}", timeList[key].Minutes, timeList[key].Seconds, timeList[key].Milliseconds);
+			}
+			else
+			{
+				text+="\n" + key + "    "+ string.Format("{0:D2}:{1:D2}:{2:D3}", timeList[key].Minutes, timeList[key].Seconds, timeList[key].Milliseconds);
+			}
+		}
+		rankingText.text=text;
+		yield return new WaitForSeconds(5);
+		rankingText.text="";
+
 	}
 }
