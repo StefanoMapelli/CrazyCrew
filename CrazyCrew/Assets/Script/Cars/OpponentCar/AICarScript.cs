@@ -362,7 +362,7 @@ public class AICarScript : MonoBehaviour {
 	/// <param name="info">Info.</param>
 	bool ignoredCollision(RaycastHit info)
 	{
-		if(!info.collider.name.Equals("CheckPoint")&& !info.collider.name.Equals("PowerUpObject") && !info.collider.name.Equals("StartLine") && !info.collider.name.Equals("FinishLine"))
+		if(!info.collider.tag.Equals("CheckPoint")&& !info.collider.name.Equals("PowerUpObject") && !info.collider.name.Equals("StartLine") && !info.collider.name.Equals("FinishLine"))
 		{
 			return true;
 		}
