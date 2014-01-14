@@ -5,6 +5,7 @@ public class ResumeGame : MonoBehaviour {
 
 	private GameObject client;
 	private ClientGameManager clientGameManager;
+	public AudioSource buttonSound;
 
 
 	// Use this for initialization
@@ -28,6 +29,6 @@ public class ResumeGame : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		buttonSound.Play();
 	}
 }

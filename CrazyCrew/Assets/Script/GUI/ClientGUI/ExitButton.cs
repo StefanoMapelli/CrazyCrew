@@ -4,6 +4,7 @@ using System.Collections;
 public class ExitButton : MonoBehaviour {
 
 	private ClientGameManager clientGameManager;
+	public AudioSource buttonSound;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,6 @@ public class ExitButton : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		buttonSound.Play();
 	}
 }

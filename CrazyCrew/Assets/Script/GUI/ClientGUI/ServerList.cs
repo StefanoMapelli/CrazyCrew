@@ -6,6 +6,7 @@ public class ServerList : MonoBehaviour {
 	private HostData[] list;
 	private int index = 0;
 	private ClientNetworkManager clientNetworkManager;
+	public AudioSource buttonSound;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,7 @@ public class ServerList : MonoBehaviour {
 		if (list.Length > 0)
 		{	
 			((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-			gameObject.audio.Play();
+			buttonSound.Play();
 		}
 	}
 

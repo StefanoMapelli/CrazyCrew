@@ -4,6 +4,7 @@ using System.Collections;
 public class RefreshList : MonoBehaviour {
 	
 	private ClientNetworkManager clientNetworkManager;
+	public AudioSource buttonSound;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,6 @@ public class RefreshList : MonoBehaviour {
 	void OnMouseUp()
 	{
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play();
+		buttonSound.audio.Play();
 	}
 }
