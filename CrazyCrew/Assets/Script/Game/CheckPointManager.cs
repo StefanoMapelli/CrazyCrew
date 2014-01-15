@@ -22,7 +22,7 @@ public class CheckPointManager : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.tag=="Car")
+		if(other.tag=="CarCollider")
 		{
 			if(timeList.ContainsKey(other.gameObject.name))
 			{
@@ -31,7 +31,7 @@ public class CheckPointManager : MonoBehaviour {
 
 			timeList.Add(other.gameObject.name,raceManager.getTime());
 
-			if(other.gameObject.name=="Player")
+			if(other.name=="Player")
 			{
 				raceManager.ShowRanking(timeList);
 			}

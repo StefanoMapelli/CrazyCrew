@@ -15,8 +15,10 @@ public class PoopBehaviour : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c)
 	{
+		Debug.Log("trigger");
 		if(!(c.tag=="Terrain"))
 		{
+			Debug.Log("destroy");
 			Destroy(this.gameObject);
 		}
 	}
