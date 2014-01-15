@@ -24,12 +24,6 @@ public class MissileMovement : MonoBehaviour {
 		UnityEngine.Object explosion=Resources.Load("Prefab/Explosion");
 		GameObject explosionObject= GameObject.Instantiate(explosion, gameObject.transform.position,gameObject.transform.rotation) as GameObject;
 		Destroy(this.gameObject);
-		StartCoroutine(Explosion (explosionObject));
 	}
 
-	IEnumerator Explosion(GameObject explosionObject)
-	{
-		yield return new WaitForSeconds(1);
-		Destroy(explosionObject);
-	}
 }
