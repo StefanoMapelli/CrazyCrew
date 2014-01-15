@@ -13,12 +13,10 @@ public class PoopBehaviour : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider c)
+	void OnCollisionEnter(Collision c)
 	{
-		Debug.Log("trigger");
-		if(!(c.tag=="Terrain"))
+		if(!(c.collider.tag=="Terrain"))
 		{
-			Debug.Log("destroy");
 			Destroy(this.gameObject);
 		}
 	}

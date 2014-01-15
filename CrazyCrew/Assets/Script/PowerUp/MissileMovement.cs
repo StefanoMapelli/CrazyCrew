@@ -20,6 +20,7 @@ public class MissileMovement : MonoBehaviour {
 
 	void OnCollisionEnter()
 	{
+		Debug.Log("explosion");
 		UnityEngine.Object explosion=Resources.Load("Prefab/Explosion");
 		GameObject explosionObject= GameObject.Instantiate(explosion, gameObject.transform.position,gameObject.transform.rotation) as GameObject;
 		Destroy(this.gameObject);
