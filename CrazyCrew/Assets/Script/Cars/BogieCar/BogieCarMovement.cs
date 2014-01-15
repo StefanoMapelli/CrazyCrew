@@ -282,7 +282,7 @@ public class BogieCarMovement : MonoBehaviour {
 		if(other.gameObject.name == "BonusObject")
 		{
 			int powerUpId = UnityEngine.Random.Range(1,5);
-			//powerUpId=4;
+			//powerUpId=2;
 			serverBogieCar.bonusComunication(powerUpId);
 			switch(powerUpId)
 			{
