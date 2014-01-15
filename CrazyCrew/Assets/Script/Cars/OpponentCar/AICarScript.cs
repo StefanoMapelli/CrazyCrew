@@ -331,9 +331,8 @@ public class AICarScript : MonoBehaviour {
 
 	void OnCollisionEnter(Collision c)
 	{
-		if(c.collider.name.Equals("Missile(Clone)"))
+		if(c.collider.name.Equals("RocketCollider"))
 		{
-			Debug.Log("Missile mi ha colpito ");
 			StartCoroutine(MissileEffect());
 		}
 
@@ -349,7 +348,7 @@ public class AICarScript : MonoBehaviour {
 			finalTime=((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getFinalTime();
 			Debug.Log(finalTime);
 		}
-		if(other.name=="Poop(Clone)")
+		if(other.name=="Poop")
 		{
 			StartCoroutine(PoopEffect());
 		}

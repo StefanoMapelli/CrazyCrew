@@ -13,9 +13,9 @@ public class PoopBehaviour : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider c)
+	void OnCollisionEnter(Collision c)
 	{
-		if(!(c.tag=="Terrain"))
+		if(!(c.collider.tag=="Terrain"))
 		{
 			Destroy(this.gameObject);
 		}

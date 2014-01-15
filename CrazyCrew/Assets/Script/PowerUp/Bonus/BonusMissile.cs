@@ -16,6 +16,7 @@ public class BonusMissile : MonoBehaviour, Bonus
 	public void StartEffect () 
 	{
 		UnityEngine.Object missile=Resources.Load("Prefab/Missile");
-		GameObject missileObject= GameObject.Instantiate(missile, height+(car.transform.position+car.transform.right*missileForwardOffset), car.transform.rotation) as GameObject;
+		GameObject missileObject= GameObject.Instantiate(missile, height+(car.transform.position+car.transform.right*missileForwardOffset),car.transform.rotation) as GameObject;
+
 	}
 }
