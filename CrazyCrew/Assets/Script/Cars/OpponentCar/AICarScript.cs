@@ -400,12 +400,9 @@ public class AICarScript : MonoBehaviour {
 
 	IEnumerator MissileEffect()
 	{
-		UnityEngine.Object explosion=Resources.Load("Prefab/Explosion");
-		GameObject explosionObject= GameObject.Instantiate(explosion, gameObject.transform.position,gameObject.transform.rotation) as GameObject;
 		wheelTraction.brakeTorque=2000;
 		wheelTraction.motorTorque=0;
 		yield return new WaitForSeconds(1);
-		Destroy(explosionObject);
 		rigidbody.AddForce(new Vector3(0,10,0));
 		wheelTraction.brakeTorque=0;
 	}
