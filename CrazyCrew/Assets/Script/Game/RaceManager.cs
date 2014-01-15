@@ -33,7 +33,11 @@ public class RaceManager : MonoBehaviour {
 	public GameObject time5;
 	public GameObject time6;
 
-
+	//Audio
+	public AudioSource countdownSound;
+	public AudioSource pauseMusic;
+	public AudioSource gameMusic;
+	public AudioSource finishMusic;
 
 	private bool isFinish = false;
 
@@ -65,11 +69,15 @@ public class RaceManager : MonoBehaviour {
 	/// <returns></returns>
 	private IEnumerator StartGame()
 	{
+		gameMusic.Play();
+		finishMusic.Stop ();
+
 		bogieCarMovement = (BogieCarMovement) GameObject.Find("_BogieCarModel").GetComponent("BogieCarMovement");
 		infoText =  (TextMesh) (GameObject.Find("InfoText").GetComponent("TextMesh"));
 		rankingText =  (TextMesh) (GameObject.Find("RankingText").GetComponent("TextMesh"));
 		infoText.text="";
 
+		countdownSound.Play();
 		infoText.text = "3";
 		yield return new WaitForSeconds(1);
 		infoText.text = "2";
@@ -103,6 +111,17 @@ public class RaceManager : MonoBehaviour {
 	public void SetPause(bool pause)
 	{
 		this.pause = pause;
+
+		if(pause)
+		{
+			gameMusic.Stop();
+			pauseMusic.Play ();
+		}
+		else
+		{
+			gameMusic.Play();
+			pauseMusic.Stop();
+		}
 	}
 
 	/// <summary>
@@ -246,6 +265,9 @@ public class RaceManager : MonoBehaviour {
 			}
 		}
 		((CarCamera)camera.GetComponent("CarCamera")).cameraOnFinishMenu();
+		gameMusic.Stop();
+		pauseMusic.Stop();
+		finishMusic.Play ();
 	}
 
 	public TimeSpan getFinalTime()

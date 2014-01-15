@@ -54,7 +54,7 @@ public class BogieCarMovement : MonoBehaviour {
 	private bool finishRace = false;
 
 	//bonus info
-	public float speedMultiplierBonus;
+	private float speedMultiplierBonus=2;
 	private Bonus bonusAcquired;
 
 	//malus info
@@ -69,12 +69,30 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public TimeSpan finalTime;
 
-	public float poopFactor=0;
+	private float poopFactor=0;
 
 	//Posizione dove fare respawn, si aggiorna all'ultimo checkPoint passato.
 	private Vector3 lastPosition = new Vector3();
 	private Quaternion lastRotation = new Quaternion();
 
+	//Audio
+	public AudioSource dirtBrakeSound;
+
+	public AudioSource collision1;
+	public AudioSource collision2;
+	public AudioSource collision3;
+	public AudioSource collision4;
+	public AudioSource collision5;
+	public AudioSource collision6;
+
+	public AudioSource mudSound;
+	public AudioSource turboSound;
+	public AudioSource malusSound;
+	public AudioSource bonusSound;
+
+	public AudioSource ackSound;
+	public AudioSource leverSound;
+	
 	// Use this for initialization
 	void Start () 
 	{
@@ -168,9 +186,12 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			if(currentSpeed>0)
 			{
+				//controllo sul tipo di terreno
+				dirtBrakeSound.Play();
 
 				WheelTraction.motorTorque = 0;
 				WheelTraction.brakeTorque = -decelerationSpeed;
+
 			}
 			else if(currentSpeed<=0 && currentSpeed>=topRetroSpeed)
 			{
@@ -196,6 +217,8 @@ public class BogieCarMovement : MonoBehaviour {
 	/// <param name="forcePercent">Force percent è compreso tra 0 e 1.</param>
 	public void LeverDown(float forcePercent)
 	{
+		leverSound.Play();
+
 		if(currentSpeed<topSpeed)
 		{
 			WheelTraction.motorTorque += forcePercent*torqueMax;
@@ -274,103 +297,155 @@ public class BogieCarMovement : MonoBehaviour {
 			lastPosition = other.transform.position;
 			lastRotation = other.transform.rotation;
 		}
-
-		if(other.name=="Poop(Clone)")
-		{
-			StartCoroutine(PoopEffect());
-		}
-		if(other.gameObject.name == "BonusObject")
-		{
-			int powerUpId = UnityEngine.Random.Range(1,5);
-			//powerUpId=4;
-			serverBogieCar.bonusComunication(powerUpId);
-			switch(powerUpId)
-			{
-			case 1:
-			{
-				bonusAcquired = new BonusMissile();
-				break;
-			}
-				
-			case 2:
-			{
-				bonusAcquired = new BonusPoop();
-				break;
-			}
-				
-			case 3:
-			{
-				StartCoroutine(BonusTime());
-				break;
-			}
-				
-			case 4:
-			{
-				bonusAcquired = new BonusSpeed();
-				break;	
-			}
-			}
-		}
 		else
 		{
-			if(other.gameObject.name == "FinishLine")
+			if(other.name=="Poop(Clone)")
 			{
-				StartCoroutine (Finish());
+				StartCoroutine(PoopEffect());
 			}
 			else
 			{
-				if(other.gameObject.name == "MalusObject" && !malusActive)
+				if(other.gameObject.name == "BonusObject")
 				{
-					malusActive = true;
+					bonusSound.Play();
 
 					int powerUpId = UnityEngine.Random.Range(1,5);
-
-					//powerUpId=3;
-					serverBogieCar.malusComunication(powerUpId);
+					//powerUpId=4;
+					serverBogieCar.bonusComunication(powerUpId);
 					switch(powerUpId)
 					{
 					case 1:
 					{
-						StartCoroutine(MalusMud());
+						bonusAcquired = new BonusMissile();
 						break;
 					}
-						
+				
 					case 2:
 					{
-						StartCoroutine(MalusSlowdown());
+						bonusAcquired = new BonusPoop();
 						break;
 					}
-
+					
 					case 3:
 					{
-						serverBogieCar.assignRoles();
-						malusActive = false;
+						StartCoroutine(BonusTime());
 						break;
 					}
-						
+				
 					case 4:
 					{
-						StartCoroutine(MalusSteerFailure());
+						bonusAcquired = new BonusSpeed();
 						break;	
 					}
 					}
 				}
+				else
+				{
+					if(other.gameObject.name == "FinishLine")
+					{	
+						StartCoroutine (Finish());
+					}
+					else
+					{
+						if(other.gameObject.name == "MalusObject" && !malusActive)
+						{
+						malusActive = true;
+
+						int powerUpId = UnityEngine.Random.Range(1,5);
+
+						//powerUpId=3;
+						serverBogieCar.malusComunication(powerUpId);
+						switch(powerUpId)
+						{
+						case 1:
+						{
+							StartCoroutine(MalusMud());
+							break;
+						}
+						
+						case 2:
+						{
+							StartCoroutine(MalusSlowdown());
+							break;
+						}
+
+						case 3:
+						{
+							serverBogieCar.assignRoles();
+							malusActive = false;
+							break;
+						}
+						
+						case 4:
+						{
+							StartCoroutine(MalusSteerFailure());
+							break;	
+						}
+						}
+					}
+
+						}
+					}
+				}	
 			}
 		}
-	}
 
+	void OnCollisionEnter(Collision collision)
+	{
+		Debug.Log("sono in collision enter ramo else, colliso con"+collision.gameObject.name);
+		GameObject  obj = collision.gameObject;
 
+		if(currentSpeed <25 || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed <25))
+		{
+			collision1.Play();
+		}
+		//collisione generica
+		if((currentSpeed >=25 && currentSpeed < 50) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 25 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 50))
+		{
+			collision2.Play();
+		}
+		else 
+			{
+			if((currentSpeed>=50 && currentSpeed<75) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 50 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 75))
+				{
+					collision3.Play();
+				}
+				else
+				{
+				if((currentSpeed>=75 && currentSpeed<100) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 75 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 100))
+					{
+						collision4.Play();
+					}
+					else
+					{
+					if((currentSpeed>=100 && currentSpeed<125) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 100 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 125))
+						{
+							collision5.Play();
+						}
+						else
+						{
+						if((currentSpeed>=125 && currentSpeed<=150) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 125 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 150))
+								{
+									collision6.Play();
+								}
+							}
+						}
+					}
+				}
+			}
+	
 	//GESTIONE POWER-UP
 	//BONUS
-
+	
 	public void bonusSpeed()
 	{
 		Debug.Log ("Turbo attivato");
 		StartCoroutine(BonusSpeed());
 	}
-
+	
 	IEnumerator BonusSpeed()
 	{
+		turboSound.Play();
 		infoText.text="TURBOOOOOO";
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
 		yield return new WaitForSeconds(0.5f);
@@ -414,6 +489,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 	IEnumerator MalusReductionNotify()
 	{
+		ackSound.Play();
 		infoText.text=" Malus reduced...GOOD JOB!";
 		yield return new WaitForSeconds(2);
 		infoText.text="";
@@ -421,6 +497,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 	IEnumerator MalusSteerFailure()
 	{
+		malusSound.Play();
+
 		malusDuration=5;
 		malusSteerRotation=6;
 
@@ -444,6 +522,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 	IEnumerator MalusSlowdown()
 	{
+		malusSound.Play();
+
 		malusDuration=5;
 		serverBogieCar.slowDown(true);
 		WheelTraction.motorTorque = -torqueMax*0.2f;
@@ -463,6 +543,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 	IEnumerator MalusMud()
 	{
+		mudSound.Play();
+
 		malusDuration=5;
 
 		GameObject Stain1 = GameObject.Find("Stain1");
