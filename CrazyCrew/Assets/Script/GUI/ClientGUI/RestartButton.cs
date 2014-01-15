@@ -4,13 +4,13 @@ using System.Collections;
 public class RestartButton : MonoBehaviour {
 
 	private ClientGameManager clientGameManager;
-	private PowerUpController powerUpController;
+	//private PowerUpController powerUpController;
 	public AudioSource buttonSound;
 	
 	// Use this for initialization
 	void Start () {
 		clientGameManager = (ClientGameManager) GameObject.Find ("Client").GetComponent("ClientGameManager");
-		powerUpController = (PowerUpController) GameObject.Find ("PowerUpButton").GetComponent("PowerUpController");
+	//	powerUpController = (PowerUpController) GameObject.Find ("PowerUpButton").GetComponent("PowerUpController");
 	}
 
 	void OnMouseDown() {

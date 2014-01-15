@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PoopBehaviour : MonoBehaviour {
 
+	public AudioSource collisionPoopSound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,6 +19,7 @@ public class PoopBehaviour : MonoBehaviour {
 	{
 		if(!(c.collider.tag=="Terrain"))
 		{
+			collisionPoopSound.Play();
 			Destroy(this.gameObject);
 		}
 	}

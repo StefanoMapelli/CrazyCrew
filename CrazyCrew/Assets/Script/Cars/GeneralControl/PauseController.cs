@@ -4,6 +4,7 @@ using System.Collections;
 public class PauseController : MonoBehaviour {
 
 	private ClientGameManager clientGameManager;
+	public AudioSource buttonSound;
 
 	// Use this for initialization
 	void Start () {
@@ -19,5 +20,10 @@ public class PauseController : MonoBehaviour {
 	void OnMouseDown()
 	{
 		clientGameManager.pauseOn();
+	}
+
+	void OnMouseUp()
+	{
+		buttonSound.Play();
 	}
 }

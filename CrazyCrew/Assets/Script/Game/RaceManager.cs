@@ -38,6 +38,7 @@ public class RaceManager : MonoBehaviour {
 	public AudioSource pauseMusic;
 	public AudioSource gameMusic;
 	public AudioSource finishMusic;
+	public AudioSource showRankingSound;
 
 	private bool isFinish = false;
 
@@ -338,12 +339,12 @@ public class RaceManager : MonoBehaviour {
 
 	public void ShowRanking(Dictionary<string,TimeSpan> timeList)
 	{
-
 		StartCoroutine(ShowRankingText(timeList));
 	}
 
 	IEnumerator ShowRankingText(Dictionary<string,TimeSpan> timeList)
 	{
+		this.showRankingSound.Play();
 		string text="Ranking:";
 		foreach (string key in timeList.Keys)
 		{
