@@ -54,30 +54,38 @@ public static class GUIMenusClient {
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
-		leftSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*1,Screen.height/2, screenPos.z));
-		rightSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/2, screenPos.z));
-		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,Screen.height/10, screenPos.z));
-		pause.transform.localScale = new Vector3(5f,5f,1f);
-		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/10)*9,(Screen.height/5), screenPos.z));
-
-		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
-		brake.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,Screen.height/2, screenPos.z));
-		brakeLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,(Screen.height/10)*6, screenPos.z));
-		powerUpButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/2, screenPos.z));
-		powerUpLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,(Screen.height/10)*6, screenPos.z));
-		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/5, screenPos.z));
+		// try to scale correctly the steer controls
+		float height = Camera.main.orthographicSize * 2f;
+		float width = (height * Screen.width / Screen.height);
+		// LEVER
+		leverPlane.transform.localScale = new Vector3(width/50,(height/4)*3,1f);
+		//leverInfo.transform.localScale = new Vector3(width,height,1f);
+		lever.transform.localScale = new Vector3(width/6,width/(100f/3f),1f);
+		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/4,Screen.height/2, screenPos.z));
+		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/4,Screen.height/16, screenPos.z));
+		// BRAKE
+		brake.transform.localScale = new Vector3(width/2,height/3,1f);
+		brake.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-(Screen.height/6),screenPos.z));
+		brakeLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-(Screen.height/6), screenPos.z));
+		// POWER-UP BUTTON
+		powerUpButton.transform.localScale = new Vector3(width/2,height/3,1f);
+		powerUpButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height/2, screenPos.z));
+		powerUpLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height/2, screenPos.z));
+		// PAUSE
+		pause.transform.localScale = new Vector3(width/2,height/3,1f);
+		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-((Screen.height/6)*5), screenPos.z));
+		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-((Screen.height/6)*5), screenPos.z));
+		// STEER
+		leftSteer.transform.localScale = new Vector3(width/3, height, 1f);
+		rightSteer.transform.localScale = new Vector3(width/3, height, 1f);
+		leftSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/6,Screen.height/2, screenPos.z));
+		rightSteer.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*5,Screen.height/2, screenPos.z));
 
 		//estremo superiore del LeverPlane
 		float sup = leverPlane.transform.position.y + 
 			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
 		lever.transform.position = 
 			new Vector3(leverPlane.transform.position.x,sup,-1f);
-
-		// try to scale correctly the steer controls
-		float height = Camera.main.orthographicSize * 2f;
-		float width = (height * Screen.width / Screen.height)/3f;
-		leftSteer.transform.localScale = new Vector3(width, height, 1f);
-		rightSteer.transform.localScale = new Vector3(width, height, 1f);
 	}
 
 	public static void mainMenu(bool enabled)
@@ -226,7 +234,7 @@ public static class GUIMenusClient {
 
 		// scale pause button properly
 		float height = Camera.main.orthographicSize * 2f;
-		float width = (height * Screen.width / Screen.height)/3f;
-		pause.transform.localScale = new Vector3(width, height, 1f);
+		float width = (height * Screen.width / Screen.height);
+		pause.transform.localScale = new Vector3(width/3, height, 1f);
 	}
 }
