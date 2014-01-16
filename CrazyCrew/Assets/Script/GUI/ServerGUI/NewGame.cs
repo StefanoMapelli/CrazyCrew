@@ -18,22 +18,19 @@ public class NewGame : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
-
-
-		GUIMenusServer.masterServerError(false);
+		//GUIMenusServer.masterServerError(false);
 
 		server = GameObject.Find("Server");
 		ServerNetworkManager serverNetworkManager = (ServerNetworkManager) server.GetComponent("ServerNetworkManager");
 
 		serverNetworkManager.StartServer();
-		GUIMenusServer.mainMenu(false);
-		GUIMenusServer.waitingForPlayersMenu(true);
+		Camera.main.transform.Translate(new Vector3(520f,58f,0f));
+		//GUIMenusServer.mainMenu(false);
+		//GUIMenusServer.waitingForPlayersMenu(true);
 	}
 
 	void OnMouseUp()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 		buttonSound.Play ();
 	}
 }

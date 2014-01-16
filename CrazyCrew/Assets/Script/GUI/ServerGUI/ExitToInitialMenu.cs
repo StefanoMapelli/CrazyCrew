@@ -17,13 +17,13 @@ public class ExitToInitialMenu : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
+		//((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		serverGameManager.exitGame();
 	}
 
 	void OnMouseUp()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play ();
+		//((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		//gameObject.audio.Play ();
 	}
 }

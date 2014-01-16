@@ -92,7 +92,10 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public AudioSource ackSound;
 	public AudioSource leverSound;
-	
+
+	private Animation animation;
+	private bool lever1 = true;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -110,6 +113,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 		lastPosition = this.transform.position;
 		lastRotation = this.transform.rotation;
+
+		animation = (Animation) GameObject.Find ("Avanti Finita 003").GetComponent("Animation");
 	}
 
 	public Bonus getBonus()
@@ -218,7 +223,15 @@ public class BogieCarMovement : MonoBehaviour {
 	public void LeverDown(float forcePercent)
 	{
 		leverSound.Play();
-
+		if (lever1) {
+			animation.Play("Lever1");
+			lever1 = false;
+		}
+		else {
+			animation.Play("Lever2");
+			lever1 = true;
+		}
+	
 		if(currentSpeed<topSpeed)
 		{
 			WheelTraction.motorTorque += forcePercent*torqueMax;
@@ -250,6 +263,33 @@ public class BogieCarMovement : MonoBehaviour {
 
 	public void Steer(float steerPercent)
 	{
+		if (steerPercent < 0) {
+			if (!animation.isPlaying)
+				animation.Play ("Left");
+			else {
+				if (animation.IsPlaying("Left")) {
+					animation.Play ("Left");
+				}
+				else {
+					animation.Blend ("Right",0f,0.5f);
+					animation.Blend ("Left",1f,0.5f);
+				}
+			}
+		}
+		else {
+			if (!animation.isPlaying)
+				animation.Play ("Right");
+			else {
+				if (animation.IsPlaying("Right")) {
+					animation.Play ("Right");
+				}
+				else {
+					animation.Blend ("Left",0f,0.5f);
+					animation.Blend ("Right",1f,0.5f);
+				}
+			}
+		}
+
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
 		float currentSteerAngle = Mathf.Lerp(lowSpeedSteerAngle,highSpeedSteerAngle,speedFactor);
 
