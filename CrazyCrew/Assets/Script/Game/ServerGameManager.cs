@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Threading;
 using System;
@@ -13,11 +12,13 @@ public class ServerGameManager : MonoBehaviour {
 	private int numberOfPlayers = 3;
 	private ArrayList players = new ArrayList();
 	private ServerBogieCar serverBogieCar;
-	private PlayerCount playerCount;
+	//private PlayerCount playerCount;
 	private RaceManager raceManager;
 
 	public AudioSource restart;
 	public AudioSource exit;
+
+	private TextMesh player1,player2,player3;
 
 	public ArrayList getPlayers()
 	{
@@ -30,7 +31,10 @@ public class ServerGameManager : MonoBehaviour {
 		initialTimeScale = Time.timeScale;
 		serverBogieCar = (ServerBogieCar) gameObject.GetComponent("ServerBogieCar");
 
-		playerCount = (PlayerCount) GameObject.Find ("PlayerCountText").GetComponent("PlayerCount");
+		player1 = (TextMesh) GameObject.Find ("Player1").GetComponent("TextMesh");
+		player2 = (TextMesh) GameObject.Find ("Player2").GetComponent("TextMesh");
+		player3 = (TextMesh) GameObject.Find ("Player3").GetComponent("TextMesh");
+		//playerCount = (PlayerCount) GameObject.Find ("PlayerCountText").GetComponent("PlayerCount");
 	}
 
 	// Update is called once per frame
@@ -92,7 +96,31 @@ public class ServerGameManager : MonoBehaviour {
 			if(players.Count < numberOfPlayers)
 			{
 				players.Add(new Player(np));
-				playerCount.incrementNumber();
+				if (players.Count == 1) {
+					player1.color = Color.green;
+					player1.text = "Connected!";
+					player2.color = Color.red;
+					player2.text = "Disconnected...";
+					player3.color = Color.red;
+					player3.text = "Disconnected...";
+				}
+				else if (players.Count == 2) {
+					player1.color = Color.green;
+					player1.text = "Connected!";
+					player2.color = Color.green;
+					player2.text = "Connected";
+					player3.color = Color.red;
+					player3.text = "Disconnected...";
+				}
+				else if (players.Count == 3) {
+					player1.color = Color.green;
+					player1.text = "Connected!";
+					player2.color = Color.green;
+					player2.text = "Connected";
+					player3.color = Color.green;
+					player3.text = "Connected";
+				}
+				//playerCount.incrementNumber();
 			}
 		}
 		else
@@ -111,7 +139,31 @@ public class ServerGameManager : MonoBehaviour {
 			object o = getPlayer(np);
 			players.Remove(o);
 			Debug.Log("Player: "+np+" disconnesso");
-			playerCount.decrementNumber();
+			if (players.Count == 1) {
+				player1.color = Color.green;
+				player1.text = "Connected!";
+				player2.color = Color.red;
+				player2.text = "Disconnected...";
+				player3.color = Color.red;
+				player3.text = "Disconnected...";
+			}
+			else if (players.Count == 2) {
+				player1.color = Color.green;
+				player1.text = "Connected!";
+				player2.color = Color.green;
+				player2.text = "Connected!";
+				player3.color = Color.red;
+				player3.text = "Disconnected...";
+			}
+			else if (players.Count == 0) {
+				player1.color = Color.red;
+				player1.text = "Disconnected...";
+				player2.color = Color.red;
+				player2.text = "Disconnected...";
+				player3.color = Color.red;
+				player3.text = "Disconnected...";
+			}
+			//playerCount.decrementNumber();
 		}
 		else
 		{

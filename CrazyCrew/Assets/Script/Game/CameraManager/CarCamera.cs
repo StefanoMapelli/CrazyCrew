@@ -65,8 +65,12 @@ public class CarCamera : MonoBehaviour {
 	public void cameraOnFinishMenu()
 	{
 		finishMenu=true;
-		transform.position=new Vector3(14.4843f,-13.1f,110f);
-		transform.rotation=new Quaternion(0,0,0,0);
+		//transform.position=new Vector3(14.4843f,-13.1f,80f);
+		//transform.rotation=new Quaternion(0,0,0,0);
+		Camera cam = (Camera) GameObject.Find ("Camera1").GetComponent("Camera");
+		cam.enabled = true;
+
+		((Camera)this.GetComponent("Camera")).enabled = false;
 
 	}
 

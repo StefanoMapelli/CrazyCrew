@@ -19,15 +19,15 @@ public class RestartRace : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
+		//((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		serverGameManager.restartGame();
 		//((RaceManager)raceManager.GetComponent("RaceManager")).RestartRace ();
 	}
 
 	void OnMouseUp()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
-		gameObject.audio.Play ();
+		//((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
+		//gameObject.audio.Play ();
 	}
 
 }
