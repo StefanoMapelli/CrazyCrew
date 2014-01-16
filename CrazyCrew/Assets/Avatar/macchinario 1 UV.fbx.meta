@@ -1,0 +1,125 @@
+fileFormatVersion: 2
+guid: 37e552b7fd452ed4d92a62aa105eb0b9
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Camera_Interest
+    100004: Camera_Root
+    100006: light
+    100008: //RootNode
+    100010: MACCHINARIO_1:base
+    100012: MACCHINARIO_1:Braccio_orizzontale
+    100014: MACCHINARIO_1:corda_arrotolata_001
+    100016: MACCHINARIO_1:corda_arrotolata_002
+    100018: MACCHINARIO_1:corda_arrotolata_003
+    100020: MACCHINARIO_1:corda_arrotolata_004
+    100022: MACCHINARIO_1:corda_arrotolata_005
+    100024: MACCHINARIO_1:Corda_pendente
+    100026: MACCHINARIO_1:ingranaggio
+    100028: MACCHINARIO_1:MACCHINARIO_1
+    100030: MACCHINARIO_1:trave
+    100032: MACCHINARIO_1:vite_ingranaggio
+    400000: Camera
+    400002: Camera_Interest
+    400004: Camera_Root
+    400006: light
+    400008: //RootNode
+    400010: MACCHINARIO_1:base
+    400012: MACCHINARIO_1:Braccio_orizzontale
+    400014: MACCHINARIO_1:corda_arrotolata_001
+    400016: MACCHINARIO_1:corda_arrotolata_002
+    400018: MACCHINARIO_1:corda_arrotolata_003
+    400020: MACCHINARIO_1:corda_arrotolata_004
+    400022: MACCHINARIO_1:corda_arrotolata_005
+    400024: MACCHINARIO_1:Corda_pendente
+    400026: MACCHINARIO_1:ingranaggio
+    400028: MACCHINARIO_1:MACCHINARIO_1
+    400030: MACCHINARIO_1:trave
+    400032: MACCHINARIO_1:vite_ingranaggio
+    2300000: MACCHINARIO_1:base
+    2300002: MACCHINARIO_1:Braccio_orizzontale
+    2300004: MACCHINARIO_1:corda_arrotolata_001
+    2300006: MACCHINARIO_1:corda_arrotolata_002
+    2300008: MACCHINARIO_1:corda_arrotolata_003
+    2300010: MACCHINARIO_1:corda_arrotolata_004
+    2300012: MACCHINARIO_1:corda_arrotolata_005
+    2300014: MACCHINARIO_1:Corda_pendente
+    2300016: MACCHINARIO_1:ingranaggio
+    2300018: MACCHINARIO_1:trave
+    2300020: MACCHINARIO_1:vite_ingranaggio
+    3300000: MACCHINARIO_1:base
+    3300002: MACCHINARIO_1:Braccio_orizzontale
+    3300004: MACCHINARIO_1:corda_arrotolata_001
+    3300006: MACCHINARIO_1:corda_arrotolata_002
+    3300008: MACCHINARIO_1:corda_arrotolata_003
+    3300010: MACCHINARIO_1:corda_arrotolata_004
+    3300012: MACCHINARIO_1:corda_arrotolata_005
+    3300014: MACCHINARIO_1:Corda_pendente
+    3300016: MACCHINARIO_1:ingranaggio
+    3300018: MACCHINARIO_1:trave
+    3300020: MACCHINARIO_1:vite_ingranaggio
+    4300000: MACCHINARIO_1:base
+    4300002: MACCHINARIO_1:trave
+    4300004: MACCHINARIO_1:Braccio_orizzontale
+    4300006: MACCHINARIO_1:vite_ingranaggio
+    4300008: MACCHINARIO_1:Corda_pendente
+    4300010: MACCHINARIO_1:ingranaggio
+    4300012: MACCHINARIO_1:corda_arrotolata_001
+    4300014: MACCHINARIO_1:corda_arrotolata_002
+    4300016: MACCHINARIO_1:corda_arrotolata_003
+    4300018: MACCHINARIO_1:corda_arrotolata_004
+    4300020: MACCHINARIO_1:corda_arrotolata_005
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  userData: 
