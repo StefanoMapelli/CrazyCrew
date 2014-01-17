@@ -419,7 +419,7 @@ public class BogieCarMovement : MonoBehaviour {
 							bonusText.text="SWITCH CONTROLLER";
 							serverBogieCar.assignRoles();
 							malusActive = false;
-							StartCoroutine (SwitchWaiting);
+							StartCoroutine (SwitchWaiting());
 							break;
 						}
 						
@@ -437,7 +437,8 @@ public class BogieCarMovement : MonoBehaviour {
 			}
 		}
 
-	IEnumerator SwitchWaiting(){
+	IEnumerator SwitchWaiting()
+	{
 		yield return new WaitForSeconds(4);
 		bonusText.text="";
 	}
