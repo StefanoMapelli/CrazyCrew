@@ -19,6 +19,7 @@ public class PowerUp : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
+		Debug.Log("Bonus colpito");
 		//quando c'è collisione l'oggetto scompare sotto il terreno
 		transform.Translate(new Vector3(0,-10,0));
 	}
