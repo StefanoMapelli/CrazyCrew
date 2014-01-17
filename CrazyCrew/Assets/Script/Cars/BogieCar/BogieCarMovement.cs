@@ -432,24 +432,26 @@ public class BogieCarMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		Debug.Log("sono in collision enter ramo else, colliso con"+collision.gameObject.name);
-		GameObject  obj = collision.gameObject;
+		if(collision.gameObject.tag != "Terrain")
+		{
+			Debug.Log("sono in collision enter ramo else, colliso con"+collision.gameObject.name);
+			GameObject  obj = collision.gameObject;
 
-		if(currentSpeed <25 || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed <25))
-		{
-			collision1.Play();
-		}
-		//collisione generica
-		if((currentSpeed >=25 && currentSpeed < 50) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 25 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 50))
-		{
-			collision2.Play();
-		}
-		else 
+			if(currentSpeed <25 || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed <25))
 			{
-			if((currentSpeed>=50 && currentSpeed<75) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 50 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 75))
-				{
-					collision3.Play();
-				}
+				collision1.Play();
+			}
+			//collisione generica
+			if((currentSpeed >=25 && currentSpeed < 50) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 25 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 50))
+			{
+				collision2.Play();
+			}
+			else 
+			{
+				if((currentSpeed>=50 && currentSpeed<75) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 50 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 75))
+					{
+						collision3.Play();
+					}
 				else
 				{
 				if((currentSpeed>=75 && currentSpeed<100) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 75 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 100))
@@ -473,6 +475,7 @@ public class BogieCarMovement : MonoBehaviour {
 					}
 				}
 			}
+	}
 	
 	//GESTIONE POWER-UP
 	//BONUS
