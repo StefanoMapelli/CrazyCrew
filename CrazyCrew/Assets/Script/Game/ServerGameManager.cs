@@ -108,7 +108,7 @@ public class ServerGameManager : MonoBehaviour {
 					player1.color = Color.green;
 					player1.text = "Connected!";
 					player2.color = Color.green;
-					player2.text = "Connected";
+					player2.text = "Connected!";
 					player3.color = Color.red;
 					player3.text = "Disconnected...";
 				}
@@ -116,9 +116,9 @@ public class ServerGameManager : MonoBehaviour {
 					player1.color = Color.green;
 					player1.text = "Connected!";
 					player2.color = Color.green;
-					player2.text = "Connected";
+					player2.text = "Connected!";
 					player3.color = Color.green;
-					player3.text = "Connected";
+					player3.text = "Connected!";
 				}
 				//playerCount.incrementNumber();
 			}
