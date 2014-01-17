@@ -114,7 +114,7 @@ public class BogieCarMovement : MonoBehaviour {
 		lastPosition = this.transform.position;
 		lastRotation = this.transform.rotation;
 
-		animation = (Animation) GameObject.Find ("Avanti Finita 003").GetComponent("Animation");
+//		animation = (Animation) GameObject.Find ("Avanti Finita 003").GetComponent("Animation");
 	}
 
 	public Bonus getBonus()
@@ -224,11 +224,11 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		leverSound.Play();
 		if (lever1) {
-			animation.Play("Lever1");
+			//animation.Play("Lever1");
 			lever1 = false;
 		}
 		else {
-			animation.Play("Lever2");
+			//animation.Play("Lever2");
 			lever1 = true;
 		}
 	
@@ -264,7 +264,7 @@ public class BogieCarMovement : MonoBehaviour {
 	public void Steer(float steerPercent)
 	{
 		if (steerPercent < 0) {
-			if (!animation.isPlaying)
+		/*	if (!animation.isPlaying)
 				animation.Play ("Left");
 			else {
 				if (animation.IsPlaying("Left")) {
@@ -287,7 +287,7 @@ public class BogieCarMovement : MonoBehaviour {
 					animation.Blend ("Left",0f,0.5f);
 					animation.Blend ("Right",1f,0.5f);
 				}
-			}
+			}*/
 		}
 
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
