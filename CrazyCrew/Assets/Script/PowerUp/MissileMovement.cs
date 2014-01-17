@@ -10,8 +10,10 @@ public class MissileMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		car=GameObject.Find("_BogieCarModel");
+		GameObject.Find("BonusText").GetComponent<TextMesh>().text="";
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 

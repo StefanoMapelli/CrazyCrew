@@ -7,6 +7,7 @@ public class PoopBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		GameObject.Find("BonusText").GetComponent<TextMesh>().text="";
 	
 	}
 	

@@ -64,8 +64,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 	private int malusSteerRotation=0;
 	private ArrayList mudSpotsList = new ArrayList();
-
-	public TextMesh infoText;
+	
+	public TextMesh bonusText;
 
 	public TimeSpan finalTime;
 
@@ -114,7 +114,7 @@ public class BogieCarMovement : MonoBehaviour {
 		lastPosition = this.transform.position;
 		lastRotation = this.transform.rotation;
 
-//		animation = (Animation) GameObject.Find ("Avanti Finita 003").GetComponent("Animation");
+		animation = (Animation) GameObject.Find ("Avanti Finita 003").GetComponent("Animation");
 	}
 
 	public Bonus getBonus()
@@ -152,13 +152,15 @@ public class BogieCarMovement : MonoBehaviour {
 	public void WheelRotate()
 	{
 		WheelTractionRPM = WheelTraction.rpm;
+		//(0,0,-WheelFR.rpm/60*360*Time.deltaTime)
+		WheelFRTransform.Rotate(0,0,-WheelFR.rpm/60*360*Time.deltaTime,Space.Self);
+		WheelRLTransform.Rotate(0,0,WheelRL.rpm/60*360*Time.deltaTime,Space.Self);
+		WheelRRTransform.Rotate(0,0,-WheelRR.rpm/60*360*Time.deltaTime,Space.Self);
+		WheelFLTransform.Rotate(0,0,WheelFL.rpm/60*360*Time.deltaTime,Space.Self);
 
-		WheelFRTransform.Rotate(0,-WheelFR.rpm/60*360*Time.deltaTime,0);
-		WheelRLTransform.Rotate(0,-WheelRL.rpm/60*360*Time.deltaTime,0);
-		WheelRRTransform.Rotate(0,-WheelRR.rpm/60*360*Time.deltaTime,0);
-		WheelFLTransform.Rotate(0,-WheelRR.rpm/60*360*Time.deltaTime,0);
-		WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,WheelFL.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
-		WheelFRTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,WheelFR.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
+		//TODO: visualizzare sterzata
+		//WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x+WheelFL.steerAngle,WheelFLTransform.localEulerAngles.y,WheelFLTransform.localEulerAngles.z);
+		//WheelFRTransform.localEulerAngles=new Vector3(WheelFRTransform.localEulerAngles.x-WheelFR.steerAngle,WheelFRTransform.localEulerAngles.y,WheelFRTransform.localEulerAngles.z);
 
 	}
 	
@@ -224,11 +226,11 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		leverSound.Play();
 		if (lever1) {
-			//animation.Play("Lever1");
+			animation.Play("Lever1");
 			lever1 = false;
 		}
 		else {
-			//animation.Play("Lever2");
+			animation.Play("Lever2");
 			lever1 = true;
 		}
 	
@@ -264,7 +266,7 @@ public class BogieCarMovement : MonoBehaviour {
 	public void Steer(float steerPercent)
 	{
 		if (steerPercent < 0) {
-		/*	if (!animation.isPlaying)
+			if (!animation.isPlaying)
 				animation.Play ("Left");
 			else {
 				if (animation.IsPlaying("Left")) {
@@ -287,7 +289,7 @@ public class BogieCarMovement : MonoBehaviour {
 					animation.Blend ("Left",0f,0.5f);
 					animation.Blend ("Right",1f,0.5f);
 				}
-			}*/
+			}
 		}
 
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
@@ -295,9 +297,9 @@ public class BogieCarMovement : MonoBehaviour {
 
 		currentSteerAngle = (currentSteerAngle*steerPercent) + malusSteerRotation;
 
-		
 		WheelFL.steerAngle = currentSteerAngle+poopFactor;
 		WheelFR.steerAngle = currentSteerAngle+poopFactor;
+
 	}
 	
 	IEnumerator Finish ()
@@ -345,7 +347,7 @@ public class BogieCarMovement : MonoBehaviour {
 			}
 			else
 			{
-				if(other.gameObject.name == "BonusObject")
+				if(other.gameObject.tag == "Bonus")
 				{
 					bonusSound.Play();
 
@@ -356,12 +358,14 @@ public class BogieCarMovement : MonoBehaviour {
 					{
 					case 1:
 					{
+						bonusText.text="MISSILE READY!!!";
 						bonusAcquired = new BonusMissile();
 						break;
 					}
 				
 					case 2:
 					{
+						bonusText.text="POOP KEPT!!!";
 						bonusAcquired = new BonusPoop();
 						break;
 					}
@@ -374,6 +378,7 @@ public class BogieCarMovement : MonoBehaviour {
 				
 					case 4:
 					{
+						bonusText.text="TURBO READY TO GO!!!";
 						bonusAcquired = new BonusSpeed();
 						break;	
 					}
@@ -387,7 +392,7 @@ public class BogieCarMovement : MonoBehaviour {
 					}
 					else
 					{
-						if(other.gameObject.name == "MalusObject" && !malusActive)
+						if(other.gameObject.tag == "Malus" && !malusActive)
 						{
 						malusActive = true;
 
@@ -411,8 +416,10 @@ public class BogieCarMovement : MonoBehaviour {
 
 						case 3:
 						{
+							bonusText.text="SWITCH CONTROLLER";
 							serverBogieCar.assignRoles();
 							malusActive = false;
+							StartCoroutine (SwitchWaiting);
 							break;
 						}
 						
@@ -429,6 +436,11 @@ public class BogieCarMovement : MonoBehaviour {
 				}	
 			}
 		}
+
+	IEnumerator SwitchWaiting(){
+		yield return new WaitForSeconds(4);
+		bonusText.text="";
+	}
 
 	void OnCollisionEnter(Collision collision)
 	{
@@ -489,21 +501,21 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator BonusSpeed()
 	{
 		turboSound.Play();
-		infoText.text="TURBOOOOOO";
+		bonusText.text="TURBOOOOOO";
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
 		yield return new WaitForSeconds(0.5f);
 		StartCoroutine (StopTorque(torqueMax*speedMultiplierBonus));
-		infoText.text="";
+		bonusText.text="";
 	}
 
 	//powerUp: il tempo viene decrementato di un valore tra 5 e 10 secondi
 	IEnumerator BonusTime()
 	{
 		int bonusTime = UnityEngine.Random.Range(5,11);
-		infoText.text="BONUS TIME: " +bonusTime+ "sec";
+		bonusText.text="BONUS TIME: " +bonusTime+ "sec";
 		((RaceManager)raceManager.GetComponent ("RaceManager")).bonusTime(bonusTime);
 		yield return new WaitForSeconds(3);
-		infoText.text="";
+		bonusText.text="";
 	}
 
 
@@ -533,9 +545,9 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator MalusReductionNotify()
 	{
 		ackSound.Play();
-		infoText.text=" Malus reduced...GOOD JOB!";
+		bonusText.text=" Malus reduced...GOOD JOB!";
 		yield return new WaitForSeconds(2);
-		infoText.text="";
+		bonusText.text="";
 	}
 
 	IEnumerator MalusSteerFailure()
@@ -552,14 +564,14 @@ public class BogieCarMovement : MonoBehaviour {
 	
 		for(int i=0;i<malusDuration;i++)
 		{
-			infoText.text="STEER FAILURE! Press the button to reduce it!";
+			bonusText.text="STEER FAILURE! Press the button to reduce it!";
 			yield return new WaitForSeconds(1);
 		}
 
 		serverBogieCar.malusEnded();
 		malusDuration=5;
 		malusSteerRotation=0;
-		infoText.text="";
+		bonusText.text="";
 		malusActive = false;
 	}
 
@@ -573,14 +585,14 @@ public class BogieCarMovement : MonoBehaviour {
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			infoText.text="LEVER FAILURE! Press the button to reduce it!";
+			bonusText.text="LEVER FAILURE! Press the button to reduce it!";
 			yield return new WaitForSeconds(1);
 		}
 
 		serverBogieCar.slowDown(false);
 		serverBogieCar.malusEnded();
 		malusDuration=5;
-		infoText.text="";
+		bonusText.text="";
 		malusActive = false;
 	}
 
@@ -601,7 +613,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			infoText.text="MUD ON THE SCREEN! Press the button to clean it!";
+			bonusText.text="MUD ON THE SCREEN! Press the button to clean it!";
 			yield return new WaitForSeconds(1);
 		}
 
@@ -618,7 +630,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		serverBogieCar.malusEnded();
 		malusDuration=5;
-		infoText.text="";
+		bonusText.text="";
 		malusActive = false;
 	}
 }

@@ -1,0 +1,1023 @@
+fileFormatVersion: 2
+guid: 8c48907e2b1f5a34f8cba18bdd1f2cbd
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: be_carr__PERNOEND01
+    100004: be_carr__VOLANTEEND01
+    100006: be_headEND01
+    100008: be_headEND01_2
+    100010: be_headEND01_3
+    100012: be_l_earEND01
+    100014: be_l_earEND01_2
+    100016: be_l_earEND01_3
+    100018: be_l_footEND01
+    100020: be_l_footEND01_2
+    100022: be_l_footEND01_3
+    100024: be_l_handEND01
+    100026: be_l_handEND01_2
+    100028: be_l_handEND01_3
+    100030: be_l_ruotaAEND01
+    100032: be_l_ruotaPEND01
+    100034: be_mouthEND01
+    100036: be_mouthEND01_2
+    100038: be_mouthEND01_3
+    100040: be_r_earEND01
+    100042: be_r_earEND01_2
+    100044: be_r_earEND01_3
+    100046: be_r_footEND01
+    100048: be_r_footEND01_2
+    100050: be_r_footEND01_3
+    100052: be_r_handEND01
+    100054: be_r_handEND01_2
+    100056: be_r_handEND01_3
+    100058: be_r_ruotaAEND01
+    100060: be_r_ruotaPEND01
+    100062: bn_carr__PERNO01
+    100064: bn_carr__VOLANTEA01
+    100066: bn_carrelloROOT_01
+    100068: bn_CiccioROOT_01
+    100070: bn_FottutoROOT_01
+    100072: bn_headA01
+    100074: bn_headA01_2
+    100076: bn_headA01_3
+    100078: bn_l_armA01
+    100080: bn_l_armA01_2
+    100082: bn_l_armA01_3
+    100084: bn_l_armB01
+    100086: bn_l_armB01_2
+    100088: bn_l_armB01_3
+    100090: bn_l_earA01
+    100092: bn_l_earA01_2
+    100094: bn_l_earA01_3
+    100096: bn_l_legA01
+    100098: bn_l_legA01_2
+    100100: bn_l_legA01_3
+    100102: bn_l_legB01
+    100104: bn_l_legB01_2
+    100106: bn_l_legB01_3
+    100108: bn_l_ruotaAA01
+    100110: bn_l_ruotaPA01
+    100112: bn_mouthA01
+    100114: bn_mouthA01_2
+    100116: bn_mouthA01_3
+    100118: bn_r_armA01
+    100120: bn_r_armA01_2
+    100122: bn_r_armA01_3
+    100124: bn_r_armB01
+    100126: bn_r_armB01_2
+    100128: bn_r_armB01_3
+    100130: bn_r_earA01
+    100132: bn_r_earA01_2
+    100134: bn_r_earA01_3
+    100136: bn_r_legA01
+    100138: bn_r_legA01_2
+    100140: bn_r_legA01_3
+    100142: bn_r_legB01
+    100144: bn_r_legB01_2
+    100146: bn_r_legB01_3
+    100148: bn_r_ruotaAA01
+    100150: bn_r_ruotaPA01
+    100152: bn_rinkoROOT_01
+    100154: bn_spine01
+    100156: bn_spine01_2
+    100158: bn_spine01_3
+    100160: Carrello
+    100162: Ciccio
+    100164: ctrl_CoG01
+    100166: ctrl_CoG01_2
+    100168: ctrl_CoG01_3
+    100170: ctrl_l_ear01
+    100172: ctrl_l_ear01_2
+    100174: ctrl_l_ear01_3
+    100176: ctrl_l_foot01
+    100178: ctrl_l_foot01_2
+    100180: ctrl_l_foot01_3
+    100182: ctrl_l_hand01
+    100184: ctrl_l_hand01_2
+    100186: ctrl_l_hand01_3
+    100188: ctrl_l_ruotaA01
+    100190: ctrl_l_ruotaP01
+    100192: ctrl_manubrio01
+    100194: ctrl_r_ear01
+    100196: ctrl_r_ear01_2
+    100198: ctrl_r_ear01_3
+    100200: ctrl_r_foot01
+    100202: ctrl_r_foot01_2
+    100204: ctrl_r_foot01_3
+    100206: ctrl_r_hand01
+    100208: ctrl_r_hand01_2
+    100210: ctrl_r_hand01_3
+    100212: ctrl_r_ruotaA01
+    100214: ctrl_r_ruotaP01
+    100216: ctrl_volante01
+    100218: Fottuto
+    100220: Fottuto_orecchino
+    100222: GLOBAL_M_BONE
+    100224: GLOBAL_M_MESH
+    100226: GLOBAL_M_RIG
+    100228: GLOBALctrl_Carrello01
+    100230: GLOBALctrl_Ciccio01
+    100232: GLOBALctrl_Fottuto01
+    100234: GLOBALctrl_Rinko01
+    100236: GOAL_l_arm01
+    100238: GOAL_l_arm01_2
+    100240: GOAL_l_arm01_3
+    100242: GOAL_l_leg01
+    100244: GOAL_l_leg01_2
+    100246: GOAL_l_leg01_3
+    100248: GOAL_r_arm01
+    100250: GOAL_r_arm01_2
+    100252: GOAL_r_arm01_3
+    100254: GOAL_r_leg01
+    100256: GOAL_r_leg01_2
+    100258: GOAL_r_leg01_3
+    100260: GOAL_spine01
+    100262: GOAL_spine01_2
+    100264: GOAL_spine01_3
+    100266: maniglia_l_
+    100268: maniglia_r_
+    100270: POLE_l_arm01
+    100272: POLE_l_arm01_2
+    100274: POLE_l_arm01_3
+    100276: POLE_r_arm01
+    100278: POLE_r_arm01_2
+    100280: POLE_r_arm01_3
+    100282: Rinko
+    100284: sc_mouth01
+    100286: sc_mouth01_2
+    100288: sc_mouth01_3
+    100290: Skin
+    100292: Skin_2
+    100294: Skin_3
+    100296: Skin_4
+    100298: Skin_5
+    400000: //RootNode
+    400002: be_carr__PERNOEND01
+    400004: be_carr__VOLANTEEND01
+    400006: be_headEND01
+    400008: be_headEND01_2
+    400010: be_headEND01_3
+    400012: be_l_earEND01
+    400014: be_l_earEND01_2
+    400016: be_l_earEND01_3
+    400018: be_l_footEND01
+    400020: be_l_footEND01_2
+    400022: be_l_footEND01_3
+    400024: be_l_handEND01
+    400026: be_l_handEND01_2
+    400028: be_l_handEND01_3
+    400030: be_l_ruotaAEND01
+    400032: be_l_ruotaPEND01
+    400034: be_mouthEND01
+    400036: be_mouthEND01_2
+    400038: be_mouthEND01_3
+    400040: be_r_earEND01
+    400042: be_r_earEND01_2
+    400044: be_r_earEND01_3
+    400046: be_r_footEND01
+    400048: be_r_footEND01_2
+    400050: be_r_footEND01_3
+    400052: be_r_handEND01
+    400054: be_r_handEND01_2
+    400056: be_r_handEND01_3
+    400058: be_r_ruotaAEND01
+    400060: be_r_ruotaPEND01
+    400062: bn_carr__PERNO01
+    400064: bn_carr__VOLANTEA01
+    400066: bn_carrelloROOT_01
+    400068: bn_CiccioROOT_01
+    400070: bn_FottutoROOT_01
+    400072: bn_headA01
+    400074: bn_headA01_2
+    400076: bn_headA01_3
+    400078: bn_l_armA01
+    400080: bn_l_armA01_2
+    400082: bn_l_armA01_3
+    400084: bn_l_armB01
+    400086: bn_l_armB01_2
+    400088: bn_l_armB01_3
+    400090: bn_l_earA01
+    400092: bn_l_earA01_2
+    400094: bn_l_earA01_3
+    400096: bn_l_legA01
+    400098: bn_l_legA01_2
+    400100: bn_l_legA01_3
+    400102: bn_l_legB01
+    400104: bn_l_legB01_2
+    400106: bn_l_legB01_3
+    400108: bn_l_ruotaAA01
+    400110: bn_l_ruotaPA01
+    400112: bn_mouthA01
+    400114: bn_mouthA01_2
+    400116: bn_mouthA01_3
+    400118: bn_r_armA01
+    400120: bn_r_armA01_2
+    400122: bn_r_armA01_3
+    400124: bn_r_armB01
+    400126: bn_r_armB01_2
+    400128: bn_r_armB01_3
+    400130: bn_r_earA01
+    400132: bn_r_earA01_2
+    400134: bn_r_earA01_3
+    400136: bn_r_legA01
+    400138: bn_r_legA01_2
+    400140: bn_r_legA01_3
+    400142: bn_r_legB01
+    400144: bn_r_legB01_2
+    400146: bn_r_legB01_3
+    400148: bn_r_ruotaAA01
+    400150: bn_r_ruotaPA01
+    400152: bn_rinkoROOT_01
+    400154: bn_spine01
+    400156: bn_spine01_2
+    400158: bn_spine01_3
+    400160: Carrello
+    400162: Ciccio
+    400164: ctrl_CoG01
+    400166: ctrl_CoG01_2
+    400168: ctrl_CoG01_3
+    400170: ctrl_l_ear01
+    400172: ctrl_l_ear01_2
+    400174: ctrl_l_ear01_3
+    400176: ctrl_l_foot01
+    400178: ctrl_l_foot01_2
+    400180: ctrl_l_foot01_3
+    400182: ctrl_l_hand01
+    400184: ctrl_l_hand01_2
+    400186: ctrl_l_hand01_3
+    400188: ctrl_l_ruotaA01
+    400190: ctrl_l_ruotaP01
+    400192: ctrl_manubrio01
+    400194: ctrl_r_ear01
+    400196: ctrl_r_ear01_2
+    400198: ctrl_r_ear01_3
+    400200: ctrl_r_foot01
+    400202: ctrl_r_foot01_2
+    400204: ctrl_r_foot01_3
+    400206: ctrl_r_hand01
+    400208: ctrl_r_hand01_2
+    400210: ctrl_r_hand01_3
+    400212: ctrl_r_ruotaA01
+    400214: ctrl_r_ruotaP01
+    400216: ctrl_volante01
+    400218: Fottuto
+    400220: Fottuto_orecchino
+    400222: GLOBAL_M_BONE
+    400224: GLOBAL_M_MESH
+    400226: GLOBAL_M_RIG
+    400228: GLOBALctrl_Carrello01
+    400230: GLOBALctrl_Ciccio01
+    400232: GLOBALctrl_Fottuto01
+    400234: GLOBALctrl_Rinko01
+    400236: GOAL_l_arm01
+    400238: GOAL_l_arm01_2
+    400240: GOAL_l_arm01_3
+    400242: GOAL_l_leg01
+    400244: GOAL_l_leg01_2
+    400246: GOAL_l_leg01_3
+    400248: GOAL_r_arm01
+    400250: GOAL_r_arm01_2
+    400252: GOAL_r_arm01_3
+    400254: GOAL_r_leg01
+    400256: GOAL_r_leg01_2
+    400258: GOAL_r_leg01_3
+    400260: GOAL_spine01
+    400262: GOAL_spine01_2
+    400264: GOAL_spine01_3
+    400266: maniglia_l_
+    400268: maniglia_r_
+    400270: POLE_l_arm01
+    400272: POLE_l_arm01_2
+    400274: POLE_l_arm01_3
+    400276: POLE_r_arm01
+    400278: POLE_r_arm01_2
+    400280: POLE_r_arm01_3
+    400282: Rinko
+    400284: sc_mouth01
+    400286: sc_mouth01_2
+    400288: sc_mouth01_3
+    400290: Skin
+    400292: Skin_2
+    400294: Skin_3
+    400296: Skin_4
+    400298: Skin_5
+    4300000: Fottuto
+    4300002: Fottuto_orecchino
+    4300004: Rinko
+    4300006: Ciccio
+    4300008: Carrello
+    7400000: Lever1
+    7400002: Lever2
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Carrello
+    13700002: Ciccio
+    13700004: Fottuto
+    13700006: Fottuto_orecchino
+    13700008: Rinko
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Lever1
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GLOBAL_M_BONE
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__PERNO01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__PERNO01/be_carr__PERNOEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__VOLANTEA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__VOLANTEA01/be_carr__VOLANTEEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaAA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaAA01/be_l_ruotaAEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaPA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaPA01/be_l_ruotaPEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaAA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaAA01/be_r_ruotaAEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaPA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaPA01/be_r_ruotaPEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_l_legA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_l_legA01/bn_l_legB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_l_legA01/bn_l_legB01/be_l_footEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_r_legA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_r_legA01/bn_r_legB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_r_legA01/bn_r_legB01/be_r_footEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/be_headEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_l_earA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_l_earA01/be_l_earEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_mouthA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_mouthA01/be_mouthEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_r_earA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_r_earA01/be_r_earEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_l_armA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_l_armA01/bn_l_armB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_l_armA01/bn_l_armB01/be_l_handEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_r_armA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_r_armA01/bn_r_armB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_r_armA01/bn_r_armB01/be_r_handEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_l_legA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_l_legA01_3/bn_l_legB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_l_legA01_3/bn_l_legB01_3/be_l_footEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_r_legA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_r_legA01_3/bn_r_legB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_r_legA01_3/bn_r_legB01_3/be_r_footEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/be_headEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_l_earA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_l_earA01_3/be_l_earEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_mouthA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_mouthA01_3/be_mouthEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_r_earA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_r_earA01_3/be_r_earEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_l_armA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_l_armA01_3/bn_l_armB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_l_armA01_3/bn_l_armB01_3/be_l_handEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_r_armA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_r_armA01_3/bn_r_armB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_r_armA01_3/bn_r_armB01_3/be_r_handEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_l_legA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_l_legA01_2/bn_l_legB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_l_legA01_2/bn_l_legB01_2/be_l_footEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_r_legA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_r_legA01_2/bn_r_legB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_r_legA01_2/bn_r_legB01_2/be_r_footEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/be_headEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_l_earA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_l_earA01_2/be_l_earEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_mouthA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_mouthA01_2/be_mouthEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_r_earA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_r_earA01_2/be_r_earEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_l_armA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_l_armA01_2/bn_l_armB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_l_armA01_2/bn_l_armB01_2/be_l_handEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_r_armA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_r_armA01_2/bn_r_armB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_r_armA01_2/bn_r_armB01_2/be_r_handEND01_2
+        weight: 1
+      - path: GLOBAL_M_MESH
+        weight: 1
+      - path: GLOBAL_M_MESH/Carrello
+        weight: 1
+      - path: GLOBAL_M_MESH/Carrello/Skin_5
+        weight: 1
+      - path: GLOBAL_M_MESH/Ciccio
+        weight: 1
+      - path: GLOBAL_M_MESH/Ciccio/Skin_4
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto/Skin
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto_orecchino
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto_orecchino/Skin_2
+        weight: 1
+      - path: GLOBAL_M_MESH/Rinko
+        weight: 1
+      - path: GLOBAL_M_MESH/Rinko/Skin_3
+        weight: 1
+      - path: GLOBAL_M_RIG
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_l_ruotaA01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_l_ruotaP01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_manubrio01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_manubrio01/maniglia_l_
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_manubrio01/maniglia_r_
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_r_ruotaA01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_r_ruotaP01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_volante01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_l_foot01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_l_foot01/GOAL_l_leg01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_r_foot01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_r_foot01/GOAL_r_leg01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_l_hand01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_l_hand01/GOAL_l_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_r_hand01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_r_hand01/GOAL_r_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01/ctrl_l_ear01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01/ctrl_r_ear01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01/sc_mouth01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/POLE_l_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/POLE_r_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_l_foot01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_l_foot01_3/GOAL_l_leg01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_r_foot01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_r_foot01_3/GOAL_r_leg01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_l_hand01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_l_hand01_3/GOAL_l_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_r_hand01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_r_hand01_3/GOAL_r_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3/ctrl_l_ear01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3/ctrl_r_ear01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3/sc_mouth01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/POLE_l_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/POLE_r_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_l_foot01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_l_foot01_2/GOAL_l_leg01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_r_foot01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_r_foot01_2/GOAL_r_leg01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_l_hand01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_l_hand01_2/GOAL_l_arm01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_r_hand01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_r_hand01_2/GOAL_r_arm01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2/ctrl_l_ear01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2/ctrl_r_ear01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2/sc_mouth01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/POLE_l_arm01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/POLE_r_arm01_2
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Lever2
+      takeName: C4D Animation Take
+      firstFrame: 20
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: GLOBAL_M_BONE
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__PERNO01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__PERNO01/be_carr__PERNOEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__VOLANTEA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_carr__VOLANTEA01/be_carr__VOLANTEEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaAA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaAA01/be_l_ruotaAEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaPA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_l_ruotaPA01/be_l_ruotaPEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaAA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaAA01/be_r_ruotaAEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaPA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_carrelloROOT_01/bn_r_ruotaPA01/be_r_ruotaPEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_l_legA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_l_legA01/bn_l_legB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_l_legA01/bn_l_legB01/be_l_footEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_r_legA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_r_legA01/bn_r_legB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_r_legA01/bn_r_legB01/be_r_footEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/be_headEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_l_earA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_l_earA01/be_l_earEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_mouthA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_mouthA01/be_mouthEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_r_earA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_headA01/bn_r_earA01/be_r_earEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_l_armA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_l_armA01/bn_l_armB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_l_armA01/bn_l_armB01/be_l_handEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_r_armA01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_r_armA01/bn_r_armB01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_CiccioROOT_01/bn_spine01/bn_r_armA01/bn_r_armB01/be_r_handEND01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_l_legA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_l_legA01_3/bn_l_legB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_l_legA01_3/bn_l_legB01_3/be_l_footEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_r_legA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_r_legA01_3/bn_r_legB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_r_legA01_3/bn_r_legB01_3/be_r_footEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/be_headEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_l_earA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_l_earA01_3/be_l_earEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_mouthA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_mouthA01_3/be_mouthEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_r_earA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_headA01_3/bn_r_earA01_3/be_r_earEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_l_armA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_l_armA01_3/bn_l_armB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_l_armA01_3/bn_l_armB01_3/be_l_handEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_r_armA01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_r_armA01_3/bn_r_armB01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_FottutoROOT_01/bn_spine01_3/bn_r_armA01_3/bn_r_armB01_3/be_r_handEND01_3
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_l_legA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_l_legA01_2/bn_l_legB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_l_legA01_2/bn_l_legB01_2/be_l_footEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_r_legA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_r_legA01_2/bn_r_legB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_r_legA01_2/bn_r_legB01_2/be_r_footEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/be_headEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_l_earA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_l_earA01_2/be_l_earEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_mouthA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_mouthA01_2/be_mouthEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_r_earA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_headA01_2/bn_r_earA01_2/be_r_earEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_l_armA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_l_armA01_2/bn_l_armB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_l_armA01_2/bn_l_armB01_2/be_l_handEND01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_r_armA01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_r_armA01_2/bn_r_armB01_2
+        weight: 1
+      - path: GLOBAL_M_BONE/bn_rinkoROOT_01/bn_spine01_2/bn_r_armA01_2/bn_r_armB01_2/be_r_handEND01_2
+        weight: 1
+      - path: GLOBAL_M_MESH
+        weight: 1
+      - path: GLOBAL_M_MESH/Carrello
+        weight: 1
+      - path: GLOBAL_M_MESH/Carrello/Skin_5
+        weight: 1
+      - path: GLOBAL_M_MESH/Ciccio
+        weight: 1
+      - path: GLOBAL_M_MESH/Ciccio/Skin_4
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto/Skin
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto_orecchino
+        weight: 1
+      - path: GLOBAL_M_MESH/Fottuto_orecchino/Skin_2
+        weight: 1
+      - path: GLOBAL_M_MESH/Rinko
+        weight: 1
+      - path: GLOBAL_M_MESH/Rinko/Skin_3
+        weight: 1
+      - path: GLOBAL_M_RIG
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_l_ruotaA01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_l_ruotaP01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_manubrio01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_manubrio01/maniglia_l_
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_manubrio01/maniglia_r_
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_r_ruotaA01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_r_ruotaP01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Carrello01/ctrl_volante01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_l_foot01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_l_foot01/GOAL_l_leg01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_r_foot01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_CoG01/ctrl_r_foot01/GOAL_r_leg01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_l_hand01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_l_hand01/GOAL_l_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_r_hand01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/ctrl_r_hand01/GOAL_r_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01/ctrl_l_ear01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01/ctrl_r_ear01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/GOAL_spine01/sc_mouth01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/POLE_l_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Ciccio01/POLE_r_arm01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_l_foot01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_l_foot01_3/GOAL_l_leg01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_r_foot01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_CoG01_3/ctrl_r_foot01_3/GOAL_r_leg01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_l_hand01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_l_hand01_3/GOAL_l_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_r_hand01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/ctrl_r_hand01_3/GOAL_r_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3/ctrl_l_ear01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3/ctrl_r_ear01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/GOAL_spine01_3/sc_mouth01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/POLE_l_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Fottuto01/POLE_r_arm01_3
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_l_foot01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_l_foot01_2/GOAL_l_leg01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_r_foot01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_CoG01_2/ctrl_r_foot01_2/GOAL_r_leg01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_l_hand01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_l_hand01_2/GOAL_l_arm01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_r_hand01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/ctrl_r_hand01_2/GOAL_r_arm01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2/ctrl_l_ear01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2/ctrl_r_ear01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/GOAL_spine01_2/sc_mouth01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/POLE_l_arm01_2
+        weight: 1
+      - path: GLOBAL_M_RIG/GLOBALctrl_Rinko01/POLE_r_arm01_2
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  userData: 
