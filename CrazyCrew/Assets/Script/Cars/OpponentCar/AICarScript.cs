@@ -343,6 +343,7 @@ public class AICarScript : MonoBehaviour {
 			StartCoroutine(MissileEffect());
 		}
 
+		animateDamage();
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -420,19 +421,28 @@ public class AICarScript : MonoBehaviour {
 	}
 	
 	public void animateIdle() {
-		int val = UnityEngine.Random.Range(1,11);
-		if (val <= 6)
-			animation.CrossFade("Idle");
-		else 
-			animation.CrossFade("Idle2");
+		if (!raceFinished) {
+			if (!animation.isPlaying) {
+				int val = UnityEngine.Random.Range(1,11);
+				if (val <= 6)
+					animation.CrossFade("Idle");
+				else 
+					animation.CrossFade("Idle2");
+			}
+		}
 	}
 
 	public void animateSteer(float angle) {
-		if (angle > 0) {
-			animation.CrossFade("Right");
+		if (!raceFinished) {
+			if (angle > 0) 
+				animation.CrossFade("Right");
+			else if (angle < 0) 
+				animation.CrossFade("Left");
 		}
-		else if (angle < 0) {
-			animation.CrossFade("Left");
-		}
+	}
+
+	public void animateDamage() {
+		animation.Stop();
+		animation.Play ("Damage");
 	}
 }
