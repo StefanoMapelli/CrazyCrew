@@ -11,7 +11,7 @@ public class MissileMovement : MonoBehaviour {
 	void Start () {
 		car=GameObject.Find("_BogieCarModel");
 		GameObject.Find("BonusText").GetComponent<TextMesh>().text="";
-
+		StartCoroutine (DeleteMissile ());
 	}
 
 	// Update is called once per frame
@@ -25,13 +25,20 @@ public class MissileMovement : MonoBehaviour {
 		Debug.Log("explosion");
 		UnityEngine.Object explosion=Resources.Load("Prefab/Explosion");
 		GameObject explosionObject= GameObject.Instantiate(explosion, gameObject.transform.position,gameObject.transform.rotation) as GameObject;
-		Destroy(this.gameObject);
 		StartCoroutine(Explosion (explosionObject));
+		Destroy(this.gameObject);
+		//this.gameObject.SetActive (false);
 	}
 
 	IEnumerator Explosion(GameObject explosionObject)
 	{
 		yield return new WaitForSeconds(1);
 		Destroy(explosionObject);
+	}
+
+	IEnumerator DeleteMissile()
+	{
+		yield return new WaitForSeconds(5);
+		Destroy(this.gameObject);
 	}
 }
