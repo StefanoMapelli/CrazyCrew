@@ -225,12 +225,29 @@ public class BogieCarMovement : MonoBehaviour {
 	public void LeverDown(float forcePercent)
 	{
 		leverSound.Play();
+
 		if (lever1) {
-			animation.CrossFade("Lever1",0.2f);
+			if (!animation.isPlaying)
+				animation.Play ("Lever1");
+			else {
+				if (animation.IsPlaying("Lever2")) {
+					animation.Stop ();
+					animation.Play ("Lever1");
+					animation["Lever1"].time += animation["Lever2"].time;
+				}
+			}
 			lever1 = false;
 		}
 		else {
-			animation.CrossFade("Lever2",0.2f);
+			if (!animation.isPlaying)
+				animation.Play ("Lever2");
+			else {
+				if (animation.IsPlaying("Lever1")) {
+					animation.Stop ();
+					animation.Play ("Lever2");
+					animation["Lever2"].time += animation["Lever1"].time;
+				}
+			}
 			lever1 = true;
 		}
 	
