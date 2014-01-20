@@ -54,7 +54,7 @@ public class BogieCarMovement : MonoBehaviour {
 	private bool finishRace = false;
 
 	//bonus info
-	private float speedMultiplierBonus=2;
+	private float speedMultiplierBonus=3;
 	private Bonus bonusAcquired;
 	private ParticleSystem turbo;
 
