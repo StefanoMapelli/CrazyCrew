@@ -159,7 +159,7 @@ public class BogieCarMovement : MonoBehaviour {
 		WheelFLTransform.Rotate(0,0,WheelFL.rpm/60*360*Time.deltaTime,Space.Self);
 
 		//TODO: visualizzare sterzata
-		//WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x+WheelFL.steerAngle,WheelFLTransform.localEulerAngles.y,WheelFLTransform.localEulerAngles.z);
+		//WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,WheelFLTransform.localEulerAngles.y-WheelFL.steerAngle,WheelFLTransform.localEulerAngles.z);
 		//WheelFRTransform.localEulerAngles=new Vector3(WheelFRTransform.localEulerAngles.x-WheelFR.steerAngle,WheelFRTransform.localEulerAngles.y,WheelFRTransform.localEulerAngles.z);
 
 	}
@@ -226,11 +226,11 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		leverSound.Play();
 		if (lever1) {
-			animation.Play("Lever1");
+			animation.CrossFade("Lever1",0.2f);
 			lever1 = false;
 		}
 		else {
-			animation.Play("Lever2");
+			animation.CrossFade("Lever2",0.2f);
 			lever1 = true;
 		}
 	
@@ -273,8 +273,7 @@ public class BogieCarMovement : MonoBehaviour {
 					animation.Play ("Left");
 				}
 				else {
-					animation.Blend ("Right",0f,0.5f);
-					animation.Blend ("Left",1f,0.5f);
+					animation.CrossFade("Left",0.3f);
 				}
 			}
 		}
@@ -286,8 +285,7 @@ public class BogieCarMovement : MonoBehaviour {
 					animation.Play ("Right");
 				}
 				else {
-					animation.Blend ("Left",0f,0.5f);
-					animation.Blend ("Right",1f,0.5f);
+					animation.CrossFade("Right",0.3f);
 				}
 			}
 		}
