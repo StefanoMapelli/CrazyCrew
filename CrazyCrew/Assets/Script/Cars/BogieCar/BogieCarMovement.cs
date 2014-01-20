@@ -96,7 +96,6 @@ public class BogieCarMovement : MonoBehaviour {
 	public AudioSource leverSound;
 
 	private Animation animation;
-	private bool lever1 = true;
 
 	// Use this for initialization
 	void Start () 
@@ -230,29 +229,8 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		leverSound.Play();
 
-		if (lever1) {
-			if (!animation.isPlaying)
-				animation.Play ("Lever1");
-			else {
-				if (animation.IsPlaying("Lever2")) {
-					animation.Stop ();
-					animation.Play ("Lever1");
-					animation["Lever1"].time += animation["Lever2"].time;
-				}
-			}
-			lever1 = false;
-		}
-		else {
-			if (!animation.isPlaying)
-				animation.Play ("Lever2");
-			else {
-				if (animation.IsPlaying("Lever1")) {
-					animation.Stop ();
-					animation.Play ("Lever2");
-					animation["Lever2"].time += animation["Lever1"].time;
-				}
-			}
-			lever1 = true;
+		if (!animation.isPlaying) {
+			animation.Play ("Lever");
 		}
 	
 		if(currentSpeed<topSpeed)
@@ -289,26 +267,10 @@ public class BogieCarMovement : MonoBehaviour {
 		if (steerPercent < 0) {
 			if (!animation.isPlaying)
 				animation.Play ("Left");
-			else {
-				if (animation.IsPlaying("Left")) {
-					animation.Play ("Left");
-				}
-				else {
-					animation.CrossFade("Left",0.3f);
-				}
-			}
 		}
 		else {
 			if (!animation.isPlaying)
 				animation.Play ("Right");
-			else {
-				if (animation.IsPlaying("Right")) {
-					animation.Play ("Right");
-				}
-				else {
-					animation.CrossFade("Right",0.3f);
-				}
-			}
 		}
 
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
