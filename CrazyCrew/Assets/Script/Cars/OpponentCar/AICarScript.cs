@@ -39,12 +39,15 @@ public class AICarScript : MonoBehaviour {
 
 	public TimeSpan finalTime=new TimeSpan(0,0,0);
 
+	private Animation animation;
 
 	// Use this for initialization
 	void Start () {
 		GetPath();
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
 		StartCoroutine(SetMaxSpeedOnPath());
+
+		animation = (Animation) GameObject.Find("Lupo_idle").GetComponent("Animation");
 	}
 
 	void GetPath()
@@ -86,6 +89,8 @@ public class AICarScript : MonoBehaviour {
 			RetroOnCollision();
 			WheelRotate();
 
+			animateIdle ();
+
 			currentSpeed= 2*22/7*wheelFR.radius*wheelFR.rpm*60/1000;
 			currentSpeed=Mathf.Round(currentSpeed);
 		}
@@ -113,6 +118,8 @@ public class AICarScript : MonoBehaviour {
 			{
 				currentPathObject=0;
 			}
+
+			animateSteer(newSteer);
 		}
 		else
 		{
@@ -336,6 +343,7 @@ public class AICarScript : MonoBehaviour {
 			StartCoroutine(MissileEffect());
 		}
 
+		animateDamage();
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -412,5 +420,29 @@ public class AICarScript : MonoBehaviour {
 		raceStarted=isStarted;
 	}
 	
+	public void animateIdle() {
+		if (!raceFinished) {
+			if (!animation.isPlaying) {
+				int val = UnityEngine.Random.Range(1,11);
+				if (val <= 6)
+					animation.CrossFade("Idle");
+				else 
+					animation.CrossFade("Idle2");
+			}
+		}
+	}
 
+	public void animateSteer(float angle) {
+		if (!raceFinished) {
+			if (angle > 0) 
+				animation.CrossFade("Right");
+			else if (angle < 0) 
+				animation.CrossFade("Left");
+		}
+	}
+
+	public void animateDamage() {
+		animation.Stop();
+		animation.Play ("Damage");
+	}
 }

@@ -40,9 +40,9 @@ public class BogieCarMovement : MonoBehaviour {
 
 	//valori fisici
 	public float decelerationSpeed = -50f;
-	public float retroSpeed=-10f;
+	private float retroSpeed=-20f;
 	public float torqueMax=50f;
-	public float topRetroSpeed=-10f;
+	private float topRetroSpeed=-20f;
 	public float topSpeed=150f;
 
 	//CheckPoint
@@ -54,13 +54,15 @@ public class BogieCarMovement : MonoBehaviour {
 	private bool finishRace = false;
 
 	//bonus info
-	private float speedMultiplierBonus=2;
+	private float speedMultiplierBonus=3;
 	private Bonus bonusAcquired;
+	private ParticleSystem turbo;
 
 	//malus info
 	private bool malusActive = false;
 	private int reductionCounter = 0;
 	private int malusDuration;
+	private ParticleSystem malusSmoke;
 
 	private int malusSteerRotation=0;
 	private ArrayList mudSpotsList = new ArrayList();
@@ -94,7 +96,6 @@ public class BogieCarMovement : MonoBehaviour {
 	public AudioSource leverSound;
 
 	private Animation animation;
-	private bool lever1 = true;
 
 	// Use this for initialization
 	void Start () 
@@ -105,7 +106,9 @@ public class BogieCarMovement : MonoBehaviour {
 		GameObject Stain1 = GameObject.Find("Stain1");
 		GameObject Stain2 = GameObject.Find("Stain2"); 
 		GameObject Stain3 = GameObject.Find("Stain3"); 
-		GameObject Stain4 = GameObject.Find("Stain4"); 
+		GameObject Stain4 = GameObject.Find("Stain4");
+		malusSmoke = ((ParticleSystem)GameObject.Find ("malusSmoke").GetComponent("ParticleSystem"));
+		turbo = ((ParticleSystem)GameObject.Find ("turbo").GetComponent("ParticleSystem"));
 		mudSpotsList.Add(Stain1);
 		mudSpotsList.Add(Stain2);
 		mudSpotsList.Add(Stain3);
@@ -159,7 +162,7 @@ public class BogieCarMovement : MonoBehaviour {
 		WheelFLTransform.Rotate(0,0,WheelFL.rpm/60*360*Time.deltaTime,Space.Self);
 
 		//TODO: visualizzare sterzata
-		//WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x+WheelFL.steerAngle,WheelFLTransform.localEulerAngles.y,WheelFLTransform.localEulerAngles.z);
+		//WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,WheelFLTransform.localEulerAngles.y-WheelFL.steerAngle,WheelFLTransform.localEulerAngles.z);
 		//WheelFRTransform.localEulerAngles=new Vector3(WheelFRTransform.localEulerAngles.x-WheelFR.steerAngle,WheelFRTransform.localEulerAngles.y,WheelFRTransform.localEulerAngles.z);
 
 	}
@@ -225,13 +228,9 @@ public class BogieCarMovement : MonoBehaviour {
 	public void LeverDown(float forcePercent)
 	{
 		leverSound.Play();
-		if (lever1) {
-			animation.Play("Lever1");
-			lever1 = false;
-		}
-		else {
-			animation.Play("Lever2");
-			lever1 = true;
+
+		if (!animation.isPlaying) {
+			animation.Play ("Lever");
 		}
 	
 		if(currentSpeed<topSpeed)
@@ -268,28 +267,10 @@ public class BogieCarMovement : MonoBehaviour {
 		if (steerPercent < 0) {
 			if (!animation.isPlaying)
 				animation.Play ("Left");
-			else {
-				if (animation.IsPlaying("Left")) {
-					animation.Play ("Left");
-				}
-				else {
-					animation.Blend ("Right",0f,0.5f);
-					animation.Blend ("Left",1f,0.5f);
-				}
-			}
 		}
 		else {
 			if (!animation.isPlaying)
 				animation.Play ("Right");
-			else {
-				if (animation.IsPlaying("Right")) {
-					animation.Play ("Right");
-				}
-				else {
-					animation.Blend ("Left",0f,0.5f);
-					animation.Blend ("Right",1f,0.5f);
-				}
-			}
 		}
 
 		float speedFactor = rigidbody.velocity.magnitude/lowestSteerAtSpeed;
@@ -398,7 +379,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 						int powerUpId = UnityEngine.Random.Range(1,5);
 
-						//powerUpId=3;
+						//powerUpId=1;
 						serverBogieCar.malusComunication(powerUpId);
 						switch(powerUpId)
 						{
@@ -502,6 +483,7 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator BonusSpeed()
 	{
 		turboSound.Play();
+		turbo.Play();
 		bonusText.text="TURBOOOOOO";
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
 		yield return new WaitForSeconds(0.5f);
@@ -531,7 +513,13 @@ public class BogieCarMovement : MonoBehaviour {
 				malusDuration--;
 
 			if(malusName == "SLOWDOWN")
+			{
 				WheelTraction.motorTorque = torqueMax*0.05f;
+				malusSmoke.emissionRate -= 5;
+			}
+
+			if(malusName == "STEER FAILURE")
+				malusSmoke.emissionRate -= 5;
 
 			if(malusName == "MUD")
 			{
@@ -554,6 +542,7 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator MalusSteerFailure()
 	{
 		malusSound.Play();
+		malusSmoke.Play();
 
 		malusDuration=5;
 		malusSteerRotation=6;
@@ -570,6 +559,8 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 
 		serverBogieCar.malusEnded();
+		malusSmoke.Stop();
+		malusSmoke.emissionRate=15;
 		malusDuration=5;
 		malusSteerRotation=0;
 		bonusText.text="";
@@ -579,6 +570,7 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator MalusSlowdown()
 	{
 		malusSound.Play();
+		malusSmoke.Play();
 
 		malusDuration=5;
 		serverBogieCar.slowDown(true);
@@ -592,6 +584,8 @@ public class BogieCarMovement : MonoBehaviour {
 
 		serverBogieCar.slowDown(false);
 		serverBogieCar.malusEnded();
+		malusSmoke.Stop();
+		malusSmoke.emissionRate=15;
 		malusDuration=5;
 		bonusText.text="";
 		malusActive = false;

@@ -14,7 +14,7 @@ public class BonusPoop : MonoBehaviour, Bonus
 	public void StartEffect () 
 	{
 		UnityEngine.Object poop = Resources.Load("Prefab/Poop");
-		GameObject poopObject= GameObject.Instantiate(poop,car.transform.position+car.transform.up*poopDisplacement, car.transform.rotation) as GameObject;
-		poopObject.rigidbody.AddForce(car.transform.right*300f,ForceMode.Impulse);
+		GameObject poopObject= GameObject.Instantiate(poop,car.transform.position+(-car.transform.right)*poopDisplacement, car.transform.rotation) as GameObject;
+		//poopObject.rigidbody.AddForce(car.transform.right*300f,ForceMode.Impulse);
 	}
 }
