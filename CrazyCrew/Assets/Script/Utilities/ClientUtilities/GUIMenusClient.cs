@@ -55,7 +55,7 @@ public static class GUIMenusClient {
 		float height = Camera.main.orthographicSize * 2f;
 		float width = (height * Screen.width / Screen.height);
 		// LEVER
-		leverPlane.transform.localScale = new Vector3(width/50,(height/4)*3,1f);
+		leverPlane.transform.localScale = new Vector3(width/25,(height/4)*3,1f);
 		lever.transform.localScale = new Vector3(width/6,width/(100f/3f),1f);
 		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/4,Screen.height/2, screenPos.z));
 		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/4,Screen.height/16, screenPos.z));
@@ -77,9 +77,10 @@ public static class GUIMenusClient {
 
 		//estremo superiore del LeverPlane
 		float sup = leverPlane.transform.position.y + 
-			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
+			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f
+			- (((MeshRenderer)lever.GetComponent("MeshRenderer")).bounds.size.y)/2f;
 		lever.transform.position = 
-			new Vector3(leverPlane.transform.position.x,sup,-1f);
+			new Vector3(leverPlane.transform.position.x,sup,-2f);
 	}
 
 	public static void mainMenu(bool enabled)
