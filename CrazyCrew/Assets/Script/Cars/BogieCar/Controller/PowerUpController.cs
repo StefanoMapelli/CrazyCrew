@@ -87,6 +87,7 @@ public class PowerUpController : MonoBehaviour {
 
 	public void setVibration()
 	{
+		//da scommentare per la consegna
 		//Handheld.Vibrate();
 	}
 

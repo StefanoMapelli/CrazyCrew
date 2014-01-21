@@ -9,7 +9,7 @@ public class ClientBogieCar : MonoBehaviour {
 	private PowerUpController powerUpController;
 	private ClientGameManager clientGameManager;
 
-	private int roleSwitchCounter = 0;
+	public AudioSource startClient;
 
 	// Use this for initialization
 	void Start () {
@@ -27,10 +27,7 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void assignLever1()
 	{
-		roleSwitchCounter++;
-
-		if(roleSwitchCounter==1)
-			gameObject.audio.Play();
+		startClient.Play();
 
 		clientGameManager.setRole("Lever1");
 		leverController.setRole("Lever1");
@@ -48,10 +45,7 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void assignLever2()
 	{
-		roleSwitchCounter++;
-		
-		if(roleSwitchCounter==1)
-			gameObject.audio.Play();
+		startClient.Play();
 
 		clientGameManager.setRole("Lever2");
 		leverController.setRole("Lever2");
@@ -75,10 +69,7 @@ public class ClientBogieCar : MonoBehaviour {
 	[RPC]
 	void assignSteer()
 	{
-		roleSwitchCounter++;
-		
-		if(roleSwitchCounter==1)
-			gameObject.audio.Play();
+		startClient.Play();
 
 		GUIMenusClient.showSteer(true);
 		GUIMenusClient.showPauseButton(true);
