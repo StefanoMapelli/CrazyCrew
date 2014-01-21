@@ -43,14 +43,11 @@ public static class GUIMenusClient {
 		GameObject leftSteer = GameObject.Find ("LeftSteer");
 		GameObject rightSteer = GameObject.Find ("RightSteer");
 		GameObject pause = GameObject.Find ("Pause");
-		GameObject pauseLabel = GameObject.Find ("PauseLabel");
 		GameObject lever = GameObject.Find("Lever");
 		GameObject leverPlane = GameObject.Find("LeverPlane");
 		GameObject brake = GameObject.Find("Brake");
-		GameObject brakeLabel = GameObject.Find("BrakeLabel");
 		GameObject leverInfo = GameObject.Find("LeverInfo");
 		GameObject powerUpButton = GameObject.Find ("PowerUpButton");
-		GameObject powerUpLabel = GameObject.Find ("PowerUpLabel");
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
@@ -59,22 +56,19 @@ public static class GUIMenusClient {
 		float width = (height * Screen.width / Screen.height);
 		// LEVER
 		leverPlane.transform.localScale = new Vector3(width/50,(height/4)*3,1f);
-		//leverInfo.transform.localScale = new Vector3(width,height,1f);
 		lever.transform.localScale = new Vector3(width/6,width/(100f/3f),1f);
 		leverPlane.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/4,Screen.height/2, screenPos.z));
 		leverInfo.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/4,Screen.height/16, screenPos.z));
 		// BRAKE
 		brake.transform.localScale = new Vector3(width/2,height/3,1f);
 		brake.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-(Screen.height/6),screenPos.z));
-		brakeLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-(Screen.height/6), screenPos.z));
 		// POWER-UP BUTTON
 		powerUpButton.transform.localScale = new Vector3(width/2,height/3,1f);
 		powerUpButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height/2, screenPos.z));
-		powerUpLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height/2, screenPos.z));
+
 		// PAUSE
 		pause.transform.localScale = new Vector3(width/2,height/3,1f);
 		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-((Screen.height/6)*5), screenPos.z));
-		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/4)*3,Screen.height-((Screen.height/6)*5), screenPos.z));
 		// STEER
 		leftSteer.transform.localScale = new Vector3(width/3, height, 1f);
 		rightSteer.transform.localScale = new Vector3(width/3, height, 1f);
@@ -145,7 +139,6 @@ public static class GUIMenusClient {
 		GameObject lever = GameObject.Find("Lever");
 		GameObject leverPlane = GameObject.Find("LeverPlane");
 		GameObject brake = GameObject.Find("Brake");
-		GameObject brakeLabel = GameObject.Find("BrakeLabel");
 		GameObject leverInfo = GameObject.Find("LeverInfo");
 
 		((MeshRenderer) lever.GetComponent("MeshRenderer")).enabled = enabled;
@@ -156,19 +149,15 @@ public static class GUIMenusClient {
 		((MeshRenderer) brake.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) brake.GetComponent("BoxCollider")).enabled = enabled;
 
-		((MeshRenderer) brakeLabel.GetComponent("MeshRenderer")).enabled = enabled;
 		((MeshRenderer) leverInfo.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 
 	public static void showPauseButton(bool enabled)
 	{
 		GameObject pause = GameObject.Find("Pause"); 
-		GameObject pauseLabel = GameObject.Find("PauseLabel");
 
 		((MeshRenderer) pause.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) pause.GetComponent("BoxCollider")).enabled = enabled;
-		
-		((MeshRenderer) pauseLabel.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 
 	public static void showSteer(bool enabled)
@@ -186,12 +175,9 @@ public static class GUIMenusClient {
 	public static void showPowerUpController(bool enabled)
 	{
 		GameObject powerUpButton = GameObject.Find ("PowerUpButton");
-		GameObject powerUpLabel = GameObject.Find ("PowerUpLabel");
 
 		((MeshRenderer) powerUpButton.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) powerUpButton.GetComponent("BoxCollider")).enabled = enabled;
-		
-		((MeshRenderer) powerUpLabel.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 
 	public static void showServerList(bool enabled) 
@@ -223,14 +209,12 @@ public static class GUIMenusClient {
 
 	public static void positioningSteerPause() {
 		GameObject pause = GameObject.Find ("Pause");
-		GameObject pauseLabel = GameObject.Find ("PauseLabel");
 		Vector3 cost = new Vector3(0,0,-1);
 
 		Vector3 screenPos = Camera.main.WorldToScreenPoint(cost);
 
 		// place pause button and pause label in the center
 		pause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2f,Screen.height/2f, screenPos.z));
-		pauseLabel.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2f,Screen.height/2f, screenPos.z));
 
 		// scale pause button properly
 		float height = Camera.main.orthographicSize * 2f;

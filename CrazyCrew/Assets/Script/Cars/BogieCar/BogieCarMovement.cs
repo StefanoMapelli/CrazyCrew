@@ -398,6 +398,7 @@ public class BogieCarMovement : MonoBehaviour {
 						case 3:
 						{
 							bonusText.text="SWITCH CONTROLLER";
+							malusSound.Play();
 							serverBogieCar.assignRoles();
 							malusActive = false;
 							StartCoroutine (SwitchWaiting());
