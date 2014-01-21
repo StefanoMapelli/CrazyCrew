@@ -3,9 +3,10 @@ using System.Collections;
 
 public class PowerUpController : MonoBehaviour {
 
+	public Material[] controllerMaterials = new Material[3];
+
 	private NetworkView networkView;
 	private string role;
-	private TextMesh text;
 
 	//valori aggiornati ogni qualvolta viene acquisito/utilizzato/rimosso un bonus o un malus tremite RPC dal server
 	private bool hasBonus = false;
@@ -17,7 +18,6 @@ public class PowerUpController : MonoBehaviour {
 	void Start () {
 		GameObject client = GameObject.Find ("Client");
 		networkView = (NetworkView) client.GetComponent("NetworkView");
-		text = ((TextMesh)GameObject.Find ("PowerUpLabel").GetComponent("TextMesh"));
 	}
 
 	void Update()
@@ -44,11 +44,13 @@ public class PowerUpController : MonoBehaviour {
 	public void setHasBonus(bool hasBonus)
 	{
 		this.hasBonus = hasBonus;
+		updateBonusLabel();
 	}
 
 	public void setHasMalus(bool hasMalus)
 	{
 		this.hasMalus = hasMalus;
+		updateMalusLabel();
 	}
 
 	public void setMalusName(string name)
@@ -65,14 +67,10 @@ public class PowerUpController : MonoBehaviour {
 	{
 		if(role == "Lever1")
 		{
-			if(hasBonus)
-			{
-				text.text = "Activate "+bonusName;
-			}
-			else
-			{
-				text.text = "Activate bonus";
-			}
+			if (hasBonus)
+				this.GetComponent("MeshRenderer").renderer.material = controllerMaterials[0];
+			else 
+				this.GetComponent("MeshRenderer").renderer.material = controllerMaterials[2];
 		}
 	}
 
@@ -80,14 +78,10 @@ public class PowerUpController : MonoBehaviour {
 	{
 		if(role == "Lever2")
 		{
-			if(hasMalus)
-			{
-				text.text = "Reduce "+malusName;
-			}
-			else
-			{
-				text.text = "Reduce malus effects";
-			}
+			if (hasMalus)
+				this.GetComponent("MeshRenderer").renderer.material = controllerMaterials[1];
+			else 
+				this.GetComponent("MeshRenderer").renderer.material = controllerMaterials[2];
 		}
 	}
 
