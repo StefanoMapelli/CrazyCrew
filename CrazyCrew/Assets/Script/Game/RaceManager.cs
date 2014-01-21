@@ -96,6 +96,7 @@ public class RaceManager : MonoBehaviour {
 
 		// just an attempt
 		ServerBogieCar serverBogieCar = (ServerBogieCar) GameObject.Find ("Server").GetComponent("ServerBogieCar");
+		Debug.Log("Sono prima di assignRoles()");
 		serverBogieCar.assignRoles();
 		// just an attempt
 

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class RestartRace : MonoBehaviour {
 
-	public GameObject carMovement;
-	public GameObject raceManager;
+	//public GameObject carMovement;
+	//public GameObject raceManager;
 	private ServerGameManager serverGameManager;
 
 	// Use this for initialization
