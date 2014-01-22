@@ -45,6 +45,9 @@ public class RaceManager : MonoBehaviour {
 	//Opponent car object
 	private AICarScript opponentCar1;
 	private AICarScript opponentCar2;
+	private AICarScript opponentCar3;
+	private AICarScript opponentCar4;
+	private AICarScript opponentCar5;
 
 	// Use this for initialization
 	void Start () {
@@ -102,9 +105,15 @@ public class RaceManager : MonoBehaviour {
 
 		opponentCar1= (AICarScript) GameObject.Find("_OpponentCarModel1").GetComponent("AICarScript");
 		opponentCar2= (AICarScript) GameObject.Find("_OpponentCarModel2").GetComponent("AICarScript");
+		opponentCar3= (AICarScript) GameObject.Find("_OpponentCarModel3").GetComponent("AICarScript");
+		opponentCar4= (AICarScript) GameObject.Find("_OpponentCarModel4").GetComponent("AICarScript");
+		opponentCar5= (AICarScript) GameObject.Find("_OpponentCarModel5").GetComponent("AICarScript");
 
 		opponentCar1.setRaceStarted(true);
 		opponentCar2.setRaceStarted(true);
+		opponentCar3.setRaceStarted(true);
+		opponentCar4.setRaceStarted(true);
+		opponentCar5.setRaceStarted(true);
 
 		yield return new WaitForSeconds(1);
 		infoText.text = "";
@@ -287,6 +296,9 @@ public class RaceManager : MonoBehaviour {
 		ArrayList cars=new ArrayList();
 		cars.Add(opponentCar1);
 		cars.Add(opponentCar2);
+		cars.Add(opponentCar3);
+		cars.Add(opponentCar4);
+		cars.Add(opponentCar5);
 		object temp;
 
 		for(int i=0;i<cars.Count;i++)
@@ -295,7 +307,7 @@ public class RaceManager : MonoBehaviour {
 			{
 				int h=0;
 				int m=0;
-				int s=UnityEngine.Random.Range(5,60);
+				int s=UnityEngine.Random.Range(5,30);
 				int ms=UnityEngine.Random.Range(0,99);
 
 				((AICarScript) cars[i]).finalTime=bogieCarMovement.finalTime.Add(new TimeSpan(0,h,m,s,ms));
@@ -304,13 +316,13 @@ public class RaceManager : MonoBehaviour {
 
 		for(int i=0;i<cars.Count;i++)
 		{
-			for(int j=1;i<cars.Count;i++)
+			for(int j=0;j<cars.Count-1;j++)
 			{
-				if(((AICarScript) cars[j-1]).finalTime.CompareTo(((AICarScript) cars[j]).finalTime)>0)
+				if(((AICarScript) cars[j+1]).finalTime.CompareTo(((AICarScript) cars[j]).finalTime)<0)
 				{
-					temp=cars[j];
-					cars[j]=cars[j-1];
-					cars[j-1]=temp;
+					temp=cars[j+1];
+					cars[j+1]=cars[j];
+					cars[j]=temp;
 				}
 			}
 		}

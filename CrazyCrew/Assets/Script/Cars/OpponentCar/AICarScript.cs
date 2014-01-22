@@ -37,6 +37,10 @@ public class AICarScript : MonoBehaviour {
 	public bool checkpointPassed=false;
 	public float poopFactor=0;
 
+	public float lowSpeed;
+	public float midSpeed;
+	public float highSpeed;
+
 	public TimeSpan finalTime=new TimeSpan(0,0,0);
 
 	private Animation animation;
@@ -66,7 +70,7 @@ public class AICarScript : MonoBehaviour {
 		Debug.Log(path.Count);
 	}
 
-	public void WheelRotate()
+	/*public void WheelRotate()
 	{
 		
 		WheelFRTransform.Rotate(0,-wheelFR.rpm/60*360*Time.deltaTime,0);
@@ -76,7 +80,7 @@ public class AICarScript : MonoBehaviour {
 		WheelFLTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,wheelFL.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
 		WheelFRTransform.localEulerAngles=new Vector3(WheelFLTransform.localEulerAngles.x,wheelFR.steerAngle-WheelFLTransform.localEulerAngles.z+90,WheelFLTransform.localEulerAngles.z);
 		
-	}
+	}*/
 
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -87,7 +91,6 @@ public class AICarScript : MonoBehaviour {
 			Move ();
 			FrontSensor();
 			RetroOnCollision();
-			WheelRotate();
 
 			animateIdle ();
 
@@ -281,12 +284,12 @@ public class AICarScript : MonoBehaviour {
 		{
 			if(isPointOnCurve(currentPathObject))
 			{
-				maxSpeed=UnityEngine.Random.Range(100,130);
+				maxSpeed=UnityEngine.Random.Range(lowSpeed,midSpeed);
 				yield return new WaitForSeconds(2);
 			}
 			else
 			{
-				maxSpeed=UnityEngine.Random.Range(130,160);
+				maxSpeed=UnityEngine.Random.Range(midSpeed,highSpeed);
 				yield return new WaitForSeconds(2);
 			}
 		}
