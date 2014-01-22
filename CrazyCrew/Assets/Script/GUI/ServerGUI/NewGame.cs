@@ -9,6 +9,7 @@ public class NewGame : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		server = GameObject.Find("Server");
 	}
 	
 	// Update is called once per frame
@@ -18,13 +19,10 @@ public class NewGame : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		//GUIMenusServer.masterServerError(false);
-
-		server = GameObject.Find("Server");
 		ServerNetworkManager serverNetworkManager = (ServerNetworkManager) server.GetComponent("ServerNetworkManager");
-
 		serverNetworkManager.StartServer();
-		Camera.main.transform.Translate(new Vector3(520f,58f,0f));
+
+		Camera.main.transform.Translate(new Vector3(-420f,0f,0f));
 		//GUIMenusServer.mainMenu(false);
 		//GUIMenusServer.waitingForPlayersMenu(true);
 	}

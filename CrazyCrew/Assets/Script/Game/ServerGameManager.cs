@@ -20,6 +20,8 @@ public class ServerGameManager : MonoBehaviour {
 
 	private ClientIndicator player1,player2,player3;
 
+	private int level;
+
 	public ArrayList getPlayers()
 	{
 		return players;
@@ -46,8 +48,19 @@ public class ServerGameManager : MonoBehaviour {
 			//inizia partita
 			Debug.Log("Inizia la partita");
 			playing=true;
-			
-			Application.LoadLevel("bogieCar");
+
+			switch (level) {
+				case 1:
+				{
+					Application.LoadLevel("bogieCar");
+					break;
+				}
+				case 2: 
+				{
+					Application.LoadLevel("bogieCar2");
+					break;
+				}
+			}
 
 			Debug.Log("Loading level? "+Application.isLoadingLevel);
 		}
@@ -72,7 +85,7 @@ public class ServerGameManager : MonoBehaviour {
 	
 	public void OnLevelWasLoaded(int level)
 	{
-		if (level == 1) {
+		if (level == 1 || level == 2) {
 			serverBogieCar.initializeBogieCar();
 			Debug.Log("Livello ricaricato");
 			Time.timeScale = initialTimeScale;
@@ -213,6 +226,14 @@ public class ServerGameManager : MonoBehaviour {
 				return false;
 		}
 		return true;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getLevel() {
+		return level;
 	}
 
 	[RPC]
