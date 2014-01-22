@@ -236,6 +236,12 @@ public class ServerGameManager : MonoBehaviour {
 		return level;
 	}
 
+	public void disconnectPlayers() {
+		foreach (Player p in players) {
+			Network.CloseConnection(p.getNetworkPlayer(),true);
+		}
+	}
+
 	[RPC]
 	void setReady(NetworkPlayer np)
 	{

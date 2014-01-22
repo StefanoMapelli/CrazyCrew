@@ -23,6 +23,7 @@ public class NewGame : MonoBehaviour {
 		serverNetworkManager.StartServer();
 
 		Camera.main.transform.Translate(new Vector3(-420f,0f,0f));
+		GUIMenusServer.masterServerError(false);
 		//GUIMenusServer.mainMenu(false);
 		//GUIMenusServer.waitingForPlayersMenu(true);
 	}
