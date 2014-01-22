@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class BrakeController : MonoBehaviour {
-	
+
+	public Material[] materials = new Material[2];
+
 	private NetworkView networkView;
 	private string role;
 	
@@ -24,9 +26,11 @@ public class BrakeController : MonoBehaviour {
 	
 	void OnMouseDown() {
 		networkView.RPC("brakeOn",RPCMode.Server, role);
+		this.GetComponent("MeshRenderer").renderer.material = materials[1];
 	}
 	
 	void OnMouseUp() {
 		networkView.RPC("brakeOff",RPCMode.Server, role);
+		this.GetComponent("MeshRenderer").renderer.material = materials[0];
 	}
 }

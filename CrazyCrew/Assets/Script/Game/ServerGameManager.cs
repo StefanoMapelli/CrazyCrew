@@ -18,7 +18,7 @@ public class ServerGameManager : MonoBehaviour {
 	public AudioSource restart;
 	public AudioSource exit;
 
-	private TextMesh player1,player2,player3;
+	private ClientIndicator player1,player2,player3;
 
 	public ArrayList getPlayers()
 	{
@@ -31,9 +31,9 @@ public class ServerGameManager : MonoBehaviour {
 		initialTimeScale = Time.timeScale;
 		serverBogieCar = (ServerBogieCar) gameObject.GetComponent("ServerBogieCar");
 
-		player1 = (TextMesh) GameObject.Find ("Player1").GetComponent("TextMesh");
-		player2 = (TextMesh) GameObject.Find ("Player2").GetComponent("TextMesh");
-		player3 = (TextMesh) GameObject.Find ("Player3").GetComponent("TextMesh");
+		player1 = (ClientIndicator) GameObject.Find("Player1").GetComponent("ClientIndicator");
+		player2 = (ClientIndicator) GameObject.Find("Player2").GetComponent("ClientIndicator");
+		player3 = (ClientIndicator) GameObject.Find("Player3").GetComponent("ClientIndicator");
 		//playerCount = (PlayerCount) GameObject.Find ("PlayerCountText").GetComponent("PlayerCount");
 	}
 
@@ -97,28 +97,19 @@ public class ServerGameManager : MonoBehaviour {
 			{
 				players.Add(new Player(np));
 				if (players.Count == 1) {
-					player1.color = Color.green;
-					player1.text = "Connected!";
-					player2.color = Color.red;
-					player2.text = "Disconnected...";
-					player3.color = Color.red;
-					player3.text = "Disconnected...";
+					player1.setConnected(true);
+					player2.setConnected(false);
+					player3.setConnected(false);
 				}
 				else if (players.Count == 2) {
-					player1.color = Color.green;
-					player1.text = "Connected!";
-					player2.color = Color.green;
-					player2.text = "Connected!";
-					player3.color = Color.red;
-					player3.text = "Disconnected...";
+					player1.setConnected(true);
+					player2.setConnected(true);
+					player3.setConnected(false);
 				}
 				else if (players.Count == 3) {
-					player1.color = Color.green;
-					player1.text = "Connected!";
-					player2.color = Color.green;
-					player2.text = "Connected!";
-					player3.color = Color.green;
-					player3.text = "Connected!";
+					player1.setConnected(true);
+					player2.setConnected(true);
+					player3.setConnected(true);
 				}
 				//playerCount.incrementNumber();
 			}
@@ -139,29 +130,21 @@ public class ServerGameManager : MonoBehaviour {
 			object o = getPlayer(np);
 			players.Remove(o);
 			Debug.Log("Player: "+np+" disconnesso");
+
 			if (players.Count == 1) {
-				player1.color = Color.green;
-				player1.text = "Connected!";
-				player2.color = Color.red;
-				player2.text = "Disconnected...";
-				player3.color = Color.red;
-				player3.text = "Disconnected...";
+				player1.setConnected(true);
+				player2.setConnected(false);
+				player3.setConnected(false);
 			}
 			else if (players.Count == 2) {
-				player1.color = Color.green;
-				player1.text = "Connected!";
-				player2.color = Color.green;
-				player2.text = "Connected!";
-				player3.color = Color.red;
-				player3.text = "Disconnected...";
+				player1.setConnected(true);
+				player2.setConnected(true);
+				player3.setConnected(false);
 			}
 			else if (players.Count == 0) {
-				player1.color = Color.red;
-				player1.text = "Disconnected...";
-				player2.color = Color.red;
-				player2.text = "Disconnected...";
-				player3.color = Color.red;
-				player3.text = "Disconnected...";
+				player1.setConnected(false);
+				player2.setConnected(false);
+				player3.setConnected(false);
 			}
 			//playerCount.decrementNumber();
 		}
