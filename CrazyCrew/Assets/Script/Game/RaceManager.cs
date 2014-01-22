@@ -104,16 +104,16 @@ public class RaceManager : MonoBehaviour {
 		// just an attempt
 
 		opponentCar1= (AICarScript) GameObject.Find("_OpponentCarModel1").GetComponent("AICarScript");
-		opponentCar2= (AICarScript) GameObject.Find("_OpponentCarModel2").GetComponent("AICarScript");
-		opponentCar3= (AICarScript) GameObject.Find("_OpponentCarModel3").GetComponent("AICarScript");
-		opponentCar4= (AICarScript) GameObject.Find("_OpponentCarModel4").GetComponent("AICarScript");
-		opponentCar5= (AICarScript) GameObject.Find("_OpponentCarModel5").GetComponent("AICarScript");
+		//opponentCar2= (AICarScript) GameObject.Find("_OpponentCarModel2").GetComponent("AICarScript");
+		//opponentCar3= (AICarScript) GameObject.Find("_OpponentCarModel3").GetComponent("AICarScript");
+		//opponentCar4= (AICarScript) GameObject.Find("_OpponentCarModel4").GetComponent("AICarScript");
+		//opponentCar5= (AICarScript) GameObject.Find("_OpponentCarModel5").GetComponent("AICarScript");
 
 		opponentCar1.setRaceStarted(true);
-		opponentCar2.setRaceStarted(true);
-		opponentCar3.setRaceStarted(true);
-		opponentCar4.setRaceStarted(true);
-		opponentCar5.setRaceStarted(true);
+		//opponentCar2.setRaceStarted(true);
+		//opponentCar3.setRaceStarted(true);
+		//opponentCar4.setRaceStarted(true);
+		//opponentCar5.setRaceStarted(true);
 
 		yield return new WaitForSeconds(1);
 		infoText.text = "";

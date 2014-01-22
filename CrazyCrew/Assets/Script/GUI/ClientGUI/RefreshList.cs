@@ -17,6 +17,9 @@ public class RefreshList : MonoBehaviour {
 	void OnMouseDown() {
 		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		clientNetworkManager.RefreshHostList();
+		GUIMenusClient.mainMenu(false);
+		GUIMenusClient.showServerList(true);
+		GUIMenusClient.connectionError(false);
 	}
 
 	void OnMouseUp()

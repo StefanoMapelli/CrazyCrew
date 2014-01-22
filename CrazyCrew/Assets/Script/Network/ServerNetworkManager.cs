@@ -12,7 +12,7 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	public void StartServer()
 	{
-		gameName = DateTime.Now.ToString();
+		gameName = System.Environment.UserName;
 	    Network.InitializeServer(3, 25000, false);
 	    MasterServer.RegisterHost(typeName, gameName);
 	}

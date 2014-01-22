@@ -17,13 +17,11 @@ public class BackButton : MonoBehaviour {
 	}
 	
 	void OnMouseDown() {
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.black;
 		serverList.decrementIndex();
 	}
 
 	void OnMouseUp()
 	{
-		((TextMesh)gameObject.GetComponent("TextMesh")).color = Color.white;
 		shiftSound.Play();
 	}
 }

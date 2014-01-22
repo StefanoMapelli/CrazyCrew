@@ -240,6 +240,7 @@ public class ServerGameManager : MonoBehaviour {
 		foreach (Player p in players) {
 			Network.CloseConnection(p.getNetworkPlayer(),true);
 		}
+		players.Clear();
 	}
 
 	[RPC]

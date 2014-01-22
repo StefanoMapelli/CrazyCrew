@@ -15,6 +15,8 @@ public static class GUIMenusClient {
 		GameObject exit = GameObject.Find("ExitToMenuButton");
 		GameObject backButton = GameObject.Find ("BackButton");
 		GameObject nextButton = GameObject.Find ("NextButton");
+		GameObject returnButton = GameObject.Find ("ReturnButton");
+		GameObject label = GameObject.Find ("Label");
 		GameObject serverList = GameObject.Find ("ServerList");
 		GameObject restartButton = GameObject.Find ("RestartButton");
 		GameObject exitButton = GameObject.Find ("ExitButton");
@@ -29,9 +31,11 @@ public static class GUIMenusClient {
 		exit.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
 		restartFromPause.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/3,screenPos.z));
 
-		backButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/6,Screen.height/10, screenPos.z));
-		nextButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*5,Screen.height/10, screenPos.z));
-		serverList.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/6)*3,Screen.height/3, screenPos.z));
+		backButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/3,Screen.height/2, screenPos.z));
+		nextButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3((Screen.width/3)*2,Screen.height/2, screenPos.z));
+		serverList.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
+		returnButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/8,Screen.height/8, screenPos.z));
+		label.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/10)*9, screenPos.z));
 
 		restartButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,(Screen.height/3)*2, screenPos.z));
 		exitButton.transform.position = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width/2,Screen.height/2, screenPos.z));
@@ -186,6 +190,8 @@ public static class GUIMenusClient {
 		GameObject backButton = GameObject.Find ("BackButton");
 		GameObject nextButton = GameObject.Find ("NextButton");
 		GameObject serverList = GameObject.Find ("ServerList");
+		GameObject returnButton = GameObject.Find ("ReturnButton");
+		GameObject label = GameObject.Find ("Label");
 
 		((MeshRenderer) backButton.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) backButton.GetComponent("BoxCollider")).enabled = enabled;
@@ -195,6 +201,11 @@ public static class GUIMenusClient {
 
 		((MeshRenderer) serverList.GetComponent("MeshRenderer")).enabled = enabled;
 		((BoxCollider) serverList.GetComponent("BoxCollider")).enabled = enabled;
+
+		((MeshRenderer) returnButton.GetComponent("MeshRenderer")).enabled = enabled;
+		((BoxCollider) returnButton.GetComponent("BoxCollider")).enabled = enabled;
+
+		((MeshRenderer) label.GetComponent("MeshRenderer")).enabled = enabled;
 	}
 
 	public static void showEndMenu(bool enabled) {

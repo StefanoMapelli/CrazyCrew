@@ -43,7 +43,7 @@ public class AICarScript : MonoBehaviour {
 
 	public TimeSpan finalTime=new TimeSpan(0,0,0);
 
-	private Animation animation;
+	//private Animation animation;
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +51,7 @@ public class AICarScript : MonoBehaviour {
 		rigidbody.centerOfMass=new Vector3(0,-0.2f,0);
 		StartCoroutine(SetMaxSpeedOnPath());
 
-		animation = (Animation) GameObject.Find("Lupo_idle").GetComponent("Animation");
+		//animation = (Animation) GameObject.Find("Lupo_idle").GetComponent("Animation");
 	}
 
 	void GetPath()
@@ -92,7 +92,7 @@ public class AICarScript : MonoBehaviour {
 			FrontSensor();
 			RetroOnCollision();
 
-			animateIdle ();
+			//animateIdle ();
 
 			currentSpeed= 2*22/7*wheelFR.radius*wheelFR.rpm*60/1000;
 			currentSpeed=Mathf.Round(currentSpeed);
@@ -122,7 +122,7 @@ public class AICarScript : MonoBehaviour {
 				currentPathObject=0;
 			}
 
-			animateSteer(newSteer);
+			//animateSteer(newSteer);
 		}
 		else
 		{
@@ -346,7 +346,7 @@ public class AICarScript : MonoBehaviour {
 			StartCoroutine(MissileEffect());
 		}
 
-		animateDamage();
+		//animateDamage();
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -422,7 +422,8 @@ public class AICarScript : MonoBehaviour {
 	{
 		raceStarted=isStarted;
 	}
-	
+
+	/*
 	public void animateIdle() {
 		if (!raceFinished) {
 			if (!animation.isPlaying) {
@@ -447,5 +448,5 @@ public class AICarScript : MonoBehaviour {
 	public void animateDamage() {
 		animation.Stop();
 		animation.Play ("Damage");
-	}
+	}*/
 }

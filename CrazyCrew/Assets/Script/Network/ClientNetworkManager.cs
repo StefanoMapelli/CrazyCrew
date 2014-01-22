@@ -32,8 +32,6 @@ public class ClientNetworkManager : MonoBehaviour {
 	public void RefreshHostList()
 	{
 	    MasterServer.RequestHostList(typeName);
-		// commentato per la beta
-		//GUIMenusClient.showServerList(true);
 	}
 	 
 	void OnMasterServerEvent(MasterServerEvent msEvent)
@@ -43,15 +41,13 @@ public class ClientNetworkManager : MonoBehaviour {
 			serverList.setList(hostList);
 			if (myServer != null)
 				listArrived = true;
-
-			// per la beta
-			JoinServer(hostList[0]);
 		}
 	}
 
 	void OnFailedToConnectToMasterServer(NetworkConnectionError e) {
 		GUIMenusClient.connectionError(true);
 		GUIMenusClient.mainMenu(true);
+		GUIMenusClient.showServerList(false);
 	}
 
 	void OnFailedToConnect(NetworkConnectionError e) {
