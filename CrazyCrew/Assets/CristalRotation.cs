@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CristalRotation : MonoBehaviour {
 
-	public Transform axis;
+	//public Transform axis;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class CristalRotation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		transform.Rotate(axis.right,2);
+		transform.Rotate(new Vector3(0,2,0));
 	
 	}
 }
