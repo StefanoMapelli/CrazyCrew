@@ -54,6 +54,7 @@ public class BogieCarMovement : MonoBehaviour {
 	private bool finishRace = false;
 
 	//bonus info
+	public GameObject bonusSlot; 
 	private float speedMultiplierBonus=3;
 	private Bonus bonusAcquired;
 	private ParticleSystem turbo;
@@ -68,6 +69,7 @@ public class BogieCarMovement : MonoBehaviour {
 	private ArrayList mudSpotsList = new ArrayList();
 	
 	public TextMesh bonusText;
+	public TextMesh speedText;
 
 	public TimeSpan finalTime;
 
@@ -150,6 +152,8 @@ public class BogieCarMovement : MonoBehaviour {
 			this.transform.position=lastPosition;
 			this.transform.rotation = lastRotation;
 		}
+
+		speedText.text = currentSpeed.ToString();
 	}
 
 	public void WheelRotate()
@@ -333,21 +337,23 @@ public class BogieCarMovement : MonoBehaviour {
 					bonusSound.Play();
 
 					int powerUpId = UnityEngine.Random.Range(1,5);
-					//powerUpId=4;
+					powerUpId=4;
 					serverBogieCar.bonusComunication(powerUpId);
 					switch(powerUpId)
 					{
 					case 1:
 					{
-						bonusText.text="MISSILE READY!!!";
+						bonusText.text="MISSILE taken!";
 						bonusAcquired = new BonusMissile();
+						StartCoroutine (Waiting());
 						break;
 					}
 				
 					case 2:
 					{
-						bonusText.text="POOP KEPT!!!";
+						bonusText.text="POOP taken!";
 						bonusAcquired = new BonusPoop();
+						StartCoroutine (Waiting());
 						break;
 					}
 					
@@ -359,8 +365,10 @@ public class BogieCarMovement : MonoBehaviour {
 				
 					case 4:
 					{
-						bonusText.text="TURBO READY TO GO!!!";
+						bonusText.text="TURBO taken!";
+						bonusSlot.GetComponent("MeshRenderer").renderer.material = bonusSlot.GetComponent("MeshRenderer").renderer.materials[1];
 						bonusAcquired = new BonusSpeed();
+						StartCoroutine (Waiting());
 						break;	
 					}
 					}
@@ -397,11 +405,11 @@ public class BogieCarMovement : MonoBehaviour {
 
 						case 3:
 						{
-							bonusText.text="SWITCH CONTROLLER";
+							bonusText.text="SWITCH!!!";
 							malusSound.Play();
 							serverBogieCar.assignRoles();
 							malusActive = false;
-							StartCoroutine (SwitchWaiting());
+							StartCoroutine (Waiting());
 							break;
 						}
 						
@@ -419,7 +427,7 @@ public class BogieCarMovement : MonoBehaviour {
 			}
 		}
 
-	IEnumerator SwitchWaiting()
+	IEnumerator Waiting()
 	{
 		yield return new WaitForSeconds(4);
 		bonusText.text="";
@@ -485,10 +493,11 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		turboSound.Play();
 		turbo.Play();
-		bonusText.text="TURBOOOOOO";
+		bonusText.text="TURBO!!";
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
 		yield return new WaitForSeconds(0.5f);
 		StartCoroutine (StopTorque(torqueMax*speedMultiplierBonus));
+		bonusSlot.GetComponent("MeshRenderer").renderer.material = bonusSlot.GetComponent("MeshRenderer").renderer.materials[0];
 		bonusText.text="";
 	}
 
@@ -535,7 +544,7 @@ public class BogieCarMovement : MonoBehaviour {
 	IEnumerator MalusReductionNotify()
 	{
 		ackSound.Play();
-		bonusText.text=" Malus reduced...GOOD JOB!";
+		bonusText.text="Malus reduced!";
 		yield return new WaitForSeconds(2);
 		bonusText.text="";
 	}
@@ -555,7 +564,7 @@ public class BogieCarMovement : MonoBehaviour {
 	
 		for(int i=0;i<malusDuration;i++)
 		{
-			bonusText.text="STEER FAILURE! Press the button to reduce it!";
+			bonusText.text="STEER FAILURE! Tap the RED button!";
 			yield return new WaitForSeconds(1);
 		}
 
@@ -579,7 +588,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			bonusText.text="LEVER FAILURE! Press the button to reduce it!";
+			bonusText.text="LEVER FAILURE! Tap the RED button!";
 			yield return new WaitForSeconds(1);
 		}
 
@@ -609,7 +618,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			bonusText.text="MUD ON THE SCREEN! Press the button to clean it!";
+			bonusText.text="MUD ON THE SCREEN! Tap the RED button!";
 			yield return new WaitForSeconds(1);
 		}
 
