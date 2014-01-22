@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fd356d02affbe08468b426f2c6dcdcc2
+guid: e8241bf2ee04f334f8506fb361c2a586
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -174,7 +174,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -386,5 +386,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   userData: 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e6b857115c742314fa80ed4b38586df7
+guid: 6938a2c7d8ad1804a87229a7aa9be9a5
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
@@ -65,24 +65,16 @@ ModelImporter:
     100118: sc_mouth01
     100120: Skin
     100122: Skin_2
-    100124: Skin_2_2
-    100126: Skin_3
-    100128: Skin_3_2
-    100130: Skin_4
-    100132: Skin_4_2
-    100134: Skin_5
-    100136: Skin_5_2
-    100138: Skin_6
-    100140: Skin_6_2
-    100142: Skin_7
-    100144: Skin_7_2
-    100146: Skin_8
-    100148: Skin_8_2
-    100150: Skin_9
-    100152: Tube001
-    100154: Tube002
-    100156: Tube003
-    100158: Tube004
+    100124: Skin_3
+    100126: Skin_4
+    100128: Skin_5
+    100130: Skin_6
+    100132: Skin_7
+    100134: Skin_8
+    100136: Tube001
+    100138: Tube002
+    100140: Tube003
+    100142: Tube004
     400000: be_carrelloEND01
     400002: be_headEND01
     400004: be_l_footEND01
@@ -145,24 +137,16 @@ ModelImporter:
     400118: sc_mouth01
     400120: Skin
     400122: Skin_2
-    400124: Skin_2_2
-    400126: Skin_3
-    400128: Skin_3_2
-    400130: Skin_4
-    400132: Skin_4_2
-    400134: Skin_5
-    400136: Skin_5_2
-    400138: Skin_6
-    400140: Skin_6_2
-    400142: Skin_7
-    400144: Skin_7_2
-    400146: Skin_8
-    400148: Skin_8_2
-    400150: Skin_9
-    400152: Tube001
-    400154: Tube002
-    400156: Tube003
-    400158: Tube004
+    400124: Skin_3
+    400126: Skin_4
+    400128: Skin_5
+    400130: Skin_6
+    400132: Skin_7
+    400134: Skin_8
+    400136: Tube001
+    400138: Tube002
+    400140: Tube003
+    400142: Tube004
     4300000: polymsh
     4300002: Tube001
     4300004: Tube002
@@ -171,7 +155,7 @@ ModelImporter:
     4300010: Carrello_Cubo_1_003
     4300012: Box001
     4300014: Box003
-    7400000: Damage
+    7400000: Idle
     9500000: //RootNode
     11100000: //RootNode
     13700000: Box001
@@ -198,7 +182,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Damage
+      name: Idle
       takeName: C4D Animation Take
       firstFrame: -10
       lastFrame: 30
@@ -289,51 +273,35 @@ ModelImporter:
         weight: 1
       - path: GLOBAL_MESH/Box001
         weight: 1
-      - path: GLOBAL_MESH/Box001/Skin_7_2
-        weight: 1
-      - path: GLOBAL_MESH/Box001/Skin_8
+      - path: GLOBAL_MESH/Box001/Skin_7
         weight: 1
       - path: GLOBAL_MESH/Box003
         weight: 1
-      - path: GLOBAL_MESH/Box003/Skin_8_2
-        weight: 1
-      - path: GLOBAL_MESH/Box003/Skin_9
+      - path: GLOBAL_MESH/Box003/Skin_8
         weight: 1
       - path: GLOBAL_MESH/Carrello_Cubo_1_003
         weight: 1
-      - path: GLOBAL_MESH/Carrello_Cubo_1_003/Skin_6_2
-        weight: 1
-      - path: GLOBAL_MESH/Carrello_Cubo_1_003/Skin_7
+      - path: GLOBAL_MESH/Carrello_Cubo_1_003/Skin_6
         weight: 1
       - path: GLOBAL_MESH/polymsh
         weight: 1
       - path: GLOBAL_MESH/polymsh/Skin
         weight: 1
-      - path: GLOBAL_MESH/polymsh/Skin_2
-        weight: 1
       - path: GLOBAL_MESH/Tube001
         weight: 1
-      - path: GLOBAL_MESH/Tube001/Skin_2_2
-        weight: 1
-      - path: GLOBAL_MESH/Tube001/Skin_3
+      - path: GLOBAL_MESH/Tube001/Skin_2
         weight: 1
       - path: GLOBAL_MESH/Tube002
         weight: 1
-      - path: GLOBAL_MESH/Tube002/Skin_3_2
-        weight: 1
-      - path: GLOBAL_MESH/Tube002/Skin_4
+      - path: GLOBAL_MESH/Tube002/Skin_3
         weight: 1
       - path: GLOBAL_MESH/Tube003
         weight: 1
-      - path: GLOBAL_MESH/Tube003/Skin_4_2
-        weight: 1
-      - path: GLOBAL_MESH/Tube003/Skin_5
+      - path: GLOBAL_MESH/Tube003/Skin_4
         weight: 1
       - path: GLOBAL_MESH/Tube004
         weight: 1
-      - path: GLOBAL_MESH/Tube004/Skin_5_2
-        weight: 1
-      - path: GLOBAL_MESH/Tube004/Skin_6
+      - path: GLOBAL_MESH/Tube004/Skin_5
         weight: 1
       - path: GLOBAL_RIG
         weight: 1
