@@ -4,6 +4,7 @@ using System.Collections;
 public class SetLevel : MonoBehaviour {
 
 	private GameObject server;
+	public AudioSource buttonSound;
 
 	public int level;
 
@@ -17,5 +18,10 @@ public class SetLevel : MonoBehaviour {
 
 		serverGameManager.setLevel(level);
 		Camera.main.transform.Translate(new Vector3(940f,58f,0f));
+	}
+
+	void OnMouseUp()
+	{
+		buttonSound.Play();
 	}
 }

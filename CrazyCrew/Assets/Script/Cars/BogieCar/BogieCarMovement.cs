@@ -40,9 +40,9 @@ public class BogieCarMovement : MonoBehaviour {
 
 	//valori fisici
 	public float decelerationSpeed = -50f;
-	private float retroSpeed=-20f;
+	private float retroSpeed=-40f;
 	public float torqueMax=50f;
-	private float topRetroSpeed=-20f;
+	private float topRetroSpeed=-45f;
 	public float topSpeed=150f;
 
 	//CheckPoint
@@ -200,13 +200,16 @@ public class BogieCarMovement : MonoBehaviour {
     * In caso di freno sinistro e destro premuto aziono il freno del veicolo
     */
 	private void Brake()
-	{		
+	{
 		if(brakeL && brakeR) 
 		{
 			if(currentSpeed>0)
 			{
 				//controllo sul tipo di terreno
-				dirtBrakeSound.Play();
+				if(!dirtBrakeSound.isPlaying)
+				{
+					dirtBrakeSound.Play();
+				}
 
 				WheelTraction.motorTorque = 0;
 				WheelTraction.brakeTorque = -decelerationSpeed;
@@ -575,7 +578,7 @@ public class BogieCarMovement : MonoBehaviour {
 	
 		for(int i=0;i<malusDuration;i++)
 		{
-			bonusText.text="STEER FAILURE! Tap the RED button!";
+			bonusText.text="STEER FAILURE!\nTap the RED button!";
 			yield return new WaitForSeconds(1);
 		}
 
@@ -599,7 +602,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			bonusText.text="LEVER FAILURE! Tap the RED button!";
+			bonusText.text="LEVER FAILURE!\nTap the RED button!";
 			yield return new WaitForSeconds(1);
 		}
 
@@ -629,7 +632,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		for(int i=0;i<malusDuration;i++)
 		{
-			bonusText.text="MUD ON THE SCREEN! Tap the RED button!";
+			bonusText.text="MUD!\nTap the RED button!";
 			yield return new WaitForSeconds(1);
 		}
 
