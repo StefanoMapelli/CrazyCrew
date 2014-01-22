@@ -19,7 +19,7 @@ public class malusObject : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		
-		Debug.Log("Bonus colpito");
+		Debug.Log("Bonus colpito " + other.name);
 		//quando c'è collisione l'oggetto scompare sotto il terreno
 		transform.Translate(new Vector3(0,0,-10));
 	}
@@ -33,6 +33,6 @@ public class malusObject : MonoBehaviour {
 	{
 		//dopo dieci secondi il power up ritorna sul percorso
 		yield return new WaitForSeconds(10);
-		transform.Translate(new Vector3(0,0,-10));
+		transform.Translate(new Vector3(0,0,10));
 	}
 }
