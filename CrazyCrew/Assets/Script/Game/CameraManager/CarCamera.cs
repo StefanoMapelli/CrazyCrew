@@ -37,7 +37,7 @@ public class CarCamera : MonoBehaviour {
 			transform.LookAt(car);
 
 			*/
-			transform.position=new Vector3(car.position.x,car.position.y,car.position.z)-6*car.right + 3*car.up;
+			transform.position=new Vector3(car.position.x,car.position.y,car.position.z)-11*car.right + 3*car.up;
 			transform.LookAt(new Vector3(car.transform.position.x,car.transform.position.y+2,car.transform.position.z));
 
 		}

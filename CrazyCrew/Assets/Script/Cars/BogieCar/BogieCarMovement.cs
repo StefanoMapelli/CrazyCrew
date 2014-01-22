@@ -55,6 +55,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 	//bonus info
 	public GameObject bonusSlot; 
+	public Material[] bonusMalerials= new Material[4];
 	private float speedMultiplierBonus=3;
 	private Bonus bonusAcquired;
 	private ParticleSystem turbo;
@@ -153,7 +154,12 @@ public class BogieCarMovement : MonoBehaviour {
 			this.transform.rotation = lastRotation;
 		}
 
-		speedText.text = currentSpeed.ToString();
+		if(currentSpeed > 0)
+		{
+			speedText.text = currentSpeed.ToString();
+		}
+		else
+			speedText.text="0";
 	}
 
 	public void WheelRotate()
@@ -185,7 +191,6 @@ public class BogieCarMovement : MonoBehaviour {
 	{
 		brakeL=true;
 	}
-	
 	public void BrakeLOff()
 	{
 		brakeL=false;
@@ -337,13 +342,14 @@ public class BogieCarMovement : MonoBehaviour {
 					bonusSound.Play();
 
 					int powerUpId = UnityEngine.Random.Range(1,5);
-					powerUpId=4;
+					//powerUpId=4;
 					serverBogieCar.bonusComunication(powerUpId);
 					switch(powerUpId)
 					{
 					case 1:
 					{
 						bonusText.text="MISSILE taken!";
+						bonusSlot.renderer.material = bonusMalerials[3];
 						bonusAcquired = new BonusMissile();
 						StartCoroutine (Waiting());
 						break;
@@ -352,6 +358,7 @@ public class BogieCarMovement : MonoBehaviour {
 					case 2:
 					{
 						bonusText.text="POOP taken!";
+						bonusSlot.renderer.material = bonusMalerials[2];
 						bonusAcquired = new BonusPoop();
 						StartCoroutine (Waiting());
 						break;
@@ -366,7 +373,7 @@ public class BogieCarMovement : MonoBehaviour {
 					case 4:
 					{
 						bonusText.text="TURBO taken!";
-						bonusSlot.GetComponent("MeshRenderer").renderer.material = bonusSlot.GetComponent("MeshRenderer").renderer.materials[1];
+						bonusSlot.renderer.material = bonusMalerials[1];
 						bonusAcquired = new BonusSpeed();
 						StartCoroutine (Waiting());
 						break;	
@@ -497,7 +504,7 @@ public class BogieCarMovement : MonoBehaviour {
 		WheelTraction.motorTorque += torqueMax*speedMultiplierBonus;
 		yield return new WaitForSeconds(0.5f);
 		StartCoroutine (StopTorque(torqueMax*speedMultiplierBonus));
-		bonusSlot.GetComponent("MeshRenderer").renderer.material = bonusSlot.GetComponent("MeshRenderer").renderer.materials[0];
+		bonusSlot.GetComponent("MeshRenderer").renderer.material = bonusMalerials[0];
 		bonusText.text="";
 	}
 
@@ -511,6 +518,10 @@ public class BogieCarMovement : MonoBehaviour {
 		bonusText.text="";
 	}
 
+	public void resetPlank()
+	{
+		bonusSlot.GetComponent("MeshRenderer").renderer.material = bonusMalerials[0];
+	}
 
 	//MALUS
 	public void malusReduction(string malusName)
