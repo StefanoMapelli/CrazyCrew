@@ -19,9 +19,8 @@ public class ServerNetworkManager : MonoBehaviour {
 
 	void OnFailedToConnectToMasterServer(NetworkConnectionError info) 
 	{
-		//GUIMenusServer.waitingForPlayersMenu(false);
-		//GUIMenusServer.mainMenu(true);
-		//GUIMenusServer.masterServerError(true);
+		GUIMenusServer.masterServerError(true);
+		Camera.main.transform.position = new Vector3(0f,0f,-20f);
 	}
 
 	void OnServerInitialized()
