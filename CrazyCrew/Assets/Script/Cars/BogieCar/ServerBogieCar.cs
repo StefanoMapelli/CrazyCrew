@@ -66,7 +66,7 @@ public class ServerBogieCar : MonoBehaviour {
 			networkView.RPC ("hasBonus",RPCMode.Others, true, "MISSILE");
 		}
 		
-		else if(powerUpId<=8)		
+		else if(powerUpId<=6)		
 		{
 			networkView.RPC ("hasBonus",RPCMode.Others, true, "POOP");
 		}		
