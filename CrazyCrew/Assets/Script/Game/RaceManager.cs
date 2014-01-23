@@ -60,6 +60,11 @@ public class RaceManager : MonoBehaviour {
 		RaceFinish(this,e);
 	}
 
+	public void setInfoText(string text)
+	{
+		infoText.text=text;
+	}
+
 	public void RestartRace () {
 		//CountDown
 		isFinish=false;

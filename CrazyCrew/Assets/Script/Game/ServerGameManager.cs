@@ -64,24 +64,21 @@ public class ServerGameManager : MonoBehaviour {
 
 			Debug.Log("Loading level? "+Application.isLoadingLevel);
 		}
-	}
 
-	//resto in attesa dell'evento di fine gara
-	
-	void OnGUI()
-	{
 		if(pause)
 		{
 			if(!allPlayersConnected())
 			{
-				GUI.Label (new Rect(10,10,200,200),"Waiting for players reconnection...");
+				raceManager.setInfoText("Waiting for players reconnection...");
 			}
 			else
 			{
-				GUI.Label (new Rect(10,10,200,200),"Game paused");
+				raceManager.setInfoText("Game paused");
 			}
 		}
 	}
+
+	//resto in attesa dell'evento di fine gara
 	
 	public void OnLevelWasLoaded(int level)
 	{
@@ -289,6 +286,7 @@ public class ServerGameManager : MonoBehaviour {
 			if (allPlayersConnected()) {
 				raceManager.SetPause(p);
 				networkView.RPC("setPause",RPCMode.All,false);
+				raceManager.setInfoText("");
 				pause = false;
 				Time.timeScale = initialTimeScale;
 			}
