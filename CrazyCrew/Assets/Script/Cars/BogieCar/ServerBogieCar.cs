@@ -61,49 +61,35 @@ public class ServerBogieCar : MonoBehaviour {
 
 	public void bonusComunication(int powerUpId)
 	{
-		switch(powerUpId)
-		{
-		case 1:
+		if(powerUpId <=4)					
 		{
 			networkView.RPC ("hasBonus",RPCMode.Others, true, "MISSILE");
-			break;
 		}
-			
-		case 2:
+		
+		else if(powerUpId<=8)		
 		{
 			networkView.RPC ("hasBonus",RPCMode.Others, true, "POOP");
-			break;
-		}
-
-		case 4:
+		}		
+		else
 		{
 			networkView.RPC ("hasBonus",RPCMode.Others, true, "SPEED");
-			break;	
-		}
 		}
 	}
 
-	public void malusComunication(int powerUpId)
+	public void malusComunication(float powerUpId)
 	{
-		switch(powerUpId)
-		{
-		case 1:
+		if(powerUpId <= 2.5f)
 		{
 			networkView.RPC ("hasMalus", RPCMode.Others, true, "MUD");
-			break;
 		}
-			
-		case 2:
+		
+		else if(powerUpId <= 4.5f)
 		{
 			networkView.RPC ("hasMalus",RPCMode.Others, true, "SLOWDOWN");
-			break;
 		}
-			
-		case 4:
+		else if(powerUpId >8f)
 		{
 			networkView.RPC ("hasMalus",RPCMode.Others, true, "STEER FAILURE");
-			break;	
-		}
 		}
 	}
 

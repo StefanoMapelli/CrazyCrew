@@ -344,44 +344,34 @@ public class BogieCarMovement : MonoBehaviour {
 				{
 					bonusSound.Play();
 
-					int powerUpId = UnityEngine.Random.Range(1,5);
+					int powerUpId = UnityEngine.Random.Range(1,10);
 					//powerUpId=4;
 					serverBogieCar.bonusComunication(powerUpId);
-					switch(powerUpId)
-					{
-					case 1:
+					
+					if(powerUpId <=4)					
 					{
 						bonusText.text="MISSILE taken!";
 						bonusSlot.renderer.material = bonusMalerials[3];
 						bonusAcquired = new BonusMissile();
 						StartCoroutine (Waiting());
-						break;
 					}
 				
-					case 2:
+					else if(powerUpId<=8)		
 					{
 						bonusText.text="POOP taken!";
 						bonusSlot.renderer.material = bonusMalerials[2];
 						bonusAcquired = new BonusPoop();
 						StartCoroutine (Waiting());
-						break;
 					}
 					
-					case 3:
-					{
-						StartCoroutine(BonusTime());
-						break;
-					}
-				
-					case 4:
+					else
 					{
 						bonusText.text="TURBO taken!";
 						bonusSlot.renderer.material = bonusMalerials[1];
 						bonusAcquired = new BonusSpeed();
 						StartCoroutine (Waiting());
-						break;	
 					}
-					}
+
 				}
 				else
 				{
@@ -393,49 +383,40 @@ public class BogieCarMovement : MonoBehaviour {
 					{
 						if(other.gameObject.tag == "Malus" && !malusActive)
 						{
-						malusActive = true;
+							malusActive = true;
 
-						int powerUpId = UnityEngine.Random.Range(1,5);
+							float powerUpId = UnityEngine.Random.Range(1f,10f);
 
-						//powerUpId=1;
-						serverBogieCar.malusComunication(powerUpId);
-						switch(powerUpId)
-						{
-						case 1:
-						{
-							StartCoroutine(MalusMud());
-							break;
-						}
+							//powerUpId=1;
+							serverBogieCar.malusComunication(powerUpId);
+							if(powerUpId <= 2.5f)
+							{
+								StartCoroutine(MalusMud());
+							}
+							
+							else if(powerUpId <= 4.5f)
+							{
+								StartCoroutine(MalusSlowdown());
+							}
+							else if(powerUpId <= 8f)
+							{
+								bonusText.text="SWITCH!!!";
+								malusSound.Play();
+								serverBogieCar.assignRoles();
+								malusActive = false;
+								StartCoroutine (Waiting());
+							}
+							else
+							{
+								StartCoroutine(MalusSteerFailure());
+							}
 						
-						case 2:
-						{
-							StartCoroutine(MalusSlowdown());
-							break;
-						}
-
-						case 3:
-						{
-							bonusText.text="SWITCH!!!";
-							malusSound.Play();
-							serverBogieCar.assignRoles();
-							malusActive = false;
-							StartCoroutine (Waiting());
-							break;
-						}
-						
-						case 4:
-						{
-							StartCoroutine(MalusSteerFailure());
-							break;	
-						}
 						}
 					}
-
-						}
-					}
-				}	
+				}
 			}
 		}
+	}
 
 	IEnumerator Waiting()
 	{
