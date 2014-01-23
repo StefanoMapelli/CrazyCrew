@@ -63,6 +63,8 @@ public class AICarScript : MonoBehaviour {
 			animation = (Animation) GameObject.Find("Lupo_idle4").GetComponent("Animation");
 		else if (wolfNumber == 5)
 			animation = (Animation) GameObject.Find("Lupo_idle5").GetComponent("Animation");
+
+		rigidbody.constraints=RigidbodyConstraints.FreezePositionY;
 	}
 
 	void GetPath()
@@ -102,11 +104,24 @@ public class AICarScript : MonoBehaviour {
 			Move ();
 			FrontSensor();
 			RetroOnCollision();
+			FreezeY();
 
 			animateIdle ();
 
 			currentSpeed= 2*22/7*wheelFR.radius*wheelFR.rpm*60/1000;
 			currentSpeed=Mathf.Round(currentSpeed);
+		}
+	}
+
+	void FreezeY()
+	{
+		if((currentPathObject>=200 && currentPathObject<=211) || (currentPathObject>=43 && currentPathObject<=53))
+		{
+			rigidbody.constraints=RigidbodyConstraints.None;
+		}
+		else
+		{
+			rigidbody.constraints=RigidbodyConstraints.FreezePositionY;
 		}
 	}
 
@@ -347,7 +362,7 @@ public class AICarScript : MonoBehaviour {
 	{
 		numberOfRetroRequest=0;
 		blocked=0;
-		transform.position=((Transform) path[currentPathObject]).position;
+		transform.position=new Vector3(((Transform) path[currentPathObject]).position.x,-0.1556902f,((Transform) path[currentPathObject]).position.x);
 	}
 
 	void OnCollisionEnter(Collision c)
@@ -370,6 +385,7 @@ public class AICarScript : MonoBehaviour {
 			finalTime=((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getFinalTime();
 			Debug.Log(finalTime);
 		}
+
 		if(other.name=="Poop")
 		{
 			StartCoroutine(PoopEffect());

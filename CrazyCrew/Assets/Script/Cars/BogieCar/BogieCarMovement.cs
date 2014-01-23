@@ -150,7 +150,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 		if(Input.GetKeyDown (KeyCode.R))
 		{
-			this.transform.position=lastPosition;
+			this.transform.position=new Vector3(lastPosition.x,-0.1556971f,lastPosition.z);
 			this.transform.rotation = lastRotation;
 		}
 
@@ -331,6 +331,14 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			lastPosition = other.transform.position;
 			lastRotation = other.transform.rotation;
+			if(other.gameObject.name=="CheckPointYNoFreeze")
+			{
+				rigidbody.constraints=RigidbodyConstraints.None;
+			}
+			if(other.gameObject.name=="CheckPointYFreeze")
+			{
+				rigidbody.constraints=RigidbodyConstraints.FreezePositionY;
+			}
 		}
 		else
 		{
@@ -345,7 +353,6 @@ public class BogieCarMovement : MonoBehaviour {
 					bonusSound.Play();
 
 					int powerUpId = UnityEngine.Random.Range(1,10);
-					//powerUpId=4;
 					serverBogieCar.bonusComunication(powerUpId);
 					
 					if(powerUpId <=4)					
@@ -356,7 +363,7 @@ public class BogieCarMovement : MonoBehaviour {
 						StartCoroutine (Waiting());
 					}
 				
-					else if(powerUpId<=8)		
+					else if(powerUpId<=6)		
 					{
 						bonusText.text="POOP taken!";
 						bonusSlot.renderer.material = bonusMalerials[2];
