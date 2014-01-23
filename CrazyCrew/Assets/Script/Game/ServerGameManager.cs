@@ -169,9 +169,8 @@ public class ServerGameManager : MonoBehaviour {
 			//exit from the game if all the players are disconnected
 			if (allPlayersDisconnected())
 			{
-				GameObject server = GameObject.Find ("Server");
-				Destroy(server);
-				Application.LoadLevel ("Server");
+				Time.timeScale = initialTimeScale;
+				exitGame();
 			}
 		}
 	}
