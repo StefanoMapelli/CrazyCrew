@@ -168,6 +168,14 @@ public class ServerGameManager : MonoBehaviour {
 			Time.timeScale = 0;
 			raceManager.SetPause(true);
 			networkView.RPC("setPause", RPCMode.All, pause);
+
+			//exit from the game if all the players are disconnected
+			if (allPlayersDisconnected())
+			{
+				GameObject server = GameObject.Find ("Server");
+				Destroy(server);
+				Application.LoadLevel ("Server");
+			}
 		}
 	}
 
@@ -223,6 +231,18 @@ public class ServerGameManager : MonoBehaviour {
 		{
 			p = (Player) o;
 			if(!p.getConnected())
+				return false;
+		}
+		return true;
+	}
+
+	private bool allPlayersDisconnected()
+	{
+		Player p;
+		foreach(object o in players)
+		{
+			p = (Player) o;
+			if(p.getConnected())
 				return false;
 		}
 		return true;

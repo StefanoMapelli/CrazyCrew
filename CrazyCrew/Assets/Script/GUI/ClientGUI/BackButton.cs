@@ -5,7 +5,9 @@ public class BackButton : MonoBehaviour {
 
 	private ServerList serverList;
 	public AudioSource shiftSound;
-	
+
+	public Material[] materials = new Material[2];
+
 	// Use this for initialization
 	void Start () {
 		serverList = (ServerList) GameObject.Find ("ServerList").GetComponent("ServerList");
@@ -17,11 +19,13 @@ public class BackButton : MonoBehaviour {
 	}
 	
 	void OnMouseDown() {
+		this.GetComponent("MeshRenderer").renderer.material = materials[1];
 		serverList.decrementIndex();
 	}
 
 	void OnMouseUp()
 	{
+		this.GetComponent("MeshRenderer").renderer.material = materials[0];
 		shiftSound.Play();
 	}
 }
