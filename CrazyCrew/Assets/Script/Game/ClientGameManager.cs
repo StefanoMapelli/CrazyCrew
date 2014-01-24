@@ -14,9 +14,9 @@ public class ClientGameManager : MonoBehaviour {
 	void Start () 
 	{
 		//Screen.autorotateToPortrait = true;
-		Screen.autorotateToLandscapeLeft = true;
+		//Screen.autorotateToLandscapeLeft = true;
 		//Screen.autorotateToLandscapeRight = true;
-		Screen.orientation = ScreenOrientation.AutoRotation;
+		Screen.orientation = ScreenOrientation.LandscapeLeft;
 		screenWidth = Screen.width;
 		screenHeight = Screen.height;
 

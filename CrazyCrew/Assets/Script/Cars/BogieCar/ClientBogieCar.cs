@@ -58,6 +58,8 @@ public class ClientBogieCar : MonoBehaviour {
 		GUIMenusClient.showPowerUpController(true);
 
 		GUIMenusClient.controllerPositioning();
+
+		GUIMenusClient.lowLever();
 	}
 
 	[RPC]

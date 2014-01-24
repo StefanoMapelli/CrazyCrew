@@ -233,4 +233,15 @@ public static class GUIMenusClient {
 		float width = (height * Screen.width / Screen.height);
 		pause.transform.localScale = new Vector3(width/3, height, 1f);
 	}
+
+	public static void lowLever() {
+		GameObject lever = GameObject.Find("Lever");
+		GameObject leverPlane = GameObject.Find("LeverPlane");
+
+		float inf = leverPlane.transform.position.y -
+			(((MeshRenderer)leverPlane.GetComponent("MeshRenderer")).bounds.size.y)/2f;
+
+		lever.transform.position = 
+			new Vector3(leverPlane.transform.position.x,inf,-2f);
+	}
 }
