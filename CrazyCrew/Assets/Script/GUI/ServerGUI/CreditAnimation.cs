@@ -6,6 +6,7 @@ public class CreditAnimation : MonoBehaviour {
 	private bool start = false;
 	private float vel = 25f;
 	private Vector3 startingPosition;
+	public AudioSource buttonSound;
 
 	public void setStart(bool start) {
 		this.start = start;
@@ -33,5 +34,10 @@ public class CreditAnimation : MonoBehaviour {
 
 		creditAnimation.setStart(false);
 		Camera.main.transform.position = new Vector3(0f,0f,-20f);
+	}
+
+	void OnMouseUp()
+	{
+		buttonSound.Play ();
 	}
 }
