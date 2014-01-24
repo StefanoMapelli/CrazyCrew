@@ -82,7 +82,7 @@ public class ServerGameManager : MonoBehaviour {
 	
 	public void OnLevelWasLoaded(int level)
 	{
-		if (level == 1 || level == 2) {
+		if (level == 2 || level == 3) {
 			serverBogieCar.initializeBogieCar();
 			Debug.Log("Livello ricaricato");
 			Time.timeScale = initialTimeScale;
