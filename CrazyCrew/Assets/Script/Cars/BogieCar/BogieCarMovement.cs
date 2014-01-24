@@ -59,6 +59,7 @@ public class BogieCarMovement : MonoBehaviour {
 	private float speedMultiplierBonus=3;
 	private Bonus bonusAcquired;
 	private ParticleSystem turbo;
+	private ParticleSystem poop;
 
 	//malus info
 	private bool malusActive = false;
@@ -112,6 +113,7 @@ public class BogieCarMovement : MonoBehaviour {
 		GameObject Stain4 = GameObject.Find("Stain4");
 		malusSmoke = ((ParticleSystem)GameObject.Find ("malusSmoke").GetComponent("ParticleSystem"));
 		turbo = ((ParticleSystem)GameObject.Find ("turbo").GetComponent("ParticleSystem"));
+		poop =  ((ParticleSystem)GameObject.Find ("poopEffect").GetComponent("ParticleSystem"));
 		mudSpotsList.Add(Stain1);
 		mudSpotsList.Add(Stain2);
 		mudSpotsList.Add(Stain3);
@@ -126,6 +128,11 @@ public class BogieCarMovement : MonoBehaviour {
 	public Bonus getBonus()
 	{
 		return bonusAcquired;
+	}
+
+	public void usePoop()
+	{
+		poop.Play();
 	}
 
 	/*public void setSteerMalusDuration()
@@ -247,7 +254,14 @@ public class BogieCarMovement : MonoBehaviour {
 	
 		if(currentSpeed<topSpeed)
 		{
-			WheelTraction.motorTorque += forcePercent*torqueMax;
+			if(currentSpeed < -5)
+			{
+				WheelTraction.motorTorque += forcePercent*torqueMax*2;
+			}
+			else
+			{
+				WheelTraction.motorTorque += forcePercent*torqueMax;
+			}
 			StartCoroutine (StopTorque(forcePercent*torqueMax));
 		}
 		else
