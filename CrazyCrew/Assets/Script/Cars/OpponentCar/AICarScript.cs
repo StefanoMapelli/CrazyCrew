@@ -419,13 +419,16 @@ public class AICarScript : MonoBehaviour {
 			if(((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getLevel()==2)
 			{
 				if(((i>=12) && (i<=17)) || ((i>=23) && (i<=27)) || ((i>=36) && (i<=39)) || ((i>=45) && (i<=52)) || ((i>=61) && (i<=68)) || ((i>=77) && (i<=82)) || ((i>=86) && (i<=97)) || ((i>=102) && (i<=107)) || ((i>=119) && (i<=123)) || ((i>=130) && (i<=134)))
-				return true;
-			}
-			else
-			{
-				return false;
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
+		return true;
 	}
 
 	IEnumerator setRetro()
