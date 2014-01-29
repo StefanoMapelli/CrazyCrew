@@ -49,6 +49,9 @@ public class RaceManager : MonoBehaviour {
 	private AICarScript opponentCar4;
 	private AICarScript opponentCar5;
 
+
+	private int level;
+
 	// Use this for initialization
 	void Start () {
 		//CountDown
@@ -164,38 +167,129 @@ public class RaceManager : MonoBehaviour {
 					{
 					case 1: 
 					{
-						((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-						((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+						if (checkHighscore()) {
+							TimeSpan highscore = getHighscore();
+							if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+								((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+							}
+							else {
+								((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+								setHighscore (bogieCarMovement.finalTime);
+							}
+						}
+						else {
+							((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+							setHighscore(bogieCarMovement.finalTime);
+						}
 						break;
 					}
 					case 2: 
 					{
-						((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-						((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+						if (checkHighscore()) {
+							TimeSpan highscore = getHighscore();
+							if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+								((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+							}
+							else {
+								((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+								setHighscore (bogieCarMovement.finalTime);
+							}
+						}
+						else {
+							((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+							setHighscore(bogieCarMovement.finalTime);
+						}
 						break;
 					}
 					case 3: 
 					{
-						((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-						((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+						if (checkHighscore()) {
+							TimeSpan highscore = getHighscore();
+							if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+								((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+							}
+							else {
+								((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+								setHighscore (bogieCarMovement.finalTime);
+							}
+						}
+						else {
+							((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+							setHighscore(bogieCarMovement.finalTime);
+						}
 						break;
 					}
 					case 4: 
 					{
-						((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-						((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+						if (checkHighscore()) {
+							TimeSpan highscore = getHighscore();
+							if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+								((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+							}
+							else {
+								((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+								setHighscore (bogieCarMovement.finalTime);
+							}
+						}
+						else {
+							((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+							setHighscore(bogieCarMovement.finalTime);
+						}
 						break;
 					}
 					case 5: 
 					{
-						((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-						((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+						if (checkHighscore()) {
+							TimeSpan highscore = getHighscore();
+							if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+								((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+							}
+							else {
+								((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+								setHighscore (bogieCarMovement.finalTime);
+							}
+						}
+						else {
+							((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+							setHighscore(bogieCarMovement.finalTime);
+						}
 						break;
 					}
 					case 6: 
 					{
-						((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-						((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+						Debug.Log ("sono al caso 6");
+						if (checkHighscore()) {
+							TimeSpan highscore = getHighscore();
+							if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+								((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+							}
+							else {
+								((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+								setHighscore (bogieCarMovement.finalTime);
+							}
+						}
+						else {
+							((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+							setHighscore(bogieCarMovement.finalTime);
+						}
 						break;
 					}
 					}
@@ -244,38 +338,128 @@ public class RaceManager : MonoBehaviour {
 			{
 			case 1: 
 			{
-				((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-				((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+				if (checkHighscore()) {
+					TimeSpan highscore = getHighscore();
+					if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+						((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+					}
+					else {
+						((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+						setHighscore (bogieCarMovement.finalTime);
+					}
+				}
+				else {
+					((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
+					setHighscore(bogieCarMovement.finalTime);
+				}
 				break;
 			}
 			case 2: 
 			{
-				((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-				((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+				if (checkHighscore()) {
+					TimeSpan highscore = getHighscore();
+					if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+						((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+					}
+					else {
+						((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+						setHighscore (bogieCarMovement.finalTime);
+					}
+				}
+				else {
+					((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
+					setHighscore(bogieCarMovement.finalTime);
+				}
 				break;
 			}
 			case 3: 
 			{
-				((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-				((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+				if (checkHighscore()) {
+					TimeSpan highscore = getHighscore();
+					if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+						((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+					}
+					else {
+						((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+						setHighscore (bogieCarMovement.finalTime);
+					}
+				}
+				else {
+					((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
+					setHighscore(bogieCarMovement.finalTime);
+				}
 				break;
 			}
 			case 4: 
 			{
-				((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-				((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+				if (checkHighscore()) {
+					TimeSpan highscore = getHighscore();
+					if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+						((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+					}
+					else {
+						((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+						setHighscore (bogieCarMovement.finalTime);
+					}
+				}
+				else {
+					((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
+					setHighscore(bogieCarMovement.finalTime);
+				}
 				break;
 			}
 			case 5: 
 			{
-				((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-				((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+				if (checkHighscore()) {
+					TimeSpan highscore = getHighscore();
+					if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+						((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+					}
+					else {
+						((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+						setHighscore (bogieCarMovement.finalTime);
+					}
+				}
+				else {
+					((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
+					setHighscore(bogieCarMovement.finalTime);
+				}
 				break;
 			}
 			case 6: 
 			{
-				((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
-				((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+				if (checkHighscore()) {
+					TimeSpan highscore = getHighscore();
+					if (highscore.CompareTo(bogieCarMovement.finalTime) < 0) {
+						((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3}", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+					}
+					else {
+						((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+						setHighscore (bogieCarMovement.finalTime);
+					}
+				}
+				else {
+					((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
+					setHighscore(bogieCarMovement.finalTime);
+				}
 				break;
 			}
 			}
@@ -379,5 +563,62 @@ public class RaceManager : MonoBehaviour {
 		yield return new WaitForSeconds(5);
 		rankingText.text="";
 
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	private TimeSpan getHighscore() {
+		int min = 0,sec = 0,msec = 0;
+
+		if (level == 1) {
+			min = PlayerPrefs.GetInt("highmin1");
+			sec = PlayerPrefs.GetInt("highsec1");
+			msec = PlayerPrefs.GetInt("highmsec1");
+		}
+		else if (level == 2) {
+			min = PlayerPrefs.GetInt("highmin2");
+			sec = PlayerPrefs.GetInt("highsec2");
+			msec = PlayerPrefs.GetInt("highmsec2");
+		}
+
+		TimeSpan highscore = new TimeSpan(0,0,min,sec,msec);
+		return highscore;
+	}
+
+	private void setHighscore(TimeSpan time) {
+		if (level == 1) {
+			PlayerPrefs.SetInt ("highmin1",time.Minutes);
+			PlayerPrefs.SetInt ("highsec1",time.Seconds);
+			PlayerPrefs.SetInt ("highmsec1",time.Milliseconds);
+		}
+		else if (level == 2) {
+			PlayerPrefs.SetInt ("highmin2",time.Minutes);
+			PlayerPrefs.SetInt ("highsec2",time.Seconds);
+			PlayerPrefs.SetInt ("highmsec2",time.Milliseconds);
+		}
+
+		PlayerPrefs.Save();
+	}
+
+	private bool checkHighscore() {
+		if (level == 1) {
+			if (PlayerPrefs.HasKey ("highmin1") && PlayerPrefs.HasKey ("highsec1") && PlayerPrefs.HasKey ("highmsec1")) 
+				return true;
+			else 
+				return false;
+		}
+		else if (level == 2) {
+			if (PlayerPrefs.HasKey ("highmin2") && PlayerPrefs.HasKey ("highsec2") && PlayerPrefs.HasKey ("highmsec2")) 
+				return true;
+			else 
+				return false;
+		}
+		return false;
 	}
 }
