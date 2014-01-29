@@ -159,8 +159,6 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			this.transform.position=new Vector3(lastPosition.x,-0.1556971f,lastPosition.z);
 			this.transform.rotation = lastRotation;
-			rigidbody.constraints=RigidbodyConstraints.None;
-			StartCoroutine(FreezeCoroutine());
 		}
 
 		if(currentSpeed > 0)
@@ -169,12 +167,6 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 		else
 			speedText.text="0";
-	}
-
-	IEnumerator FreezeCoroutine()
-	{
-		yield return new WaitForSeconds(2);
-		rigidbody.constraints=RigidbodyConstraints.FreezePositionY;
 	}
 
 	public void WheelRotate()
@@ -265,12 +257,14 @@ public class BogieCarMovement : MonoBehaviour {
 			if(currentSpeed < -5)
 			{
 				WheelTraction.motorTorque += forcePercent*torqueMax*2;
+				StartCoroutine (StopTorque(forcePercent*torqueMax*2));
 			}
 			else
 			{
 				WheelTraction.motorTorque += forcePercent*torqueMax;
+				StartCoroutine (StopTorque(forcePercent*torqueMax));
 			}
-			StartCoroutine (StopTorque(forcePercent*torqueMax));
+
 		}
 		else
 		{
@@ -462,7 +456,7 @@ public class BogieCarMovement : MonoBehaviour {
 
 			if(currentSpeed <25 || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed <25))
 			{
-					cllision1.Play();
+					collision1.Play();
 			}
 			//collisione generica
 			if((currentSpeed >=25 && currentSpeed < 50) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 25 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 50))
