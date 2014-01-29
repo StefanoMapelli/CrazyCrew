@@ -455,19 +455,19 @@ public class BogieCarMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject.tag != "Terrain")
+		if(collision.gameObject.tag != "Terrain" && !audio.isPlaying)
 		{
 			Debug.Log("sono in collision enter ramo else, colliso con"+collision.gameObject.name);
 			GameObject  obj = collision.gameObject;
 
 			if(currentSpeed <25 || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed <25))
 			{
-				collision1.Play();
+					cllision1.Play();
 			}
 			//collisione generica
 			if((currentSpeed >=25 && currentSpeed < 50) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 25 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 50))
 			{
-				collision2.Play();
+					collision2.Play();
 			}
 			else 
 			{
