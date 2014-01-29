@@ -16,7 +16,7 @@ public class CreditAnimation : MonoBehaviour {
 
 	private void playAnimation() {
 		transform.position = new Vector3(transform.position.x,transform.position.y+(Time.deltaTime*vel),transform.position.z);
-		if (transform.position.y > 450)
+		if (transform.position.y > 500)
 			transform.position = startingPosition;
 	}
 
