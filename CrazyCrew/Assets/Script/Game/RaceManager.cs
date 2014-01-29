@@ -174,13 +174,13 @@ public class RaceManager : MonoBehaviour {
 								((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 							}
 							else {
-								((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 								((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 								setHighscore (bogieCarMovement.finalTime);
 							}
 						}
 						else {
-							((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 							((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 							setHighscore(bogieCarMovement.finalTime);
 						}
@@ -195,13 +195,13 @@ public class RaceManager : MonoBehaviour {
 								((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
 							}
 							else {
-								((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 								((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
 								setHighscore (bogieCarMovement.finalTime);
 							}
 						}
 						else {
-							((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 							((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
 							setHighscore(bogieCarMovement.finalTime);
 						}
@@ -216,13 +216,13 @@ public class RaceManager : MonoBehaviour {
 								((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 							}
 							else {
-								((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 								((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
 								setHighscore (bogieCarMovement.finalTime);
 							}
 						}
 						else {
-							((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 							((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
 							setHighscore(bogieCarMovement.finalTime);
 						}
@@ -237,13 +237,13 @@ public class RaceManager : MonoBehaviour {
 								((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
 							}
 							else {
-								((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 								((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
 								setHighscore (bogieCarMovement.finalTime);
 							}
 						}
 						else {
-							((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 							((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
 							setHighscore(bogieCarMovement.finalTime);
 						}
@@ -258,13 +258,13 @@ public class RaceManager : MonoBehaviour {
 								((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
 							}
 							else {
-								((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 								((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
 								setHighscore (bogieCarMovement.finalTime);
 							}
 						}
 						else {
-							((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 							((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
 							setHighscore(bogieCarMovement.finalTime);
 						}
@@ -280,13 +280,13 @@ public class RaceManager : MonoBehaviour {
 								((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
 							}
 							else {
-								((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+								((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 								((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
 								setHighscore (bogieCarMovement.finalTime);
 							}
 						}
 						else {
-							((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+							((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 							((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
 							setHighscore(bogieCarMovement.finalTime);
 						}
@@ -345,13 +345,13 @@ public class RaceManager : MonoBehaviour {
 						((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 					}
 					else {
-						((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 						((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 						setHighscore (bogieCarMovement.finalTime);
 					}
 				}
 				else {
-					((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time1.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 					((TextMesh)time1.GetComponent ("TextMesh")).color=Color.yellow;
 					setHighscore(bogieCarMovement.finalTime);
 				}
@@ -366,13 +366,13 @@ public class RaceManager : MonoBehaviour {
 						((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
 					}
 					else {
-						((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 						((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
 						setHighscore (bogieCarMovement.finalTime);
 					}
 				}
 				else {
-					((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time2.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 					((TextMesh)time2.GetComponent ("TextMesh")).color=Color.yellow;
 					setHighscore(bogieCarMovement.finalTime);
 				}
@@ -387,13 +387,13 @@ public class RaceManager : MonoBehaviour {
 						((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
 					}
 					else {
-						((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 						((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
 						setHighscore (bogieCarMovement.finalTime);
 					}
 				}
 				else {
-					((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time3.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 					((TextMesh)time3.GetComponent ("TextMesh")).color=Color.yellow;
 					setHighscore(bogieCarMovement.finalTime);
 				}
@@ -408,13 +408,13 @@ public class RaceManager : MonoBehaviour {
 						((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
 					}
 					else {
-						((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 						((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
 						setHighscore (bogieCarMovement.finalTime);
 					}
 				}
 				else {
-					((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time4.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 					((TextMesh)time4.GetComponent ("TextMesh")).color=Color.yellow;
 					setHighscore(bogieCarMovement.finalTime);
 				}
@@ -429,13 +429,13 @@ public class RaceManager : MonoBehaviour {
 						((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
 					}
 					else {
-						((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 						((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
 						setHighscore (bogieCarMovement.finalTime);
 					}
 				}
 				else {
-					((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time5.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 					((TextMesh)time5.GetComponent ("TextMesh")).color=Color.yellow;
 					setHighscore(bogieCarMovement.finalTime);
 				}
@@ -450,13 +450,13 @@ public class RaceManager : MonoBehaviour {
 						((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
 					}
 					else {
-						((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+						((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 						((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
 						setHighscore (bogieCarMovement.finalTime);
 					}
 				}
 				else {
-					((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New Highscore!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
+					((TextMesh)time6.GetComponent ("TextMesh")).text += string.Format("{0:D2}:{1:D2}:{2:D3} New record!", bogieCarMovement.finalTime.Minutes, bogieCarMovement.finalTime.Seconds, bogieCarMovement.finalTime.Milliseconds);
 					((TextMesh)time6.GetComponent ("TextMesh")).color=Color.yellow;
 					setHighscore(bogieCarMovement.finalTime);
 				}

@@ -90,7 +90,7 @@ public class ServerGameManager : MonoBehaviour {
 			raceManager = (RaceManager) GameObject.Find ("RaceManager").GetComponent ("RaceManager");
 			//aggiungo l'evento di fine gara
 			raceManager.RaceFinish+=new EventHandler(RaceFinish);
-			raceManager.setLevel(level);
+			raceManager.setLevel(level-1);
 		}
 	}
 
