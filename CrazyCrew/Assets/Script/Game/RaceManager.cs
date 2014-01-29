@@ -49,6 +49,8 @@ public class RaceManager : MonoBehaviour {
 	private AICarScript opponentCar4;
 	private AICarScript opponentCar5;
 
+	private string difficulty;
+
 
 	private int level;
 
@@ -531,6 +533,16 @@ public class RaceManager : MonoBehaviour {
 		}
 
 		startTime = DateTime.Now;
+	}
+
+	public string getDifficulty()
+	{
+		return difficulty;
+	}
+
+	public void setDifficulty(string levelDifficulty)
+	{
+		difficulty=levelDifficulty;
 	}
 
 	//da usare nel caso di bonus di tempo

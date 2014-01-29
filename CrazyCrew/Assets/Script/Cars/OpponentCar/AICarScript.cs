@@ -64,6 +64,86 @@ public class AICarScript : MonoBehaviour {
 		else if (wolfNumber == 5)
 			animation = (Animation) GameObject.Find("Lupo_idle5").GetComponent("Animation");
 
+		//settaggio difficoltà easy and hard vari avversari
+		if(((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getDifficulty()=="Easy")
+		{
+			maxTorque=30;
+			if (wolfNumber == 1)
+			{
+				lowSpeed=100;
+				midSpeed=130;
+				highSpeed=150;
+			}
+
+			else if (wolfNumber == 2)
+			{
+				lowSpeed=100;
+				midSpeed=130;
+				highSpeed=150;
+			}
+				
+			else if (wolfNumber == 3)
+			{
+				lowSpeed=90;
+				midSpeed=120;
+				highSpeed=140;
+			}
+				
+			else if (wolfNumber == 4)
+			{
+				lowSpeed=100;
+				midSpeed=120;
+				highSpeed=140;
+			}
+				
+			else if (wolfNumber == 5)
+			{
+				lowSpeed=80;
+				midSpeed=110;
+				highSpeed=130;
+			}
+				
+		}
+		else
+		{
+			maxTorque=50;
+			if (wolfNumber == 1)
+			{
+				lowSpeed=140;
+				midSpeed=160;
+				highSpeed=180;
+			}
+			
+			else if (wolfNumber == 2)
+			{
+				lowSpeed=130;
+				midSpeed=160;
+				highSpeed=180;
+			}
+			
+			else if (wolfNumber == 3)
+			{
+				lowSpeed=120;
+				midSpeed=150;
+				highSpeed=180;
+			}
+			
+			else if (wolfNumber == 4)
+			{
+				lowSpeed=120;
+				midSpeed=140;
+				highSpeed=170;
+			}
+			
+			else if (wolfNumber == 5)
+			{
+				lowSpeed=120;
+				midSpeed=140;
+				highSpeed=170;
+			}
+
+		}
+
 		rigidbody.constraints=RigidbodyConstraints.FreezePositionY;
 	}
 
@@ -323,14 +403,32 @@ public class AICarScript : MonoBehaviour {
 
 	bool isPointOnCurve(int i)
 	{
-		if(((i>=17) && (i<=29)) || ((i>=33) && (i<=45)) || ((i>=50) && (i<=67)) || ((i>=79) && (i<=81)) || ((i>=98) && (i<=107)) || ((i>=114) && (i<=127)) || ((i>=138) && (i<=141)) || ((i>=144) && (i<=155)) || ((i>=158) && (i<=176)) || ((i>=187) && (i<=200)) || ((i>=204) && (i<=207)) || ((i>=219) && (i<=230)) || ((i>=242) && (i<=249)) || ((i>=256) && (i<=259)) || ((i>=268) && (i<=276)) || ((i>=290) && (i<=308)))
+		if(((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getLevel()==1)
 		{
-			return true;
+			if(((i>=17) && (i<=29)) || ((i>=33) && (i<=45)) || ((i>=50) && (i<=67)) || ((i>=79) && (i<=81)) || ((i>=98) && (i<=107)) || ((i>=114) && (i<=127)) || ((i>=138) && (i<=141)) || ((i>=144) && (i<=155)) || ((i>=158) && (i<=176)) || ((i>=187) && (i<=200)) || ((i>=204) && (i<=207)) || ((i>=219) && (i<=230)) || ((i>=242) && (i<=249)) || ((i>=256) && (i<=259)) || ((i>=268) && (i<=276)) || ((i>=290) && (i<=308)))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
-			return false;
+			if(((RaceManager)GameObject.Find("RaceManager").GetComponent ("RaceManager")).getLevel()==2)
+			{
+				if(((i>=12) && (i<=17)) || ((i>=23) && (i<=27)) || ((i>=36) && (i<=39)) || ((i>=45) && (i<=52)) || ((i>=61) && (i<=68)) || ((i>=77) && (i<=82)) || ((i>=86) && (i<=97)) || ((i>=102) && (i<=107)) || ((i>=119) && (i<=123)) || ((i>=130) && (i<=134)))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
 		}
+		return true;
 	}
 
 	IEnumerator setRetro()
