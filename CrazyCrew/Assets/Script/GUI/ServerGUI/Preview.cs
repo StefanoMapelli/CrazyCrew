@@ -21,7 +21,7 @@ public class Preview : MonoBehaviour {
 		ServerNetworkManager serverNetworkManager = (ServerNetworkManager) server.GetComponent("ServerNetworkManager");
 		serverNetworkManager.StartServer();
 
-		Camera.main.transform.Translate(new Vector3(940f,58f,0f));
+		Camera.main.transform.position = new Vector3(-1280f,0f,-20f);
 	}
 
 	public void setMaterial(int m) {

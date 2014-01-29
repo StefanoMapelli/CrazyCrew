@@ -21,6 +21,7 @@ public class ServerGameManager : MonoBehaviour {
 	private ClientIndicator player1,player2,player3;
 
 	private int level;
+	private string difficulty;
 
 	public ArrayList getPlayers()
 	{
@@ -91,6 +92,7 @@ public class ServerGameManager : MonoBehaviour {
 			//aggiungo l'evento di fine gara
 			raceManager.RaceFinish+=new EventHandler(RaceFinish);
 			raceManager.setLevel(level-1);
+			raceManager.setDifficulty(difficulty);
 		}
 	}
 
@@ -258,6 +260,10 @@ public class ServerGameManager : MonoBehaviour {
 			Network.CloseConnection(p.getNetworkPlayer(),true);
 		}
 		players.Clear();
+	}
+
+	public void setDifficulty(string difficulty) {
+		this.difficulty = difficulty;
 	}
 
 	[RPC]
