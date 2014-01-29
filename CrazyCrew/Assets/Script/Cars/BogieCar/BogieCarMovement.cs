@@ -159,6 +159,8 @@ public class BogieCarMovement : MonoBehaviour {
 		{
 			this.transform.position=new Vector3(lastPosition.x,-0.1556971f,lastPosition.z);
 			this.transform.rotation = lastRotation;
+			rigidbody.constraints=RigidbodyConstraints.None;
+			StartCoroutine(FreezeCoroutine());
 		}
 
 		if(currentSpeed > 0)
@@ -167,6 +169,12 @@ public class BogieCarMovement : MonoBehaviour {
 		}
 		else
 			speedText.text="0";
+	}
+
+	IEnumerator FreezeCoroutine()
+	{
+		yield return new WaitForSeconds(2);
+		rigidbody.constraints=RigidbodyConstraints.FreezePositionY;
 	}
 
 	public void WheelRotate()
