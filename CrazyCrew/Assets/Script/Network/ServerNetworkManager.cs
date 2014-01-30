@@ -47,10 +47,10 @@ public class ServerNetworkManager : MonoBehaviour {
 	void Start () {
 
 		DontDestroyOnLoad(gameObject);
-		MasterServer.ipAddress = masterServerIpAddress;
+		/*MasterServer.ipAddress = masterServerIpAddress;
 		MasterServer.port = 23466;
 		Network.natFacilitatorIP = masterServerIpAddress;
-		Network.natFacilitatorPort = 50005;
+		Network.natFacilitatorPort = 50005;*/
 	}
 
 	// Update is called once per frame

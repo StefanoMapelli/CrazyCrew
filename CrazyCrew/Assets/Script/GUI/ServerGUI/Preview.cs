@@ -18,9 +18,6 @@ public class Preview : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		ServerNetworkManager serverNetworkManager = (ServerNetworkManager) server.GetComponent("ServerNetworkManager");
-		serverNetworkManager.StartServer();
-
 		Camera.main.transform.position = new Vector3(-1280f,0f,-20f);
 	}
 
