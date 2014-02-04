@@ -46,7 +46,6 @@ public class BogieCarMovement : MonoBehaviour {
 	public float topSpeed=150f;
 
 	//CheckPoint
-	private bool checkPoint = false;
 	public GameObject raceManager;
 
 
@@ -99,7 +98,7 @@ public class BogieCarMovement : MonoBehaviour {
 	public AudioSource ackSound;
 	public AudioSource leverSound;
 
-	private Animation animation;
+	private new Animation animation;
 
 	// Use this for initialization
 	void Start () 

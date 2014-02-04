@@ -6,7 +6,7 @@ public class LeverController : MonoBehaviour {
 	
 	private Vector3 screenPoint;
 	private Vector3 offset;
-	private NetworkView networkView;
+	private new NetworkView networkView;
 	private string role;	
 	private bool blocked;
 	private bool malusBlocked = false;
