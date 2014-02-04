@@ -449,7 +449,54 @@ public class BogieCarMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject.tag != "Terrain" && !audio.isPlaying)
+		if(collision.gameObject.tag != "Terrain" && !audio.isPlaying && collision.gameObject.tag!="Quad")
+		{
+			Debug.Log("sono in collision enter ramo else, colliso con"+collision.gameObject.name);
+			GameObject  obj = collision.gameObject;
+			
+			if(currentSpeed <25)
+			{
+				collision1.Play();
+			}
+			//collisione generica
+			if(currentSpeed >=25)
+			{
+				collision2.Play();
+			}
+			else 
+			{
+				if(currentSpeed>=50 && currentSpeed<75)
+				{
+					collision3.Play();
+				}
+				else
+				{
+					if(currentSpeed>=75 && currentSpeed<100)
+					{
+						collision4.Play();
+					}
+					else
+					{
+						if(currentSpeed>=100 && currentSpeed<125)
+						{
+							collision5.Play();
+						}
+						else
+						{
+							if(currentSpeed>=125 && currentSpeed<=150)
+							{	
+								collision6.Play();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/*void OnCollisionEnter(Collision collision)
+	{
+		if(collision.gameObject.tag != "Terrain" && !audio.isPlaying && collision.gameObject.tag!="Quad")
 		{
 			Debug.Log("sono in collision enter ramo else, colliso con"+collision.gameObject.name);
 			GameObject  obj = collision.gameObject;
@@ -471,28 +518,28 @@ public class BogieCarMovement : MonoBehaviour {
 					}
 				else
 				{
-				if((currentSpeed>=75 && currentSpeed<100) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 75 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 100))
+					if((currentSpeed>=75 && currentSpeed<100) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 75 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 100))
 					{
 						collision4.Play();
 					}
 					else
 					{
-					if((currentSpeed>=100 && currentSpeed<125) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 100 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 125))
+						if((currentSpeed>=100 && currentSpeed<125) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 100 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 125))
 						{
 							collision5.Play();
 						}
 						else
 						{
-						if((currentSpeed>=125 && currentSpeed<=150) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 125 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 150))
-								{
+							if((currentSpeed>=125 && currentSpeed<=150) || (obj.tag=="Car" && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed >= 125 && ((AICarScript)obj.GetComponent("AICarScript")).currentSpeed < 150))
+							{	
 									collision6.Play();
-								}
 							}
 						}
 					}
 				}
 			}
-	}
+		}
+	}*/
 	
 	//GESTIONE POWER-UP
 	//BONUS
