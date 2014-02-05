@@ -6,7 +6,7 @@ public class SteerController : MonoBehaviour {
 	private static float steerRotation = 0f;
 	private float i = 0f;
 	private float rate = 1f/5f;
-	private NetworkView networkView;
+	private new NetworkView networkView;
 
 	public Material[] materials = new Material[2];
 

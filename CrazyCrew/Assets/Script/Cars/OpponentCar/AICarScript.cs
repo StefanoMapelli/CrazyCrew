@@ -43,7 +43,7 @@ public class AICarScript : MonoBehaviour {
 
 	public TimeSpan finalTime=new TimeSpan(0,0,0);
 
-	private Animation animation;
+	private new Animation animation;
 
 	public int wolfNumber;
 

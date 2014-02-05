@@ -5,7 +5,7 @@ public class BrakeController : MonoBehaviour {
 
 	public Material[] materials = new Material[2];
 
-	private NetworkView networkView;
+	private new NetworkView networkView;
 	private string role;
 	
 	// Use this for initialization

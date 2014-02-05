@@ -5,7 +5,7 @@ public class PowerUpController : MonoBehaviour {
 
 	public Material[] controllerMaterials = new Material[3];
 
-	private NetworkView networkView;
+	private new NetworkView networkView;
 	private string role;
 
 	//valori aggiornati ogni qualvolta viene acquisito/utilizzato/rimosso un bonus o un malus tremite RPC dal server

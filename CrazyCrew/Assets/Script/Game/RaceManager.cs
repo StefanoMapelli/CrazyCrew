@@ -14,7 +14,7 @@ public class RaceManager : MonoBehaviour {
 	//info
 	private TextMesh infoText;
 	private TextMesh rankingText;
-	public GameObject camera;
+	public new GameObject camera;
 
 	//Pause
 	private bool pause = true;
